@@ -38,9 +38,7 @@ hermes-config/                 → configuração do Hermes
   notes/                       → notas gerais
   _rules/                      → regras do agente
 infra-vps/vps.md               → Docker, Swarm, Traefik, IPVS, VPS
-geral/                         → conteúdo não categorizado (a eliminar)
-  procedures/
-  sessoes/
+hermes/procedures/             → procedures do Hermes
 ```
 
 ## Como funciona
@@ -85,5 +83,6 @@ Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que 
 - [[infra-vps/vps.md|🖥 VPS (infraestrutura)]]
 - [[hermes/sessoes/hermes-sessoes.md|📂 Sessões]]
 - [[hermes/todo/hermes-tarefas.md|📂 Tarefas]]
-- [[hermes-config/hermes-config-home.md|📂 Config]]
-- [[geral/geral-home.md|📂 Geral]]
+- [[hermes-config/hermes-config.md|📂 Config]]
+- [[hermes/procedures/firecrawl-multi-platform-search.md|🔥 Firecrawl]]
+- [[hermes/sessoes/2026-06-18-crise-update-recuperacao.md|🔄 Crise update]]
