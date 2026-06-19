@@ -20,5 +20,5 @@ timestamp: 2026-06-18T00:00:00+00:00
 ## 🔗 Conexões entre projetos
 - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
 - [[hermes/conceitos/wiki-fundacao.md|wiki-fundacao]]
-- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes/conceitos/wiki-fundacao.md|wiki-fundacao (histórico)]]
 - [[infra-vps/gotchas/ipvs-table-502.md|ipvs-table-502]]

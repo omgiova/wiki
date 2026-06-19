@@ -6,7 +6,7 @@
 
 ### sessoes
 
-  - [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+  - [[hermes/conceitos/wiki-fundacao.md|wiki-fundacao]]
   - [[hermes/sessoes/hermes-sessoes.md|INDEX]]
 
 ### todo
