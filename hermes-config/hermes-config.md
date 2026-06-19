@@ -38,5 +38,4 @@ Detalhes de infra no [[infra-vps/vps.md|vps]].
 - [[hermes/conceitos/wiki.md|wiki]] — base de conhecimento
 - [[hermes/procedures/firecrawl-multi-platform-search.md|🔥 Firecrawl]] — busca multi-plataforma
 - [[hermes/sessoes/2026-06-18-crise-update-recuperacao.md|🔄 Crise update]] — recuperação de sessões
-- [[hermes/sessoes/hermes-sessoes.md|📂 Sessões]]
 - [[hermes/todo/proximos-passos.md|📋 Próximos passos]]

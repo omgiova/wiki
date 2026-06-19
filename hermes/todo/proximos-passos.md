@@ -14,9 +14,6 @@ timestamp: 2026-06-18T00:00:00+00:00
 4. **Revisar SOUL.md** — o system prompt do Hermes
 5. **Criar AGENTS.md** — placa apontando pra wiki, pra outros agentes (Codex, Claude Code) saberem onde buscar contexto
 
-## 📂 Navegação
-[[hermes/todo/hermes-tarefas.md|📂 Voltar para todo]]
-
 ## 🔗 Conexões entre projetos
 - [[hermes/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update]]
 - [[hermes/conceitos/wiki.md|wiki (histórico + conceito)]]
