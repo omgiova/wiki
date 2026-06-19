@@ -1,6 +1,6 @@
 ---
 type: gotcha
-tags: [docker, gotcha, infra-vps, n8n, projetos, traefik]
+tags: [docker, gotcha, infra-vps, n8n, traefik]
 title: 1. Testar se o backend responde pela overlay
 description: bash systemctl restart docker - Não perde volumes, imagens, configs ou networks - Todos os serviços do Swarm sobem de novo com IPVS repovoado - Downtime de ~20-30 segundos
 timestamp: 2026-06-18T00:00:00+00:00

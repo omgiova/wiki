@@ -1,6 +1,6 @@
 ---
 type: todo
-tags: [github, hermes, obsidian, projetos, todo, wiki]
+tags: [github, hermes, obsidian, todo, wiki]
 title: Próximos Passos
 description: 1. Migrar conhecimento acumulado — revisar sessões passadas do Hermes e capturar decisões, gotchas, procedimentos e regras que estão perdidos na memory ou só na cabeça do usuário 2. Sincronizar wik...
 timestamp: 2026-06-18T00:00:00+00:00

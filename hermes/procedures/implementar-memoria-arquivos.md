@@ -1,6 +1,6 @@
 ---
 type: procedure
-tags: [ai-memory, hermes, obsidian, procedure, projetos]
+tags: [ai-memory, hermes, obsidian, procedure]
 title: Procedimento: Implementar Memória Baseada em Arquivos (Obsidian + Markdown)
 description: 1. Organizar o vault Obsidian 00 - Inbox/ → ideias soltas 01 - Projetos/ → um diretório por projeto 02 - Conhecimento/ → regras, conceitos 03 - Logs/ → registro de sessões
 timestamp: 2026-06-17T00:00:00+00:00
