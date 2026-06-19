@@ -12,9 +12,6 @@
 
   - [[hermes/hermes-home.md|INDEX]]
   - [[hermes/conceitos/wiki-fundacao.md|wiki-fundacao]]
-  - [[hermes/decisions/hermes-decisoes.md|INDEX]]
-  - [[hermes/procedures/hermes-procedimentos.md|INDEX]]
-  - [[hermes/rules/hermes-regras.md|INDEX]]
   - [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
   - [[hermes/sessoes/hermes-sessoes.md|INDEX]]
   - [[hermes/todo/hermes-tarefas.md|INDEX]]
@@ -33,7 +30,4 @@
 
   - [[infra-vps/infra-vps-home.md|INDEX]]
   - [[infra-vps/gotchas/ipvs-table-502.md|ipvs-table-502]]
-  - [[infra-vps/decisions/infra-vps-decisoes.md|INDEX]]
   - [[infra-vps/gotchas/infra-vps-gotchas.md|INDEX]]
-  - [[infra-vps/procedures/infra-vps-procedimentos.md|INDEX]]
-  - [[infra-vps/rules/infra-vps-regras.md|INDEX]]
