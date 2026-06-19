@@ -1,3 +1,3 @@
-# Índice: infra-vps/procedures
+# Procedimentos de Infra
 
 - [[infra-vps/procedures/diagnostico-502-traefik.md|diagnostico-502-traefik]]

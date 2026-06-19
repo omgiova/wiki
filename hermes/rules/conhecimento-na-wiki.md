@@ -31,7 +31,7 @@ timestamp: 2026-06-18T00:00:00+00:00
 3. Memory() do Hermes = só o essencial pra não errar na próxima sessão
 
 ## 📂 Navegação
-[[hermes/rules/INDEX.md|📂 Voltar para rules]]
+[[hermes/rules/hermes-regras.md|📂 Voltar para rules]]
 
 ## 🔗 Conexões entre projetos
 - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]

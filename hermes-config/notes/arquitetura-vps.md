@@ -2,7 +2,7 @@
 type: note
 tags: [ai-memory, alexa, docker, mcp, n8n, note, vps]
 title: Arquitetura do VPS
-description: hermes-config/notes/INDEX.md📂 Voltar para notes
+description: Resumo da arquitetura do VPS — hardware, serviços, stack
 timestamp: 2026-06-18T00:00:00+00:00
 ---
 
@@ -27,7 +27,7 @@ timestamp: 2026-06-18T00:00:00+00:00
 - **Banco:** SQLite (Hermes, ai-memory)
 
 ## 📂 Navegação
-[[hermes-config/notes/INDEX.md|📂 Voltar para notes]]
+[[hermes-config/notes/hermes-config-notas.md|📂 Voltar para notes]]
 
 ## 🔗 Relacionados (mesmo grupo)
 - [[hermes-config/notes/visao-geral.md|visao-geral]]

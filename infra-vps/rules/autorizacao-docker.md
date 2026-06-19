@@ -37,7 +37,7 @@ timestamp: 2026-06-18T00:00:00+00:00
 Perda de confiança do usuário + horas de troubleshooting desnecessário. Já aconteceu.
 
 ## 📂 Navegação
-[[infra-vps/rules/INDEX.md|📂 Voltar para rules]]
+[[infra-vps/rules/infra-vps-regras.md|📂 Voltar para rules]]
 
 ## 🔗 Conexões entre projetos
 - [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]

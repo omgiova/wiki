@@ -44,7 +44,7 @@ updates:
 - Testar `journal_mode=DELETE` quando gateway puder ser parado
 
 ## 📂 Navegação
-[[geral/sessoes/INDEX.md|📂 Voltar para sessoes]]
+[[geral/sessoes/geral-sessoes.md|📂 Voltar para sessoes]]
 
 ## 🔗 Conexões entre projetos
 - [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]

@@ -52,7 +52,7 @@ timestamp: 2026-06-17T00:00:00+00:00
    > "Leia o arquivo do projeto e as regras do agente antes de responder"
 
 ## 📂 Navegação
-[[hermes/procedures/INDEX.md|📂 Voltar para procedures]]
+[[hermes/procedures/hermes-procedimentos.md|📂 Voltar para procedures]]
 
 ## 🔗 Conexões entre projetos
 - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]

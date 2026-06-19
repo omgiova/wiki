@@ -25,5 +25,5 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 - Testar antes de assumir que funciona
 
 ## 📂 Navegação
-[[hermes-config/_rules/INDEX.md|📂 Voltar para _rules]]
+[[hermes-config/_rules/hermes-config-regras.md|📂 Voltar para _rules]]
 

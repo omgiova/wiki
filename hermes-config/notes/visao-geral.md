@@ -2,7 +2,7 @@
 type: note
 tags: [n8n, note, remotion, telegram, vps]
 title: Hermes Agent — Visão Geral
-description: Base de conhecimento persistente. - 01 - Projetos/ — contexto de cada projeto - 02 - Conhecimento/ — regras, decisões, padrões - 03 - Logs/ — resumo de sessões - 04 - Recursos/ — automação e mídia
+description: Visão geral do ecossistema — stack, estrutura do vault, conexões
 timestamp: 2026-06-18T00:00:00+00:00
 ---
 
@@ -23,7 +23,7 @@ Base de conhecimento persistente.
 - **04 - Recursos/** — automação e mídia
 
 ## 📂 Navegação
-[[hermes-config/notes/INDEX.md|📂 Voltar para notes]]
+[[hermes-config/notes/hermes-config-notas.md|📂 Voltar para notes]]
 
 ## 🔗 Relacionados (mesmo grupo)
 - [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]

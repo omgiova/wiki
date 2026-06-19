@@ -34,7 +34,7 @@ Usuário → Traefik (porta 443)
 - Config estática evita dependência de service discovery externo
 
 ## 📂 Navegação
-[[infra-vps/decisions/INDEX.md|📂 Voltar para decisions]]
+[[infra-vps/decisions/infra-vps-decisoes.md|📂 Voltar para decisions]]
 
 ## 🔗 Conexões entre projetos
 - [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]

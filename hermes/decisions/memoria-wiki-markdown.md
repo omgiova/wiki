@@ -48,7 +48,7 @@ Dentro de cada projeto: `decisions/`, `gotchas/`, `procedures/`, `rules/`.
 - Popular com conhecimento acumulado
 
 ## 📂 Navegação
-[[hermes/decisions/INDEX.md|📂 Voltar para decisions]]
+[[hermes/decisions/hermes-decisoes.md|📂 Voltar para decisions]]
 
 ## 🔗 Conexões entre projetos
 - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]

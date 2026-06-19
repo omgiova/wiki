@@ -42,7 +42,7 @@ ipvsadm -Ln
 ```
 
 ## 📂 Navegação
-[[infra-vps/gotchas/INDEX.md|📂 Voltar para gotchas]]
+[[infra-vps/gotchas/infra-vps-gotchas.md|📂 Voltar para gotchas]]
 
 ## 🔗 Relacionados (mesmo grupo)
 - [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]

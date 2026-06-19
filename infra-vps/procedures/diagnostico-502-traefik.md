@@ -50,7 +50,7 @@ timestamp: 2026-06-18T00:00:00+00:00
 - Apenas `systemctl restart docker` — não perde dados
 
 ## 📂 Navegação
-[[infra-vps/procedures/INDEX.md|📂 Voltar para procedures]]
+[[infra-vps/procedures/infra-vps-procedimentos.md|📂 Voltar para procedures]]
 
 ## 🔗 Conexões entre projetos
 - [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]

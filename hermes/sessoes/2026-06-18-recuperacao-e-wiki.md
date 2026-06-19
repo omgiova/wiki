@@ -34,7 +34,7 @@ timestamp: 2026-06-18T00:00:00+00:00
 5. Handoff entre agentes (trocar de ferramenta sem perder contexto)
 
 ## 📂 Navegação
-[[hermes/sessoes/INDEX.md|📂 Voltar para sessoes]]
+[[hermes/sessoes/hermes-sessoes.md|📂 Voltar para sessoes]]
 
 ## 🔗 Conexões entre projetos
 - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
