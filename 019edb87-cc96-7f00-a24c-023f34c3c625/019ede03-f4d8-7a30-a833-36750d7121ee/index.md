@@ -1,4 +1,7 @@
 ---
+tier: semantic
+---
+---
 tags:
 - index
 - hermes
@@ -9,25 +12,25 @@ tier: semantic
 ---
 # ai-memory-wiki
 
-Base de conhecimento persistente. Tudo que não cabe na memory() do Hermes.
+Base de conhecimento persistente. Tudo que nao cabe na memory() do Hermes.
 
-## 🖥 Infraestrutura
+## Memoria
 
-- [[infra-vps/vps.md|VPS]] — Hostinger KVM 2, Docker Swarm, IPVS, serviços rodando
-- [[hermes-config/hermes-config.md|Hermes Config]] — identidade, regras, stack, preferências técnicas
+- [[memoria/wiki.md|Wiki]] — como funciona a wiki, estrutura do vault, regras e historico
 
-## 🧠 Conhecimento
+## Infraestrutura
 
-- [[hermes/conceitos/wiki.md|Wiki]] — como funciona a wiki, estrutura do vault, regras e histórico
+- [[infra/vps.md|VPS]] — Hostinger KVM 2, Docker Swarm, IPVS, servicos rodando
+- [[infra/hermes.md|Hermes Config]] — identidade, regras, stack, preferencias tecnicas
 
-## 🔧 Automação
+## Conhecimento
 
-- [[hermes/procedures/firecrawl-multi-platform-search.md|Firecrawl]] — busca multi-plataforma com site:
+- [[conhecimento/firecrawl.md|Firecrawl]] — busca multi-plataforma com site:
 
-## 📜 Histórico
+## Historico
 
-- [[hermes/sessoes/2026-06-18-crise-update-recuperacao.md|Crise update]] — recuperação de sessões após /update corromper state.db
+- [[historico/crise-update.md|Crise update]] — recuperacao de sessoes apos /update corromper state.db
 
-## 📋 Pendências
+## Pendencias
 
-- [[hermes/todo/proximos-passos.md|Próximos passos]] — o que falta fazer
+- [[pendencias/proximos-passos.md|Proximos passos]] — o que falta fazer
