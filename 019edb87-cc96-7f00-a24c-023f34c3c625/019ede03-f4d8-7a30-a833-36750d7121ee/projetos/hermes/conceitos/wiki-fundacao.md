@@ -38,8 +38,7 @@ hermes/                        → Hermes Agent
 hermes-config/                 → configuração do Hermes
   notes/                       → notas gerais
   _rules/                      → regras do agente
-infra-vps/                     → Docker, Swarm, Traefik, VPS
-  gotchas/                     → problemas conhecidos
+infra-vps/vps.md               → Docker, Swarm, Traefik, IPVS, VPS
 geral/                         → conteúdo não categorizado (a eliminar)
   procedures/
   sessoes/
@@ -47,45 +46,36 @@ geral/                         → conteúdo não categorizado (a eliminar)
 
 ## Como funciona
 
-1. **Escrever:** agente cria/atualiza markdown no vault (`/root/ai-memory-wiki/wiki/`)
-2. **Indexar:** o ai-memory server (Rust) indexa automaticamente em SQLite + FTS5
-3. **Consultar:** Hermes usa MCP tools (`memory_query`, `memory_read_page`, etc.)
-4. **Versionar:** Git. Vault sincronizado com GitHub (`omgiova/ai-memory-wiki`) e Obsidian no celular
+1. **Escrever:** agente cria/atualiza markdown no vault
+2. **Indexar:** o ai-memory server indexa automaticamente em SQLite + FTS5
+3. **Consultar:** Hermes usa MCP tools (`memory_query`, `memory_read_page`)
+4. **Versionar:** Git. Vault sincronizado com GitHub e Obsidian no celular
 
 ## Regras
 
-1. **Conhecimento durável vai pra wiki, não pra `memory()`** — toda decisão, gotcha, procedimento, regra vira markdown
-2. **Memory() do Hermes** é cache de sessão (2.200 chars), não fonte da verdade
-3. **Uma página por conceito** — seguir OKF (Open Knowledge Format): `type`, `title`, `description`, `tags`, `timestamp`
-4. **Cross-links** entre páginas relacionadas usando wikilinks (`[[path/to/file.md|display]]`)
-5. **Todo arquivo** tem frontmatter OKF com `type`, `title`, `description`, `tags`, `timestamp`
+1. **Conhecimento durável vai pra wiki, não pra `memory()`**
+2. **Memory() do Hermes** é cache de sessão (2.200 chars)
+3. **Uma página por conceito** — OKF: type, title, description, tags, timestamp
+4. **Cross-links** entre páginas com wikilinks
+5. **Todo arquivo** tem frontmatter OKF
 
 ## Histórico
 
 ### Fundação (2026-06-18)
 
-Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que quebraram n8n e Node-RED (IPVS table corrompida → 502), foi criada a estrutura inicial da wiki com 7 páginas em `projetos/infra-vps/` e `projetos/hermes/` — o embrião do que virou este vault.
+Após comandos Docker Swarm errados que quebraram n8n e Node-RED (IPVS corrompida → 502), foi criada a estrutura inicial da wiki com 7 páginas — o embrião do vault atual.
 
-### 5 Pilares do objetivo final
+### 5 Pilares
 
-1. **Memória de longo prazo** para agentes Hermes
-2. **Markdown como fonte da verdade** — versionado, legível, buscável
-3. **Padrão LLM Wiki do Karpathy** (Raw → Wiki → Schema)
-4. **Loop de auto-aprendizado** (sessão → extração → memória)
-5. **Handoff entre agentes** (trocar de ferramenta sem perder contexto)
+1. Memória de longo prazo para agentes
+2. Markdown como fonte da verdade
+3. Padrão LLM Wiki do Karpathy (Raw → Wiki → Schema)
+4. Loop de auto-aprendizado (sessão → extração → memória)
+5. Handoff entre agentes
 
 ### Pendente
 
-- Migrar conhecimento acumulado de semanas de uso pra wiki
-- Configurar auto-improve loop do ai-memory
-- Garantir handoff entre agentes (Hermes ↔ Codex etc.)
+- Migrar conhecimento acumulado pra wiki
+- Configurar auto-improve loop
+- Garantir handoff entre agentes
 - Revisar SOUL.md + criar AGENTS.md
-
-## Navegação
-
-- [[hermes/conceitos/wiki-fundacao.md|📄 Este arquivo (wiki-fundacao)]]
-- [[infra-vps/vps.md|🖥 VPS (infraestrutura)]]
-- [[hermes/sessoes/hermes-sessoes.md|📂 Sessões]]
-- [[hermes/todo/hermes-tarefas.md|📂 Tarefas]]
-- [[hermes-config/hermes-config-home.md|📂 Config]]
-- [[geral/geral-home.md|📂 Geral]]
