@@ -41,3 +41,15 @@ Dentro de cada projeto: `decisions/`, `gotchas/`, `procedures/`, `rules/`.
 - Sincronizar wiki com GitHub (repo privado)
 - Conectar Obsidian no Windows ao mesmo repo
 - Popular com conhecimento acumulado
+
+## 📂 Navegação
+[[hermes/decisions/INDEX.md|📂 Voltar para decisions]]
+
+## 🔗 Conexões entre projetos
+- [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
+- [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+

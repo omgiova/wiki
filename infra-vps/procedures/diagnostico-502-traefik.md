@@ -42,3 +42,15 @@ tags: [docker, infra-vps, n8n, procedure, projetos, traefik]
 ### Quando chamar o restart do Docker
 - IPVS table vazia + DNS resolve + containers rodando
 - Apenas `systemctl restart docker` — não perde dados
+
+## 📂 Navegação
+[[infra-vps/procedures/INDEX.md|📂 Voltar para procedures]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
+

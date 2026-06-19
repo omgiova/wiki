@@ -19,3 +19,7 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 - Python para scripts/automação
 - Preferir Docker para deploy
 - Testar antes de assumir que funciona
+
+## 📂 Navegação
+[[hermes-config/_rules/INDEX.md|📂 Voltar para _rules]]
+

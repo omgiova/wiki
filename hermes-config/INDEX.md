@@ -1,16 +1,13 @@
-# hermes-config/
+# Índice: hermes-config
 
-## Páginas
 
-- [[hermes-config/_rules/regras-do-agente.md|Regras Do Agente]]
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
+### _rules
 
-## Por Categoria
+  - [[hermes-config/_rules/INDEX.md|INDEX]]
+  - [[hermes-config/_rules/regras-do-agente.md|regras-do-agente]]
 
-### _Rules
-- [[hermes-config/_rules/regras-do-agente.md|Regras Do Agente]]
+### notes
 
-### Notes
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
+  - [[hermes-config/notes/INDEX.md|INDEX]]
+  - [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+  - [[hermes-config/notes/visao-geral.md|visao-geral]]

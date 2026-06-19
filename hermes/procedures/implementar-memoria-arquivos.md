@@ -45,3 +45,15 @@ tags: [ai-memory, hermes, obsidian, procedure, projetos]
 5. **Instruir o agente a carregar contexto**
    Iniciar sessão com:
    > "Leia o arquivo do projeto e as regras do agente antes de responder"
+
+## 📂 Navegação
+[[hermes/procedures/INDEX.md|📂 Voltar para procedures]]
+
+## 🔗 Conexões entre projetos
+- [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]
+- [[infra-vps/procedures/diagnostico-502-traefik.md|diagnostico-502-traefik]]
+

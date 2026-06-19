@@ -21,3 +21,18 @@ tags: [ai-memory, alexa, docker, mcp, n8n, note, vps]
 - **Runtime:** Node.js, Python 3.11
 - **Container:** Docker
 - **Banco:** SQLite (Hermes, ai-memory)
+
+## 📂 Navegação
+[[hermes-config/notes/INDEX.md|📂 Voltar para notes]]
+
+## 🔗 Relacionados (mesmo grupo)
+- [[hermes-config/notes/visao-geral.md|visao-geral]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
+- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]
+- [[infra-vps/gotchas/ipvs-table-vazia.md|ipvs-table-vazia]]
+

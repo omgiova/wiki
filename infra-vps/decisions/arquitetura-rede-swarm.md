@@ -27,3 +27,15 @@ Usuário → Traefik (porta 443)
 - EasyPanel gerencia o Traefik automaticamente
 - DNS do Swarm + IPVS = load balancing transparente entre réplicas
 - Config estática evita dependência de service discovery externo
+
+## 📂 Navegação
+[[infra-vps/decisions/INDEX.md|📂 Voltar para decisions]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]
+- [[infra-vps/gotchas/ipvs-table-vazia.md|ipvs-table-vazia]]
+

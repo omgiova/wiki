@@ -1,10 +1,3 @@
-# hermes/procedures/
+# Índice: hermes/procedures
 
-## Páginas
-
-- [[hermes/procedures/implementar-memoria-arquivos.md|Implementar Memoria Arquivos]]
-
-## Por Categoria
-
-### Procedures
-- [[hermes/procedures/implementar-memoria-arquivos.md|Implementar Memoria Arquivos]]
+- [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]

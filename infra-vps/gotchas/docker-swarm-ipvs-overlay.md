@@ -54,3 +54,18 @@ projetos_nodered:    "http://projetos_nodered:8800/"
 **NUNCA** mexer em redes overlay ou escalar serviços pra 0 sem entender o IPVS. O correto pra resolver 502 com overlay quebrado é:
 1. `ipvsadm -Ln` (verificar tabela)
 2. `systemctl restart docker` (repovoar)
+
+## 📂 Navegação
+[[infra-vps/gotchas/INDEX.md|📂 Voltar para gotchas]]
+
+## 🔗 Relacionados (mesmo grupo)
+- [[infra-vps/gotchas/ipvs-table-vazia.md|ipvs-table-vazia]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
+- [[infra-vps/procedures/diagnostico-502-traefik.md|diagnostico-502-traefik]]
+- [[infra-vps/rules/autorizacao-docker.md|autorizacao-docker]]
+

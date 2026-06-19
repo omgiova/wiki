@@ -1,14 +1,12 @@
-# geral/
+# Índice: geral
 
-## Páginas
 
-- [[geral/procedures/firecrawl-multi-platform-search.md|Firecrawl Multi Platform Search]]
-- [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026 06 18 Crise Update Recuperacao]]
+### procedures
 
-## Por Categoria
+  - [[geral/procedures/INDEX.md|INDEX]]
+  - [[geral/procedures/firecrawl-multi-platform-search.md|firecrawl-multi-platform-search]]
 
-### Procedures
-- [[geral/procedures/firecrawl-multi-platform-search.md|Firecrawl Multi Platform Search]]
+### sessoes
 
-### Sessoes
-- [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026 06 18 Crise Update Recuperacao]]
+  - [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
+  - [[geral/sessoes/INDEX.md|INDEX]]

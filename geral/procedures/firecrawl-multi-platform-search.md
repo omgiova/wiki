@@ -25,3 +25,7 @@ firecrawl search "site:x.com OR site:twitter.com <query>" --scrape --limit 3
 ```
 
 Sempre usar `--scrape` para ver o conteúdo completo. Uma única ferramenta cobre as 3 plataformas, sem custo extra.
+
+## 📂 Navegação
+[[geral/procedures/INDEX.md|📂 Voltar para procedures]]
+

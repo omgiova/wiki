@@ -1,10 +1,3 @@
-# hermes/todo/
+# Índice: hermes/todo
 
-## Páginas
-
-- [[hermes/todo/proximos-passos.md|Proximos Passos]]
-
-## Por Categoria
-
-### Todo
-- [[hermes/todo/proximos-passos.md|Proximos Passos]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]

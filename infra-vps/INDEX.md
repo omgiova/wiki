@@ -1,24 +1,23 @@
-# infra-vps/
+# Índice: infra-vps
 
-## Páginas
 
-- [[infra-vps/decisions/arquitetura-rede-swarm.md|Arquitetura Rede Swarm]]
-- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|Docker Swarm Ipvs Overlay]]
-- [[infra-vps/gotchas/ipvs-table-vazia.md|Ipvs Table Vazia]]
-- [[infra-vps/procedures/diagnostico-502-traefik.md|Diagnostico 502 Traefik]]
-- [[infra-vps/rules/autorizacao-docker.md|Autorizacao Docker]]
+### decisions
 
-## Por Categoria
+  - [[infra-vps/decisions/INDEX.md|INDEX]]
+  - [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
 
-### Decisions
-- [[infra-vps/decisions/arquitetura-rede-swarm.md|Arquitetura Rede Swarm]]
+### gotchas
 
-### Gotchas
-- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|Docker Swarm Ipvs Overlay]]
-- [[infra-vps/gotchas/ipvs-table-vazia.md|Ipvs Table Vazia]]
+  - [[infra-vps/gotchas/INDEX.md|INDEX]]
+  - [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]
+  - [[infra-vps/gotchas/ipvs-table-vazia.md|ipvs-table-vazia]]
 
-### Procedures
-- [[infra-vps/procedures/diagnostico-502-traefik.md|Diagnostico 502 Traefik]]
+### procedures
 
-### Rules
-- [[infra-vps/rules/autorizacao-docker.md|Autorizacao Docker]]
+  - [[infra-vps/procedures/INDEX.md|INDEX]]
+  - [[infra-vps/procedures/diagnostico-502-traefik.md|diagnostico-502-traefik]]
+
+### rules
+
+  - [[infra-vps/rules/INDEX.md|INDEX]]
+  - [[infra-vps/rules/autorizacao-docker.md|autorizacao-docker]]

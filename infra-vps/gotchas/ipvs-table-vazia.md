@@ -35,3 +35,18 @@ ipvsadm -Ln
 
 # 3. Se tabela vazia → restart docker
 ```
+
+## 📂 Navegação
+[[infra-vps/gotchas/INDEX.md|📂 Voltar para gotchas]]
+
+## 🔗 Relacionados (mesmo grupo)
+- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
+- [[infra-vps/procedures/diagnostico-502-traefik.md|diagnostico-502-traefik]]
+

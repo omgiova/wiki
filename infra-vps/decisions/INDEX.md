@@ -1,10 +1,3 @@
-# infra-vps/decisions/
+# Índice: infra-vps/decisions
 
-## Páginas
-
-- [[infra-vps/decisions/arquitetura-rede-swarm.md|Arquitetura Rede Swarm]]
-
-## Por Categoria
-
-### Decisions
-- [[infra-vps/decisions/arquitetura-rede-swarm.md|Arquitetura Rede Swarm]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]

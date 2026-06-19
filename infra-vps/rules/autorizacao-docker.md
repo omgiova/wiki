@@ -30,3 +30,15 @@ tags: [docker, infra-vps, projetos, rule, traefik, wiki]
 
 ### Penalidade por violação
 Perda de confiança do usuário + horas de troubleshooting desnecessário. Já aconteceu.
+
+## 📂 Navegação
+[[infra-vps/rules/INDEX.md|📂 Voltar para rules]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]
+- [[infra-vps/decisions/arquitetura-rede-swarm.md|arquitetura-rede-swarm]]
+- [[infra-vps/gotchas/docker-swarm-ipvs-overlay.md|docker-swarm-ipvs-overlay]]
+

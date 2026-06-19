@@ -1,36 +1,27 @@
-# hermes/
+# Índice: hermes
 
-## Páginas
 
-- [[hermes-config/_rules/regras-do-agente.md|Regras Do Agente]]
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
-- [[hermes/decisions/memoria-wiki-markdown.md|Memoria Wiki Markdown]]
-- [[hermes/procedures/implementar-memoria-arquivos.md|Implementar Memoria Arquivos]]
-- [[hermes/rules/conhecimento-na-wiki.md|Conhecimento Na Wiki]]
-- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026 06 18 Recuperacao E Wiki]]
-- [[hermes/todo/proximos-passos.md|Proximos Passos]]
+### decisions
 
-## Por Categoria
+  - [[hermes/decisions/INDEX.md|INDEX]]
+  - [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
 
-### _Rules
-- [[hermes-config/_rules/regras-do-agente.md|Regras Do Agente]]
+### procedures
 
-### Decisions
-- [[hermes/decisions/memoria-wiki-markdown.md|Memoria Wiki Markdown]]
+  - [[hermes/procedures/INDEX.md|INDEX]]
+  - [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]
 
-### Notes
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
+### rules
 
-### Procedures
-- [[hermes/procedures/implementar-memoria-arquivos.md|Implementar Memoria Arquivos]]
+  - [[hermes/rules/INDEX.md|INDEX]]
+  - [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
 
-### Rules
-- [[hermes/rules/conhecimento-na-wiki.md|Conhecimento Na Wiki]]
+### sessoes
 
-### Sessoes
-- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026 06 18 Recuperacao E Wiki]]
+  - [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+  - [[hermes/sessoes/INDEX.md|INDEX]]
 
-### Todo
-- [[hermes/todo/proximos-passos.md|Proximos Passos]]
+### todo
+
+  - [[hermes/todo/INDEX.md|INDEX]]
+  - [[hermes/todo/proximos-passos.md|proximos-passos]]

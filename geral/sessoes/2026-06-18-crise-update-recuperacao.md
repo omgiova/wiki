@@ -38,3 +38,14 @@ updates:
 ## Pendente
 - Abrir issue no Hermes GitHub sobre corrupção de state.db durante update do gateway
 - Testar `journal_mode=DELETE` quando gateway puder ser parado
+
+## 📂 Navegação
+[[geral/sessoes/INDEX.md|📂 Voltar para sessoes]]
+
+## 🔗 Conexões entre projetos
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/sessoes/2026-06-18-recuperacao-e-wiki.md|2026-06-18-recuperacao-e-wiki]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]
+

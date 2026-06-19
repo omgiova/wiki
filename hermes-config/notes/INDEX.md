@@ -1,12 +1,4 @@
-# hermes-config/notes/
+# Índice: hermes-config/notes
 
-## Páginas
-
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
-
-## Por Categoria
-
-### Notes
-- [[hermes-config/notes/arquitetura-vps.md|Arquitetura Vps]]
-- [[hermes-config/notes/visao-geral.md|Visao Geral]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+- [[hermes-config/notes/visao-geral.md|visao-geral]]

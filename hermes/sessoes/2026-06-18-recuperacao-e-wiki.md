@@ -27,3 +27,15 @@ tags: [ai-memory, docker, github, hermes, n8n, obsidian, projetos, sessoe, vps, 
 3. Padrão LLM Wiki do Karpathy (Raw → Wiki → Schema)
 4. Loop de auto-aprendizado (sessão → extração → memória)
 5. Handoff entre agentes (trocar de ferramenta sem perder contexto)
+
+## 📂 Navegação
+[[hermes/sessoes/INDEX.md|📂 Voltar para sessoes]]
+
+## 🔗 Conexões entre projetos
+- [[geral/sessoes/2026-06-18-crise-update-recuperacao.md|2026-06-18-crise-update-recuperacao]]
+- [[hermes/decisions/memoria-wiki-markdown.md|memoria-wiki-markdown]]
+- [[hermes/procedures/implementar-memoria-arquivos.md|implementar-memoria-arquivos]]
+- [[hermes/rules/conhecimento-na-wiki.md|conhecimento-na-wiki]]
+- [[hermes/todo/proximos-passos.md|proximos-passos]]
+- [[hermes-config/notes/arquitetura-vps.md|arquitetura-vps]]
+
