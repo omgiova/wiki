@@ -13,14 +13,15 @@ status: stable
 
 1. **Migrar conhecimento acumulado** — revisar sessões passadas do Hermes e capturar decisões, gotchas, procedimentos e regras que estão perdidos na memory() ou só na cabeça do usuário
 2. **Revisar SOUL.md** — o system prompt do Hermes
-3. **Criar estrutura `diario/`** — Daily Notes para memória episódica
-4. **Criar pasta `raw/`** — fontes brutas (PDFs, artigos, logs imutáveis)
+3. **Migrar conhecimento acumulado** — continuar capturando decisões, gotchas e procedimentos das sessões passadas do Hermes
 
 ### Concluído
 
 - ~~**Sincronizar wiki com GitHub**~~ — feito (repo `omgiova/ai-memory-wiki`)
 - ~~**Conectar Obsidian**~~ — feito (espelhado no Windows via clone)
-- ~~**Criar AGENTS.md**~~ — feito (ver [[AGENTS.md]])
+- ~~**Criar AGENTS.md**~~ — feito ([[AGENTS.md]])
+- ~~**Criar estrutura `diario/`**~~ — feito
+- ~~**Criar pasta `raw/`**~~ — feito
 
 ## 🔗 Conexões entre projetos
 - [[historico/crise-update.md|2026-06-18-crise-update]]
