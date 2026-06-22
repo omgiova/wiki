@@ -60,7 +60,7 @@ msg_id = get_session_env("HERMES_SESSION_MESSAGE_ID")  # ex: "527"
 chat_id = get_session_env("HERMES_SESSION_CHAT_ID")     # ex: "-1003870518428"
 ```
 
-Isso significa que o Hermes **pode reagir a mensagens automaticamente** sem pedir o message_id ao usuário. A variável `HERMES_SESSION_MESSAGE_ID` reflete o message_id da mensagem que触发ou o turn atual.
+Isso significa que o Hermes **pode reagir a mensagens automaticamente** sem pedir o message_id ao usuário. A variável `HERMES_SESSION_MESSAGE_ID` reflete o message_id da mensagem que disparou o turn atual.
 
 ## Emojis suportados como reação
 
