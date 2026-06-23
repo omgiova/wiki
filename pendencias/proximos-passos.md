@@ -15,7 +15,7 @@ status: stable
 
 ### Concluído
 
-- ~~**Sincronizar wiki com GitHub**~~ — feito (repo `omgiova/ai-memory-wiki`)
+- ~~**Sincronizar wiki com GitHub**~~ — feito (repo `omgiova/wiki`)
 - ~~**Conectar Obsidian**~~ — feito (espelhado no Windows via clone)
 - ~~**Criar AGENTS.md**~~ — feito ([[AGENTS.md]])
 - ~~**Criar estrutura `diario/`**~~ — feito
