@@ -22,6 +22,7 @@ Base de conhecimento persistente. Tudo que não cabe na memory() do Hermes.
 ## 🔧 Automação
 
 - [[automacao/firecrawl.md|Firecrawl]] — busca multi-plataforma com site:
+- [[automacao/wiki-review.md|Wiki Review]] — agente que auto-escreve o diário a cada 10 turnos
 
 ## 📜 Histórico
 

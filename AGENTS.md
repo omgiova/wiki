@@ -22,7 +22,8 @@ index.md                          → ponto de entrada único
 AGENTS.md                         → este arquivo
 │
 ├── automacao/
-│   └── firecrawl.md              → busca multi-plataforma com sintaxe site:
+│   ├── firecrawl.md              → busca multi-plataforma com sintaxe site:
+│   └── wiki-review.md            → agente background que salva insights no diario/ a cada 10 turnos
 │
 ├── conhecimento/
 │   └── wiki.md                   → conceito central, regras e histórico da wiki
