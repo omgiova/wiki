@@ -11,7 +11,20 @@ status: stable
 
 Plugin do Hermes que analisa a conversa automaticamente e escreve insights no diário da wiki (`wiki/diario/YYYY-MM-DD-{session}.md`). Roda em background sem intervenção do usuário.
 
-## Implementação atual (v4 — plugin, sobrevive a hermes update)
+## Implementação atual (v6 — sessão por session_id, contador por sessão)
+
+**O que mudou em v6 (2026-06-24):**
+- Estado unificado em `~/.hermes/wiki_review_session.json` como dicionário `{session_id: {diary_path, last_activity, counter}}`
+- Contador deixou de ser global (`wiki_review_counter`) — agora é por session_id
+- Arquivo de diário nomeado `YYYY-MM-DD-HHMM-{session_short}.md` — cada tópico/chat tem o seu
+- Timestamps em BRT (`-03:00`) em vez de UTC
+- Notificação Telegram no tópico wiki_review (thread 749) após cada commit
+
+**Rollback para v5:** restaurar o `__init__.py` com `_get_diary_path()` sem parâmetro, SESSION_STATE_FILE como `{"diary_path":..., "last_activity":...}` e contador global em `~/.hermes/wiki_review_counter`. Ver seção v5 no histórico abaixo.
+
+---
+
+## Implementação anterior (v4/v5 — plugin, sobrevive a hermes update)
 
 O wiki_review vive em `~/.hermes/plugins/wiki-review/`. Arquivo não rastreado pelo git do hermes-agent — sobrevive a qualquer `hermes update`.
 
