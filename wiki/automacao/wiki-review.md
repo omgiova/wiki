@@ -101,15 +101,26 @@ O plugin recebe `session_id`, `model`, `platform` e `conversation_history` via h
 - **Notificação visual**: apenas `logger.info`, não aparece no terminal do usuário (futuro: explorar hook `on_session_start` ou similar)
 - **Condição de disparo**: contador por N turnos (mesmo `nudge_interval`), não exatamente `_should_review_memory`
 
-## O prompt (3 perguntas)
+## O prompt — critério de durabilidade
 
-O agente filho recebe o histórico da conversa e responde a 3 perguntas:
+O agente filho recebe o histórico e filtra por **durabilidade**: só escreve o que for útil na PRÓXIMA sessão. Não é um resumo do que aconteceu.
 
-1. **O usuário revelou algo sobre si?** — persona, desejos, preferências, estilo de trabalho
-2. **Teve correção, técnica nova, ferramenta instalada, skill desatualizada?** — mudanças de abordagem, novos workflows, configurações
-3. **Tem pendência ou próximo passo?** — decisões adiadas, issues abertas, caminhos não explorados
+Sinais que justificam uma entrada:
+- Usuário corrigiu comportamento/tom/abordagem (frustração explícita é sinal de primeira classe)
+- Usuário revelou algo DURÁVEL sobre si — preferência estável, estilo de trabalho, objetivo de longo prazo
+- Técnica, fix, config ou caminho de debugging reutilizável surgiu
+- Decisão explicitamente adiada com follow-up necessário
 
-Cada finding vira uma seção `## {título} — {HH:MM}` escrita no arquivo temporário.
+Não captura (ruído que polui o diário):
+- Narrativas de sessão ("falamos sobre X", "testamos Y") — o que aconteceu hoje não é durável
+- Erros transitórios que se resolveram
+- Pendências vagas sem dono ou contexto acionável
+- Afirmações negativas sobre ferramentas ("X não funciona")
+- Resumos do que o agente pesquisou ou produziu
+
+**"Nada a registrar." é um outcome legítimo e esperado** — sessões tranquilas sem correções devem retornar vazio.
+
+Cada finding vira uma seção `## {título} — {HH:MM}` com 2-4 linhas: o que é, por que importa para o futuro, como aplicar.
 
 ## Arquivo de saída
 
