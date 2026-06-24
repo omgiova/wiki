@@ -30,7 +30,8 @@ AGENTS.md                         → este arquivo (schema)
     │   └── wiki-review.md        → agente background que salva insights no diario/ a cada 10 turnos
     │
     ├── conhecimento/
-    │   └── wiki.md               → conceito central, regras e histórico da wiki
+    │   ├── wiki.md               → conceito central, regras e histórico da wiki
+    │   └── agent-loop-architectures.md  → comparação de loops entre Hermes, OpenClaw, Claude Code, Codex e Cline
     │
     ├── diario/                   → daily notes / memória episódica (YYYY-MM-DD.md)
     │

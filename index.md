@@ -18,6 +18,7 @@ Catálogo completo. Leia este arquivo primeiro ao responder queries — use os l
 ## 🧠 Conhecimento
 
 - [[wiki/conhecimento/wiki.md|Wiki]] — o que é esta wiki, como funciona, regras de escrita e histórico de fundação
+- [[wiki/conhecimento/agent-loop-architectures.md|Arquiteturas de Loop em Agentes]] — comparação de detecção de loop, aprovação, circuit breaker entre Hermes, OpenClaw, Claude Code, Codex e Cline
 
 ## 🔧 Automação
 
