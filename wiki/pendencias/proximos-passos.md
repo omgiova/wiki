@@ -19,9 +19,9 @@ status: stable
 
 6. **[RASCUNHO] Unificar skills na wiki** — pesquisar documentação técnica de sistemas existentes (ex: MCP tools + LLM Wiki, skills como páginas `type: procedure`) para que skills do Hermes também vivam na wiki e sejam acessíveis a qualquer agente (Claude Code, Codex, Manus). Não implementar sem validação externa. *Registrado em 2026-06-24.*
 
-5. **Print de início de sessão no wiki_review** — adicionar via `on_session_start` (ou hook equivalente) um print `"📓 Ligando o wiki_review"` que aparece quando uma nova sessão começa, indicando que o wiki_review está ativo. Diferente do "iniciando..." atual (que dispara a cada 10 turnos antes de analisar).
+5. **Print visual do wiki_review no terminal** — o plugin atualmente só escreve `logger.info`, que não aparece na tela do usuário. Giovani quer um print visível quando o wiki_review dispara e quando termina. Explorar depois que o sistema estiver rodando estável: opções são `on_session_start` hook, gateway callback, ou acesso ao objeto `agent` via algum mecanismo futuro. *Registrado 2026-06-24.*
 
-4. **Limpar source tree do Hermes** — wiki_review foi reimplementado como plugin em `~/.hermes/plugins/wiki-review/` (2026-06-24), então o source tree já está limpo para esse item. Mas ainda há `AGENTS.md` (redirect) em `/usr/local/lib/hermes-agent/` que pode precisar de limpeza. Confirmar com Giovani antes de marcar como concluído.
+4. **Limpar source tree do Hermes** — gatilho do wiki_review removido de `agent/turn_finalizer.py` (2026-06-24). Ainda há `AGENTS.md` (redirect) em `/usr/local/lib/hermes-agent/` que pode precisar de limpeza. Confirmar com Giovani antes de marcar como concluído.
 
 ### Concluído
 
