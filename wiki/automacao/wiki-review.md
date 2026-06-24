@@ -1,58 +1,65 @@
 ---
 type: procedure
-tags: [hermes, wiki, automacao, background, diario]
+tags: [hermes, wiki, automacao, background, diario, plugin]
 title: Wiki Review — Auto-escrita de diário em background
-description: Agente clone do background_review nativo do Hermes que roda a cada 10 turnos e salva insights da conversa na wiki (diario/).
-timestamp: 2026-06-23T00:00:00+00:00
+description: Plugin que roda a cada N turnos e salva insights da conversa na wiki (diario/).
+timestamp: 2026-06-24T10:30:00+00:00
 status: stable
 ---
 
 # Wiki Review
 
-Processo em background que analisa a conversa automaticamente e escreve insights no diário da wiki (`diario/YYYY-MM-DD.md`). Roda sem intervenção do usuário, a cada 10 turnos de conversa.
+Plugin do Hermes que analisa a conversa automaticamente e escreve insights no diário da wiki (`wiki/diario/YYYY-MM-DD-{session}.md`). Roda em background sem intervenção do usuário.
 
-## Como funciona
+## Implementação atual (plugin — sobrevive a hermes update)
 
-1. `turn_finalizer.py` é chamado ao fim de cada turno do Hermes
-2. Verifica `_should_review_memory` — o mesmo gatilho do `background_review` nativo (a cada `_memory_nudge_interval` turnos, padrão 10)
-3. Quando o gatilho dispara, wiki_review roda **no mesmo turno** que o background_review de memória
-4. A thread instancia um `AIAgent` filho (fork do agente principal) com toolset restrito a `file`
-5. O agente filho lê o histórico da conversa e escreve seções no diário
-6. Após o agente terminar, o código Python faz `git add -A && git commit` diretamente
-7. O hook `post-commit` de `/root/wiki/` faz `git pull --rebase + push` automaticamente
+O wiki_review é um **plugin standalone** em `~/.hermes/plugins/wiki-review/`. Ele usa o hook `post_llm_call` do sistema de plugins do Hermes, que é chamado ao fim de cada turno.
 
 ```
-turno N → finalize_turn() → _should_review_memory == True
-                                    ↓ (mesmo gatilho do background_review)
-                          spawn_wiki_review_thread()
-                                    ↓ thread daemon
-                          AIAgent(toolset=["file"])
-                          → run_conversation(prompt, histórico)
-                          → write_file(diario/YYYY-MM-DD-*.md)
-                                    ↓ após agente terminar
-                          git add -A && git commit
-                                    ↓ hook post-commit
-                          git pull --rebase + git push
+~/.hermes/plugins/wiki-review/
+  __init__.py    → lógica: contador, spawn de thread, AIAgent, git commit
+  plugin.yaml    → manifest: name, version, hooks: [post_llm_call]
 ```
 
-## Arquivos envolvidos
-
-| Arquivo | Papel |
-|---|---|
-| `/root/.hermes/agent/turn_finalizer.py` | Gatilho — verifica `_should_review_memory` e dispara a thread |
-| `/root/.hermes/agent/wiki_review.py` | Toda a lógica: agente filho, git commit |
-| `/root/wiki/diario/YYYY-MM-DD-*.md` | Saída — daily notes escritas pelo agente |
-| `/root/wiki/.git/hooks/post-commit` | Hook que faz push automático após commit |
-
-## Configuração
-
-O intervalo de disparo é o mesmo do background_review nativo: `agent._memory_nudge_interval` (padrão 10 turnos, configurável em `config.yaml` via `memory.nudge_interval`).
-
-```python
-# em wiki_review.py
-WIKI_DIR = Path("/root/wiki")
-DIARIO_DIR = WIKI_DIR / "diario"
+Ativação em `~/.hermes/config.yaml`:
+```yaml
+plugins:
+  enabled:
+    - wiki-review
 ```
+
+### Por que plugin e não turn_finalizer.py?
+
+O Python carrega o source tree `/usr/local/lib/hermes-agent/` — nunca `/root/.hermes/agent/`. Qualquer arquivo em `.hermes/agent/` é ignorado pelo runtime. Além disso, `hermes update` restaura o source tree, apagando patches manuais. O sistema de plugins em `~/.hermes/plugins/` é o único ponto de extensão que sobrevive a updates.
+
+### Fluxo
+
+```
+turno N → post_llm_call hook disparado
+               ↓ verifica contador (/root/.hermes/wiki_review_counter)
+               ↓ se count >= nudge_interval → reseta para 0
+          spawn thread daemon
+               ↓
+          AIAgent(enabled_toolsets=["file"], skip_memory=True)
+          → run_conversation(prompt, histórico)
+          → write_file(diario/YYYY-MM-DD-{session}.md)
+               ↓ após agente terminar
+          git -C /root/wiki add -A && git commit
+               ↓ hook post-commit
+          git pull --rebase + push
+```
+
+### Parâmetros configuráveis
+
+| Parâmetro | Onde | Padrão |
+|---|---|---|
+| Intervalo de disparo | `memory.nudge_interval` em config.yaml | 10 |
+| Diretório da wiki | hardcoded no plugin | `/root/wiki` |
+| Modelo usado | `model` kwarg do hook (mesmo modelo do turno) | — |
+
+### Contador de turnos
+
+Persiste em `/root/.hermes/wiki_review_counter` (inteiro simples). Sobrevive a restarts do gateway. Incrementa a cada turno; zera quando dispara.
 
 ## O prompt (3 perguntas)
 
@@ -67,12 +74,12 @@ Cada finding vira uma seção `## {título} — {HH:MM}` no diário do dia.
 ## Nome do arquivo de saída
 
 ```
-diario/YYYY-MM-DD-{8 chars do session_id}.md
+wiki/diario/YYYY-MM-DD-{8 chars do session_id}.md
 ```
 
-Exemplo: `diario/2026-06-23-20260623.md`
+Exemplo: `wiki/diario/2026-06-24-20260624.md`
 
-Se o arquivo já existir (outro disparo no mesmo dia), o agente lê o conteúdo atual e reescreve com as novas seções anexadas (read → append → write, já que `write_file` não tem modo append nativo confiável).
+Se o arquivo já existir (outro disparo no mesmo dia), o agente lê o conteúdo atual e reescreve com as novas seções anexadas.
 
 ## Restrições do agente filho
 
@@ -80,18 +87,33 @@ Se o arquivo já existir (outro disparo no mesmo dia), o agente lê o conteúdo 
 - `skip_memory=True` — não acessa nem escreve na `memory()` do Hermes
 - `max_iterations=16`
 - `compression_enabled=False`
-- Qualquer tool fora do whitelist é negada com log de warning
 
-## Histórico e bugs corrigidos (2026-06-23)
+## Histórico de implementações
 
-**Bug 1 — contador resetava a cada restart do gateway**
-O contador era uma variável global Python (`_wiki_review_turn_counter = 0`). Cada restart do gateway (update, crash) zerava o valor. Corrigido: contador agora persiste em `/root/.hermes/wiki_review_counter`.
+### v1 — source tree (2026-06-22, funcionou)
+Código adicionado diretamente em `/usr/local/lib/hermes-agent/agent/turn_finalizer.py` e `agent/wiki_review.py`. Funcionou. Depois foi "movido" para `.hermes/agent/` como "override" — conceito errado.
 
-**Bug 2 — prompt contraditório sobre git**
-O `_WIKI_REVIEW_PROMPT` dizia "só use write_file e read_file", mas o código concatenava depois "você pode usar terminal para git commit/push". O modelo seguia uma ou outra instrução aleatoriamente, resultando em arquivos escritos mas não commitados. Corrigido: git removido do escopo do LLM — agente filho só escreve o arquivo, commit é feito em Python após o agente terminar.
+### v2 — .hermes/agent/ override (2026-06-23, nunca funcionou)
+Bugs:
+1. `.hermes/agent/` não está em `sys.path` — Python nunca carrega dali
+2. Import errado: `from agent.background_review import _resolve_review_runtime` — função está em `agent.curator`
+
+### v3 — plugin (2026-06-24, implementação atual)
+Plugin em `~/.hermes/plugins/wiki-review/`. Usa hook `post_llm_call`. Sobrevive a `hermes update`. Confirmado funcionando pelos logs:
+```
+INFO hermes_plugins.wiki_review: wiki_review: disparado (session=20260624)
+```
+
+## Rollback
+
+```bash
+rm -rf /root/.hermes/plugins/wiki-review/
+# remover "- wiki-review" de plugins.enabled em ~/.hermes/config.yaml
+hermes gateway restart
+```
 
 ## Conexões
 
-- [[wiki/infraestrutura/hermes.md|Hermes Config]] — onde os arquivos modificados vivem (`agent/`)
-- [[wiki/conhecimento/wiki.md|Wiki]] — estrutura do vault e regras de escrita
-- [[wiki/pendencias/proximos-passos.md|Próximos passos]]
+- [[infraestrutura/hermes.md|Hermes Config]] — stack e arquitetura
+- [[conhecimento/wiki.md|Wiki]] — estrutura do vault e regras de escrita
+- [[pendencias/proximos-passos.md|Próximos passos]]

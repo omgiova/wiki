@@ -21,7 +21,7 @@ status: stable
 
 5. **Print de início de sessão no wiki_review** — adicionar via `on_session_start` (ou hook equivalente) um print `"📓 Ligando o wiki_review"` que aparece quando uma nova sessão começa, indicando que o wiki_review está ativo. Diferente do "iniciando..." atual (que dispara a cada 10 turnos antes de analisar).
 
-4. **Limpar source tree do Hermes** — após testar background_review e wiki_review por um tempo e confirmar que tudo funciona, remover do source tree (`/usr/local/lib/hermes-agent/`) as mudanças que foram aplicadas lá por engano: `AGENTS.md` (redirect) e `agent/turn_finalizer.py` (trigger do wiki_review). Essas mudanças devem existir apenas em `/root/.hermes/` (overrides). O source tree deve ficar limpo (igual ao upstream) para que `hermes update` não precise stashar nada.
+4. ~~**Limpar source tree do Hermes**~~ — resolvido de outra forma: wiki_review foi reimplementado como plugin em `~/.hermes/plugins/wiki-review/` (2026-06-24). Não existe mais código de wiki_review no source tree, então não há nada para limpar. O source tree já está limpo.
 
 ### Concluído
 
