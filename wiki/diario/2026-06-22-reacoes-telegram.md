@@ -104,7 +104,7 @@ O update chega como `MessageReactionUpdated`:
 
 ---
 
-## Preferência de nomenclatura do diário — 00:15
+## Preferência de nomenclatura do diário — 21:15
 
 O usuário pediu para renomear o arquivo de `2026-06-22.md` para `2026-06-22-reacoes-telegram.md`. Motivo: ele cria **múltiplas daily notes por dia**, então o padrão `YYYY-MM-DD.md` não serve. O padrão correto é `YYYY-MM-DD-sufixo-descritivo.md`.
 
@@ -114,7 +114,7 @@ O usuário pediu para renomear o arquivo de `2026-06-22.md` para `2026-06-22-rea
 
 ---
 
-## Estilo de trabalho do Giovani — 00:20
+## Estilo de trabalho do Giovani — 21:20
 
 Dois momentos marcantes nesta sessão revelam o estilo esperado:
 
@@ -126,7 +126,7 @@ Dois momentos marcantes nesta sessão revelam o estilo esperado:
 
 ---
 
-## Descoberta técnica: HERMES_SESSION_MESSAGE_ID — 00:25
+## Descoberta técnica: HERMES_SESSION_MESSAGE_ID — 21:25
 
 Investigando o código-fonte do gateway (`gateway/session_context.py`), descobri que o Hermes **já injeta o message_id** do Telegram no contexto da sessão via variável de contexto `HERMES_SESSION_MESSAGE_ID`.
 
@@ -153,7 +153,7 @@ msg_id = get_session_env('HERMES_SESSION_MESSAGE_ID', '')
 
 ---
 
-## Próximos passos — 00:30
+## Próximos passos — 21:30
 
 1. **Validar `HERMES_SESSION_MESSAGE_ID`** — testar se o valor da variável corresponde ao message_id real da mensagem atual. Se sim, criar uma skill ou snippet para reagir automaticamente.
 
