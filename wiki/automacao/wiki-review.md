@@ -49,6 +49,27 @@ turno N → post_llm_call hook disparado
           git pull --rebase + push
 ```
 
+### Nome do arquivo de saída
+
+```
+wiki/diario/YYYY-MM-DD-HHMM.md
+```
+
+O horário é o do **primeiro disparo da sessão**. Disparos subsequentes na mesma sessão appendam no mesmo arquivo.
+
+**Por que não usa session_id?** No gateway Telegram o `session_id` é o `chat_id` — fixo para sempre, igual em todas as conversas do usuário. Usar o session_id como nome faria TODAS as conversas ir para o mesmo arquivo. A detecção de sessão por inatividade resolve isso sem precisar de acesso ao objeto `agent`.
+
+### Detecção de sessão por inatividade
+
+Estado persistido em `/root/.hermes/wiki_review_session.json`:
+```json
+{"diary_path": "/root/wiki/wiki/diario/2026-06-24-1430.md", "last_activity": "2026-06-24T14:32:00+00:00"}
+```
+
+Lógica:
+- Se `now - last_activity < 60 min` → mesma sessão, usa o mesmo arquivo, atualiza `last_activity`
+- Se `now - last_activity >= 60 min` → nova sessão, cria arquivo com novo `HHMM`, reseta o estado
+
 ### Por que arquivo temporário?
 
 O bug crítico das versões anteriores: o agente tentava ler o diário existente e reescrever o arquivo inteiro com as novas seções adicionadas. O argumento `content` do `write_file` ficava enorme (frontmatter + conteúdo antigo + novas seções). O modelo truncava o JSON na geração e o `message_sanitization` não conseguia reparar:
@@ -90,13 +111,9 @@ O agente filho recebe o histórico da conversa e responde a 3 perguntas:
 
 Cada finding vira uma seção `## {título} — {HH:MM}` escrita no arquivo temporário.
 
-## Nome do arquivo de saída
+## Arquivo de saída
 
-```
-wiki/diario/YYYY-MM-DD-{8 chars do session_id}.md
-```
-
-Exemplo: `wiki/diario/2026-06-24-20260624.md`
+Ver seção "Nome do arquivo de saída" acima — gerado por detecção de sessão por inatividade.
 
 ## Restrições do agente filho
 
@@ -153,9 +170,17 @@ Resultado: o arquivo nunca era escrito. Aconteceu 10+ vezes nos logs.
 
 ---
 
-### v4 — plugin com arquivo temporário (2026-06-24, implementação atual)
+### v4 — plugin com arquivo temporário (2026-06-24, superado por v5)
+
+Plugin não rastreado + temp file. Corrigiu o bug do write_file. Mas usava `session_id[:8]` para nomear o arquivo — e o session_id no gateway Telegram é o chat_id (fixo), então todos os disparos do dia iam para o mesmo arquivo. Um arquivo acumulou +10 sessões misturadas.
+
+---
+
+### v5 — detecção de sessão por inatividade (2026-06-24, implementação atual)
 
 Plugin não rastreado + estratégia de escrita correta: Python cria o arquivo com frontmatter, agente gera só as novas seções em `/tmp/`, Python faz o append. Sem leitura nem reescrita do arquivo inteiro pelo agente.
+
+Um arquivo por sessão de conversa. Sessão detectada por inatividade (60 min sem turno = nova sessão). Nome do arquivo: `YYYY-MM-DD-HHMM.md`. Estado persistido em `~/.hermes/wiki_review_session.json`.
 
 ## Conexões
 
