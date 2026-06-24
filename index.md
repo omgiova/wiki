@@ -14,6 +14,7 @@ Catálogo completo. Leia este arquivo primeiro ao responder queries — use os l
 
 - [[wiki/infraestrutura/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/infraestrutura/hermes.md|Hermes]] — identidade, regras, stack, modelos ativos e preferências do Hermes Agent
+- [[wiki/infraestrutura/telegram-topicos.md|Telegram Tópicos]] — tópicos (forum threads) do grupo principal; wiki_review = thread 749
 
 ## 🧠 Conhecimento
 

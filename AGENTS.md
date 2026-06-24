@@ -73,6 +73,7 @@ AGENTS.md                         → este arquivo (schema)
     │
     ├── infraestrutura/
     │   ├── hermes.md             → identidade, regras, stack e preferências do Hermes
+    │   ├── telegram-topicos.md   → tópicos do grupo Telegram (thread IDs)
     │   └── vps.md                → hardware, serviços, Docker Swarm, IPVS
     │
     └── pendencias/
