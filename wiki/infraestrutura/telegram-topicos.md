@@ -13,10 +13,11 @@ Grupo principal: `-1003870518428`
 
 | Tópico | thread_id | Descrição |
 |---|---|---|
-| Geral | None | Tópico padrão do grupo (sem thread_id no Telegram) |
-| wiki_review | 749 | Espelho em tempo real do que o wiki_review escreve no diário |
+|| Geral | 1 | Tópico padrão do grupo |
+|| wiki_review | 749 | Espelho em tempo real do que o wiki_review escreve no diário |
+|| Skills | 282 | Tópico de skills do Hermes, confirmado em 2026-06-24 |
 
-> Esta página está incompleta — Giovani tem outros tópicos documentados em outros lugares. Centralizar aqui quando possível.
+> Veja [[telegram/topics.md]] para o mapa completo e atualizado de todos os chats e tópicos.
 
 ## Conexões
 
