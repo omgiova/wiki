@@ -148,3 +148,7 @@ systemctl restart docker
 ## Visão geral do ecossistema
 
 A stack roda num único VPS Hostinger KVM 2 com Ubuntu. O Hermes Agent é o orquestrador de automação pessoal, n8n e Node-RED cuidam de workflows, e a wiki em `/root/wiki/` mantém a base de conhecimento persistente.
+
+## 🔗 Conexões
+
+- [[infraestrutura/pendencia-problema-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)

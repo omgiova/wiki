@@ -1,10 +1,10 @@
 ---
-type: pendencia
+type: session
 tags: [hermes, claude, ssh, termux, remote-control, bug]
 title: Problema SSH/Claude — Sessões Travando no Remote Control
 description: Diagnóstico de 3 problemas que causam travamento de sessões Claude via Remote Control (Termux/Android) — curl sem timeout, processo zumbi e prompt de aprovação invisível
 timestamp: 2026-06-26T00:00:00-03:00
-status: pendente
+status: draft
 ---
 
 # Problema SSH/Claude — Sessões Travando no Remote Control
