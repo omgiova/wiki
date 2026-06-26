@@ -30,6 +30,57 @@ Aplicar em todos os `curl` dentro de scripts que rodam no startup.
 
 **Status:** Pendente aplicar na VPS.
 
+### Diagnóstico — etapas para verificar estado atual
+
+Execute cada etapa em ordem. Cada uma é independente e pode ser pedida como "faça a etapa N".
+
+**Etapa 1 — Ver hooks configurados no Claude Code**
+```bash
+cat ~/.claude/settings.json | grep -A5 "hooks"
+```
+*Objetivo:* identificar quais hooks existem e quais scripts eles chamam.
+
+**Etapa 2 — Encontrar todos os `curl` nos scripts de hook**
+```bash
+grep -rn "curl" ~/.claude/ 2>/dev/null
+```
+*Objetivo:* listar todas as chamadas curl nos scripts da configuração do Claude.
+
+**Etapa 3 — Listar arquivos na pasta de configuração**
+```bash
+ls -la ~/.claude/
+```
+*Objetivo:* ver quais scripts e arquivos existem na pasta de configuração do Claude.
+
+**Etapa 4 — Identificar curls SEM proteção de timeout**
+```bash
+grep -rn "curl" ~/.claude/ 2>/dev/null | grep -v "max-time"
+```
+*Objetivo:* filtrar apenas as linhas com `curl` que **não** têm `--max-time`. Cada linha que aparecer é um curl problemático.
+
+**Etapa 5 — Ver conteúdo completo de cada script identificado**
+
+Após a Etapa 2 ou 4 revelarem os arquivos, ler cada um completo:
+```bash
+cat <caminho-do-script-encontrado>
+```
+*Objetivo:* entender o contexto de cada curl problemático antes de aplicar o fix.
+
+**Etapa 6 — Aplicar o fix**
+
+Para cada curl sem `--max-time` encontrado, adicionar a flag:
+```bash
+# Substituir em cada arquivo afetado
+sed -i 's/curl \(https\)/curl --max-time 10 \1/g' <caminho-do-script>
+```
+Ou editar manualmente se a linha for mais complexa.
+
+**Etapa 7 — Verificar que não sobrou nenhum curl sem proteção**
+```bash
+grep -rn "curl" ~/.claude/ 2>/dev/null | grep -v "max-time"
+```
+*Objetivo:* confirmar que o output está vazio (nenhum curl desprotegido).
+
 ---
 
 ## Problema 2 — Processo zumbi da sessão anterior (pts/0)
