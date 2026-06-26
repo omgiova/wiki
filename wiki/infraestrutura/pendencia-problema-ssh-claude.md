@@ -17,11 +17,24 @@ Diagnosticado em 2026-06-26. Explica por que sessões do Claude via Remote Contr
 
 Execute cada etapa em ordem. Cada comando já combina múltiplas verificações numa só chamada.
 
-**Etapa 1 — Processos Claude ativos e há quanto tempo existem** *(Problema 2)*
+**Etapa 1 — Processos Claude ativos e há quanto tempo existem** *(Problema 2)* ✅ FEITO (2026-06-26)
 ```bash
 ps aux | grep -i claude | grep -v grep; echo "---tempo-vivo---"; ps -eo pid,etime,cmd | grep -i claude | grep -v grep
 ```
 *O que observar:* mais de 1 processo = zumbi acumulado. Campo `etime` mostra há quanto tempo cada um existe.
+
+**Resultado (2026-06-26):** Encontrados 2 processos ativos (após kill acidental da sessão VS Code — ver nota abaixo):
+- PID 3584042 — sem terminal, 1h05min — claude gerenciado pelo VS Code extensionHost (~146 MB RAM, 1.8%)
+- PID 3595909 — pts/1, ~17min — sessão Remote Control ativa (atual)
+
+**Aprendizado importante — processo daemon do VS Code não é zumbi:**
+O processo sem terminal com flags `--output-format stream-json --input-format stream-json` é iniciado **automaticamente pelo VS Code extensionHost** ao conectar via SSH, mesmo sem abrir nenhuma aba ou sessão explícita. Ele se comunica via sockets, não via terminal. Não é zumbi — morre junto com o VS Code ao desconectar.
+
+**Erro cometido na sessão anterior:** outra instância do Claude identificou incorretamente esse processo daemon como "sua própria sessão" e deu `kill` no processo interativo (pts/0) achando que era zumbi — derrubando a própria sessão. Regra: **nunca dar kill em processo claude sem confirmar o PID da sessão atual primeiro** (verificar o pts/N da sessão ativa).
+
+**Como identificar corretamente:**
+- Processo daemon (sem terminal, `?`) com flags `--output-format stream-json` = extensão VS Code, não matar
+- Processo interativo (`pts/N`) = sessão ativa do Claude Code, não matar sem certeza
 
 **Etapa 2 — Hooks configurados, todos os curls e curls sem timeout** *(Problema 1)*
 ```bash
