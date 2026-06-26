@@ -3,3 +3,8 @@
 .obsidian/workspace-mobile.json
 .obsidian/plugins/obsidian-git/data.json
 .trash/
+
+# Preferências locais por dispositivo — não sincronizar entre PC e Android
+.obsidian/app.json
+.obsidian/appearance.json
+.obsidian/graph.json

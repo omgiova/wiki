@@ -73,14 +73,33 @@ Adicionado o caminho do vault Obsidian no Android em `wiki/infraestrutura/vps.md
 
 ```
 .obsidian/workspace.json          # estado local da janela — não faz sentido sincronizar
+.obsidian/workspace-mobile.json   # idem, versão mobile
 .obsidian/plugins/obsidian-git/data.json  # token do GitHub — nunca commitar
+.obsidian/app.json                # preferências locais do device — diferem entre PC e Android
+.obsidian/appearance.json         # tema e fonte — local por device
+.obsidian/graph.json              # estado do grafo (floats de zoom/posição) — local por device
 ```
+
+---
+
+## Fix 2026-06-26 — "Discard All" obrigatório antes de cada Pull
+
+**Problema:** toda vez que o Obsidian era aberto no Windows, era necessário dar "Discard All" antes de conseguir dar Pull.
+
+**Causa raiz:** `app.json` e `appearance.json` estavam commitados como `{}` (vazios, vindos do Android). Ao abrir no Windows, o Obsidian populava esses arquivos com suas preferências locais — gerando diff imediato em relação ao git, mesmo sem o usuário ter feito nada.
+
+**Fix aplicado:**
+1. `app.json`, `appearance.json` e `graph.json` adicionados ao `.gitignore`
+2. Removidos do rastreamento com `git rm --cached` (arquivos locais preservados)
+3. Cada device agora mantém sua própria cópia local desses arquivos sem conflito
+
+**O que continua sincronizando:** todo o conteúdo `.md`, `community-plugins.json`, `core-plugins.json` e os arquivos do plugin obsidian-git.
 
 ---
 
 ## Pontos de atenção futuros
 
-- **Conflitos possíveis entre dispositivos:** `app.json`, `appearance.json` e `core-plugins.json` podem divergir se as configurações do Obsidian forem diferentes entre desktop e Android. Resolver manualmente se acontecer.
+- **`core-plugins.json` ainda é rastreado** — se divergir entre PC e Android (plugin ativado num e não no outro), pode gerar conflito. Monitorar.
 - **`data.json` precisa ser configurado uma vez por dispositivo novo.** Não está no git — cada device guarda o seu localmente.
 - **Nunca rodar `git clean -fd .obsidian/` sem antes confirmar** que os arquivos da pasta estão commitados no git.
 - **Remote URL desatualizada:** o repo foi renomeado de `ai-memory-wiki` para `wiki` no GitHub. O redirect funciona, mas atualizar o remote é recomendado:
