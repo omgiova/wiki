@@ -23,6 +23,12 @@ status: stable
 
 4. **Limpar source tree do Hermes** — gatilho do wiki_review removido de `agent/turn_finalizer.py` (2026-06-24). Ainda há `AGENTS.md` (redirect) em `/usr/local/lib/hermes-agent/` que pode precisar de limpeza. Confirmar com Giovani antes de marcar como concluído.
 
+7. **Corrigir curl sem --max-time no script de startup** — causa direta de travamento de sessões. Adicionar `--max-time 10` em todos os `curl` dos scripts que rodam no startup do Hermes. Ver [[infraestrutura/pendencia-problema-ssh-claude.md]]. *Registrado 2026-06-26.*
+
+8. **Resolver prompt de aprovação invisível no Remote Control** — quando Claude pede aprovação de ferramenta, prompt aparece no Termux (pts/0) mas não no app. Sessão fica aparentemente travada. Investigar configurar permissões automáticas para reduzir aprovações manuais. Ver [[infraestrutura/pendencia-problema-ssh-claude.md]]. *Registrado 2026-06-26.*
+
+9. **Cleanup automático de processos zumbi do Claude** — sessões canceladas pelo app deixam processo Claude vivo no Termux. Implementar script que mata processos órfãos ao iniciar nova sessão. Ver [[infraestrutura/pendencia-problema-ssh-claude.md]]. *Registrado 2026-06-26.*
+
 ### Concluído
 
 - ~~**Criar `wiki_review.py`**~~ — feito (2026-06-23), arquivo em `/root/.hermes/agent/wiki_review.py`
