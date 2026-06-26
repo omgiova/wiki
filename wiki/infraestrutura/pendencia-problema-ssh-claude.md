@@ -11,6 +11,38 @@ status: draft
 
 Diagnosticado em 2026-06-26. Explica por que sessões do Claude via Remote Control aparecem como "Executando..." indefinidamente.
 
+---
+
+## Diagnóstico Geral
+
+Execute cada etapa em ordem. Cada comando já combina múltiplas verificações numa só chamada.
+
+**Etapa 1 — Processos Claude ativos e há quanto tempo existem** *(Problema 2)*
+```bash
+ps aux | grep -i claude | grep -v grep; echo "---tempo-vivo---"; ps -eo pid,etime,cmd | grep -i claude | grep -v grep
+```
+*O que observar:* mais de 1 processo = zumbi acumulado. Campo `etime` mostra há quanto tempo cada um existe.
+
+**Etapa 2 — Hooks configurados, todos os curls e curls sem timeout** *(Problema 1)*
+```bash
+cat ~/.claude/settings.json; echo "---curls-encontrados---"; grep -rn "curl" ~/.claude/ 2>/dev/null; echo "---curls-SEM-max-time---"; grep -rn "curl" ~/.claude/ 2>/dev/null | grep -v "max-time"
+```
+*O que observar:* a seção `hooks` no settings.json; linhas na parte `curls-SEM-max-time` = vulnerabilidades a corrigir.
+
+**Etapa 3 — Logs de sessões recentes e erros registrados** *(Problemas 1 e 2)*
+```bash
+ls -lth ~/.claude/logs/ 2>/dev/null | head -10; echo "---erros-nos-logs---"; grep -rih "timeout\|hang\|error\|killed\|signal\|stuck" ~/.claude/logs/ 2>/dev/null | tail -30
+```
+*O que observar:* datas dos logs (indicam quando sessões existiram); linhas de erro mostram padrão dos travamentos.
+
+**Etapa 4 — Configuração de permissões automáticas** *(Problema 3)*
+```bash
+grep -A5 "permissions\|autoApprove\|allow\|approve" ~/.claude/settings.json 2>/dev/null; echo "---settings-completo---"; cat ~/.claude/settings.json
+```
+*O que observar:* se há ferramentas com aprovação automática configurada. Ausência total = toda tool pede [y/n] no terminal, invisível no app.
+
+---
+
 ## Problema 1 — curl sem --max-time no script de startup
 
 **Causa direta do travamento.**
