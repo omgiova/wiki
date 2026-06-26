@@ -60,7 +60,8 @@ AGENTS.md                         → este arquivo (schema)
 └── wiki/                         → páginas geradas e mantidas pelo LLM
     ├── automacao/
     │   ├── firecrawl.md          → busca multi-plataforma com sintaxe site:
-    │   └── wiki-review.md        → agente background que salva insights no diario/ a cada 10 turnos
+    │   ├── wiki-review.md        → agente background que salva insights no diario/ a cada 10 turnos
+    │   └── wiki-review-vs-background-review.md → comparação completa (41 itens) entre wiki_review e background_review nativo
     │
     ├── conhecimento/
     │   ├── wiki.md               → conceito central, regras e histórico da wiki
@@ -69,12 +70,14 @@ AGENTS.md                         → este arquivo (schema)
     ├── diario/                   → daily notes / memória episódica (YYYY-MM-DD.md)
     │
     ├── historico/
-    │   └── crise-update.md       → recuperação de sessões após /update corromper state.db
+    │   ├── crise-update.md       → recuperação de sessões após /update corromper state.db
+    │   └── 2026-06-22-modelos-nim-elevenlabs.md → sessão: Nvidia NIM, ElevenLabs MCP, Groq e rate limit agêntico
     │
     ├── infraestrutura/
     │   ├── hermes.md             → identidade, regras, stack e preferências do Hermes
     │   ├── hermes-api.md         → referência completa dos endpoints REST do Hermes Agent (gerada do /openapi.json)
     │   ├── telegram-topicos.md   → mapa completo de chats, tópicos e IDs do Telegram
+    │   ├── termux-ssh-claude.md  → diagnóstico de sessões travando no Remote Control (Termux/Android) — 2026-06-26
     │   └── vps.md                → hardware, serviços, Docker Swarm, IPVS
     │
     └── pendencias/
