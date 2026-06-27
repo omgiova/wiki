@@ -1,233 +1,200 @@
 ---
 type: concept
-tags: [agentes, loops, arquitetura, harness]
-title: Arquiteturas de Loop em Agentes
-description: Comparação de como diferentes frameworks de agente (Hermes, OpenClaw, Claude Code, Codex, Cline) implementam detecção de loop, aprovação, circuit breaker e verificação cruzada.
-timestamp: 2026-06-27T01:55:00-03:00
+tags: [agentes, loops, arquitetura, loop-engineering, planejamento]
+title: Plano de Implementação — Loops Agênticos
+description: Base de conhecimento e planejamento para construção de sistemas de loop autônomo para o Hermes. Fundamentado em fontes primárias rastreáveis.
+timestamp: 2026-06-27T02:10:00-03:00
 status: draft
 ---
 
-# Arquiteturas de Loop em Agentes
+# Plano de Implementação — Loops Agênticos
 
-> Insights da sessão com Giovani — comparação entre Hermes, OpenClaw (Peter Steinberger), Claude Code, Codex CLI e Cline.
+## Tese central
 
-## O problema
+> *"You shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents."*
+> — Peter Steinberger (@steipete), criador do OpenClaw, agora na OpenAI
+> Fonte: https://x.com/steipete/status/2063697162748260627 (~junho 2026, 6,5M views)
 
-Agentes de IA frequentemente entram em **reply loop**: planejam, falam "vou fazer", mas não executam. Ou repetem a mesma tool call com os mesmos args sem progresso. Cada framework trata isso de forma diferente.
+Complementada por:
 
-## OpenClaw — o benchmark atual
+> *"I don't prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops."*
+> — Boris Cherny, head of Claude Code na Anthropic
+> Fonte primária: https://www.youtube.com/watch?v=SlGRN8jh2RI
+> Fonte secundária: https://thenewstack.io/loop-engineering/
 
-Peter Steinberger codificou soluções reais no OpenClaw (issue #57263). O sistema mais completo e **aberto** de loop detection.
+O ponto de alavancagem mudou: não é mais escrever o prompt certo — é escrever o sistema que dispara os prompts.
 
-### 5 Detectores de Loop
+---
 
-| Detector | O que detecta | Warning | Critical |
+## O que é loop engineering
+
+Baseado em: Addy Osmani, *"Loop Engineering"*
+- Blog: https://addyosmani.com/blog/loop-engineering/ (7 jun 2026)
+- O'Reilly Radar: https://www.oreilly.com/radar/loop-engineering/ (22 jun 2026)
+- Autor: ex-Director Google Cloud AI, autor de *Beyond Vibe Coding* (O'Reilly)
+
+Definição de Osmani:
+> *"Replacing yourself as the person who prompts the agent. You design the system that does it instead."*
+
+### Os 6 componentes de um loop (segundo Osmani)
+
+| # | Componente | O que é |
+|---|---|---|
+| 1 | **Automations** | o que dispara o loop (cron, evento, condição) |
+| 2 | **Worktrees** | ambiente isolado onde o agente opera |
+| 3 | **Skills** | capacidades específicas disponíveis ao agente |
+| 4 | **Plugins/connectors** | integrações com sistemas externos |
+| 5 | **Subagents** | agentes especializados para tarefas específicas |
+| 6 | **Memory/state** | o que persiste entre execuções |
+
+### Princípios extraídos das fontes
+
+**Maker/checker** — o modelo que produziu algo não deve revisar o próprio trabalho:
+> *"The model that wrote the code is way too nice grading its own homework. A second agent with different instructions and sometimes a different model catches the stuff the first one talked itself into."*
+
+**Memória em disco, não em contexto:**
+> *"The model forgets everything between runs so the memory has to be on disk and not in the context. The agent forgets; the repo doesn't."*
+
+**Condição de parada verificada por agente separado:**
+> O `/goal` do Claude Code *"keeps going until a condition you wrote is actually true, and after every turn a separate small model checks whether you are done"* — maker e checker são agentes distintos, inclusive para decidir quando parar.
+
+**Aviso real:**
+> *"A loop running unattended is also a loop making mistakes unattended."*
+
+---
+
+## OpenClaw como referência de implementação
+
+### O que é o OpenClaw
+- **Repositório:** https://github.com/openclaw/openclaw
+- **Autor:** Peter Steinberger + comunidade
+- **Stack:** TypeScript/Node.js
+- **Popularidade:** 381.000 stars no GitHub (um dos mais estrelados da história)
+- **Status:** open source, ativo (último commit 27 jun 2026)
+
+Filosofia central (fonte: Paolo Perazzo, https://ppaolo.substack.com/p/openclaw-system-architecture-overview, 11 fev 2026):
+> *"OpenClaw treats AI as an infrastructure problem: sessions, memory, tool sandboxing, access control, and orchestration. The LLM provides intelligence; OpenClaw provides the execution environment."*
+
+### Arquitetura (hub-and-spoke)
+
+Gateway central em WebSocket (`127.0.0.1:18789`) como control plane. Todos os canais (WhatsApp, Telegram, Discord, CLI, Web UI) conectam nele — mesma filosofia do Hermes.
+
+**Agent Runtime** (`src/agents/piembeddedrunner.ts`) — a cada turno faz 4 coisas:
+1. Resolve sessão
+2. Monta contexto
+3. Streama resposta e executa tool calls
+4. Persiste estado
+
+**Decisões de design relevantes:**
+- System prompt como **stack de arquivos**, não string única — composição de múltiplas configs do workspace
+- **Idempotency obrigatório:** toda operação com efeito colateral requer idempotency key — retry seguro sem ações duplicadas
+- **Cron jobs escopados por agente** — cada agente tem seus próprios cron jobs, não compartilhados (commit #96883)
+- **Session isolation:** tipos de sessão com permissões diferentes; `main` pode rodar tools no host, sessões `dm`/`group` têm sandbox mais restrito
+- **Plugin system:** 4 tipos (channel, memory, tool, provider), discovery automático via `package.json`
+
+### Sistema de detecção de loop (issue #57263)
+
+Referência: única documentação pública detalhada — issue no repositório. Código-fonte (`src/agents/`) não acessível sem autenticação GitHub.
+
+**5 detectores:**
+
+| Detector | O que detecta | Warning | Bloqueio |
 |---|---|---|---|
-| `generic_repeat` | Mesma tool + args + resultado idêntico | 10 calls | 20 calls |
-| `unknown_tool_repeat` | Tentativa de tool que não existe | — | 10 calls |
-| `known_poll_no_progress` | `process(poll)` / `process(log)` sem progresso | 10 calls | 20 calls |
-| `global_circuit_breaker` | Qualquer tool 30+ repetições sem progresso | — | **30 calls** (hard block) |
-| `ping_pong` | Alternância A→B→A→B sem mudar resultado | 10 calls | 20 calls |
+| `generic_repeat` | mesma tool + args + resultado idêntico | 10 calls | 20 calls |
+| `unknown_tool_repeat` | tool inexistente chamada repetidamente | — | 10 calls |
+| `known_poll_no_progress` | poll/log sem progresso real | 10 calls | 20 calls |
+| `global_circuit_breaker` | qualquer tool 30+ vezes sem progresso | — | 30 calls (hard block) |
+| `ping_pong` | alternância A→B→A→B sem resultado novo | 10 calls | 20 calls |
 
-### Tool Outcome Hashing
+**Tool Outcome Hashing:** `sha256(args_sem_volatile + resultado)` — só é "loop" se o **resultado também não mudou**. Campos voláteis (`timestamp`, `messageId`, `runId`) são removidos antes do hash.
 
-Diferencial crítico: não compara args pelo nome apenas. Usa **sha256 determinístico** do args + resultado. Só considera "loop" se o resultado também não mudou — isso separa tentativa genuína de repetição.
+**Arquivos referenciados no issue** (não acessíveis publicamente):
+- `src/agents/tool-loop-detection.ts`
+- `src/agents/embedded-agent-runner/run.ts`
+- `src/agents/bash-tools.exec-approval-followup.ts`
+- `src/agents/bash-tools.exec-approval-followup-state.ts`
+- `src/agents/execution-contract.ts`
+- `src/agents/post-compaction-loop-guard.ts`
 
-Casos especiais tratados:
-- **Volatile IDs** (messageId, runId, timestamp) são stripped do hash antes de comparar
-- **`exec` results** — hash do exit code + output agregado
-- **Veto do próprio loop** — não reseta a streak (impede que o bloqueio se auto-reinicie)
+---
 
-### Mecanismos extras do OpenClaw
-
-1. **`execution-contract.ts`** — "strict agentic execution contract". Se ativado, o modelo é *obrigado* a chamar tool depois de planejar. Se só planeja, o guard bloqueia (`STRICT_AGENTIC_BLOCKED`).
-
-2. **`bash-tools.exec-approval-followup.ts`** — aprovação assíncrona com retomada. Usuário aprova comando → quando termina, agente é retomado com resultado. Tem idempotency key + session rebind detection (se deu `/new` no meio, o followup é dropado).
-
-3. **`post-compaction-loop-guard.ts`** — guard pós-compressão. Depois que o contexto é compactado, detector extra evita que a compressão em si cause loop.
-
-4. **Ralph loop** (`subagent-spawn.ts`) — cada subagente começa com sessão **limpa**, sem arrastar histórico.
-
-### Arquivos de referência
-
-- `src/agents/tool-loop-detection.ts` — implementação completa dos 5 detectores
-- `src/agents/embedded-agent-runner/run.ts` — run loop principal com guard integration
-- `src/agents/bash-tools.exec-approval-followup.ts` — aprovação assíncrona
-- `src/agents/bash-tools.exec-approval-followup-state.ts` — estado persistente
-
-## Hermes — estado atual
+## Estado atual do Hermes
 
 ### O que já tem
 - `delegate_task` — spawn de subagentes (paralelo, isolado)
 - `cronjob` — loops agendados
-- `execute_code` — pipelines programáticos multi-tool
-- `max_turns` (default 90) — hard stop global
+- `execute_code` — pipelines multi-tool
+- `max_turns` (default 90) — único hard stop
 
-### O que não tem
-- ❌ Loop detector com hash de args + resultado ← implementação mapeada, ver seção abaixo
-- ❌ Fast-path de aprovação curta ("ok do it" → executa direto)
-- ❌ Strict-agentic guard (travar se só planejar) ← contornável via `tool_choice: any` + tool sentinela
-- ❌ Retry com escalation (falhou → tenta X → avisa)
-- ❌ Verificação cruzada (agente A faz, agente B verifica)
+### O que não tem (gaps confirmados)
+- ❌ Loop detector com hash de args + resultado
+- ❌ Idempotency key em operações com efeito colateral
+- ❌ Maker/checker (agente que valida o trabalho de outro)
+- ❌ Strict-agentic guard (bloquear se só planejar sem agir)
+- ❌ Circuit breaker com sliding window (além do max_turns global)
 - ❌ Post-compaction loop guard
 - ❌ Async approval followup
-- ❌ Prompt caching (`cache_control`) ← não relacionado a loop, mas reduz 85–90% dos input tokens
-- ❌ Circuit breaker com sliding window ← substituto mais granular para `max_turns`
-
-## Claude Code (Anthropic)
-
-- Usa **thinking blocks** — modelo planeja antes de chamar tools. Se mostra "vou fazer X" e não chama, próximo turno corrige.
-- **`tool_choice: {type: "any"}`** na API — força modelo a chamar tool no próximo turno.
-- **Sem loop detector próprio** — confia em rate limiting + max_turns.
-- **Sem fast-path de aprovação.**
-- Código fechado — o que se sabe é por observação.
-
-## Codex CLI (OpenAI)
-
-- **Responses API** — cada turno é resposta completa. Se modelo só planeja, retorna texto e acabou.
-- **`auto-execute` mode** — executa tools sem aprovação.
-- **`tool_choice: "required"`** — equivalente ao "any" do Claude.
-- **Loop detection via max_turns** (default 25) + rate limiting.
-- **Fast-path parcial** — `allow-auto-approve` pra comandos seguros.
-
-## Cline / Roo Code (VSCode)
-
-- **`alwaysAllow`** — lista de tools que rodam sem aprovação.
-- **`maxRequestsPerTask`** — default 25.
-- **`autoApprovalMode`** — "fast" (leitura) ou "full".
-- **Detector simples** — se mesma tool é chamada 3+ vezes com mesmo conteúdo, avisa.
-- **Não tem hashing de resultado** — só compara string de args.
-
-## Comparativo
-
-| Funcionalidade | Hermes | OpenClaw | Claude Code | Codex | Cline |
-|---|---|---|---|---|---|
-| Loop detector (arg hash) | ❌ | ✅ 5 detectores | ❌ | ❌ | Parcial |
-| Result hash (mudou?) | ❌ | ✅ sha256 | ❌ | ❌ | ❌ |
-| Fast-path aprovação | ❌ | ✅ | ❌ | Parcial | ✅ alwaysAllow |
-| Strict-agentic guard | ❌ | ✅ execution-contract | ❌ | ❌ | ❌ |
-| Ping-pong detection | ❌ | ✅ | ❌ | ❌ | ❌ |
-| Circuit breaker | ✅ max_turns | ✅ 30 calls | ✅ max_turns | ✅ max_turns | ✅ maxRequests |
-| Post-compaction guard | ❌ | ✅ | ❌ | ❌ | ❌ |
-| Subagente fresh context | ✅ delegate_task | ✅ Ralph loop | ✅ fork | ❌ | ❌ |
-| Async approval followup | ❌ | ✅ idempotent | ❌ | ❌ | ❌ |
-
-## Implementação no Hermes — caminhos mapeados
-
-> Pesquisa realizada em 2026-06-27. Ordenado por ROI vs esforço.
-
-### 1. Prompt Caching (`cache_control`) — 1–2h, 85–90% de economia em input tokens
-
-System prompt e definição de tools não mudam entre turns — candidatos ideais. Requer que o system seja array de blocos, não string simples. TTL padrão 5min; TTL de 1h disponível com custo de write 2× e read 0,1×.
-
-```python
-system=[{
-    "type": "text",
-    "text": SYSTEM_PROMPT,
-    "cache_control": {"type": "ephemeral"}
-}]
-```
-
-**Gotcha crítico:** qualquer campo dinâmico (timestamp, UUID) injetado no prompt invalida o cache. Verificar se o Hermes injeta isso no system. Mínimo 1.024 tokens para Sonnet cachear.
-
-### 2. `tool_choice: any` + tool sentinela — 30min
-
-Replica 80% do `execution-contract.ts` do OpenClaw. Força o modelo a chamar pelo menos uma tool a cada turno, eliminando turns de "só texto, sem ação".
-
-Complementar: adicionar tool `task_complete(result: str)` como saída explícita — o modelo tem saída clara em vez de texto livre.
-
-### 3. Exact-match request dedup — 30min
-
-Hash do último user message + model antes de encaminhar ao Claude. TTL de 30s é suficiente para duplos de reconexão do Telegram/WA sem colidir com conversa normal.
-
-### 4. Token counting pre-flight — 1h
-
-`client.messages.count_tokens(...)` antes de cada request real. Permite truncagem inteligente do histórico antes de estourar o contexto (e pagar o erro).
-
-### 5. Hash loop detector — 4–8h
-
-Replicação do OpenClaw para o Hermes. Pontos-chave:
-- `sha256(tool_name + args_sem_volatile + resultado)[:16]` como fingerprint
-- Strip de campos voláteis (`timestamp`, `messageId`, `runId`, `id`) antes de hashear
-- Sliding window de 20 calls; warn em 5 repetições, block em 10
-- Ao bloquear: injetar `tool_result` de erro artificial no loop — modelo recebe feedback sem consumir turno de LLM
-- 3 padrões em paralelo: `generic_repeat`, `no_progress` (resultado idêntico), `ping_pong` (A→B→A→B)
-
-### 6. Circuit breaker com sliding window — 2h
-
-Substituto mais granular para `max_turns`. Janela de 60s, abre após N erros. Distinção por tipo:
-- 429 rate-limit → exponential backoff com jitter, **não** conta para o breaker
-- 5xx / timeout → conta
-- 400 validation error → não conta
-
-### 7. Semantic cache CPU — 1–2 dias (baixa prioridade)
-
-**Atenção:** paper de 2026 mostra que caching de resposta em agentes multi-turn falha — o contexto muda entre turns mesmo com query idêntica. Só é seguro cachear **tool results determinísticos**. Útil apenas para queries informacionais isoladas (usuário pergunta algo ao Hermes fora de um loop de agente).
-
-Stack viável sem GPU: `all-MiniLM-L6-v2` (22M params) + FAISS + Redis.
+- ❌ Prompt caching (`cache_control`) — 85–90% de economia em input tokens
+- ❌ Cron jobs escopados por agente
 
 ---
 
 ## Loop externo com Claude Code CLI na VPS
 
-> Testado e validado em 2026-06-27 na VPS (Claude Code v2.1.183, autenticação OAuth).
+> Testado e validado em 2026-06-27 (Claude Code v2.1.183, autenticação OAuth).
 
-Além do Hermes, o Claude Code instalado na VPS pode ser acionado como processo headless — via cron do sistema, shell scripts ou systemd — sem nenhuma sessão interativa aberta.
+O binário `claude` pode ser acionado pelo cron do sistema sem nenhuma sessão interativa aberta. Credenciais OAuth ficam em `~/.claude/.credentials.json` e são lidas automaticamente.
 
-### Como funciona
+**Resultado dos testes:**
 
-O binário `claude` é um processo comum. Quando chamado, lê o prompt, faz requisição HTTP à API da Anthropic, executa tool calls na VPS e termina. O cron (daemon do sistema, sempre ativo desde o boot) aciona esse processo no horário configurado.
-
-### Autenticação no cron — o que foi testado
-
-A autenticação OAuth é salva em `~/.claude/.credentials.json`. O cron rodando como root acessa `/root/.claude/.credentials.json` automaticamente — **não é necessário configurar variáveis de ambiente**.
-
-| Comando | Ambiente mínimo (cron) | Resultado |
+| Comando | Ambiente mínimo (env -i) | Resultado |
 |---|---|---|
-| `claude --bare -p "..."` | env -i HOME=/root PATH=... | ❌ "Not logged in" |
-| `claude -p "..."` | env -i HOME=/root PATH=... | ✅ funciona |
+| `claude --bare -p "..."` | HOME=/root PATH=... | ❌ "Not logged in" |
+| `claude -p "..."` | HOME=/root PATH=... | ✅ funciona |
 
-**`--bare` é incompatível com OAuth** — quebra a leitura do credentials file. A documentação recomenda `--bare` para scripts, mas assume autenticação via `ANTHROPIC_API_KEY` como env var. Com OAuth, usar `claude -p` sem `--bare`.
+`--bare` é incompatível com autenticação OAuth — assume `ANTHROPIC_API_KEY` como env var. Com OAuth, usar `claude -p` sem `--bare`.
 
-### Exemplo de crontab
+**Quando usar cada abordagem de loop externo:**
 
-```bash
-# crontab -e (root)
-0 * * * * claude -p "verifica se todos os containers do swarm estão healthy. Se algum down, registra em /tmp/swarm-health.log com timestamp BRT" --allowedTools "Bash,Write" --output-format text >> /var/log/claude-cron.log 2>&1
-```
-
-### Quando usar cada abordagem de loop externo
-
-| Objetivo | Melhor opção |
+| Objetivo | Abordagem |
 |---|---|
-| Tarefa recorrente, horário fixo, sem contexto anterior | cron + `claude -p` |
-| Tarefa recorrente que preserva contexto entre execuções | cron + `claude -p --resume <session_id>` |
-| Loop condicional ("roda até X acontecer") | shell script com `while` + `claude -p` |
-| Loop orientado a evento (arquivo novo, webhook) | `inotifywait` / systemd `.path` + `claude -p` |
-| Tarefa dentro da sessão atual sem bloquear | subagente com `background: true` em `.claude/agents/` |
-| Pipeline complexo com hooks programáticos | Agent SDK Python |
+| Tarefa recorrente, horário fixo | cron + `claude -p` |
+| Loop com contexto preservado entre execuções | cron + `claude -p --resume <session_id>` |
+| Loop condicional ("até X acontecer") | shell script `while` + `claude -p` |
+| Loop orientado a evento | `inotifywait` / systemd `.path` + `claude -p` |
+| Tarefa sem bloquear sessão atual | subagente `background: true` em `.claude/agents/` |
+| Pipeline com hooks programáticos | Agent SDK Python |
 
-### Outros flags relevantes (documentação oficial)
+**Boas práticas validadas:**
+- Circuit breaker explícito: `MAX` de iterações no script ou `maxTurns: N` no frontmatter do subagente
+- Estado em arquivo — entre invocações o Claude começa sem contexto
+- Prompt autocontido — sem histórico de conversa, incluir todo o contexto necessário
+- `--allowedTools` — restringir ao mínimo necessário em automações
+- Logging: `>> /var/log/claude-cron.log 2>&1`
+- Idempotência: verificar se a operação pode rodar N vezes sem acúmulo de efeito colateral
 
-- `--resume <session_id>` — continua sessão específica com contexto preservado entre invocações
-- `--output-format json` — output estruturado (capturável por `jq`)
-- `--json-schema '{...}'` — força output a seguir um JSON Schema
-- `--allowedTools "Bash,Read,Write"` — limita tools disponíveis (reduz blast radius em automações)
-- `--append-system-prompt "..."` — adiciona instrução ao system prompt sem substituir
+---
 
-### Boas práticas validadas
+## Gaps — o que ainda precisamos entender
 
-- **Circuit breaker explícito** — sempre definir `MAX` de iterações no shell script; `maxTurns: N` no frontmatter de subagentes
-- **Estado em arquivo** — entre invocações o Claude começa sem contexto; o que precisa persistir vai em arquivo referenciado no prompt
-- **Prompt autocontido** — em modo `-p`, sem histórico de conversa; o prompt precisa incluir todo o contexto necessário
-- **`--allowedTools`** — em loops automatizados, restringir ao mínimo necessário
-- **Logging** — redirecionar stdout/stderr para arquivo (`>> /var/log/claude-cron.log 2>&1`)
-- **Idempotência** — verificar se a operação pode rodar N vezes sem efeito colateral acumulado
+- [ ] Como o OpenClaw implementa o padrão maker/checker na prática (sem acesso ao código-fonte)
+- [ ] Como o Hermes poderia implementar idempotency key sem redesenhar a API
+- [ ] O padrão `/goal` do Claude Code — como funciona o checker de condição de parada
+- [ ] Leitura pendente: os artigos do Addy Osmani abaixo (ainda não lidos/resumidos)
+
+---
+
+## Leituras pendentes (não consumidas ainda)
+
+- **Agent Harness Engineering:** https://addyosmani.com/blog/agent-harness-engineering/
+- **Long-Running Agents:** https://addyosmani.com/blog/long-running-agents/
+- **The Orchestration Tax:** https://addyosmani.com/blog/orchestration-tax/
+- **Adversarial Code Review (maker/checker):** https://addyosmani.com/blog/adversarial-code-review/
+- **The Intent Debt:** https://addyosmani.com/blog/intent-debt/
 
 ---
 
 ## Conexões
 
 - [[infraestrutura/hermes.md|Hermes]] — identidade, regras e stack do Hermes Agent
-- [[automacao/firecrawl.md|Firecrawl]] — busca web com Firecrawl
-- [[conhecimento/wiki.md|Wiki]] — sobre esta wiki
+- [[pendencias/proximos-passos.md|Próximos Passos]] — to-do list ativa

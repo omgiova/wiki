@@ -34,7 +34,7 @@ log.md
     │   ├── wiki-review-vs-background-review.md
     │   └── wiki-review.md
     ├── conhecimento/
-    │   ├── agent-loop-architectures.md
+    │   ├── plano-implementacao-loop.md
     │   ├── okf.md
     │   ├── orquestrador.md
     │   └── wiki.md
@@ -85,7 +85,7 @@ log.md
 
 - [[wiki/conhecimento/wiki.md|Wiki]] — o que é esta wiki, como funciona, regras de escrita e histórico de fundação
 - [[wiki/conhecimento/okf.md|Open Knowledge Format (OKF)]] — padrão open source do Google Cloud para wikis de agentes; nossa wiki já é conformante; repo oficial para consulta futura
-- [[wiki/conhecimento/agent-loop-architectures.md|Arquiteturas de Loop em Agentes]] — comparação de detecção de loop, aprovação, circuit breaker entre Hermes, OpenClaw, Claude Code, Codex e Cline
+- [[wiki/conhecimento/plano-implementacao-loop.md|Plano de Implementação — Loops Agênticos]] — base de conhecimento e planejamento para construção de sistema de loop autônomo; fundamentado em fontes primárias (Steinberger, Boris Cherny, Addy Osmani, OpenClaw)
 - [[wiki/conhecimento/orquestrador.md|Orquestrador da Memória]] — auditoria completa da wiki: OKF, estrutura, diário, automação, coordenação de agentes e roadmap de melhorias
 
 ### automacao/
