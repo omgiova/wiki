@@ -32,6 +32,16 @@ telegram:<chat_id>:<thread_id>
 
 Omitir `:thread_id` para o tópico padrão (Geral). Omitir tudo para DM (home).
 
+## Observações por contexto
+
+### Geral (thread_id=1) — comportamento via Python urllib / curl direto na VPS
+
+**Contexto:** curator-teste1 (`/root/curator-teste1.sh`), 2026-06-27, chamada via `python3` com `urllib.request` diretamente na VPS, sem passar pelo Hermes gateway.
+
+**Comportamento observado:** ao incluir `"message_thread_id": 1` no payload JSON, a API retornou `HTTP 400: Bad Request: message thread not found`. Ao omitir o campo `message_thread_id`, a mensagem foi entregue ao Geral com sucesso (message_ids 793–796 confirmados via 5 testes curl).
+
+**O que isso não invalida:** o `thread_id=1` documentado acima é correto e validado em outros ambientes (ex: Hermes gateway). A diferença pode estar no método de envio, autenticação, ou configuração do cliente. Requer investigação futura para entender por que o comportamento difere neste contexto específico.
+
 ## Conexões
 
 - [[infraestrutura/hermes.md]] — stack e configuração do Hermes
