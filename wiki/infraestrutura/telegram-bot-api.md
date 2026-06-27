@@ -27,11 +27,9 @@ Referência central para tudo sobre o Telegram neste setup. Navegue pelas págin
 | [[automacao/curador-wiki.md]] | Entrega curadorias e dailies ao Geral via `sendRichMessage` |
 | [[automacao/wiki-review.md]] | Notifica o tópico `wiki_review` após cada revisão |
 
-## HERMES_SESSION_MESSAGE_ID — limitação de timing
+## HERMES_SESSION_MESSAGE_ID
 
-> ⚠️ **Validação pendente** — comportamento observado em sessão mas não testado sistematicamente.
-
-A variável de contexto `HERMES_SESSION_MESSAGE_ID` injeta o `message_id` da mensagem que disparou o turno atual. Porém, pode estar defasada: ela reflete a mensagem que *iniciou* o turno, não necessariamente a última mensagem do usuário. A latência entre o gateway e o agente pode causar defasagem — em testes de sessão, o ID observado estava errado por pelo menos uma mensagem.
+O gateway injeta o `message_id` da mensagem que disparou o turno atual na variável de contexto `HERMES_SESSION_MESSAGE_ID`.
 
 **Acesso:**
 ```python
@@ -40,7 +38,7 @@ msg_id = get_session_env("HERMES_SESSION_MESSAGE_ID")
 chat_id = get_session_env("HERMES_SESSION_CHAT_ID")
 ```
 
-**Recomendação atual:** não confiar no valor sem verificação prévia. Validar com uma reação benigna antes de usar.
+> O comportamento real desta variável (confiabilidade, possível defasagem) está sob investigação — ver [[pendencias/proximos-passos.md]].
 
 ## Conexões
 

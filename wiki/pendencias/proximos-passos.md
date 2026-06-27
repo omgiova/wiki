@@ -11,6 +11,8 @@ status: stable
 
 ### Pendente
 
+14. **Validar comportamento de `HERMES_SESSION_MESSAGE_ID`** — confirmar se o valor vem defasado, em que condições isso ocorre e qual a confiabilidade da variável para uso em reações no Telegram. Quando validado, documentar o comportamento real em [[infraestrutura/telegram-bot-api.md]]. *Registrado 2026-06-27.*
+
 1. **Executar roadmap do Orquestrador da Memória** — [[conhecimento/orquestrador.md]] contém auditoria completa da wiki com todos os pontos de atenção, débito técnico e ações recomendadas. Ver o arquivo para detalhes. *Registrado 2026-06-26.*
 
 2. **Validar fix do Obsidian Git (merge.autostash)** — `git config merge.autostash true` configurado no Windows em 2026-06-26. Confirmar que Pull funciona consistentemente sem erros de "would be overwritten by merge". Quando validado, mudar [[infraestrutura/obsidian-git.md]] de `status: draft` para `status: stable`. *Registrado 2026-06-26.*
