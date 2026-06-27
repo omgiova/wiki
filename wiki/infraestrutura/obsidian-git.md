@@ -34,8 +34,12 @@ O plugin obsidian-git v2.38.5 não tem opção de "force pull" ou "stash before 
 **A solução é no git nativo**, que o plugin herda automaticamente:
 
 ```bash
-# Windows — rodar no Git Bash ou PowerShell dentro da pasta do vault
-git config pull.autostash true
+# Windows — rodar no Git Bash ou PowerShell
+git -C "C:\Users\omgio\Desktop\hermes\ai-memory-wiki" config pull.autostash true
+
+# Verificar se foi aplicado
+git -C "C:\Users\omgio\Desktop\hermes\ai-memory-wiki" config pull.autostash
+# deve retornar: true
 
 # Android — rodar no Termux
 git -C ~/storage/shared/ai-memory-wiki config pull.autostash true
@@ -59,7 +63,7 @@ Isso vai para o `.git/config` local de cada device (não sincronizado). Precisa 
 
 | Item | Desktop (Windows) | Android |
 |---|---|---|
-| Vault path | (onde o Obsidian apontar) | `~/storage/shared/ai-memory-wiki` |
+| Vault path | `C:\Users\omgio\Desktop\hermes\ai-memory-wiki` | `~/storage/shared/ai-memory-wiki` |
 | Plugin instalado | ✅ | ✅ |
 | Credenciais | Windows Credential Manager | `data.json` local — configurar 1x por device |
 | `data.json` no git | ❌ gitignored | ❌ gitignored |

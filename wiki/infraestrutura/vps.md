@@ -26,9 +26,13 @@ status: stable
 - sshd gerencia porta 2222 diretamente (fora do socket activation do systemd)
 - Chave ED25519 do Termux já autorizada em `/root/.ssh/authorized_keys`
 
-## Mobile (Termux / Android)
+## Devices — caminhos do vault Obsidian
 
-- **Vault Obsidian:** `~/storage/shared/ai-memory-wiki` → `/storage/emulated/0/ai-memory-wiki`
+| Device | Caminho |
+|---|---|
+| Windows | `C:\Users\omgio\Desktop\hermes\ai-memory-wiki` |
+| Android (Termux) | `~/storage/shared/ai-memory-wiki` → `/storage/emulated/0/ai-memory-wiki` |
+| Servidor (VPS) | `/root/wiki` |
 
 ## Hardware
 
@@ -151,4 +155,5 @@ A stack roda num único VPS Hostinger KVM 2 com Ubuntu. O Hermes Agent é o orqu
 
 ## 🔗 Conexões
 
-- [[infraestrutura/pendencia-problema-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
+- [[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
+- [[wiki/infraestrutura/obsidian-git.md|Obsidian Git]] — configuração e troubleshooting do plugin
