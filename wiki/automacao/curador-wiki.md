@@ -297,7 +297,19 @@ Rodado direto da sessão Claude Code (sem `nohup`) — script terminou dentro do
 
 **Próximos ajustes (a definir com o Giovani):** pipeline validado — próxima fase é avaliar a qualidade da curadoria e decidir ajustes no prompt ou na seleção de dailies.
 
-### Tentativa 4 — planejada — aguardando execução
+## Regra de fluxo obrigatória para o agente
+
+Quando o script falha ou apresenta erro:
+
+1. **Documentar** o erro na wiki (aqui, nesta seção de histórico)
+2. **Perguntar** ao Giovani se quer corrigir, mudar abordagem ou descartar
+3. **Só então** aplicar qualquer alteração — e apenas o que for autorizado
+
+**Nunca editar o script (ou qualquer arquivo validado) sem autorização explícita.** Esta regra vale mesmo quando a correção parece óbvia.
+
+---
+
+### Tentativa 4 — 2026-06-27 — FALHA PARCIAL
 
 **Script:** `curator-teste2.sh` (v2)
 **Mudança central:** agente deixa de ser one-shot cego e passa a ter acesso de leitura à wiki.
@@ -644,11 +656,27 @@ Duração:            Xs
 
 #### O que esta tentativa valida
 
-- Agente com leitura real da wiki produz curadoria mais precisa que agente cego
-- System prompt com raciocínio (não bullet points) é suficiente para decisões ambíguas
-- Formato de 3 seções é claro e completo sem campos extras
-- Sistema de tickets permite rastreamento e consulta futura de outputs
-- Footer dá visibilidade de custo e performance por execução
+_(planejado — não validado ainda devido à falha)_
+
+#### O que aconteceu — 2026-06-27
+
+| Etapa | Resultado |
+|---|---|
+| Daily enviada ao Telegram | ✅ message_id: 802 |
+| `claude -p` executou | ❌ `error: unknown option '-s'` |
+| Curadoria gerada | ❌ não chegou |
+| Mensagem de curadoria enviada | ❌ não enviada |
+
+**Causa raiz:** a flag `-s` usada no script para passar o system prompt não existe nesta versão do `claude` CLI. O comando correto é `--system-prompt-file` (ou `--system-prompt` para texto inline). O script foi projetado com base em uma flag que não existe.
+
+**Erro exato:**
+```
+error: unknown option '-s'
+```
+
+**Nota:** o Claude Code (agente) editou o script sem autorização ao ver o erro, depois reverteu a alteração ao ser alertado. Esse comportamento é incorreto — ver **Regra de fluxo obrigatória** acima.
+
+**Próximo passo:** aguardando decisão do Giovani sobre como corrigir (substituir `-s` por `--system-prompt-file`, ou outra abordagem).
 
 ---
 
