@@ -25,24 +25,33 @@ Isso significa que **o pull nunca deveria ter conflito real**. Quando falha, é 
 
 ---
 
-## Configuração ideal do obsidian-git (por device)
+## Configuração definitiva (por device)
 
-O `data.json` é gitignored e local por device — cada um precisa configurar o seu.
+### 1. Git config — `pull.autostash true` (solução real)
 
-**Configuração crítica (v2.38.5):**
+O plugin obsidian-git v2.38.5 não tem opção de "force pull" ou "stash before pull" na UI. As opções de "Merge strategy" disponíveis (Merge, Rebase, Other sync service) não resolvem o erro "would be overwritten by merge".
 
-No UI: **Settings → Community Plugins → obsidian-git → Sync Method → Reset**
+**A solução é no git nativo**, que o plugin herda automaticamente:
 
-No `data.json`: `"syncMethod": "reset"` (padrão instalado é `"merge"` — causa todos os problemas)
+```bash
+# Windows — rodar no Git Bash ou PowerShell dentro da pasta do vault
+git config pull.autostash true
 
-| Configuração | Valor correto | Valor padrão (problemático) |
+# Android — rodar no Termux
+git -C ~/storage/shared/ai-memory-wiki config pull.autostash true
+```
+
+Isso vai para o `.git/config` local de cada device (não sincronizado). Precisa rodar **uma vez por device**.
+
+**Por que funciona:** antes de qualquer pull, o git faz `git stash` das mudanças locais automaticamente, executa o pull, e descarta o stash. Mudanças do Obsidian em arquivos de config (graph.json, etc.) são stashadas e nunca mais bloqueiam o pull.
+
+### 2. Opções do plugin (secundárias)
+
+| Configuração | Valor recomendado | Observação |
 |---|---|---|
-| Sync Method | **Reset** | Merge |
-| autoPullOnBoot | `true` (opcional) | false |
-
-**Por que Reset resolve tudo:** com `syncMethod: "reset"`, cada pull vira `git fetch + git reset --hard origin/main`. O git simplesmente força o estado local a ser idêntico ao servidor, ignorando qualquer arquivo localmente "modificado" (seja pelo Obsidian auto-escrevendo configs, seja por renomeações no servidor). Não há conflito possível.
-
-**Por que Merge causa problemas:** o merge tenta conciliar estado local com remoto. Qualquer divergência — mesmo arquivos que o Obsidian reescreveu automaticamente — bloqueia o pull.
+| Merge strategy | Merge (padrão) | com autostash ativo, qualquer opção funciona |
+| Pull on startup | opcional | se ativo, pull automático ao abrir |
+| Push on commit-and-sync | ✅ ativado | correto para uso read-only — mas não há commit local |
 
 ---
 
