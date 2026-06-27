@@ -1,15 +1,15 @@
 ---
 type: procedure
 tags: [curador, loop, agentes, automacao, diario, curadoria]
-title: Curador da Wiki — Teste 1
-description: Agente read-only que analisa uma daily note aleatória e envia curadoria estruturada ao Telegram Geral. MVP do sistema de curadoria de diários.
+title: Curador da Wiki
+description: Agente que analisa daily notes e produz recomendações de curadoria estruturadas ao Telegram Geral. Histórico completo de tentativas e arquitetura atual.
 timestamp: 2026-06-27T00:00:00-03:00
 status: draft
 ---
 
-# Curador da Wiki — Teste 1
+# Curador da Wiki
 
-Agente MVP que valida a hipótese central do sistema de curadoria: um único `claude -p` com contexto distilado consegue identificar corretamente o que tem valor numa daily note?
+Agente de curadoria de diários. Cada tentativa valida uma hipótese e acumula aprendizado para a próxima.
 
 ## Regras gerais do teste
 
@@ -229,6 +229,8 @@ A wiki em [[infraestrutura/telegram-topicos.md]] documenta `thread_id=1` para Ge
 
 **Próximo passo:** documentar, depois aplicar os fixes no script, depois rodar tentativa 3.
 
+**Nota:** os fixes identificados para a tentativa 3 estão documentados na seção seguinte.
+
 **Validação adicional — formato de saída (2026-06-27T14:02-03:00):**
 
 Antes de alterar o script, foi validado o formato de entrega da daily ao Telegram. Três formatos testados:
@@ -294,6 +296,74 @@ Rodado direto da sessão Claude Code (sem `nohup`) — script terminou dentro do
 - `claude -p` com timeout 300 e prompt grande (index.md + daily completa) funciona dentro do limite
 
 **Próximos ajustes (a definir com o Giovani):** pipeline validado — próxima fase é avaliar a qualidade da curadoria e decidir ajustes no prompt ou na seleção de dailies.
+
+### Tentativa 4 — planejada — aguardando execução
+
+**Script:** `curator-teste2.sh` (v2)
+**Mudança central:** agente deixa de ser one-shot cego e passa a ter acesso de leitura à wiki.
+
+**O problema da tentativa 3:** o agente só via o `index.md` (títulos e uma linha por página). Sem ler o conteúdo real das páginas, ele não conseguia saber com certeza se um item já estava documentado — decidia com base em títulos, não em conteúdo.
+
+**Solução:** `--allowedTools "Read"` — o agente lê as páginas que julgar relevantes antes de decidir.
+
+#### Arquitetura v2
+
+```
+[bash curator-teste2.sh]
+        │
+        ├── sorteia daily aleatória de wiki/diario/
+        ├── envia daily via sendRichMessage (script, sem agente)
+        ├── chama claude com:
+        │     -s /root/curator-v2-system.md   ← system prompt separado
+        │     --allowedTools "Read"            ← leitura da wiki habilitada
+        │     -p "<index.md + daily + formato>"
+        ├── agente lê pages relevantes via Read tool
+        ├── agente produz curadoria
+        └── envia curadoria via sendRichMessage
+```
+
+#### Separação de responsabilidades
+
+| Camada | Conteúdo | Por quê |
+|---|---|---|
+| System prompt | Expertise de curadoria + caminho da wiki | Estável — define o raciocínio do agente |
+| User prompt | index.md + daily + formato de output | Dinâmico — muda a cada execução |
+| Tools (Read) | Conteúdo real das páginas wiki | Sob demanda — agente decide o que precisa ler |
+
+#### System prompt (`/root/curator-v2-system.md`)
+
+Contém:
+- Identidade e missão do curador
+- Caminho da wiki: `/root/wiki/`
+- Distinção durável vs volátil com exemplos concretos desta wiki
+- Tipos OKF com critério de uso e raciocínio (não só nomes)
+- Critério de decisão: migrar vs criar vs descartar, incluindo casos ambíguos
+- Instrução para ler páginas antes de decidir
+
+~750 tokens. Não resume nem reescreve a documentação — ensina o raciocínio para casos onde o agente precisa julgar.
+
+#### Formato de output (3 seções fixas)
+
+```
+🔍 CURADORIA — {DAILY_NAME}
+
+**MIGRAR PARA ARQUIVO EXISTENTE:**
+- [item] → [[wiki/pasta/arquivo.md]] — o que adicionar e onde
+
+**CRIAR PÁGINA NOVA:**
+- [conceito] → wiki/[pasta]/[arquivo].md | type: [tipo] — motivo
+
+**DESCARTAR:**
+- [item] — motivo
+```
+
+Sugestões estruturais (nova pasta, mudança de status, consolidações) entram dentro das seções relevantes — CRIAR ou MIGRAR — sem seção separada.
+
+#### O que esta tentativa valida
+
+- Agente com leitura real da wiki produz curadoria mais precisa que agente cego
+- System prompt com raciocínio (não bullet points) é suficiente para decisões ambíguas
+- Formato de 3 seções é claro e completo sem campos extras
 
 ---
 
