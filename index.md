@@ -2,7 +2,7 @@
 type: index
 title: wiki
 description: Catálogo completo da wiki — uma linha por página, atualizado a cada ingest
-timestamp: 2026-06-22T21:00:00-03:00
+timestamp: 2026-06-26T00:00:00-03:00
 status: stable
 ---
 
@@ -10,7 +10,9 @@ status: stable
 
 Catálogo completo. Leia este arquivo primeiro ao responder queries — use os links para navegar às páginas relevantes.
 
-## 🖥 Infraestrutura
+## wiki/
+
+### infraestrutura/
 
 - [[wiki/infraestrutura/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/infraestrutura/hermes.md|Hermes]] — identidade, regras, stack, modelos ativos e preferências do Hermes Agent
@@ -19,35 +21,28 @@ Catálogo completo. Leia este arquivo primeiro ao responder queries — use os l
 - [[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]] — diagnóstico dos 3 problemas que travam sessões Claude via Remote Control (curl sem timeout, processo zumbi, prompt invisível)
 - [[wiki/infraestrutura/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 
-## 🧠 Conhecimento
+### conhecimento/
 
 - [[wiki/conhecimento/wiki.md|Wiki]] — o que é esta wiki, como funciona, regras de escrita e histórico de fundação
 - [[wiki/conhecimento/okf.md|Open Knowledge Format (OKF)]] — padrão open source do Google Cloud para wikis de agentes; nossa wiki já é conformante; repo oficial para consulta futura
 - [[wiki/conhecimento/agent-loop-architectures.md|Arquiteturas de Loop em Agentes]] — comparação de detecção de loop, aprovação, circuit breaker entre Hermes, OpenClaw, Claude Code, Codex e Cline
 - [[wiki/conhecimento/orquestrador.md|Orquestrador da Memória]] — auditoria completa do vault: OKF, estrutura, diário, automação, coordenação de agentes e roadmap de melhorias
 
-## 🔧 Automação
+### automacao/
 
 - [[wiki/automacao/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
 - [[wiki/automacao/wiki-review.md|Wiki Review]] — agente background que roda a cada 10 turnos e salva insights no diario/
 
-## 📜 Histórico
+### historico/
 
 - [[wiki/historico/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
 - [[wiki/historico/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq
 
-## 📋 Pendências
+### pendencias/
 
 - [[wiki/pendencias/proximos-passos.md|Próximos passos]] — to-do list ativa da wiki
 
-## 📦 Raw
-
-- [[raw/karpathy-llm-wiki-pattern.md|LLM Wiki Pattern (Karpathy)]] — documento original do padrão que esta wiki segue; fonte imutável
-- [[raw/google-okf/SPEC.md|OKF SPEC.md]] — especificação oficial OKF v0.1 do Google Cloud
-- [[raw/google-okf/README.md|OKF README.md]] — intro e agente de referência do repo okf/
-- [[raw/google-okf/introducing-the-open-knowledge-format.md|Introducing the Open Knowledge Format]] — blog post do Google Cloud (jun/2026)
-
-## 📓 Diário
+### diario/
 
 Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém preferências reveladas, correções de comportamento, técnicas descobertas e pendências abertas. Não é destino final — insights estáveis devem ser extraídos e integrados em páginas permanentes.
 
@@ -59,3 +54,15 @@ Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém p
 - [[wiki/diario/2026-06-22-descoberta-id-mensagem.md|2026-06-22 message-id]] — técnica de descoberta sequencial de IDs
 - [[wiki/diario/2026-06-20.md|2026-06-20]] — fix do /update destruindo dados; migração para wiki Karpathy
 - [[wiki/diario/2026-06-19.md|2026-06-19]] — otimizações estruturais da wiki
+
+## raw/
+
+### google-okf/
+
+- [[raw/google-okf/SPEC.md|OKF SPEC.md]] — especificação oficial OKF v0.1 do Google Cloud
+- [[raw/google-okf/README.md|OKF README.md]] — intro e agente de referência do repo okf/
+- [[raw/google-okf/introducing-the-open-knowledge-format.md|Introducing the Open Knowledge Format]] — blog post do Google Cloud (jun/2026)
+
+### raiz
+
+- [[raw/karpathy-llm-wiki-pattern.md|LLM Wiki Pattern (Karpathy)]] — documento original do padrão que esta wiki segue; fonte imutável
