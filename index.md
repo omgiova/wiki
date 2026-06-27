@@ -15,6 +15,12 @@ Catálogo completo. Leia este arquivo primeiro ao responder queries — use os l
 ```
 .gitignore
 .obsidian/
+│   ├── community-plugins.json
+│   ├── core-plugins.json
+│   └── plugins/obsidian-git/
+│       ├── main.js
+│       ├── manifest.json
+│       └── styles.css
 AGENTS.md
 index.md
 ├── raw/
