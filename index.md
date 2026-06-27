@@ -46,7 +46,6 @@ log.md
     │   ├── 2026-06-22-20260622.md
     │   ├── 2026-06-22-reacoes-telegram.md
     │   ├── 2026-06-23-20260623.md
-    │   ├── 2026-06-24-20260623.md
     │   ├── 2026-06-24-20260624.md
     ├── historico/
     │   ├── 2026-06-22-modelos-nim-elevenlabs.md
@@ -55,6 +54,7 @@ log.md
     │   ├── hermes-api.md
     │   ├── hermes.md
     │   ├── obsidian-git.md
+    │   ├── elevenlabs-mcp.md
     │   ├── telegram-bot-api.md
     │   ├── telegram-reacoes.md
     │   ├── telegram-send-rich-message.md
@@ -81,6 +81,7 @@ log.md
 - [[wiki/infraestrutura/hermes-api.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
 - [[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]] — diagnóstico dos 3 problemas que travam sessões Claude via Remote Control (curl sem timeout, processo zumbi, prompt invisível)
 - [[wiki/infraestrutura/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
+- [[wiki/infraestrutura/elevenlabs-mcp.md|ElevenLabs MCP]] — capabilities e limites do free tier: text_to_sound_effects, compose_music (pago), limitação de duração, créditos
 - [[wiki/infraestrutura/telegram-bot-api.md|Telegram Hub]] — ponto de entrada único para tudo sobre Telegram: Bot API, tópicos, reações, HERMES_SESSION_MESSAGE_ID, integrações
 - [[wiki/infraestrutura/telegram-send-rich-message.md|Telegram sendRichMessage]] — documentação do endpoint Bot API 10.1: parâmetros, payload, limites e exemplo validado
 - [[wiki/infraestrutura/telegram-reacoes.md|Telegram Reações]] — procedimento para setMessageReaction via HERMES_SESSION_MESSAGE_ID; status: não validado de ponta a ponta até 2026-06-27
