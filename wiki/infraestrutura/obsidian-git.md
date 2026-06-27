@@ -4,7 +4,7 @@ tags: [obsidian, git, plugin, windows, android, sincronizacao, troubleshooting]
 title: Obsidian Git — Configuração e Troubleshooting
 description: Referência consolidada para manter o Obsidian como visualizador read-only do vault — todos os pulls devem funcionar sem interação manual
 timestamp: 2026-06-26T00:00:00-03:00
-status: stable
+status: draft
 ---
 
 # Obsidian Git — Configuração e Troubleshooting
