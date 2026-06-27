@@ -29,16 +29,20 @@ Isso significa que **o pull nunca deveria ter conflito real**. Quando falha, é 
 
 O `data.json` é gitignored e local por device — cada um precisa configurar o seu.
 
-**Configurações recomendadas no plugin (Settings → Community Plugins → obsidian-git):**
+**Configuração crítica (v2.38.5):**
 
-| Configuração | Valor | Motivo |
+No UI: **Settings → Community Plugins → obsidian-git → Sync Method → Reset**
+
+No `data.json`: `"syncMethod": "reset"` (padrão instalado é `"merge"` — causa todos os problemas)
+
+| Configuração | Valor correto | Valor padrão (problemático) |
 |---|---|---|
-| Merge strategy | `ours` ou `theirs` (remoto) | sempre aceitar o que veio do servidor |
-| Stash before pulling | ✅ ativado | descarta mudanças locais automaticamente antes do pull |
-| Commit all changes before pulling | ❌ desativado | não há nada para commitar (obsidian é read-only) |
-| Pull interval | 0 (manual) ou 5 min | evitar conflitos silenciosos em auto-pull |
+| Sync Method | **Reset** | Merge |
+| autoPullOnBoot | `true` (opcional) | false |
 
-> Se o plugin não tiver "Stash before pulling", usar o **Pull (with stash)** manual quando o pull normal falhar.
+**Por que Reset resolve tudo:** com `syncMethod: "reset"`, cada pull vira `git fetch + git reset --hard origin/main`. O git simplesmente força o estado local a ser idêntico ao servidor, ignorando qualquer arquivo localmente "modificado" (seja pelo Obsidian auto-escrevendo configs, seja por renomeações no servidor). Não há conflito possível.
+
+**Por que Merge causa problemas:** o merge tenta conciliar estado local com remoto. Qualquer divergência — mesmo arquivos que o Obsidian reescreveu automaticamente — bloqueia o pull.
 
 ---
 
@@ -102,24 +106,20 @@ O Obsidian abre e escreve em `graph.json`, `app.json`, etc. Se esses arquivos ai
 
 ---
 
-## Fix de emergência quando o pull falha (Windows)
+## Fix de emergência quando o pull falha (antes de mudar para syncMethod: reset)
 
 Se o pull falhar com "would be overwritten by merge":
 
-1. **Verificar os arquivos listados no erro**
-   - São todos `.obsidian/*`? → pode descartar sem risco
-   - Tem algum `.md` do vault? → confirmar que não há edições locais (não deveria ter)
+**Source Control → Discard All → Pull**
 
-2. **Source Control → Discard All → Pull**
-
-3. **Depois:** verificar se "Stash before pulling" está ativado nas configurações do plugin para não precisar fazer isso manualmente da próxima vez.
-
-**Fix via terminal (Windows PowerShell / Git Bash) se o botão falhar:**
+**Via terminal (Windows PowerShell / Git Bash) se o botão falhar:**
 ```bash
 cd <caminho-do-vault>
-git checkout -- .
-git pull
+git fetch origin
+git reset --hard origin/main
 ```
+
+> Depois de mudar Sync Method para Reset, esse fix manual não deveria ser mais necessário.
 
 ---
 
