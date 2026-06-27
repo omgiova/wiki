@@ -29,7 +29,7 @@ Compatível com: Claude Code, OpenAI Codex CLI, Manus, Cursor, Windsurf, Gemini 
 **Exemplos:**
 ```
 docs(vps): adiciona seção de troubleshooting de rede overlay
-chore(wiki): atualiza estrutura do vault após criação de diario/
+chore(wiki): atualiza estrutura da wiki após criação de diario/
 fix(crise-update): corrige typo na tag sessoes
 feat(diario): adiciona daily note 2026-06-19
 ```
@@ -65,7 +65,7 @@ silenciosa e difícil de rastrear.
 
 ---
 
-## Estrutura do vault
+## Estrutura da wiki
 
 > Esta seção deve estar sempre sincronizada com `git ls-files`. Ao criar, renomear ou remover qualquer arquivo ou pasta, atualize aqui.
 
@@ -112,7 +112,7 @@ AGENTS.md                         → este arquivo (schema)
 
 ## Frontmatter obrigatório (OKF)
 
-Todo arquivo `.md` do vault (exceto este) deve começar com:
+Todo arquivo `.md` da wiki (exceto este) deve começar com:
 
 ```yaml
 ---
@@ -169,7 +169,7 @@ Checklist obrigatório. Executar **nesta ordem** a cada novo arquivo criado:
 2. **Adicionar frontmatter OKF completo** — `type`, `tags`, `title`, `description`, `timestamp`, `status`
 3. **Adicionar wikilinks** para páginas relacionadas (e atualizar as páginas relacionadas para linkar de volta)
 4. **Atualizar `index.md`** — nova entrada com link + descrição de uma linha na seção correta
-5. **Atualizar a estrutura do vault** em `AGENTS.md` — deve bater com `git ls-files`
+5. **Atualizar a estrutura da wiki** em `AGENTS.md` — deve bater com `git ls-files`
 6. **Commitar tudo junto** — um commit por operação de ingest
 
 ### Query — responder a uma pergunta com base na wiki
@@ -187,7 +187,7 @@ Executar quando solicitado pelo usuário:
 - Contradições entre páginas (`status: stable` conflitando com info mais recente)
 - Conceitos mencionados em várias páginas mas sem página própria
 - Entradas no `index.md` sem correspondente em `git ls-files` (e vice-versa)
-- Árvore do vault em `AGENTS.md` fora de sync com `git ls-files`
+- Árvore da wiki em `AGENTS.md` fora de sync com `git ls-files`
 
 ---
 
@@ -206,7 +206,7 @@ AGENTS.md          ← só o humano edita este arquivo
 | Agente | Acesso | Uso típico |
 |---|---|---|
 | **Hermes** | MCP tools (`memory_query`, `memory_read_page`, `memory_write`) | consultar e escrever conhecimento durante sessões |
-| **Claude Code** | lê este arquivo automaticamente na raiz | editar vault, estruturar conhecimento, commits |
+| **Claude Code** | lê este arquivo automaticamente na raiz | editar wiki, estruturar conhecimento, commits |
 | **Manus** | lê AGENTS.md como schema | pesquisar, sintetizar e registrar novos conhecimentos |
 | **Codex CLI** | lê AGENTS.md automaticamente | tarefas de escrita e refatoração de páginas |
 
