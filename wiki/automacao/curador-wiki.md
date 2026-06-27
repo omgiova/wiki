@@ -734,7 +734,8 @@ bash /root/curator-teste2.sh
 
 ### Tentativa 6 — 2026-06-27 — aguardando execução
 
-**Script:** `curator-teste2.sh` (v2 — mesmo script)
+**Script:** `curator-teste3.sh` (v3 — novo script; v2 preservado como baseline estável da tentativa 5)
+**System prompt:** `curator-v3-system.md` (v3 — inclui seção de prioridade)
 **Mudanças:** formato de output redesenhado — numeração contínua, tags de prioridade, estrutura por item mais legível.
 
 **Problemas da tentativa 5 a corrigir:**
@@ -774,9 +775,9 @@ bash /root/curator-teste2.sh
 - `[MÉDIA]` — útil, mas existe em outro lugar ou pode ser reconstruído
 - `[BAIXA]` — complementar, contexto de apoio, baixo risco de perda
 
-**Onde aplicar os fixes:**
-- Formato de output no `-p` do `curator-teste2.sh`
-- Critério de prioridade no `curator-v2-system.md`
+**Onde foram aplicados os fixes:**
+- Formato de output no `-p` do `curator-teste3.sh`
+- Critério de prioridade no `curator-v3-system.md`
 
 **O que esta tentativa valida:**
 - Numeração contínua funciona com o modelo
