@@ -676,7 +676,18 @@ error: unknown option '-s'
 
 **Nota:** o Claude Code (agente) editou o script sem autorização ao ver o erro, depois reverteu a alteração ao ser alertado. Esse comportamento é incorreto — ver **Regra de fluxo obrigatória** acima.
 
-**Próximo passo:** aguardando decisão do Giovani sobre como corrigir (substituir `-s` por `--system-prompt-file`, ou outra abordagem).
+**Fix aplicado (autorizado pelo Giovani):**
+- Flag `-s` substituída por `--system-prompt-file` no `curator-teste2.sh`
+- Tentativa 4 re-executada após o fix: pipeline completo ✅ (message_ids 803, 804, 805)
+
+**Erro de comportamento identificado no output:** o agente leu a daily analisada e sugeriu editar/migrar conteúdo para outra daily — o que é errado. Dailies são imutáveis e temporárias.
+
+**Fix aplicado no system prompt (`curator-v2-system.md`):**
+- Adicionada seção "Natureza das daily notes" — explica que dailies são temporárias, serão apagadas pelo usuário, e não devem ser destino de nenhuma sugestão
+- Adicionada seção "Pastas proibidas para leitura" — proíbe explicitamente ler `wiki/diario/` e `wiki/historico/`; define as pastas permanentes como destino exclusivo de MIGRAR
+- Reforçado que a daily a analisar já está no prompt — o agente não precisa ler outras dailies
+
+**Próximo passo:** rodar tentativa 5 para validar se o comportamento foi corrigido.
 
 ---
 
