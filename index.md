@@ -1,9 +1,5 @@
 ---
-type: index
-title: wiki
-description: Catálogo completo da wiki — uma linha por página, atualizado a cada ingest
-timestamp: 2026-06-26T00:00:00-03:00
-status: stable
+okf_version: "0.1"
 ---
 
 # wiki
@@ -69,6 +65,7 @@ index.md
 
 - [[AGENTS.md|AGENTS.md]] — instruções obrigatórias para agentes que trabalham neste repositório; lido automaticamente por Claude Code e Codex CLI
 - [[index.md|index.md]] — este arquivo; catálogo completo e ponto de entrada único da wiki
+- [[log.md|log.md]] — changelog estrutural da wiki; registro cronológico de criações, atualizações, renomeações e deleções de páginas
 
 ## wiki/
 

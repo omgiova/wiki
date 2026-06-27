@@ -71,6 +71,7 @@ silenciosa e difícil de rastrear.
 
 ```
 index.md                          → ponto de entrada único (catálogo)
+log.md                            → changelog estrutural da wiki (append-only, sem frontmatter)
 AGENTS.md                         → este arquivo (schema)
 │
 ├── raw/                          → fontes brutas imutáveis
@@ -112,7 +113,7 @@ AGENTS.md                         → este arquivo (schema)
 
 ## Frontmatter obrigatório (OKF)
 
-Todo arquivo `.md` da wiki (exceto este) deve começar com:
+Todo arquivo `.md` da wiki (exceto `AGENTS.md`, `index.md` e `log.md`) deve começar com:
 
 ```yaml
 ---
