@@ -784,7 +784,13 @@ bash /root/curator-teste2.sh
 - Tags de prioridade são aplicadas de forma consistente e útil
 - Novo formato é mais legível para o Giovani
 
-**Resultado:** _(a preencher após execução)_
+**Resultado:** SUCESSO ✅ — pipeline completo, message_ids 809 (daily), 810 (curadoria), 811 (footer).
+
+**O que foi validado:**
+- Numeração contínua através dos 3 blocos funcionou
+- Tags de prioridade `[ALTA]`, `[MÉDIA]`, `[BAIXA]` aplicadas pelo modelo
+- Novo formato expandido por item entregue corretamente
+- Pipeline idêntico ao da tentativa 5 — sem regressões
 
 ---
 
