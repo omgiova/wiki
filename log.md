@@ -143,3 +143,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - auditor-wiki-overlap-prompt-v1.md → prompt-awv1-overlap.md
 - auditor-wiki-links-prompt-v1.md → prompt-awv1-links.md
 - auditor-wiki-v1.sh e auditor-wiki.md atualizados com novos caminhos
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — adiciona seção de validações pré-produção (V1–V17)
+- Restauradas 15 validações perdidas em sessão anterior (V1–V15)
+- Corrigida referência "Fase 0" → "Fase 1" em V1
+- Corrigido "5 fases" → "6 fases" no parágrafo de abertura
+- Adicionadas V16 (autenticação claude CLI standalone) e V17 (dois findings no mesmo arquivo)
