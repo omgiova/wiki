@@ -55,3 +55,6 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Conteúdo de wiki-review-vs-background-review.md movido para wiki-review.md como seção "Comparação completa com background_review (41 itens)"
 - wiki-review-vs-background-review.md deletado
 - index.md: entrada removida da árvore de diretórios
+
+## [2026-06-28] edit | wiki-review — origem como clone do background_review documentada no topo
+- Adicionado parágrafo de abertura explicando que wiki_review nasceu como clone do background_review.py

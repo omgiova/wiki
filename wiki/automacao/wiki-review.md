@@ -11,6 +11,8 @@ status: stable
 
 Plugin do Hermes que analisa a conversa automaticamente e escreve insights no diário da wiki (`wiki/diario/YYYY-MM-DD-{session}.md`). Roda em background sem intervenção do usuário.
 
+Nasceu como clone do `background_review.py` nativo do Hermes — mesma lógica de gatilho, mesmo padrão de spawn de thread e AIAgent filho — adaptado para escrever na wiki em vez de na `memory()`. A seção de comparação ao final deste arquivo documenta todas as divergências entre os dois.
+
 ## Implementação atual (v6 — sessão por session_id, contador por sessão)
 
 **O que mudou em v6 (2026-06-24):**
