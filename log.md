@@ -50,3 +50,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Documentado: não existe "Sync Method: Reset" nem equivalente a `git clean` na interface do plugin
 - Adicionada seção "Arquivos fantasma" com causa raiz e fixes (Termux ou deleção manual)
 - Adicionado erro #8 em "Erros históricos do agente": afirmação falsa sobre "Sync Method: Reset"
+
+## [2026-06-28] edit | wiki-review — comparação com background_review incorporada
+- Conteúdo de wiki-review-vs-background-review.md movido para wiki-review.md como seção "Comparação completa com background_review (41 itens)"
+- wiki-review-vs-background-review.md deletado
+- index.md: entrada removida da árvore de diretórios

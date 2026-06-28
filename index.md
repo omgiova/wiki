@@ -33,7 +33,6 @@ log.md
     │   ├── curador-wiki.md
     │   ├── curador-wiki-historico.md
     │   ├── firecrawl.md
-    │   ├── wiki-review-vs-background-review.md
     │   └── wiki-review.md
     ├── conhecimento/
     │   ├── plano-implementacao-loop.md
