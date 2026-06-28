@@ -201,6 +201,27 @@ O script:
 
 *Resultado obtido (2026-06-28):* ❌ **Prefixo `!` não é seguro.** O script capturou corretamente (`raw: ! teste...`, `strip: teste...`), mas o Hermes também recebeu e respondeu à mensagem — gastando token. Ambos consumiram o mesmo update simultaneamente. A abordagem de prefixo simples não resolve o conflito; é necessária outra estratégia (ver nota abaixo).
 
+**V18b — poll_text: prefixo `/` como alternativa sem gasto de token**
+
+Hipótese: o Hermes trata mensagens iniciadas com `/` como comandos. Se `/algo` não é um comando reconhecido, ele responde "desconhecido" ou ignora — sem acionar o LLM. Isso evita gasto de token mesmo que ambos recebam o update simultaneamente.
+
+Formato de uso: `/ <texto>` (ex: `/ type: system`) — o auditor captura mensagens iniciando com `/`, faz strip do `/ ` e usa o restante como `new_string`.
+
+*Script de teste:* `/root/test-v18b-slash-prefix.sh`
+
+O script:
+1. Drena offset inicial
+2. Envia instrução no Telegram pedindo mensagem com `/` na frente
+3. `poll_text` com filtro: ignora mensagens sem `/`, captura a primeira com `/`
+4. Strip do `/` e espaço(s), ecoa o resultado limpo no Telegram
+
+*Verificação manual obrigatória após rodar:*
+- Hermes não respondeu → prefixo `/` seguro ✅
+- Hermes respondeu "comando desconhecido" (sem LLM) → sem gasto de token, aceitável ✅
+- Hermes respondeu via LLM → gasta token, prefixo `/` não resolve ❌
+
+*Resultado esperado:* captura e strip corretos; Hermes não aciona LLM.
+
 ## Conexões
 
 - [[AGENTS.md]] — taxonomia, templates e checklist de Lint que este script implementa

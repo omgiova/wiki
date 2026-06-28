@@ -170,3 +170,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Prefixo "!" não protege: Hermes recebeu e respondeu à mensagem, gastando token
 - Ambos (script e Hermes) consumiram o mesmo update simultaneamente
 - V18 NÃO validado; abordagem de prefixo simples descartada
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — V18b: prefixo "/" documentado como alternativa ao "!"
+- Hipótese: "/" trata mensagens como comando no Hermes, sem acionar LLM
+- Script criado: /root/test-v18b-slash-prefix.sh
+- Verificação manual: observar se Hermes aciona LLM ou só responde "desconhecido"
