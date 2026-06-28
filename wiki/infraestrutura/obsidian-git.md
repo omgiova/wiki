@@ -68,7 +68,44 @@ git -C ~/storage/shared/ai-memory-wiki config core.hooksPath ~/git-hooks
 | Device | Hook instalado | Observação |
 |---|---|---|
 | Windows | ✅ | `.git/hooks/post-merge` — funciona (NTFS suporta execução) |
-| Android | ✅ | `~/git-hooks/post-merge` + `core.hooksPath` — validação pendente |
+| Android | ⚠️ | `~/git-hooks/post-merge` + `core.hooksPath` configurado — **não validado ainda** |
+
+---
+
+## Limitações do git clean no Android (FAT filesystem)
+
+O `git clean -fd` no Android tem comportamento inconsistente sobre `storage/shared` (FAT/exFAT):
+
+- Remove arquivos individuais não rastreados corretamente
+- **Não remove diretórios não rastreados** de forma confiável (ex: `bundles/` sobreviveu ao `git clean -fd`)
+- `chmod +x` não funciona (sem suporte a bit de execução) → hook em `.git/hooks/` nunca roda
+
+**Consequência:** após `reset --hard + clean`, podem restar pastas fantasma que precisam de `rm -rf` manual.
+
+**Checklist de limpeza manual no Android quando o pull não reflete o repo:**
+
+```bash
+# 1. Força sincronização com o remoto
+git -C ~/storage/shared/ai-memory-wiki fetch origin
+git -C ~/storage/shared/ai-memory-wiki reset --hard origin/main
+git -C ~/storage/shared/ai-memory-wiki clean -fd -e ".obsidian"
+
+# 2. Deleta lixeira do Obsidian
+rm -rf ~/storage/shared/ai-memory-wiki/.trash/
+
+# 3. Lista o que sobrou fora de .git e .obsidian
+find ~/storage/shared/ai-memory-wiki \
+  -not -path '*/.git/*' \
+  -not -path '*/.obsidian/*' \
+  -not -path '*/.trash/*' \
+  -type f | sort
+
+# 4. Compara com git ls-files no servidor
+# Qualquer arquivo que aparecer no find mas não estiver no repo = fantasma
+# Deletar manualmente com rm / rm -rf
+```
+
+**Atenção:** após deletar arquivos pelo Termux, Obsidian pode continuar mostrando os fantasmas se estiver em background. Forçar fechamento completo do app (matar pelo gerenciador de tarefas do Android) antes de reabrir.
 
 ---
 

@@ -11,6 +11,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada instrução de leitura completa antes de qualquer ação
 - Incorporado log.md como etapa obrigatória dentro da seção Git e commits
 
+## [2026-06-28] edit | obsidian-git — limitações git clean no Android e checklist de limpeza
+- Documentado: git clean -fd não remove diretórios não rastreados de forma confiável no FAT (Android)
+- Adicionado checklist completo de limpeza manual para Android
+- Nota sobre necessidade de force-close do Obsidian após limpeza pelo Termux
+
 ## [2026-06-28] edit | obsidian-git — Android FAT filesystem e core.hooksPath documentados
 - Android: `storage/shared` é FAT/exFAT, não suporta chmod +x — hook deve ir em `~/git-hooks/` (ext4)
 - Solução: `core.hooksPath` no git config aponta para armazenamento interno do Termux
