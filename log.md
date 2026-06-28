@@ -66,3 +66,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 
 ## [2026-06-28] edit | AGENTS.md — regra de derivação do commit message explicitada
 - Bloco Tipos/Escopo reescrito com "Commit message — derivado diretamente da entrada do log: tipo(escopo): descrição"
+
+## [2026-06-28] edit | conhecimento/plano-implementacao-loop — Curador da Wiki movido para ✅ Validado
+- Seção "🚧 A validar" removida (único item validado)
+- Nova subsection "Curador da Wiki — v1" em "✅ Validado" com arquitetura real, decisões de design e arquivos da v1
+- Frontmatter: timestamp atualizado para 2026-06-28, status draft → stable
