@@ -1,13 +1,15 @@
 # AGENTS.md
 
-Instruções para agentes de IA que trabalham neste repositório.  
-Compatível com: Claude Code, OpenAI Codex CLI, Manus, Cursor, Windsurf, Gemini CLI.
+> ⚠️ **Leia este arquivo completo antes de qualquer ação — pesquisar, criar, editar, renomear, mover ou excluir arquivos.**
 
 ---
 
 ## Git e commits
 
-> ⚠️ **OBRIGATÓRIO:** após criar, editar, renomear, mover ou excluir **qualquer** arquivo, executar imediatamente:
+> ⚠️ **OBRIGATÓRIO:** após criar, editar, renomear, mover ou excluir **qualquer** arquivo:
+>
+> 1. Appendar entrada em `log.md` (ver formato abaixo)
+> 2. Executar:
 > ```bash
 > git -C /root/wiki add -A
 > git -C /root/wiki commit -m "<tipo>(<escopo>): <descrição>"
@@ -28,6 +30,24 @@ Compatível com: Claude Code, OpenAI Codex CLI, Manus, Cursor, Windsurf, Gemini 
 
 **Branches:** trabalhar em `main` por padrão. Feature branch só se explicitamente solicitado.
 
+### Formato do log.md
+
+`log.md` é append-only e cronológico. Nunca editar entradas existentes.
+
+```
+## [YYYY-MM-DD] <tipo> | <título>
+- <detalhe relevante>
+- <páginas tocadas, se aplicável>
+```
+
+| tipo | quando usar |
+|---|---|
+| `ingest` | nova fonte adicionada à wiki |
+| `query` | pergunta gerou página nova arquivada |
+| `lint` | health-check executado |
+| `edit` | edição significativa em página existente |
+| `session` | resumo de encerramento de sessão na wiki |
+
 ---
 
 ## O que é este repositório
@@ -38,9 +58,11 @@ Compatível com: Claude Code, OpenAI Codex CLI, Manus, Cursor, Windsurf, Gemini 
 
 ---
 
-## Autorização — antes de qualquer ação
+## Autorização
 
-Toda edição requer autorização explícita do usuário. A autorização vale só para o escopo pedido. Ao encontrar inconsistência: reportar, não corrigir. `"Encontrei [problema] em [arquivo]. Devo corrigir?"`
+Toda edição requer autorização explícita do usuário. A autorização vale só para o escopo pedido. Ao encontrar inconsistência: reportar, não corrigir — `"Encontrei [problema] em [arquivo]. Devo corrigir?"`
+
+Arquivos que o agente NUNCA deve modificar: `.git/`, `.obsidian/`, `AGENTS.md`
 
 ---
 
@@ -56,12 +78,12 @@ Todo arquivo `.md` da wiki (exceto `AGENTS.md`, `index.md` e `log.md`) deve come
 
 ```yaml
 ---
-type: <tipo>         # veja tipos abaixo
-tags: [tag1, tag2]   # kebab-case, plural, sem typos
+type: <tipo>
+tags: [tag1, tag2]
 title: <título>
 description: <uma linha descrevendo o conteúdo>
 timestamp: <ISO 8601>
-status: <status>     # veja status abaixo
+status: <status>
 ---
 ```
 
@@ -81,7 +103,7 @@ status: <status>     # veja status abaixo
 
 | status | significado |
 |---|---|
-| `draft` | em construção, pode estar incompleto ou desatualizado |
+| `draft` | em construção, pode estar incompleto ou desatualizado — usar ao criar página nova |
 | `stable` | confiável, revisado |
 | `deprecated` | obsoleto, não usar como referência |
 
@@ -91,11 +113,9 @@ status: <status>     # veja status abaixo
 
 1. **Uma página por conceito** — não duplicar. Se o conceito já existe, atualizar a página existente ou criar um link.
 2. **Wikilinks** para conectar páginas relacionadas: `[[caminho/arquivo.md|texto]]`
-3. **Toda página** tem frontmatter OKF completo + seção de navegação/conexões no final
-4. **`raw/`** é imutável — arquivos ali nunca são editados, apenas adicionados
-5. **`wiki/diario/`** segue o padrão `wiki/diario/YYYY-MM-DD-sufixo-descritivo.md` com `type: daily`
-6. **Tags** em kebab-case, no plural, sem acentos (ex: `sessoes`, não `sessoe` ou `sessão`)
-7. **`status: draft`** ao criar uma página nova; mudar para `stable` quando revisada
+3. **`raw/`** é imutável — arquivos ali nunca são editados, apenas adicionados
+4. **`wiki/diario/`** segue o padrão `wiki/diario/YYYY-MM-DD-sufixo-descritivo.md` com `type: daily`
+5. **Tags** em kebab-case, no plural, sem acentos (ex: `sessoes`, não `sessoe` ou `sessão`)
 
 ---
 
@@ -109,7 +129,6 @@ Checklist obrigatório. Executar **nesta ordem** a cada novo arquivo criado:
 2. **Adicionar frontmatter OKF completo** — `type`, `tags`, `title`, `description`, `timestamp`, `status`
 3. **Adicionar wikilinks** para páginas relacionadas (e atualizar as páginas relacionadas para linkar de volta)
 4. **Atualizar `index.md`** — nova entrada com link + descrição na seção correta; árvore sincronizada com `git ls-files`
-5. **Commitar tudo junto** — um commit por operação de ingest
 
 ### Query — responder a uma pergunta com base na wiki
 
@@ -126,26 +145,3 @@ Executar quando solicitado pelo usuário:
 - Contradições entre páginas (`status: stable` conflitando com info mais recente)
 - Conceitos mencionados em várias páginas mas sem página própria
 - Entradas no `index.md` sem correspondente em `git ls-files` (e vice-versa)
-
----
-
-## Arquivos que o agente NUNCA deve modificar
-
-```
-.git/
-.obsidian/
-AGENTS.md          ← só o humano edita este arquivo
-```
-
----
-
-## Como os agentes usam este repositório
-
-| Agente | Acesso | Uso típico |
-|---|---|---|
-| **Hermes** | `read_file`, `search_files` | consultar e escrever conhecimento durante sessões |
-| **Claude Code** | lê este arquivo automaticamente na raiz | editar wiki, estruturar conhecimento, commits |
-| **Manus** | lê AGENTS.md como schema | pesquisar, sintetizar e registrar novos conhecimentos |
-| **Codex CLI** | lê AGENTS.md automaticamente | tarefas de escrita e refatoração de páginas |
-
----
