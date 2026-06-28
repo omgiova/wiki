@@ -25,7 +25,7 @@
 
 ### Formato do log.md
 
-`log.md` é append-only e cronológico. Nunca editar entradas existentes. **Sempre appendar no fim do arquivo** — entradas mais recentes ficam no final (`tail -5` retorna as mais recentes).
+`log.md` é append-only e cronológico. Nunca editar entradas existentes. **Sempre appendar no fim do arquivo** (`tail -5` retorna as mais recentes).
 
 ```
 ## [YYYY-MM-DD] <tipo> | <escopo> — <descrição>
