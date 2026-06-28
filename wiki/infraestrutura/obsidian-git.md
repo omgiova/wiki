@@ -27,6 +27,45 @@ Isso significa que **o pull nunca deveria ter conflito real**. Quando falha, é 
 
 ---
 
+## Solução definitiva para arquivos fantasma — post-merge hook
+
+> Esta é a configuração permanente. Após instalada, todo pull limpa arquivos não rastreados automaticamente — sem interação manual.
+
+O plugin obsidian-git não tem equivalente a `git clean` na interface (confirmado 2026-06-28). A solução é um **git hook `post-merge`** que o git executa sozinho após cada pull.
+
+**Instalar — uma vez por device:**
+
+```bash
+# PC (Git Bash)
+cat > "C:\Users\omgio\Desktop\hermes\ai-memory-wiki\.git\hooks\post-merge" << 'EOF'
+#!/bin/sh
+git clean -fd -e ".obsidian"
+EOF
+chmod +x "C:\Users\omgio\Desktop\hermes\ai-memory-wiki\.git\hooks\post-merge"
+```
+
+```bash
+# Android (Termux)
+cat > ~/storage/shared/ai-memory-wiki/.git/hooks/post-merge << 'EOF'
+#!/bin/sh
+git clean -fd -e ".obsidian"
+EOF
+chmod +x ~/storage/shared/ai-memory-wiki/.git/hooks/post-merge
+```
+
+**Por que funciona:** o git executa `post-merge` automaticamente após todo merge bem-sucedido. O plugin obsidian-git usa `git fetch` + `git merge` internamente — então o hook é acionado a cada pull pelo plugin.
+
+**O `-e ".obsidian"` protege** a pasta do plugin (credenciais, config local).
+
+**Status de instalação por device:**
+
+| Device | Hook instalado |
+|---|---|
+| Windows | ❌ pendente |
+| Android | ❌ pendente |
+
+---
+
 ## Configuração definitiva (por device)
 
 ### 1. Git config — `merge.autostash true` (solução real — validada em 2026-06-26)
