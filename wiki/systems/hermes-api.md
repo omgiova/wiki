@@ -1,8 +1,8 @@
 ---
-type: concept
+type: system
 tags: [hermes, api, rest, openapi, infraestrutura]
 title: Hermes Agent — API REST (OpenAPI)
-description: Referência completa dos endpoints da API do Hermes Agent (gerada automaticamente do /openapi.json)
+description: Referência completa dos ~180 endpoints REST do Hermes Agent, gerada automaticamente do /openapi.json — seção Interface do sistema Hermes
 timestamp: 2026-06-25T00:29:23-03:00
 status: stable
 ---

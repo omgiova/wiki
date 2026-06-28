@@ -112,3 +112,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criados /root/auditor-wiki-agent-prompt-v1.md e /root/auditor-wiki-coord-prompt-v1.md
 - Criado /root/auditor-wiki-v1.sh: script principal bash
 - index.md atualizado: entrada adicionada em procedures/
+
+## [2026-06-28] edit | systems/hermes — reestruturação para type: system com seções obrigatórias
+- hermes.md: type concept → system; adicionadas seções O que é, Stack e configuração, Interface, Operação, Erros conhecidos, Conexões
+- hermes-api.md: type concept → system; description atualizada para refletir papel como seção Interface do sistema
+- index.md: descrição de hermes.md atualizada
