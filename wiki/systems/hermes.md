@@ -83,7 +83,7 @@ REST API disponível em `http://localhost:9119`. Docs interativas: `http://local
 | Password | `15071995` |
 | Password hash | scrypt — gerado via `plugins.dashboard_auth.basic.hash_password('15071995')` |
 
-Referência completa dos ~180 endpoints REST agrupados por domínio: [[wiki/systems/hermes-api.md|Hermes API]].
+Referência completa dos ~180 endpoints REST agrupados por domínio: [[wiki/systems/hermes-endpoints.md|Hermes API]].
 
 ## Operação
 
@@ -131,7 +131,7 @@ plugins:
 ## Conexões
 
 - [[wiki/systems/vps.md|VPS]] — hardware e serviços da stack
-- [[wiki/systems/hermes-api.md|Hermes API]] — referência completa dos endpoints REST
+- [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos endpoints REST
 - [[wiki/concepts/wiki.md|Wiki]] — base de conhecimento
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
 - [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — síntese de voz via MCP

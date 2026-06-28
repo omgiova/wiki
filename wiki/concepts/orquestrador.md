@@ -49,10 +49,10 @@ O que existe agora é **débito técnico acumulado** — inconsistências pequen
 
 ### 1.4 — Campo `resource` ausente em páginas de recursos reais
 
-**Arquivos:** `systems/hermes-api.md`, `systems/vps.md`, `tools/telegram-topicos.md`  
-**Problema:** OKF §4.1 recomenda `resource: <URI>` para conceitos vinculados a ativos reais. `hermes-api.md` descreve endpoints reais (tem um `/openapi.json` de origem). `vps.md` descreve um servidor com IP fixo. `telegram-topicos.md` tem chat IDs e thread IDs.  
+**Arquivos:** `systems/hermes-endpoints.md`, `systems/vps.md`, `tools/telegram-topicos.md`  
+**Problema:** OKF §4.1 recomenda `resource: <URI>` para conceitos vinculados a ativos reais. `hermes-endpoints.md` descreve endpoints reais (tem um `/openapi.json` de origem). `vps.md` descreve um servidor com IP fixo. `telegram-topicos.md` tem chat IDs e thread IDs.  
 **Ação:** Adicionar `resource:` nas três páginas. Exemplos:
-  - `hermes-api.md` → `resource: http://2.24.121.135:8000/openapi.json`
+  - `hermes-endpoints.md` → `resource: http://2.24.121.135:8000/openapi.json`
   - `vps.md` → `resource: ssh://root@2.24.121.135`
   - `telegram-topicos.md` → `resource: https://t.me/c/...` (quando IDs forem preenchidos)
 
@@ -302,7 +302,7 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 7.2 — Descobertas de ElevenLabs SFX sem página permanente ✅
 
-**Resolvido em 2026-06-27:** criada `wiki/tools/elevenlabs-mcp.md` com capabilities, limites do free tier, comportamento de `duration_seconds`, `loop=true`, créditos e prompt language. Linkada de `hermes.md` (MCP Servers) e `hermes-api.md`.
+**Resolvido em 2026-06-27:** criada `wiki/tools/elevenlabs-mcp.md` com capabilities, limites do free tier, comportamento de `duration_seconds`, `loop=true`, créditos e prompt language. Linkada de `hermes.md` (MCP Servers) e `hermes-endpoints.md`.
 
 ### 7.3 — Técnica de message-id do Telegram sem página consolidada
 
@@ -337,11 +337,11 @@ Auditoria de quem linka para quem:
 | `procedures/wiki-review-vs-background-review.md` | Apenas de `wiki-review.md` |
 | `history/2026-06-22-modelos-nim-elevenlabs.md` | Apenas do `index.md` |
 | `tools/telegram-topicos.md` | Apenas do `index.md` |
-| `systems/hermes-api.md` | Apenas do `index.md` |
+| `systems/hermes-endpoints.md` | Apenas do `index.md` |
 | `systems/termux-ssh-claude.md` | `index.md` (com link errado), `todo/proximos-passos.md` |
 
 **Páginas de diário:** Nenhuma das daily notes recebe links de páginas permanentes (apenas do index.md). Isso é esperado — diários são inbox.  
-**Ação:** `history/2026-06-22-modelos-nim-elevenlabs.md` e `tools/telegram-topicos.md` e `hermes-api.md` merecem ser linkados de `systems/hermes.md` nas seções relevantes (modelos, telegram, API).
+**Ação:** `history/2026-06-22-modelos-nim-elevenlabs.md` e `tools/telegram-topicos.md` e `hermes-endpoints.md` merecem ser linkados de `systems/hermes.md` nas seções relevantes (modelos, telegram, API).
 
 ### 8.2 — Wikilinks com prefixo relativo inconsistente
 
@@ -409,7 +409,7 @@ Prioridades organizadas por impacto e custo de execução.
 
 | # | Ação | Arquivo | Custo |
 |---|---|---|---|
-| M1 | Adicionar `resource:` em hermes-api.md, vps.md, telegram-topicos.md | 3 arquivos | Baixo |
+| M1 | Adicionar `resource:` em hermes-endpoints.md, vps.md, telegram-topicos.md | 3 arquivos | Baixo |
 | M2 | Mover entradas temáticas do diário para páginas permanentes | 2 arquivos diário | Médio |
 | M3 | Criar seção "Promote" no AGENTS.md | `AGENTS.md` | Médio |
 | M4 | Adicionar tweet "design loops" em agent-loop-architectures.md | `agent-loop-architectures.md` | Baixo |

@@ -117,3 +117,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - hermes.md: type concept → system; adicionadas seções O que é, Stack e configuração, Interface, Operação, Erros conhecidos, Conexões
 - hermes-api.md: type concept → system; description atualizada para refletir papel como seção Interface do sistema
 - index.md: descrição de hermes.md atualizada
+
+## [2026-06-28] edit | systems/hermes-api — renomear para hermes-endpoints.md
+- hermes-api.md renomeado para hermes-endpoints.md (nome mais preciso — só endpoints REST, não toda a interface)
+- Links atualizados em: index.md, hermes.md, elevenlabs-mcp.md, telegram.md, orquestrador.md
+- log.md preservado (append-only, entradas históricas mantidas)

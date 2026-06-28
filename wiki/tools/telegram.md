@@ -288,7 +288,7 @@ O padrão test-then-act (validar com 👍 antes da reação real) é o protocolo
 | Página | Como usa o Telegram |
 |---|---|
 | [[systems/hermes.md]] | Gateway principal — Telegram é o canal de entrada do Hermes |
-| [[systems/hermes-api.md]] | Endpoints REST de messaging (`/api/messaging/telegram/`) |
+| [[systems/hermes-endpoints.md]] | Endpoints REST de messaging (`/api/messaging/telegram/`) |
 | [[procedures/curador-wiki.md]] | Entrega curadorias e dailies ao Geral via `sendRichMessage` |
 | [[procedures/wiki-review.md]] | Notifica o tópico `wiki_review` após cada revisão |
 
@@ -297,7 +297,7 @@ O padrão test-then-act (validar com 👍 antes da reação real) é o protocolo
 ## Conexões
 
 - [[systems/hermes.md]]
-- [[systems/hermes-api.md]]
+- [[systems/hermes-endpoints.md]]
 - [[procedures/curador-wiki.md]]
 - [[procedures/wiki-review.md]]
 - [[todo/proximos-passos.md]]

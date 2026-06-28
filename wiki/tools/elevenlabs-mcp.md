@@ -79,4 +79,4 @@ Qualidade do output em `text_to_sound_effects` por idioma do prompt:
 ## Conexões
 
 - [[systems/hermes.md|Hermes]] — MCP listado como `uvx elevenlabs-mcp (enabled)`
-- [[systems/hermes-api.md|Hermes API]] — endpoint `GET /api/audio/elevenlabs/voices`
+- [[systems/hermes-endpoints.md|Hermes API]] — endpoint `GET /api/audio/elevenlabs/voices`

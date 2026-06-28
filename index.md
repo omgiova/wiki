@@ -45,7 +45,7 @@ log.md
     │   ├── curador-wiki.md
     │   └── wiki-review.md
     ├── systems/
-    │   ├── hermes-api.md
+    │   ├── hermes-endpoints.md
     │   ├── hermes.md
     │   ├── termux-ssh-claude.md
     │   └── vps.md
@@ -69,7 +69,7 @@ log.md
 ### systems/
 
 - [[wiki/systems/hermes.md|Hermes]] — sistema principal: identidade, stack, modelos, interface REST e operação do Hermes Agent
-- [[wiki/systems/hermes-api.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
+- [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
 - [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/systems/termux-ssh-claude.md|Termux + SSH + Claude]] — setup completo de acesso remoto: configuração, erros conhecidos e troubleshooting
 
