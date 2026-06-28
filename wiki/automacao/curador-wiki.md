@@ -833,11 +833,63 @@ bash /root/curator-teste2.sh
 - Destinos de MIGRAR são verificados antes de sugeridos
 - Footer com arquivos lidos permite auditoria rápida da análise
 
-**Resultado:** _(a preencher após execução)_
+**Resultado:** SUCESSO ✅ — ticket #014, daily `2026-06-22-reacoes-telegram.md`, message-ids 835 (daily), 836 (curadoria), 837 (footer). Avaliação do output pendente.
 
 ---
 
-## Pendências de curadoria (estado em 2026-06-27)
+### Tentativa 9 — 2026-06-28 — SUCESSO ✅
+
+**Script:** `curator-teste5.sh` (v5 — novo script; v4 preservado como baseline estável)
+**System prompt:** `curator-v4-system.md` (mesmo do v4 — sem alteração)
+**Mudança central:** script aceita nome de daily como argumento opcional.
+
+**Problema da tentativa 8:** com poucas dailies no diário, a seleção aleatória repetia arquivos já processados. Não havia como escolher qual daily injetar sem editar o script.
+
+**Fix aplicado em `curator-teste5.sh`:**
+
+```bash
+# 1. Escolher daily (argumento ou aleatória)
+if [[ -n "${1:-}" ]]; then
+    DAILY_PATH="$WIKI_DIARIO/$1"
+    if [[ ! -f "$DAILY_PATH" ]]; then
+        log "ERRO: daily não encontrada: $DAILY_PATH"
+        echo "ERRO: daily não encontrada: $DAILY_PATH" >&2
+        exit 1
+    fi
+    MODO="escolhida"
+else
+    DAILY_PATH=$(ls "$WIKI_DIARIO"/*.md | shuf -n1)
+    MODO="sorteada"
+fi
+```
+
+**Uso:**
+```bash
+# daily específica
+bash /root/curator-teste5.sh 2026-06-20.md
+
+# aleatória (comportamento anterior)
+bash /root/curator-teste5.sh
+```
+
+**O que esta tentativa valida:**
+- Argumento opcional funciona sem quebrar o comportamento padrão
+- Validação de arquivo inexistente com erro claro no log
+
+| Etapa | Resultado |
+|---|---|
+| Daily escolhida | `2026-06-20.md` (argumento explícito) |
+| Daily enviada ao Telegram | ✅ message_id: 838 |
+| `claude -p` executou e retornou curadoria | ✅ |
+| Curadoria enviada via `sendRichMessage` | ✅ message_id: 839 |
+| Footer enviado | ✅ message_id: 840 |
+| Ticket gerado | #015 |
+
+**Avaliação do output:** pendente.
+
+---
+
+## Pendências de curadoria (estado em 2026-06-28)
 
 Duas dailies ainda sem ticket:
 
