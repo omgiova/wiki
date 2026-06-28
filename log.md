@@ -191,3 +191,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Botão Recomeçar (restart/exit 2/exec) adicionado ao Resumo executivo
 - poll_text com filtro "/" incorporado ao script real e aos testes
 - D1 e D2 atualizados
+
+## [2026-06-28] chore | scripts — renomeados de test-vN para valid-N-papel
+- Padrão antigo "test-v9" parecia número de versão; novo padrão: valid-<validação>-<papel>
+- valid-9-resumo.sh, valid-9-corrigivel.sh, valid-9-nao-corrigivel.sh
+- valid-18-prefixo-exclamacao.sh, valid-18-prefixo-barra.sh (históricos)
+- Wiki atualizada com novos caminhos

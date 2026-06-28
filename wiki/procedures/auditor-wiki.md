@@ -152,7 +152,7 @@ Verificar todas as interações possíveis entre o usuário e o auditor via Tele
 
 *Prefixo `/` para texto livre:* quando o auditor pede texto (Ajustar / Instruir), o usuário envia com `/` na frente. O auditor filtra mensagens sem `/` e faz strip antes de usar. O Hermes trata como comando desconhecido sem acionar o LLM.
 
-**V9a — Resumo executivo** (`/root/test-v9a-resumo.sh`)
+**V9a — Resumo executivo** (`/root/valid-9-resumo.sh`)
 
 | # | Botão | callback_data esperado |
 |---|---|---|
@@ -160,7 +160,7 @@ Verificar todas as interações possíveis entre o usuário e o auditor via Tele
 | 2 | 🔄 Recomeçar | `restart` |
 | 3 | ❌ Encerrar | `abort` |
 
-**V9b — Finding corrigível** (`/root/test-v9b-corrigivel.sh`)
+**V9b — Finding corrigível** (`/root/valid-9-corrigivel.sh`)
 
 | # | Botão | callback_data esperado |
 |---|---|---|
@@ -168,7 +168,7 @@ Verificar todas as interações possíveis entre o usuário e o auditor via Tele
 | 2 | ❌ Pular | `skip` |
 | 3 | ✏️ Ajustar → texto com `/` | `adjust` + texto capturado |
 
-**V9c — Finding não-corrigível** (`/root/test-v9c-nao-corrigivel.sh`)
+**V9c — Finding não-corrigível** (`/root/valid-9-nao-corrigivel.sh`)
 
 | # | Botão | callback_data esperado |
 |---|---|---|
