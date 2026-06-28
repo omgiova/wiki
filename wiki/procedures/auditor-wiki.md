@@ -271,6 +271,71 @@ Fase 4 disparou, mas sem findings para apresentar, a mensagem no Telegram veio v
 3. **Fallback deve ALERTAR, não silenciar** — Se um agente produz prosa, o script deveria abortar ou pelo menos logar um WARNING com os primeiros 200 chars do output, não só registrar findings vazio e seguir.
 4. **8 agentes paralelos é excessivo para o free tier** — O limite do Claude free não suporta esse volume. Reduzir para 2-3 agentes por run, ou serializar.
 
+---
+
+### Análise do consumo de tokens — por que 75% em 5 minutos?
+
+O gasto massivo não foi acidental — é consequência direta da arquitetura do script. Abaixo, a decomposição do que cada agente consumiu.
+
+#### Mecânica: como Claude Code conta o consumo
+
+O Claude Code free tier tem um **orçamento por janela de ~5h**, medido em requests/tokens combinados. Cada chamada ao `claude` CLI inicia uma **sessão de múltiplos turns** quando `--allowedTools Read` está ativo. Cada turno (tool call) conta como um request separado contra o mesmo orçamento — e a entrada de cada turno inclui **todo o contexto acumulado dos turnos anteriores** (Claude Code não descarta histórico da conversa).
+
+Ou seja: se um agente faz 5 Read calls, são 5 requests, e cada request custa mais que o anterior porque o contexto cresceu.
+
+#### O que cada agente consumiu
+
+| Agente | Pasta | Read calls | Contexto final estimado |
+|---|---|---|---|
+| **Folder: concepts** | `concepts/` | AGENTS.md + 4 arquivos = 5 | ~80KB (orquestrador.md = 30KB) |
+| **Folder: history** | `history/` | AGENTS.md + 3 arquivos = 4 | ~90KB (2026-06-24.md = 63KB) |
+| **Folder: procedures** | `procedures/` | AGENTS.md + 4 arquivos = 5 | ~114KB (curador-historico = 50KB) |
+| **Folder: systems** | `systems/` | AGENTS.md + 4 arquivos = 5 | ~68KB (endpoints = 23KB) |
+| **Folder: tools** | `tools/` | AGENTS.md + 4 arquivos = 5 | ~61KB (obsidian-git = 16KB) |
+| **Folder: todo** | `todo/` | AGENTS.md + 1 arquivo = 2 | ~35KB |
+| **Folder: diario** | `diario/` | AGENTS.md + 1 arquivo = 2 | ~27KB |
+| **Overlap** | todos | **pode ler QUALQUER arquivo** para confirmar suspeitas | potencialmente 300KB+ |
+| **Links** | todos | lê cada destino de wikilink com label | depende do número de wikilinks |
+
+**Além das Reads, CADA agente recebeu:**
+
+| Item | Tamanho |
+|---|---|
+| System prompt (`prompt-awv1-pasta.md`) | ~3,5KB |
+| `struct_str` — JSON com dados de todos os 21 arquivos da wiki | **~10KB** |
+| Instrução no user prompt | ~0,5KB |
+
+Ou seja, cada agente já começava com ~14KB de contexto **antes de qualquer Read call**.
+
+#### O efeito multiplicador
+
+O problema não é um agente isolado — é o **paralelismo combinado com o crescimento geométrico do contexto**:
+
+1. **8 processos Claude simultâneos**, cada um numa sessão independente
+2. Cada processo faz 2 a 5 Read calls (dependendo do número de arquivos na pasta)
+3. Cada Read call adiciona o **arquivo inteiro** ao contexto acumulado
+4. O contexto **cresce a cada turno** — o quinto Read call de um agente tem 5× mais tokens de entrada que o primeiro
+5. **Todos competem pelo mesmo orçamento** do Claude Code free tier
+
+#### Estimativa total
+
+| Componente | Cálculo |
+|---|---|
+| Input tokens (todos os agentes, todas as turns) | ~700KB–1,5MB |
+| Output tokens (cada agente gera resposta final) | ~5–20KB × 8 = 40–160KB |
+| Read calls totais | ~35–50 chamadas |
+| Requests totais (cada turno = 1 request) | ~35–50 |
+
+Para comparação: uma sessão normal de Claude Code onde você faz perguntas sequenciais gera ~5–15 requests por hora com contexto estável. O auditor fez **35–50 requests em 5 minutos** com contexto **crescendo em cada request**.
+
+#### O fator "struct_str em todo lugar"
+
+Cada agente recebe o `struct_str` completo (dados de TODOS os 21 arquivos) mesmo que só precise auditar sua própria pasta. O agente `todo/` (1 arquivo de 7KB) recebeu ~10KB de struct_str com dados de 20 arquivos que não lhe dizem respeito — **mais dados de entrada que o próprio conteúdo que ele precisava auditar**.
+
+#### Por que no uso normal não gasta isso
+
+No uso normal do Claude Code (via CLI interativa ou via Hermes), o orçamento é consumido de forma **sequencial e espaçada** — uma conversa de cada vez, com pausas entre requests. O auditor lança **8 conversas simultâneas**, cada uma fazendo múltiplos tool calls em RÁPIDA SUCESSÃO. O orçamento do free tier foi desenhado para o primeiro cenário, não para o segundo.
+
 ## Conexões
 
 - [[AGENTS.md]] — taxonomia, templates e checklist de Lint que este script implementa

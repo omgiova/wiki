@@ -217,3 +217,13 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Gastou ~75% do limite Claude free em ~5 minutos (normalmente leva horas para consumir isso)
 - Adicionada seção "Primeira execução real — 2026-06-28 (desastre)" com timeline, falhas, consumo, análise de causa raiz e lições
 - Nenhuma correção aplicada — só documentação
+
+## [2026-06-28] query | auditor-wiki — análise de consumo de tokens (causa raiz do desastre)
+- Adicionada seção "Análise do consumo de tokens" com decomposição do gasto por agente
+- Identificados 3 fatores principais: 8 agentes paralelos × multi-turn Read × contexto acumulativo
+- Cada agente faz 2-5 Read calls (AGENTS.md + arquivos da pasta), contexto cresce a cada turno
+- struct_str (~10KB) enviado a TODOS os agentes mesmo os que só precisam de 1 arquivo
+- Overlap/link agents podem ler centenas de KB se ativarem Read em múltiplos arquivos
+- Comparação: uso normal = ~5-15 requests/h sequencial; auditor = ~35-50 requests em 5 min paralelo
+- Total estimado: ~700KB-1,5MB tokens de entrada + ~40-160KB saída em 8 sessões simultâneas
+- Claude Code free tier foi desenhado para uso sequencial, não para 8 sessões paralelas em rajada
