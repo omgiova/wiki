@@ -9,7 +9,7 @@ status: draft
 
 # Auditor da Wiki
 
-Automação bash que roda uma auditoria completa da wiki em 5 fases, valida cada correção individualmente via Telegram com botões interativos e commita somente o que o usuário aprovar.
+Automação bash que roda uma auditoria completa da wiki em 6 fases, valida cada correção individualmente via Telegram com botões interativos e commita somente o que o usuário aprovar.
 
 Segue o checklist de Lint definido em [[AGENTS.md]] — verifica taxonomia, seções obrigatórias, type OKF, frontmatter, orphans, sync index vs git, qualidade de nomes de arquivo, labels de wikilinks, sobreposição semântica e consistência de status.
 
@@ -109,6 +109,61 @@ Cada finding aplicado gera um commit imediato:
 - `git commit -m "edit(<arquivo>): <finding_id> — <descrição>"`
 
 Push único ao final, após todos os findings processados.
+
+## Validações pré-produção
+
+Executar na ordem antes do primeiro run completo. Cada validação é independente e pode ser feita isoladamente.
+
+**V1 — Fase 1: descoberta dinâmica**
+Rodar isolado e inspecionar o JSON gerado via bash. Verificar: todos os arquivos listados, `files_by_folder` agrupa corretamente, `wikilinks_map` tem entradas, diff git vs index está preciso.
+
+**V2 — Agente de pasta isolado**
+Descomentar e rodar só o agente de um folder (ex: `systems/`) antes de rodar todos em paralelo. Verificar: output é JSON válido, findings têm todos os campos obrigatórios, nenhum prose no lugar de JSON.
+
+**V3 — Agente Overlap isolado**
+Rodar só o agente Overlap com o inventário real. Verificar: lê os arquivos suspeitos com Read, não flaga falsos positivos, output é JSON válido.
+
+**V4 — Agente Links isolado**
+Rodar só o agente Links com o `wikilinks_map` real. Verificar: detecta links quebrados corretamente, compara labels com `title:` do frontmatter, output é JSON válido.
+
+**V5 — Extração JSON (fallback)**
+Verificar que o fallback `findings: []` é acionado corretamente quando um agente produz prose, e que o coordenador lida com relatório vazio sem travar.
+
+**V6 — Coordenador isolado**
+Alimentar o coordenador com relatórios reais dos agentes e verificar: output é JSON válido com `executive_summary` e `findings`, campo `correctable` está classificado coerentemente, nenhum finding duplicado.
+
+**V7 — Agente Corretor isolado**
+Passar um finding real e verificar: `old_string` é substring exata do arquivo (crítico — se não for, o `apply_edit` falha), `new_string` está correto, `edits` tem o caminho de arquivo no formato certo (`systems/hermes.md`, não absoluto).
+
+**V8 — Telegram: token e chat_id**
+Verificar que `TELEGRAM_BOT_TOKEN` está disponível em `~/.hermes/.env` e que `CHAT_ID=-1003870518428` corresponde ao chat correto. Testar com um `sendMessage` simples antes de rodar o script completo.
+
+**V9 — Telegram: inline keyboard**
+Verificar que os botões aparecem corretamente no Telegram (o bot precisa ter permissão de enviar mensagens com `reply_markup` no grupo). Testar `answerCallbackQuery` — se não for chamado, o botão fica com loading infinito.
+
+**V10 — apply_edit: old_string exato**
+O maior risco do script. O agente corretor copia o trecho do arquivo, mas LLMs às vezes normalizam espaços ou quebras de linha. Verificar na primeira aplicação real se o `old_string` está sendo encontrado ou se cai no erro "old_string não encontrado".
+
+**V11 — Commits por finding**
+Verificar que o `git add` passa os caminhos relativos corretos ao `WIKI_DIR` (não absolutos, não relativos a `wiki/`). Rodar um finding de teste e inspecionar `git log --oneline -3`.
+
+**V12 — Push final**
+A wiki tem hook post-commit que auto-pusha. Verificar se isso cria conflito com o `git push` explícito da Fase 6 (pode resultar em "Everything up-to-date", que é ok, ou em erro se o hook já tiver pushado algo diferente).
+
+**V13 — Execução paralela: recursos**
+8 agentes simultâneos consomem memória e rate limit da API. Verificar memória disponível na VPS e se o gateway Hermes interfere com chamadas externas ao `claude` CLI.
+
+**V14 — Pasta diary/ vazia**
+Verificar que o script não lança agente para `diary/` quando a pasta não tem arquivos `.md` (o `if not file_list: continue` cobre isso, mas vale confirmar).
+
+**V15 — Timeout Telegram**
+O timeout padrão é 10 min por resposta. Verificar se é suficiente ou se precisa ajustar `TG_TIMEOUT` no script.
+
+**V16 — claude CLI: autenticação standalone**
+O auditor invoca `claude` como subprocesso bash, fora do contexto do Hermes gateway. Verificar se a autenticação funciona de forma independente (`claude -p "teste" --output-format json`). Se a autenticação depender de variável de ambiente que o gateway injeta em runtime, o auditor não vai tê-la e vai falhar silenciosamente nos agentes da Fase 2.
+
+**V17 — Dois findings consecutivos no mesmo arquivo**
+`apply_edit` usa `str.replace(old_string, new_string, 1)`. Se dois findings apontam para o mesmo arquivo e são processados em sequência, o primeiro pode alterar o contexto onde o `old_string` do segundo estava — o segundo finding cai no erro "old_string não encontrado". Verificar se o coordenador pode ser instruído a agrupar edits do mesmo arquivo num único finding, ou confirmar que a Fase 5 sequencial já mitiga o risco.
 
 ## Conexões
 
