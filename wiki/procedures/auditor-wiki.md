@@ -148,23 +148,34 @@ Passar um finding real e verificar: `old_string` é substring exata do arquivo (
 Verificar que `TELEGRAM_BOT_TOKEN` está disponível em `~/.hermes/.env` e que `CHAT_ID=-1003870518428` corresponde ao chat correto. Testar com um `sendMessage` simples antes de rodar o script completo.
 
 **V9 — Telegram: interação completa (todos os tipos de mensagem)**
-Verificar todas as interações possíveis entre o usuário e o auditor via Telegram. São 3 tipos de mensagem e 7 interações no total.
+Verificar todas as interações possíveis entre o usuário e o auditor via Telegram. São 3 tipos de mensagem, cada um com script próprio.
 
-*Script de teste:* `/root/test-v9-completo.sh` — executa as 7 interações em sequência, reporta pass/fail individual e placar final.
+*Prefixo `/` para texto livre:* quando o auditor pede texto (Ajustar / Instruir), o usuário envia com `/` na frente. O auditor filtra mensagens sem `/` e faz strip antes de usar. O Hermes trata como comando desconhecido sem acionar o LLM.
 
-| # | Tipo | Botão clicado | Com texto? |
-|---|---|---|---|
-| 1 | Resumo executivo | ✅ Prosseguir | — |
-| 2 | Finding corrigível | ✅ Aplicar | — |
-| 3 | Finding corrigível | ❌ Pular | — |
-| 4 | Finding corrigível | ✏️ Ajustar | sim — texto livre com `/` na frente |
-| 5 | Finding não-corrigível | ✅ Entendido | — |
-| 6 | Finding não-corrigível | ✏️ Instruir correção | sim — instrução com `/` na frente |
-| 7 | Resumo executivo | ❌ Encerrar | — |
+**V9a — Resumo executivo** (`/root/test-v9a-resumo.sh`)
 
-*Prefixo `/` para texto livre:* quando o auditor pede texto (interações 4 e 6), o usuário envia a mensagem com `/` na frente (ex: `/corrige o type pra system`). O auditor filtra mensagens sem `/` e faz strip antes de usar. O Hermes trata `/comando-desconhecido` como comando e não aciona o LLM — sem gasto de token.
+| # | Botão | callback_data esperado |
+|---|---|---|
+| 1 | ✅ Prosseguir | `proceed` |
+| 2 | 🔄 Recomeçar | `restart` |
+| 3 | ❌ Encerrar | `abort` |
 
-*Resultado esperado:* 7/7 passam.
+**V9b — Finding corrigível** (`/root/test-v9b-corrigivel.sh`)
+
+| # | Botão | callback_data esperado |
+|---|---|---|
+| 1 | ✅ Aplicar | `apply` |
+| 2 | ❌ Pular | `skip` |
+| 3 | ✏️ Ajustar → texto com `/` | `adjust` + texto capturado |
+
+**V9c — Finding não-corrigível** (`/root/test-v9c-nao-corrigivel.sh`)
+
+| # | Botão | callback_data esperado |
+|---|---|---|
+| 1 | ✅ Entendido | `skip` |
+| 2 | ✏️ Instruir correção → texto com `/` | `instruct` + texto capturado |
+
+*Resultado esperado:* V9a 3/3, V9b 3/3, V9c 2/2.
 
 **V10 — apply_edit: old_string exato**
 O maior risco do script. O agente corretor copia o trecho do arquivo, mas LLMs às vezes normalizam espaços ou quebras de linha. Verificar na primeira aplicação real se o `old_string` está sendo encontrado ou se cai no erro "old_string não encontrado".
@@ -203,8 +214,8 @@ Solução proposta: ao invés de pedir texto livre, o bot deve enviar um segundo
 
 Impacto: mudança no auditor script (`auditor-wiki-v1.sh`) e nos prompts dos agentes de pasta (que precisam incluir o campo `field` e `valid_values` nos findings corrigíveis).
 
-**D2 — resolvido pelo V9 completo**
-Coberto pelo script `/root/test-v9-completo.sh` que testa os 3 tipos de mensagem e os 7 botões reais.
+**D2 — resolvido pelo V9 (3 scripts)**
+Coberto por V9a/V9b/V9c que testam os 3 tipos de mensagem com os botões reais, incluindo o novo botão 🔄 Recomeçar.
 
 ## Conexões
 

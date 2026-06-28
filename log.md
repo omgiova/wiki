@@ -185,3 +185,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - V9 reescrito com script único test-v9-completo.sh cobrindo todas as 7 interações
 - V18/V18b colapsados em nota histórica (prefixo "/" validado, incorporado ao V9)
 - D2 fechado (coberto pelo V9 completo)
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — V9 reestruturado em V9a/V9b/V9c; fix Recomeçar documentado
+- V9 dividido em 3 scripts por tipo de mensagem (resumo, corrigível, não-corrigível)
+- Botão Recomeçar (restart/exit 2/exec) adicionado ao Resumo executivo
+- poll_text com filtro "/" incorporado ao script real e aos testes
+- D1 e D2 atualizados
