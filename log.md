@@ -158,3 +158,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | procedures/auditor-wiki.md — protocolo obrigatório de execução de validações
 - Adicionado bloco de aviso com os 4 passos obrigatórios: criar → documentar → commitar → rodar
 - Regra explícita: nunca rodar sem documentar antes; autorização do usuário vem após ver a documentação commitada
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — V18: poll_text com filtro de prefixo "!" documentado
+- Contexto do conflito Hermes vs auditor documentado (mesmo token, long-polling sem webhook)
+- Script criado: /root/test-v18-poll-text-prefix.sh — duas fases + verificação manual do Hermes
+- Solução proposta: prefixo "!" nas respostas ao auditor; strip antes de usar como new_string

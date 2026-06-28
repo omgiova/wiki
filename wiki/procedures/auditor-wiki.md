@@ -186,6 +186,19 @@ O auditor invoca `claude` como subprocesso bash, fora do contexto do Hermes gate
 **V17 — Dois findings consecutivos no mesmo arquivo**
 `apply_edit` usa `str.replace(old_string, new_string, 1)`. Se dois findings apontam para o mesmo arquivo e são processados em sequência, o primeiro pode alterar o contexto onde o `old_string` do segundo estava — o segundo finding cai no erro "old_string não encontrado". Verificar se o coordenador pode ser instruído a agrupar edits do mesmo arquivo num único finding, ou confirmar que a Fase 5 sequencial já mitiga o risco.
 
+**V18 — poll_text: conflito com Hermes e filtro por prefixo `!`**
+
+Contexto: o auditor e o Hermes usam o mesmo bot-token com long-polling (`getUpdates`, sem webhook). Quando o auditor aguarda `poll_text` (fluxo "Ajustar" ou "Instruir"), Hermes também está escutando — há corrida para capturar a mensagem do usuário, com resultado não-determinístico. A solução adotada: exigir que respostas ao auditor comecem com `!`; o auditor filtra e faz strip do prefixo; o Hermes deve ignorar silenciosamente.
+
+*Script de teste:* `/root/test-v18-poll-text-prefix.sh`
+
+O script:
+- **Fase 1** — solicita uma mensagem SEM `!` e aguarda 30s. Documenta se o auditor captura (comportamento atual sem filtro) ou não vê nada (Hermes capturou primeiro). Não é pass/fail — é observação do estado atual.
+- **Fase 2** — solicita uma mensagem COM `!` (ex: `! type: system`). `poll_text` com filtro ignora mensagens sem `!` e captura somente a prefixada. Faz strip do `!` e espaço(s), ecoa o texto limpo de volta no Telegram.
+- **Verificação manual obrigatória:** observar se o Hermes responde à mensagem com `!`. Se sim → `!` não é seguro como prefixo, escolher outro (ex: `/adj`). Se não → `!` é seguro.
+
+*Resultado esperado:* Fase 2 captura a mensagem com `!`, strip correto, Hermes não responde.
+
 ## Conexões
 
 - [[AGENTS.md]] — taxonomia, templates e checklist de Lint que este script implementa
