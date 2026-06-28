@@ -71,3 +71,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Seção "🚧 A validar" removida (único item validado)
 - Nova subsection "Curador da Wiki — v1" em "✅ Validado" com arquitetura real, decisões de design e arquivos da v1
 - Frontmatter: timestamp atualizado para 2026-06-28, status draft → stable
+
+## [2026-06-28] edit | conhecimento/plano-implementacao-loop — Curador da Wiki: separado "automação validada" de "loop validado"
+- Restaurada seção "🚧 A validar (como loop)" com framing correto
+- Curador v1 descrito como automação funcionando, mas comportamento como loop (cron, idempotência, cobertura) ainda não testado

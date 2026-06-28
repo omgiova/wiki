@@ -48,13 +48,15 @@ O binário `claude` pode ser acionado pelo cron do sistema sem sessão interativ
 
 ---
 
+## 🚧 A validar (como loop)
+
 ### Curador da Wiki — v1
 
-> Validado em 2026-06-28. v1 em produção.
+> Automação validada em 2026-06-28. Loop ainda não testado.
 
-Automação bash que seleciona uma daily note, injeta `index.md` + conteúdo da daily em um `claude -p` com `--allowedTools "Read"` e entrega 3 mensagens ao Telegram Geral.
+A automação funciona: seleciona uma daily, chama `claude -p`, entrega 3 mensagens ao Telegram. O que ainda não foi validado é seu comportamento **como loop** — execução recorrente via cron, acumulação de estado entre runs, idempotência em múltiplas iterações, critério de parada.
 
-**Arquitetura:**
+**Arquitetura atual (single-shot):**
 ```
 bash curador-wiki-script-v1.sh [daily.md]
   ├── sorteia daily aleatória ou usa argumento
@@ -66,15 +68,11 @@ bash curador-wiki-script-v1.sh [daily.md]
   └── envia footer com métricas ao Telegram (msg 3)
 ```
 
-**Decisões de design validadas:**
-
-| Decisão | Motivo |
-|---|---|
-| `--allowedTools "Read"` em vez de `""` | Agente lê páginas referenciadas na daily — melhora contexto sem perder controle |
-| `--system-prompt-file` separado | System prompt versionado independente do script |
-| `--output-format json` | Permite extrair `result` e `usage` de forma confiável |
-| Ticket numerado | Rastreabilidade entre runs; facilita comparação de outputs |
-| Outputs em `/var/log/curator-outputs/` | Histórico local de curadoria para revisão |
+**O que falta validar como loop:**
+- Comportamento em execução recorrente (cron diário/semanal)
+- Idempotência: rodar na mesma daily duas vezes não gera output duplicado ou inconsistente
+- Rastreamento de dailies já processadas (evitar repetição ou garantir cobertura total)
+- Degradação de qualidade ao longo de muitas runs
 
 **Arquivos:**
 - `/root/curador-wiki-script-v1.sh` — script principal
