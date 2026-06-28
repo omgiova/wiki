@@ -201,3 +201,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | procedures/auditor-wiki.md — V9a validado (3/3)
 
 ## [2026-06-28] edit | procedures/auditor-wiki.md — V9b validado (3/3)
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — V9c validado (2/2); validação 9 completa
+- V9c: finding não-corrigível, 2/2 passaram
+- Validação 9 inteira concluída: V9a 3/3, V9b 3/3, V9c 2/2
+- Fix aplicado: botão Recomeçar, poll_text com filtro /, prompts atualizados

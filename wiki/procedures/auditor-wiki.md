@@ -147,7 +147,7 @@ Passar um finding real e verificar: `old_string` é substring exata do arquivo (
 **V8 — Telegram: token e chat_id**
 Verificar que `TELEGRAM_BOT_TOKEN` está disponível em `~/.hermes/.env` e que `CHAT_ID=-1003870518428` corresponde ao chat correto. Testar com um `sendMessage` simples antes de rodar o script completo.
 
-**V9 — Telegram: interação completa (todos os tipos de mensagem)**
+**✅ V9 — Telegram: interação completa (todos os tipos de mensagem)**
 Verificar todas as interações possíveis entre o usuário e o auditor via Telegram. São 3 tipos de mensagem, cada um com script próprio.
 
 *Prefixo `/` para texto livre:* quando o auditor pede texto (Ajustar / Instruir), o usuário envia com `/` na frente. O auditor filtra mensagens sem `/` e faz strip antes de usar. O Hermes trata como comando desconhecido sem acionar o LLM.
@@ -168,7 +168,7 @@ Verificar todas as interações possíveis entre o usuário e o auditor via Tele
 | 2 | ❌ Pular | `skip` |
 | 3 | ✏️ Ajustar → texto com `/` | `adjust` + texto capturado |
 
-**V9c — Finding não-corrigível** (`/root/valid-9-nao-corrigivel.sh`)
+**✅ V9c — Finding não-corrigível** (`/root/valid-9-nao-corrigivel.sh`) — 2/2 passaram (2026-06-28)
 
 | # | Botão | callback_data esperado |
 |---|---|---|
