@@ -154,3 +154,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Expandido item V9 com descrição do script /root/test-v9-inline-keyboard.sh
 - Script criado: drena offset, sendMessage com reply_markup, poll callback_query, answerCallbackQuery, editMessageReplyMarkup
 - Resultado esperado documentado: status ok, answer_ok True, botões removidos após clique
+
+## [2026-06-28] edit | procedures/auditor-wiki.md — protocolo obrigatório de execução de validações
+- Adicionado bloco de aviso com os 4 passos obrigatórios: criar → documentar → commitar → rodar
+- Regra explícita: nunca rodar sem documentar antes; autorização do usuário vem após ver a documentação commitada

@@ -114,6 +114,15 @@ Push único ao final, após todos os findings processados.
 
 Executar na ordem antes do primeiro run completo. Cada validação é independente e pode ser feita isoladamente.
 
+> ⚠️ **Protocolo obrigatório para executar qualquer validação:**
+>
+> 1. **Criar** o script de teste (em `/root/test-v<N>-*.sh`)
+> 2. **Documentar** no item V\<N\> desta seção: o que o script faz, passo a passo, e o resultado esperado
+> 3. **Commitar** wiki + log.md antes de rodar qualquer coisa
+> 4. **Rodar** o script — somente após o commit estar no remoto
+>
+> Nunca rodar sem documentar antes. A autorização do usuário para rodar é dada após ver a documentação commitada.
+
 **V1 — Fase 1: descoberta dinâmica**
 Rodar isolado e inspecionar o JSON gerado via bash. Verificar: todos os arquivos listados, `files_by_folder` agrupa corretamente, `wikilinks_map` tem entradas, diff git vs index está preciso.
 
