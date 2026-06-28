@@ -11,6 +11,8 @@ status: stable
 
 ### Pendente
 
+1. **[PESQUISA] Embasar tecnicamente as regras de colaboração para o AGENTS.md** — Definir como um agente deve se comportar diante de bloqueios: (a) persistir na solução certa solicitando insumos ao humano quando necessário, em vez de desistir ou contornar; (b) não repetir abordagens já provadas ineficazes (ex: não executar o mesmo comando com falha mais de 2–3 vezes). Requer pesquisa de literatura técnica e frameworks de agentes antes de formular o texto definitivo para o AGENTS.md. *Registrado 2026-06-28.*
+
 14. **Validar comportamento de `HERMES_SESSION_MESSAGE_ID`** — confirmar se o valor vem defasado, em que condições isso ocorre e qual a confiabilidade da variável para uso em reações no Telegram. Quando validado, documentar o comportamento real em [[infraestrutura/telegram-bot-api.md]]. *Registrado 2026-06-27.*
 
 1. **Executar roadmap do Orquestrador da Memória** — [[conhecimento/orquestrador.md]] contém auditoria completa da wiki com todos os pontos de atenção, débito técnico e ações recomendadas. Ver o arquivo para detalhes. *Registrado 2026-06-26.*

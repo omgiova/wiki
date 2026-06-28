@@ -37,6 +37,27 @@ Ver [[AGENTS.md]] — fonte da verdade da estrutura, sempre sincronizada com `gi
 3. **Versionar:** Git → GitHub (`omgiova/wiki`) + Obsidian no Windows via clone
 4. **Consultar:** Hermes lê direto via `read_file` / `search_files` (sem MCP intermediário)
 
+## Automação da wiki
+
+A wiki é alimentada por dois agentes automáticos e gerenciada por um curador:
+
+### wiki_review
+
+Plugin do Hermes que roda em background a cada N turnos. Analisa a conversa e escreve insights automaticamente na pasta `wiki/diario/`. Ver [[automacao/wiki-review.md]].
+
+**Output:** `wiki/diario/YYYY-MM-DD-sufixo-descritivo.md` — um arquivo por sessão; sufixo descritivo obrigatório quando há mais de uma daily no mesmo dia.
+
+### diario/ — inbox temporária
+
+Arquivos criados automaticamente pelo wiki_review. São **temporários e imutáveis**:
+- Nunca devem ser referenciados em páginas permanentes
+- Não são destino de migração de conhecimento
+- Serão descartados após curadoria pelo curador-wiki
+
+### curador-wiki
+
+Agente separado que processa as dailies e recomenda o que migrar para páginas permanentes, o que criar como nova página e o que descartar. Ver [[automacao/curador-wiki.md]].
+
 ## Regras
 
 1. **Conhecimento durável vai pra wiki, não pra `memory()`** — toda decisão, gotcha, procedimento, regra vira markdown
