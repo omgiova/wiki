@@ -11,6 +11,12 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada instrução de leitura completa antes de qualquer ação
 - Incorporado log.md como etapa obrigatória dentro da seção Git e commits
 
+## [2026-06-28] edit | obsidian-git — Android FAT filesystem e core.hooksPath documentados
+- Android: `storage/shared` é FAT/exFAT, não suporta chmod +x — hook deve ir em `~/git-hooks/` (ext4)
+- Solução: `core.hooksPath` no git config aponta para armazenamento interno do Termux
+- Erros históricos #9 e #10 adicionados
+- Status de instalação atualizado: Windows ✅, Android validação pendente
+
 ## [2026-06-28] edit | obsidian-git — solução definitiva post-merge hook documentada
 - Adicionada seção "Solução definitiva para arquivos fantasma" com post-merge hook
 - Comandos de instalação para Windows e Android

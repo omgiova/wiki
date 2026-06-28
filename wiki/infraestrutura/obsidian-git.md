@@ -45,24 +45,30 @@ chmod +x "C:\Users\omgio\Desktop\hermes\ai-memory-wiki\.git\hooks\post-merge"
 ```
 
 ```bash
-# Android (Termux)
-cat > ~/storage/shared/ai-memory-wiki/.git/hooks/post-merge << 'EOF'
+# Android (Termux) — ATENÇÃO: ver seção abaixo antes de rodar
+mkdir -p ~/git-hooks
+cat > ~/git-hooks/post-merge << 'EOF'
 #!/bin/sh
 git clean -fd -e ".obsidian"
 EOF
-chmod +x ~/storage/shared/ai-memory-wiki/.git/hooks/post-merge
+chmod +x ~/git-hooks/post-merge
+git -C ~/storage/shared/ai-memory-wiki config core.hooksPath ~/git-hooks
 ```
 
+> ⚠️ **Android: NÃO colocar o hook em `.git/hooks/`**. O repositório fica em `storage/shared` (filesystem FAT/exFAT) que não suporta bit de execução — `chmod +x` não tem efeito lá. O hook precisa estar no armazenamento interno do Termux (`~/git-hooks/`) que é ext4. O `core.hooksPath` redireciona o git para essa pasta.
+
 **Por que funciona:** o git executa `post-merge` automaticamente após todo merge bem-sucedido. O plugin obsidian-git usa `git fetch` + `git merge` internamente — então o hook é acionado a cada pull pelo plugin.
+
+**Atenção:** `post-merge` só dispara quando há commits novos pra puxar. Se o Obsidian abre e já está atualizado ("Already up to date"), o hook não roda — e arquivos fantasma não são limpos nessa abertura.
 
 **O `-e ".obsidian"` protege** a pasta do plugin (credenciais, config local).
 
 **Status de instalação por device:**
 
-| Device | Hook instalado |
-|---|---|
-| Windows | ❌ pendente |
-| Android | ❌ pendente |
+| Device | Hook instalado | Observação |
+|---|---|---|
+| Windows | ✅ | `.git/hooks/post-merge` — funciona (NTFS suporta execução) |
+| Android | ✅ | `~/git-hooks/post-merge` + `core.hooksPath` — validação pendente |
 
 ---
 
@@ -265,6 +271,8 @@ git -C ~/storage/shared/ai-memory-wiki clean -fd -e '.obsidian'
 6. Afirmou que `pull.autostash true` é a solução — não funciona porque o plugin usa `git merge`, não `git pull`. O config correto é `merge.autostash true`
 7. Assumiu sem evidência que o usuário rodou o comando no VPS em vez do Windows — estava errado
 8. Afirmou que existe "Sync Method: Reset" no plugin — **não existe**. Lista completa de comandos confirmada em 2026-06-28 via screenshot do Android (ver seção acima). Não há nenhum equivalente a `git clean` na interface do plugin
+9. Tentou instalar hook em `storage/shared/.git/hooks/` no Android — filesystem FAT não suporta bit de execução, `chmod +x` não funciona lá. Solução: `core.hooksPath` apontando para `~/git-hooks/` (armazenamento interno do Termux, ext4)
+10. Deu comando de sintaxe bash (`<< 'EOF'`) para usuário rodar no PowerShell do Windows — sintaxe incompatível. PowerShell usa `@"..."@ | Set-Content`
 
 ---
 
