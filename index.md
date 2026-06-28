@@ -41,12 +41,6 @@ log.md
     │   ├── orquestrador.md
     │   └── wiki.md
     ├── diario/
-    │   ├── 2026-06-19.md
-    │   ├── 2026-06-20.md
-    │   ├── 2026-06-22-20260621.md
-    │   ├── 2026-06-22-20260622.md
-    │   ├── 2026-06-22-reacoes-telegram.md
-    │   ├── 2026-06-24-20260624.md
     ├── historico/
     │   ├── 2026-06-22-modelos-nim-elevenlabs.md
     │   ├── 2026-06-24-20260624.md
@@ -115,11 +109,7 @@ log.md
 
 Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém preferências reveladas, correções de comportamento, técnicas descobertas e pendências abertas. Não é destino final — insights estáveis devem ser extraídos e integrados em páginas permanentes.
 
-- [[wiki/diario/2026-06-22-20260622.md|2026-06-22]] — reações Telegram, protocolo test-then-act, Crawlee/Apify
-- [[wiki/diario/2026-06-22-20260621.md|2026-06-21]] — sessão anterior (ver arquivo para detalhes)
-- [[wiki/diario/2026-06-22-reacoes-telegram.md|2026-06-22 reações]] — testes de reação no Telegram, descoberta de message-id
-- [[wiki/diario/2026-06-20.md|2026-06-20]] — fix do /update destruindo dados; migração para wiki Karpathy
-- [[wiki/diario/2026-06-19.md|2026-06-19]] — otimizações estruturais da wiki
+*(sem entradas — diários anteriores a 2026-06-24 foram arquivados em `wiki/historico/`)*
 
 ## raw/
 

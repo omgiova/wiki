@@ -11,6 +11,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada instrução de leitura completa antes de qualquer ação
 - Incorporado log.md como etapa obrigatória dentro da seção Git e commits
 
+## [2026-06-28] edit | wikilinks quebrados — removidos de index.md, crise-update.md, 2026-06-24
+- index.md: removidos 5 links para diários deletados da seção diario/ e da árvore
+- crise-update.md: convertido wikilink para 2026-06-20.md em texto plano
+- 2026-06-24-20260624.md: convertidos 2 wikilinks para agent-loop-architectures.md em texto plano
+
 ## [2026-06-28] edit | obsidian-git — nós fantasma no gráfico por wikilinks quebrados
 - Documentado: gráfico mostra nós fantasma por wikilinks quebrados, não por arquivos no filesystem
 - Erro histórico #11: teoria do usuário sobre links quebrados era correta — foi descartada errado
