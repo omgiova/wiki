@@ -86,6 +86,13 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | AGENTS.md — append do log sempre no fim do arquivo
 - Explicitado que entradas mais recentes vão no final (tail -5 = mais recentes)
 
+## [2026-06-28] edit | AGENTS.md — taxonomia de pastas e correções de conflitos
+- Adicionada seção "Taxonomia de pastas" com critérios técnicos e seções obrigatórias por pasta
+- Tipos OKF expandidos: adicionados `system` e `tool`; mapeados para pastas correspondentes
+- Removida regra 4 de Regras de escrita (diary/ — específico de procedure, não de AGENTS)
+- Checklist de Ingest: item 1 reescrito para obrigar verificação de taxonomia antes de criar arquivo
+- Lint: adicionadas verificações de pasta errada e type inconsistente com pasta
+
 ## [2026-06-28] chore | wiki — refatoração completa da taxonomia de pastas
 - Renomeadas/criadas: infraestrutura/ → systems/ e tools/, automacao/ → procedures/ e tools/, conhecimento/ → concepts/, historico/ → history/, pendencias/ → todo/, diario/ → diary/
 - Todos os arquivos movidos com git mv (histórico preservado)
