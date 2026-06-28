@@ -1,29 +1,30 @@
 ---
 type: procedure
-tags: [auditoria, lint, wiki, multi-agente]
+tags: [auditoria, lint, wiki, multi-agente, telegram]
 title: Auditor da Wiki
-description: Automação multi-agente que executa health-check completo da wiki em 3 fases — estrutural, semântica e coordenação — e entrega página de auditoria priorizada.
+description: Automação multi-agente que executa health-check completo da wiki, apresenta cada correção via Telegram para aprovação e aplica somente o que for autorizado.
 timestamp: 2026-06-28T00:00:00-03:00
 status: draft
 ---
 
 # Auditor da Wiki
 
-Automação bash que roda uma auditoria completa da wiki em 3 fases paralelas, produz uma página de findings priorizada em `wiki/todo/` e notifica o Telegram.
+Automação bash que roda uma auditoria completa da wiki em 5 fases, valida cada correção individualmente via Telegram com botões interativos e commita somente o que o usuário aprovar.
 
-Segue o checklist de Lint definido em [[AGENTS.md]] — verifica taxonomia, seções obrigatórias, type OKF, frontmatter, orphans, sync index vs git, sobreposição semântica e consistência de status.
+Segue o checklist de Lint definido em [[AGENTS.md]] — verifica taxonomia, seções obrigatórias, type OKF, frontmatter, orphans, sync index vs git, qualidade de nomes de arquivo, labels de wikilinks, sobreposição semântica e consistência de status.
 
 ## O que faz
 
-- **Fase 0:** análise estrutural em bash puro — sem LLM. Coleta arquivos por pasta, extrai type/status do frontmatter de cada arquivo, calcula diff entre `git ls-files` e `index.md`.
-- **Fase 1:** 3 agentes Claude paralelos, cada um com escopo distinto, lendo os arquivos atribuídos com `--allowedTools "Read"` e produzindo relatório JSON estruturado.
-- **Fase 2:** agente coordenador recebe os 3 relatórios + dados estruturais, deduplica findings, prioriza por severidade e produz o conteúdo da página de auditoria.
-- **Fase 3 (bash):** escreve a página em `wiki/todo/`, atualiza `index.md`, appenda `log.md`, commita e notifica o Telegram.
+- **Fase 0:** análise estrutural em Python puro — sem LLM. Descobre todos os arquivos dinamicamente via `os.walk`, extrai frontmatter, agrupa por pasta, extrai mapa de wikilinks e calcula diff `git ls-files` vs `index.md`.
+- **Fase 1:** agentes Claude em paralelo — um por pasta com arquivos (dinâmico, escala automaticamente) + agente Overlap (sobreposição cross-folder) + agente Links (wikilinks quebrados e labels incorretos). Todos rodam simultaneamente.
+- **Fase 2:** agente coordenador recebe todos os relatórios, deduplica findings, prioriza por severidade e classifica quais são corrigíveis automaticamente.
+- **Fase 3:** envia resumo executivo no Telegram com botões. Usuário aprova prosseguir ou encerra sem alterar nada.
+- **Fase 4:** para cada finding em ordem de prioridade — agente corretor gera o diff proposto → Telegram apresenta com botões → usuário decide. Se aplicado: commit imediato do arquivo + `log.md`. Sequencial (um finding por vez, garante que edições no mesmo arquivo não conflitem).
+- **Fase 5:** push de todos os commits + resumo final no Telegram.
 
 ## Gatilho
 
 Manual — on demand. Executar quando solicitado pelo usuário para health-check da wiki.
-Candidato futuro a cron mensal após validação completa.
 
 ## Como executar
 
@@ -36,93 +37,78 @@ Log de execução: `/var/log/auditor-wiki.log`
 ## Entradas e saídas
 
 **Entradas:**
-- Todos os arquivos `.md` em `wiki/` (lidos pelos agentes via Read)
-- `/root/wiki/AGENTS.md` (taxonomia e regras — lido por todos os agentes)
-- `/root/wiki/index.md` (lido pelo agente C)
+- Todos os arquivos `.md` em `wiki/` (descobertos dinamicamente via `os.walk`)
+- `/root/wiki/AGENTS.md` — taxonomia e regras (lido por todos os agentes)
+- `/root/wiki/index.md` — para o diff estrutural
 
 **Saídas:**
-- `wiki/todo/auditoria-YYYY-MM-DD.md` — página com findings priorizados
+- Commits individuais por finding aplicado (arquivo corrigido + `log.md`)
+- Push de todos os commits ao final
+- Notificações Telegram em cada etapa (resumo, findings, confirmações, resultado final)
 - `/var/log/auditor-wiki.log` — log de execução com timestamps BRT
 - `/tmp/auditor-wiki-*/` — arquivos temporários removidos ao final
-- Notificação Telegram com resumo executivo
 
 ## Arquivos
 
 | Arquivo | Papel |
 |---|---|
 | `/root/auditor-wiki-v1.sh` | Script principal |
-| `/root/auditor-wiki-agent-prompt-v1.md` | System prompt dos agentes A, B, C |
+| `/root/auditor-wiki-agent-prompt-v1.md` | System prompt dos agentes de pasta |
 | `/root/auditor-wiki-coord-prompt-v1.md` | System prompt do coordenador |
+| `/root/auditor-wiki-corrector-prompt-v1.md` | System prompt do agente corretor |
+| `/root/auditor-wiki-overlap-prompt-v1.md` | System prompt do agente de sobreposição |
+| `/root/auditor-wiki-links-prompt-v1.md` | System prompt do agente de links |
 
-## Escopo dos agentes
+## Escopo dos agentes de pasta
 
-| Agente | Arquivos auditados | Foco adicional |
+Dinâmico — um agente por pasta que tiver arquivos `.md`. Para a wiki atual:
+
+| Agente | Pasta | Checks |
 |---|---|---|
-| A | `systems/` + `tools/` | Sobreposição semântica entre ferramentas; seções obrigatórias por tipo |
-| B | `procedures/` + `concepts/` | Procedures que deveriam ser concepts e vice-versa; conteúdo mencionado sem página própria |
-| C | `index.md` + `history/` + `todo/` + diff estrutural | Sync git vs index; items maduros em todo/ prontos para procedures/; orphans |
+| systems | `systems/` | taxonomia, seções, type, frontmatter, status, nome de arquivo, labels |
+| tools | `tools/` | idem |
+| procedures | `procedures/` | idem |
+| concepts | `concepts/` | idem |
+| history | `history/` | idem (corpo imutável — só frontmatter corrigível) |
+| todo | `todo/` | idem + items maduros para promover a procedures/ |
+| Overlap | todos | sobreposição semântica cross-folder |
+| Links | todos | wikilinks quebrados e labels divergentes do título real |
 
-## Resultado esperado
+## Interação via Telegram — Fase 4
 
-Página `wiki/todo/auditoria-YYYY-MM-DD.md` com:
-
+Para cada finding corrigível automaticamente:
 ```
-## Crítico
-## Alto impacto
-## Médio impacto
-## Baixo impacto
-## Estrutural (index vs git)
-## Sem ação necessária
-```
+📋 F3 — 🔴 CRÍTICO (3/12)
+📄 systems/hermes.md
+❌ Problema: ...
 
-Cada finding com: arquivo afetado, descrição objetiva, sugestão acionável.
+✂️ Correção proposta:
+`- texto antigo`
+`+ texto novo`
 
-Notificação Telegram:
-```
-🔍 Auditoria wiki — YYYY-MM-DD
-X findings: N críticos, N alto, N médio, N baixo
-→ wiki/todo/auditoria-YYYY-MM-DD.md
+[✅ Aplicar]  [❌ Pular]  [✏️ Ajustar]
 ```
 
-## Pontos de validação obrigatórios antes de usar em produção
-
-### V1 — Fase 0 (bash/Python estrutural)
-Rodar isolado e inspecionar `/tmp/auditor_struct_test.json`:
-```bash
-python3 /root/auditor-wiki-v1.sh --dry-run-phase0
+Para findings sem correção automática (sobreposição, rename):
 ```
-Verificar: todos os arquivos listados, types corretos, diff git vs index preciso.
+📋 F7 — 🟡 MÉDIO (7/12)
+📄 systems/hermes.md
+⚠️ Problema: ...
+💡 Sugestão: ...
 
-### V2 — Agente A isolado
-Rodar só o agente A e inspecionar output antes de rodar os 3 em paralelo:
-```bash
-# descomentar bloco de teste no script
+[✅ Entendido]  [✏️ Instruir correção]
 ```
-Verificar: output é JSON válido, findings têm todos os campos obrigatórios, não há prose no lugar de JSON.
 
-### V3 — Execução paralela
-3 processos `claude` simultâneos consomem recursos significativos. Verificar:
-- Memória disponível na VPS
-- Rate limits da API Claude
-- Se o gateway Hermes interfere com chamadas externas ao `claude` CLI
+**Ajustar:** usuário envia o `new_string` correto via mensagem — aplicado no lugar do proposto.
+**Instruir correção:** usuário descreve o que fazer em texto livre — agente corretor executa com essa instrução.
 
-### V4 — Extração JSON
-O script tenta parsear o `result` de cada agente como JSON. Se o agente produzir prose, cai no fallback (findings = []). Verificar se o fallback é acionado e como o coordenador lida com relatório vazio.
+## Commits por finding
 
-### V5 — Coordenador
-Verificar que o coordenador recebe todos os dados e produz markdown bem estruturado, sem truncamento (o prompt pode ser grande com 3 JSONs concatenados).
+Cada finding aplicado gera um commit imediato:
+- `git add <arquivo_editado> log.md`
+- `git commit -m "edit(<arquivo>): <finding_id> — <descrição>"`
 
-### V6 — Escrita da página e OKF
-Verificar que a página gerada tem frontmatter OKF completo e válido antes do commit.
-
-### V7 — Atualização do index.md
-O script faz append automático na seção `### todo/` do index.md. Verificar que não duplica entradas se rodado mais de uma vez no mesmo dia.
-
-### V8 — Token Telegram
-Script lê `TELEGRAM_BOT_TOKEN` de `~/.hermes/.env`. Verificar disponibilidade antes da primeira execução.
-
-### V9 — Hardcoded file lists
-A fase 1 tem listas fixas de arquivos por agente. Se arquivos forem adicionados ou removidos das pastas, o script precisa ser atualizado manualmente. Candidato a descoberta dinâmica em v2.
+Push único ao final, após todos os findings processados.
 
 ## Conexões
 

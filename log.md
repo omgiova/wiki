@@ -122,3 +122,12 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - hermes-api.md renomeado para hermes-endpoints.md (nome mais preciso — só endpoints REST, não toda a interface)
 - Links atualizados em: index.md, hermes.md, elevenlabs-mcp.md, telegram.md, orquestrador.md
 - log.md preservado (append-only, entradas históricas mantidas)
+
+## [2026-06-28] edit | procedures/auditor-wiki — reescrita completa para arquitetura v2
+- auditor-wiki-v1.sh: reescrito — descoberta dinâmica de arquivos, agentes por pasta, overlap, links, validação Telegram com inline keyboard, correções por finding com commit imediato
+- auditor-wiki-agent-prompt-v1.md: adicionados checks 7 (qualidade do nome) e 8 (labels de wikilinks)
+- auditor-wiki-coord-prompt-v1.md: output alterado de markdown para JSON (executive_summary + findings com correctable)
+- auditor-wiki-corrector-prompt-v1.md: novo — gera old_string/new_string por finding
+- auditor-wiki-overlap-prompt-v1.md: novo — detecta sobreposição semântica cross-folder
+- auditor-wiki-links-prompt-v1.md: novo — valida wikilinks quebrados e labels
+- procedures/auditor-wiki.md: documentação atualizada para refletir arquitetura completa
