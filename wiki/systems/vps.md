@@ -161,5 +161,5 @@ A stack roda num único VPS Hostinger KVM 2 com Ubuntu. O Hermes Agent é o orqu
 
 ## 🔗 Conexões
 
-- [[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
-- [[wiki/infraestrutura/obsidian-git.md|Obsidian Git]] — configuração e troubleshooting do plugin
+- [[wiki/systems/termux-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
+- [[wiki/tools/obsidian-git.md|Obsidian Git]] — configuração e troubleshooting do plugin

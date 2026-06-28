@@ -15,11 +15,11 @@ status: stable
 
 1. **[PESQUISA] Embasar tecnicamente as regras de colaboração para o AGENTS.md** — Definir como um agente deve se comportar diante de bloqueios: (a) persistir na solução certa solicitando insumos ao humano quando necessário, em vez de desistir ou contornar; (b) não repetir abordagens já provadas ineficazes (ex: não executar o mesmo comando com falha mais de 2–3 vezes). Requer pesquisa de literatura técnica e frameworks de agentes antes de formular o texto definitivo para o AGENTS.md. *Registrado 2026-06-28.*
 
-14. **Validar comportamento de `HERMES_SESSION_MESSAGE_ID`** — confirmar se o valor vem defasado, em que condições isso ocorre e qual a confiabilidade da variável para uso em reações no Telegram. Quando validado, documentar o comportamento real em [[infraestrutura/telegram-bot-api.md]]. *Registrado 2026-06-27.*
+14. **Validar comportamento de `HERMES_SESSION_MESSAGE_ID`** — confirmar se o valor vem defasado, em que condições isso ocorre e qual a confiabilidade da variável para uso em reações no Telegram. Quando validado, documentar o comportamento real em [[tools/telegram-bot-api.md]]. *Registrado 2026-06-27.*
 
-1. **Executar roadmap do Orquestrador da Memória** — [[conhecimento/orquestrador.md]] contém auditoria completa da wiki com todos os pontos de atenção, débito técnico e ações recomendadas. Ver o arquivo para detalhes. *Registrado 2026-06-26.*
+1. **Executar roadmap do Orquestrador da Memória** — [[concepts/orquestrador.md]] contém auditoria completa da wiki com todos os pontos de atenção, débito técnico e ações recomendadas. Ver o arquivo para detalhes. *Registrado 2026-06-26.*
 
-2. **Validar fix do Obsidian Git (merge.autostash)** — `git config merge.autostash true` configurado no Windows em 2026-06-26. Confirmar que Pull funciona consistentemente sem erros de "would be overwritten by merge". Quando validado, mudar [[infraestrutura/obsidian-git.md]] de `status: draft` para `status: stable`. *Registrado 2026-06-26.*
+2. **Validar fix do Obsidian Git (merge.autostash)** — `git config merge.autostash true` configurado no Windows em 2026-06-26. Confirmar que Pull funciona consistentemente sem erros de "would be overwritten by merge". Quando validado, mudar [[tools/obsidian-git.md]] de `status: draft` para `status: stable`. *Registrado 2026-06-26.*
 
 3. **Backup GitHub privado do `.hermes`** — criar repo privado `omgiova/hermes-config` com `agent/`, `skills/`, `plugins/`, `scripts/`, `cron/`, `SOUL.md`, `AGENTS.md`, `config.yaml` (excluindo `.env`, `backups/`, `logs/`, `node_modules/`, `node/`, `venv/`). Configurar auto-push via hook ou cron.
 
@@ -33,11 +33,11 @@ status: stable
 
 8. **Limpar source tree do Hermes** — gatilho do wiki_review removido de `agent/turn_finalizer.py` (2026-06-24). Ainda há `AGENTS.md` (redirect) em `/usr/local/lib/hermes-agent/` que pode precisar de limpeza. Confirmar com Giovani antes de marcar como concluído.
 
-9. **Resolver prompt de aprovação invisível no Remote Control** — quando Claude pede aprovação de ferramenta, prompt aparece no Termux (pts/0) mas não no app. Sessão fica aparentemente travada. Investigar configurar permissões automáticas para reduzir aprovações manuais. Ver [[infraestrutura/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
+9. **Resolver prompt de aprovação invisível no Remote Control** — quando Claude pede aprovação de ferramenta, prompt aparece no Termux (pts/0) mas não no app. Sessão fica aparentemente travada. Investigar configurar permissões automáticas para reduzir aprovações manuais. Ver [[systems/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
 
-10. **Cleanup automático de processos zumbi do Claude** — sessões canceladas pelo app deixam processo Claude vivo no Termux. Implementar script que mata processos órfãos ao iniciar nova sessão. Ver [[infraestrutura/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
+10. **Cleanup automático de processos zumbi do Claude** — sessões canceladas pelo app deixam processo Claude vivo no Termux. Implementar script que mata processos órfãos ao iniciar nova sessão. Ver [[systems/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
 
-11. **Detecção periódica de processos zumbi do Claude** — criar mecanismo que monitore com certa frequência processos Claude acumulados em background, evitando consumo silencioso de memória sem o usuário saber. Diferente do item 10 (que age só no início de sessão), este deve rodar de forma contínua ou agendada. Ver [[infraestrutura/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
+11. **Detecção periódica de processos zumbi do Claude** — criar mecanismo que monitore com certa frequência processos Claude acumulados em background, evitando consumo silencioso de memória sem o usuário saber. Diferente do item 10 (que age só no início de sessão), este deve rodar de forma contínua ou agendada. Ver [[systems/termux-ssh-claude.md]]. *Registrado 2026-06-26.*
 
 12. **[ESTUDO] Abstracts nas páginas da wiki para otimizar contexto do curador** — cada página wiki ganharia um campo `abstract` no frontmatter (3–5 linhas) descrevendo o conteúdo real da página, não só o título. Permite ao agente curador tomar decisões sem ler o arquivo completo. Diferente do `description` (que é genérico): o abstract responde "isso já está documentado aqui?". Requer: definir padrão, gerar abstracts para as ~20 páginas existentes, e manter abstract atualizado a cada edição da página (via hook ou disciplina de commit). Estudar antes de implementar — é uma mudança estrutural no OKF da wiki. *Registrado 2026-06-27.*
 
@@ -52,14 +52,14 @@ status: stable
 - ~~**Sincronizar wiki com GitHub**~~ — feito (repo `omgiova/wiki`)
 - ~~**Conectar Obsidian**~~ — feito (espelhado no Windows via clone)
 - ~~**Criar AGENTS.md**~~ — feito ([[AGENTS.md]])
-- ~~**Criar estrutura `diario/`**~~ — feito
+- ~~**Criar estrutura `diary/`**~~ — feito
 - ~~**Criar pasta `raw/`**~~ — feito
 - ~~**Revisar SOUL.md**~~ — feito (regra bundled skills + referência à wiki em `/root/wiki/`)
 - ~~**Migrar de ai-memory para wiki Karpathy**~~ — feito (Docker parado, MCP desabilitado, hook auto-push configurado)
 - ~~**Corrigir curl sem --max-time no script de startup**~~ — resolvido em 2026-06-26: hooks do ai-memory (legado) removidos do `settings.json` e pasta `/root/.local/share/ai-memory/` deletada. Problema não se aplicava (curls já tinham timeout), mas limpeza feita.
 
 ## 🔗 Conexões entre projetos
-- [[wiki/historico/crise-update.md|2026-06-18-crise-update]]
-- [[wiki/conhecimento/wiki.md|wiki (histórico + conceito)]]
-- [[wiki/infraestrutura/vps.md|vps (IPVS, hardware, stack)]]
-- [[wiki/conhecimento/orquestrador.md|orquestrador — panorama de saúde da wiki e débito técnico]]
+- [[wiki/history/crise-update.md|2026-06-18-crise-update]]
+- [[wiki/concepts/wiki.md|wiki (histórico + conceito)]]
+- [[wiki/systems/vps.md|vps (IPVS, hardware, stack)]]
+- [[wiki/concepts/orquestrador.md|orquestrador — panorama de saúde da wiki e débito técnico]]

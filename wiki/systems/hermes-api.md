@@ -395,6 +395,6 @@ Pode ser chamado manualmente após um `hermes update` ou agendado via cron.
 
 ## Conexões
 
-- [[infraestrutura/hermes.md]] — identidade, stack e preferências do Hermes
-- [[infraestrutura/vps.md]] — VPS onde o Hermes roda
-- [[pendencias/proximos-passos.md]] — pendências ativas
+- [[systems/hermes.md]] — identidade, stack e preferências do Hermes
+- [[systems/vps.md]] — VPS onde o Hermes roda
+- [[todo/proximos-passos.md]] — pendências ativas

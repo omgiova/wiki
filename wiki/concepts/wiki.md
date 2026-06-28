@@ -43,11 +43,11 @@ A wiki é alimentada por dois agentes automáticos e gerenciada por um curador:
 
 ### wiki_review
 
-Plugin do Hermes que roda em background a cada N turnos. Analisa a conversa e escreve insights automaticamente na pasta `wiki/diario/`. Ver [[automacao/wiki-review.md]].
+Plugin do Hermes que roda em background a cada N turnos. Analisa a conversa e escreve insights automaticamente na pasta `wiki/diary/`. Ver [[procedures/wiki-review.md]].
 
-**Output:** `wiki/diario/YYYY-MM-DD-sufixo-descritivo.md` — um arquivo por sessão; sufixo descritivo obrigatório quando há mais de uma daily no mesmo dia.
+**Output:** `wiki/diary/YYYY-MM-DD-sufixo-descritivo.md` — um arquivo por sessão; sufixo descritivo obrigatório quando há mais de uma daily no mesmo dia.
 
-### diario/ — inbox temporária
+### diary/ — inbox temporária
 
 Arquivos criados automaticamente pelo wiki_review. São **temporários e imutáveis**:
 - Nunca devem ser referenciados em páginas permanentes
@@ -56,7 +56,7 @@ Arquivos criados automaticamente pelo wiki_review. São **temporários e imutáv
 
 ### curador-wiki
 
-Agente separado que processa as dailies e recomenda o que migrar para páginas permanentes, o que criar como nova página e o que descartar. Ver [[automacao/curador-wiki.md]].
+Agente separado que processa as dailies e recomenda o que migrar para páginas permanentes, o que criar como nova página e o que descartar. Ver [[procedures/curador-wiki.md]].
 
 ## Regras
 
@@ -85,8 +85,8 @@ Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que 
 ## Navegação
 
 - [[index.md|🏠 Index]]
-- [[wiki/infraestrutura/vps.md|🖥 VPS]]
-- [[wiki/infraestrutura/hermes.md|🤖 Hermes Config]]
-- [[wiki/automacao/firecrawl.md|🔥 Firecrawl]]
-- [[wiki/historico/crise-update.md|🔄 Crise update]]
-- [[wiki/pendencias/proximos-passos.md|📋 Próximos passos]]
+- [[wiki/systems/vps.md|🖥 VPS]]
+- [[wiki/systems/hermes.md|🤖 Hermes Config]]
+- [[wiki/tools/firecrawl.md|🔥 Firecrawl]]
+- [[wiki/history/crise-update.md|🔄 Crise update]]
+- [[wiki/todo/proximos-passos.md|📋 Próximos passos]]

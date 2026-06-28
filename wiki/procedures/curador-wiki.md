@@ -50,7 +50,7 @@ Daily escolhida: 2026-06-XX.md
 
 **Msg 2 — Curadoria (tabelas por pasta):**
 ```
-### infraestrutura/
+### systems/
 
 | Nº | Tópico | Já existe na wiki? | Injetar? | Por que | Onde exatamente + conexões |
 |---|---|---|---|---|---|
@@ -93,5 +93,5 @@ Duração: Xs
 
 ## Conexões
 
-- [[wiki/automacao/curador-wiki-historico.md|Histórico de desenvolvimento]] — todas as tentativas, scripts completos e decisões de design
-- [[wiki/infraestrutura/telegram.md|Telegram]] — endpoint sendRichMessage (seção 3.2) e IDs de tópicos (seção 1)
+- [[wiki/procedures/curador-wiki-historico.md|Histórico de desenvolvimento]] — todas as tentativas, scripts completos e decisões de design
+- [[wiki/tools/telegram.md|Telegram]] — endpoint sendRichMessage (seção 3.2) e IDs de tópicos (seção 1)

@@ -54,4 +54,4 @@ Usar `web_search` para consultas simples. Usar `firecrawl search` via terminal q
 
 ## Conexões
 
-- [[wiki/infraestrutura/hermes.md|Hermes Config]] — onde firecrawl está configurado na stack
+- [[wiki/systems/hermes.md|Hermes Config]] — onde firecrawl está configurado na stack

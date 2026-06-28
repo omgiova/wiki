@@ -62,7 +62,7 @@ grep -rih "timeout\|hang\|error\|killed\|signal\|stuck" ~/.claude/logs/ 2>/dev/n
 
 ### Etapa 4 — Permissões automáticas
 
-Não executada. O erro (prompt de aprovação aparecendo no terminal do Termux mas invisível no app) não se repetiu durante esta sessão de diagnóstico. Retomar se o problema voltar. Ver [[pendencias/proximos-passos.md]] item 8.
+Não executada. O erro (prompt de aprovação aparecendo no terminal do Termux mas invisível no app) não se repetiu durante esta sessão de diagnóstico. Retomar se o problema voltar. Ver [[todo/proximos-passos.md]] item 8.
 
 ---
 
@@ -72,7 +72,7 @@ Não executada. O erro (prompt de aprovação aparecendo no terminal do Termux m
 - **Item 9** — Cleanup de zumbi ao iniciar sessão
 - **Item 10** — Detecção periódica de processos zumbi em background
 
-Ver [[pendencias/proximos-passos.md]] para acompanhamento.
+Ver [[todo/proximos-passos.md]] para acompanhamento.
 
 ---
 

@@ -78,7 +78,7 @@ bash curador-wiki-script-v1.sh [daily.md]
 - `/root/curador-wiki-script-v1.sh` — script principal
 - `/root/curador-wiki-prompt-v1.md` — system prompt do agente
 
-Ver documentação completa: [[automacao/curador-wiki.md|Curador da Wiki]]
+Ver documentação completa: [[procedures/curador-wiki.md|Curador da Wiki]]
 
 ---
 
@@ -210,6 +210,6 @@ Agent Runtime (`src/agents/piembeddedrunner.ts`) — a cada turno:
 
 ## Conexões
 
-- [[infraestrutura/hermes.md|Hermes]] — identidade, regras e stack do Hermes Agent
-- [[pendencias/proximos-passos.md|Próximos Passos]] — to-do list ativa
-- [[automacao/curador-wiki.md|Curador da Wiki — Teste 1]] — primeiro loop implementado a partir deste plano; MVP de curadoria de daily notes
+- [[systems/hermes.md|Hermes]] — identidade, regras e stack do Hermes Agent
+- [[todo/proximos-passos.md|Próximos Passos]] — to-do list ativa
+- [[procedures/curador-wiki.md|Curador da Wiki — Teste 1]] — primeiro loop implementado a partir deste plano; MVP de curadoria de daily notes

@@ -108,7 +108,7 @@ status: <status>
 1. **Uma página por conceito** — não duplicar. Se o conceito já existe, atualizar a página existente ou criar um link.
 2. **Wikilinks** para conectar páginas relacionadas: `[[caminho/arquivo.md|texto]]`
 3. **`raw/`** é imutável — arquivos ali nunca são editados, apenas adicionados
-4. **`wiki/diario/`** segue o padrão `wiki/diario/YYYY-MM-DD-sufixo-descritivo.md` com `type: daily`
+4. **`wiki/diary/`** segue o padrão `wiki/diary/YYYY-MM-DD-sufixo-descritivo.md` com `type: daily`
 5. **Tags** em kebab-case, no plural, sem acentos (ex: `sessoes`, não `sessoe` ou `sessão`)
 
 ---
@@ -119,7 +119,7 @@ status: <status>
 
 Checklist obrigatório. Executar **nesta ordem** a cada novo arquivo criado:
 
-1. **Criar o arquivo** no diretório correto (`wiki/automacao/`, `wiki/infraestrutura/`, `wiki/historico/`, `raw/`, etc.)
+1. **Criar o arquivo** no diretório correto (`wiki/systems/`, `wiki/tools/`, `wiki/procedures/`, `wiki/concepts/`, `wiki/history/`, `wiki/diary/`, `wiki/todo/`, `raw/`, etc.)
 2. **Adicionar frontmatter OKF completo** — `type`, `tags`, `title`, `description`, `timestamp`, `status`
 3. **Adicionar wikilinks** para páginas relacionadas (e atualizar as páginas relacionadas para linkar de volta)
 4. **Atualizar `index.md`** — nova entrada com link + descrição na seção correta; árvore sincronizada com `git ls-files`

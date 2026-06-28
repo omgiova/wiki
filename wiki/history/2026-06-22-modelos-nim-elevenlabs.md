@@ -46,4 +46,4 @@ status: stable
 
 ## Conexões
 
-- [[wiki/infraestrutura/hermes.md]] — estado atual dos modelos e APIs
+- [[wiki/systems/hermes.md]] — estado atual dos modelos e APIs

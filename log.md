@@ -19,7 +19,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Seção Conexões tinha link para arquivo que nunca existiu
 
 ## [2026-06-28] edit | wikilinks quebrados — removidos de index.md, crise-update.md, 2026-06-24
-- index.md: removidos 5 links para diários deletados da seção diario/ e da árvore
+- index.md: removidos 5 links para diários deletados da seção diary/ e da árvore
 - crise-update.md: convertido wikilink para 2026-06-20.md em texto plano
 - 2026-06-24-20260624.md: convertidos 2 wikilinks para agent-loop-architectures.md em texto plano
 
@@ -67,17 +67,17 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | AGENTS.md — regra de derivação do commit message explicitada
 - Bloco Tipos/Escopo reescrito com "Commit message — derivado diretamente da entrada do log: tipo(escopo): descrição"
 
-## [2026-06-28] edit | conhecimento/plano-implementacao-loop — Curador da Wiki movido para ✅ Validado
+## [2026-06-28] edit | concepts/plano-implementacao-loop — Curador da Wiki movido para ✅ Validado
 - Seção "🚧 A validar" removida (único item validado)
 - Nova subsection "Curador da Wiki — v1" em "✅ Validado" com arquitetura real, decisões de design e arquivos da v1
 - Frontmatter: timestamp atualizado para 2026-06-28, status draft → stable
 
-## [2026-06-28] edit | conhecimento/plano-implementacao-loop — Curador da Wiki: separado "automação validada" de "loop validado"
+## [2026-06-28] edit | concepts/plano-implementacao-loop — Curador da Wiki: separado "automação validada" de "loop validado"
 - Restaurada seção "🚧 A validar (como loop)" com framing correto
 - Curador v1 descrito como automação funcionando, mas comportamento como loop (cron, idempotência, cobertura) ainda não testado
 
-## [2026-06-28] edit | infraestrutura/telegram — consolidação de 4 arquivos em página única
-- Criado wiki/infraestrutura/telegram.md com todo o conteúdo migrado literalmente
+## [2026-06-28] edit | tools/telegram — consolidação de 4 arquivos em página única
+- Criado wiki/tools/telegram.md com todo o conteúdo migrado literalmente
 - Deletados: telegram-bot-api.md, telegram-topicos.md, telegram-send-rich-message.md, telegram-reacoes.md
 - Atualizado index.md: 4 entradas → 1 (árvore e lista)
 - Atualizado curador-wiki.md: links de conexões apontam para telegram.md
@@ -85,3 +85,12 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 
 ## [2026-06-28] edit | AGENTS.md — append do log sempre no fim do arquivo
 - Explicitado que entradas mais recentes vão no final (tail -5 = mais recentes)
+
+## [2026-06-28] chore | wiki — refatoração completa da taxonomia de pastas
+- Renomeadas/criadas: infraestrutura/ → systems/ e tools/, automacao/ → procedures/ e tools/, conhecimento/ → concepts/, historico/ → history/, pendencias/ → todo/, diario/ → diary/
+- Todos os arquivos movidos com git mv (histórico preservado)
+- Todos os wikilinks atualizados em todos os arquivos
+- index.md: árvore, seções e entradas sincronizadas com nova estrutura
+- AGENTS.md: referências a pastas atualizadas (ingest checklist + regra diary/)
+- curador-wiki.md e curador-wiki-historico.md: prompts ativos atualizados com novos nomes de pastas
+- Referências em history/ e orquestrador.md preservadas como registro histórico

@@ -13,9 +13,9 @@ Agente de curadoria de diários. Cada tentativa valida uma hipótese e acumula a
 
 ## Regras gerais do teste
 
-- **Formato de entrega:** todas as mensagens ao Telegram usam `sendRichMessage` (Bot API 10.1) com `rich_message.markdown`. Ver [[infraestrutura/telegram-send-rich-message.md]]
+- **Formato de entrega:** todas as mensagens ao Telegram usam `sendRichMessage` (Bot API 10.1) com `rich_message.markdown`. Ver [[tools/telegram-send-rich-message.md]]
 - **Frontmatter:** sempre removido antes do envio — nunca incluir o bloco `---` YAML nas mensagens
-- **Thread Geral:** omitir `message_thread_id` no payload (ver [[infraestrutura/telegram-topicos.md]])
+- **Thread Geral:** omitir `message_thread_id` no payload (ver [[tools/telegram-topicos.md]])
 - **Agente é read-only:** o `claude -p` só produz curadoria — nunca entrega a daily. A daily é enviada pelo script diretamente, antes de chamar o agente
 - **Execução:** sempre via `nohup bash /root/curator-teste1.sh > /var/log/curator-teste1.nohup.log 2>&1 &` — o `$LOG` é exclusivo das chamadas `log()` do script; o nohup redireciona para arquivo separado `.nohup.log`
 
@@ -24,7 +24,7 @@ Agente de curadoria de diários. Cada tentativa valida uma hipótese e acumula a
 ```
 [bash curator-teste1.sh]
         │
-        ├── sorteia daily aleatória de wiki/diario/
+        ├── sorteia daily aleatória de wiki/diary/
         ├── envia daily via sendRichMessage (script, sem agente)  ← novo
         ├── embute index.md + daily no prompt do claude -p
         ├── claude -p → curadoria estruturada
@@ -40,7 +40,7 @@ Agente de curadoria de diários. Cada tentativa valida uma hipótese e acumula a
 ```
 [bash curator-teste1.sh]
         │
-        ├── sorteia daily aleatória de wiki/diario/
+        ├── sorteia daily aleatória de wiki/diary/
         ├── embute index.md + daily no prompt (sem tool calls)
         ├── claude -p → curadoria estruturada
         └── envia 2 mensagens ao Telegram Geral
@@ -151,7 +151,7 @@ Nenhum fix foi aplicado ao script. A documentação deste erro vem antes de qual
 
 ### Tentativa 2 — 2026-06-27T13:34-03:00 — FALHA PARCIAL
 
-**Aprendizado da tentativa 1:** o problema não foi chamar o script de dentro de uma sessão Claude Code ativa — isso faz parte do teste e está validado no [[wiki/conhecimento/plano-implementacao-loop.md|Plano de Loops]]. O problema foi o **bloqueio**: o Claude Code ficou esperando o script terminar, o timeout de 2 minutos do Bash tool estourou com o processo ainda rodando, e o kill subsequente derrubou a sessão.
+**Aprendizado da tentativa 1:** o problema não foi chamar o script de dentro de uma sessão Claude Code ativa — isso faz parte do teste e está validado no [[wiki/concepts/plano-implementacao-loop.md|Plano de Loops]]. O problema foi o **bloqueio**: o Claude Code ficou esperando o script terminar, o timeout de 2 minutos do Bash tool estourou com o processo ainda rodando, e o kill subsequente derrubou a sessão.
 
 **Correção aplicada:** manter o script sendo chamado da sessão ativa, mas desacoplar o processo com `nohup ... &`.
 
@@ -217,7 +217,7 @@ A linha 17 do Python inline é o `urllib.request.urlopen(req)`. O script não ca
 
 O grupo foi consultado via `getChat`: `is_forum: True`, `type: supergroup`, `title: HERMES & GIONATO`. O grupo tem fórum habilitado, mas `thread_id=1` não existe como thread separado — o Telegram trata o tópico Geral como o chat principal, não como um tópico com ID próprio.
 
-A wiki em [[infraestrutura/telegram-topicos.md]] documenta `thread_id=1` para Geral, mas o próprio campo "Como usar" da mesma página contradiz isso: *"Omitir `:thread_id` para o tópico padrão (Geral)."* Os 4 testes sem `message_thread_id` confirmaram que sem o campo as mensagens chegam ao Geral sem erro (message_ids 793–796 entregues).
+A wiki em [[tools/telegram-topicos.md]] documenta `thread_id=1` para Geral, mas o próprio campo "Como usar" da mesma página contradiz isso: *"Omitir `:thread_id` para o tópico padrão (Geral)."* Os 4 testes sem `message_thread_id` confirmaram que sem o campo as mensagens chegam ao Geral sem erro (message_ids 793–796 entregues).
 
 **Conclusão:** o `telegram_send` do script deve enviar sem `message_thread_id` quando o destino for o tópico Geral. O formato JSON inline (teste 2) é o mais simples e funciona.
 
@@ -225,7 +225,7 @@ A wiki em [[infraestrutura/telegram-topicos.md]] documenta `thread_id=1` para Ge
 1. Remover `message_thread_id` do payload quando o destino for Geral
 2. Capturar o corpo do erro HTTP no Python (`e.read().decode()`) para diagnóstico futuro
 3. Separar o destino do `nohup` do `$LOG` para evitar sobrescrita das linhas de log
-4. Atualizar [[infraestrutura/telegram-topicos.md]] — a nota sobre `thread_id=1` para Geral está incorreta na prática; o comportamento correto é omitir o campo
+4. Atualizar [[tools/telegram-topicos.md]] — a nota sobre `thread_id=1` para Geral está incorreta na prática; o comportamento correto é omitir o campo
 
 **Próximo passo:** documentar, depois aplicar os fixes no script, depois rodar tentativa 3.
 
@@ -251,7 +251,7 @@ O `sendRichMessage` (Bot API 10.1) aceita markdown raw e renderiza nativamente n
 
 O frontmatter YAML (`---`) é removido antes do envio — não faz parte do conteúdo legível.
 
-Documentação completa do endpoint: [[infraestrutura/telegram-send-rich-message.md]]
+Documentação completa do endpoint: [[tools/telegram-send-rich-message.md]]
 
 ### Tentativa 3 — 2026-06-27 — SUCESSO ✅
 
@@ -323,7 +323,7 @@ Quando o script falha ou apresenta erro:
 ```
 [bash curator-teste2.sh]
         │
-        ├── sorteia daily aleatória de wiki/diario/
+        ├── sorteia daily aleatória de wiki/diary/
         ├── envia daily via sendRichMessage (script, sem agente)
         ├── chama claude com:
         │     -s /root/curator-v2-system.md   ← system prompt separado
@@ -359,7 +359,7 @@ composta e persistente, mantida por agentes de IA. O princípio central
 não é acumular — é compor. A wiki deve ficar mais densa e útil com o
 tempo, não apenas maior.
 
-O diário (wiki/diario/) é a inbox do sistema: captura bruta de sessões,
+O diário (wiki/diary/) é a inbox do sistema: captura bruta de sessões,
 descobertas, pendências e decisões. É o ponto de partida, não o destino.
 Seu trabalho é processar esse material e identificar o que merece sair
 do diário e entrar na base permanente.
@@ -649,7 +649,7 @@ Tokens totais:      XXXX input / XXXX output
 Duração:            Xs
 ```
 
-- **Dailies no diário:** `ls wiki/diario/*.md | wc -l` — total de arquivos no momento da execução
+- **Dailies no diário:** `ls wiki/diary/*.md | wc -l` — total de arquivos no momento da execução
 - **Tokens injetados:** estimativa por contagem de caracteres (`len / 4`)
 - **Tokens totais:** via `--output-format json` no `claude -p`, que retorna `usage.input_tokens` e `usage.output_tokens`
 - **Duração:** `$SECONDS` do bash, calculado entre início e fim da chamada ao agente
@@ -684,7 +684,7 @@ error: unknown option '-s'
 
 **Fix aplicado no system prompt (`curator-v2-system.md`):**
 - Adicionada seção "Natureza das daily notes" — explica que dailies são temporárias, serão apagadas pelo usuário, e não devem ser destino de nenhuma sugestão
-- Adicionada seção "Pastas proibidas para leitura" — proíbe explicitamente ler `wiki/diario/` e `wiki/historico/`; define as pastas permanentes como destino exclusivo de MIGRAR
+- Adicionada seção "Pastas proibidas para leitura" — proíbe explicitamente ler `wiki/diary/` e `wiki/history/`; define as pastas permanentes como destino exclusivo de MIGRAR
 - Reforçado que a daily a analisar já está no prompt — o agente não precisa ler outras dailies
 
 **Próximo passo:** rodar tentativa 5 para validar se o comportamento foi corrigido.
@@ -694,7 +694,7 @@ error: unknown option '-s'
 ### Tentativa 5 — 2026-06-27 — aguardando execução
 
 **Script:** `curator-teste2.sh` (v2 — mesmo script da tentativa 4)
-**Mudança central:** correção de comportamento no system prompt — agente proibido de ler `diario/` e `historico/`, e instruído sobre a natureza temporária das dailies.
+**Mudança central:** correção de comportamento no system prompt — agente proibido de ler `diary/` e `history/`, e instruído sobre a natureza temporária das dailies.
 
 **Problema identificado na tentativa 4:** o agente leu a daily sorteada e sugeriu migrar conteúdo para outra daily — destino proibido. Dailies são imutáveis, temporárias e serão apagadas pelo usuário após revisão. O agente não deve ler outras dailies nem sugerir dailies como destino de migração.
 
@@ -703,12 +703,12 @@ error: unknown option '-s'
 | # | Fix | Motivo |
 |---|---|---|
 | 1 | Seção "Natureza das daily notes" adicionada | Agente não entendia que dailies são temporárias e serão apagadas |
-| 2 | Seção "Pastas proibidas para leitura" adicionada | Proibição explícita de ler `wiki/diario/` e `wiki/historico/` |
-| 3 | Destino de MIGRAR definido explicitamente | Só páginas permanentes: `automacao/`, `conhecimento/`, `infraestrutura/`, `pendencias/` |
+| 2 | Seção "Pastas proibidas para leitura" adicionada | Proibição explícita de ler `wiki/diary/` e `wiki/history/` |
+| 3 | Destino de MIGRAR definido explicitamente | Só páginas permanentes: `automacao/`, `conhecimento/`, `infraestrutura/`, `todo/` |
 | 4 | Instrução: a daily já está no prompt | Agente não precisa ler outras dailies — o conteúdo a analisar já é fornecido |
 
 **O que esta tentativa valida:**
-- Agente respeita a proibição de ler `diario/` e `historico/`
+- Agente respeita a proibição de ler `diary/` e `history/`
 - Agente nunca sugere outra daily como destino de MIGRAR
 - Agente entende o papel da daily como inbox temporária
 - System prompt com restrições explícitas de pasta é suficiente (sem whitelist técnica no `--allowedTools`)
@@ -721,7 +721,7 @@ bash /root/curator-teste2.sh
 **Resultado:** SUCESSO ✅ — pipeline completo, message_ids 806 (daily), 807 (curadoria), 808 (footer).
 
 **O que foi validado:**
-- Agente não leu `diario/` nem `historico/`
+- Agente não leu `diary/` nem `history/`
 - Agente não sugeriu outra daily como destino de MIGRAR
 - Proibições explícitas no system prompt foram respeitadas
 
@@ -907,15 +907,15 @@ organizadas por pasta da wiki, com raciocínio explícito por item.
 
 É estritamente proibido ler arquivos em:
 
-- `wiki/diario/` — o conteúdo da daily a analisar já chega no prompt
-- `wiki/historico/` — registros históricos imutáveis, não são base de decisão para curadoria
+- `wiki/diary/` — o conteúdo da daily a analisar já chega no prompt
+- `wiki/history/` — registros históricos imutáveis, não são base de decisão para curadoria
 
 Dailies são **imutáveis** — nunca sugira editar, complementar ou migrar conteúdo para outra daily.
-O destino de qualquer MIGRAR é sempre uma página permanente: `automacao/`, `conhecimento/`,
-`infraestrutura/`, `pendencias/` — jamais `diario/` ou `historico/`.
+O destino de qualquer MIGRAR é sempre uma página permanente: `systems/`, `tools/`, `procedures/`,
+`concepts/`, `todo/` — jamais `diary/` ou `history/`.
 
-Você tem acesso livre a toda a wiki permanente: `automacao/`, `conhecimento/`,
-`infraestrutura/`, `pendencias/`, e ao `index.md`.
+Você tem acesso livre a toda a wiki permanente: `systems/`, `tools/`, `procedures/`,
+`concepts/`, `todo/`, e ao `index.md`.
 
 ## Esta wiki e o padrão que ela segue
 
@@ -993,7 +993,7 @@ de cada tabela do mais para o menos importante.
 |---|---|---|---|---|---|
 | N | Descrição detalhada do que é o conteúdo — não apenas um título, o suficiente para entender o item sem ler a daily | Sim / Não / Parcialmente — e o que existe | Sim — editar `arquivo.md` / Sim — criar `arquivo.md` | Por que isso vale daqui a 6 meses | Seção exata onde inserir + [[wikilinks]] para páginas relacionadas |
 
-Pastas disponíveis: automacao/, conhecimento/, infraestrutura/, pendencias/
+Pastas disponíveis: systems/, tools/, procedures/, concepts/, todo/
 Se nenhuma servir, sugira o nome da nova pasta.
 
 Ao final dos itens positivos, tabela de descartes:
@@ -1218,8 +1218,8 @@ log "Enviado com sucesso."
 
 Duas dailies ainda sem ticket:
 
-- `wiki/diario/2026-06-22-reacoes-telegram.md`
-- `wiki/diario/2026-06-23-20260623.md`
+- `wiki/diary/2026-06-22-reacoes-telegram.md`
+- `wiki/diary/2026-06-23-20260623.md`
 
 **Comando para processar as duas com intervalo de 5 minutos:**
 ```bash
@@ -1232,6 +1232,6 @@ Rodar do terminal ou de uma sessão Claude Code. Após cada execução, avaliar 
 
 ## Conexões
 
-- [[wiki/conhecimento/plano-implementacao-loop.md|Plano de Implementação — Loops]] — contexto técnico e arquitetura de loops agênticos
-- [[wiki/infraestrutura/telegram-topicos.md|Telegram Tópicos]] — IDs do Telegram usados no envio
-- [[wiki/automacao/wiki-review.md|Wiki Review]] — outro agente de automação da wiki
+- [[wiki/concepts/plano-implementacao-loop.md|Plano de Implementação — Loops]] — contexto técnico e arquitetura de loops agênticos
+- [[wiki/tools/telegram-topicos.md|Telegram Tópicos]] — IDs do Telegram usados no envio
+- [[wiki/procedures/wiki-review.md|Wiki Review]] — outro agente de automação da wiki

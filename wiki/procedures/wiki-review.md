@@ -2,14 +2,14 @@
 type: procedure
 tags: [hermes, wiki, automacao, background, diario, plugin]
 title: Wiki Review — Auto-escrita de diário em background
-description: Plugin que roda a cada N turnos e salva insights da conversa na wiki (diario/).
+description: Plugin que roda a cada N turnos e salva insights da conversa na wiki (diary/).
 timestamp: 2026-06-24T09:00:00-03:00
 status: stable
 ---
 
 # Wiki Review
 
-Plugin do Hermes que analisa a conversa automaticamente e escreve insights no diário da wiki (`wiki/diario/YYYY-MM-DD-{session}.md`). Roda em background sem intervenção do usuário.
+Plugin do Hermes que analisa a conversa automaticamente e escreve insights no diário da wiki (`wiki/diary/YYYY-MM-DD-{session}.md`). Roda em background sem intervenção do usuário.
 
 Nasceu como clone do `background_review.py` nativo do Hermes — mesma lógica de gatilho, mesmo padrão de spawn de thread e AIAgent filho — adaptado para escrever na wiki em vez de na `memory()`. A seção de comparação ao final deste arquivo documenta todas as divergências entre os dois.
 
@@ -67,7 +67,7 @@ turno N → post_llm_call hook disparado
 ### Nome do arquivo de saída
 
 ```
-wiki/diario/YYYY-MM-DD-HHMM.md
+wiki/diary/YYYY-MM-DD-HHMM.md
 ```
 
 O horário é o do **primeiro disparo da sessão**. Disparos subsequentes na mesma sessão appendam no mesmo arquivo.
@@ -78,7 +78,7 @@ O horário é o do **primeiro disparo da sessão**. Disparos subsequentes na mes
 
 Estado persistido em `/root/.hermes/wiki_review_session.json`:
 ```json
-{"diary_path": "/root/wiki/wiki/diario/2026-06-24-1430.md", "last_activity": "2026-06-24T14:32:00+00:00"}
+{"diary_path": "/root/wiki/wiki/diary/2026-06-24-1430.md", "last_activity": "2026-06-24T14:32:00+00:00"}
 ```
 
 Lógica:
@@ -275,6 +275,6 @@ Um arquivo por sessão de conversa. Sessão detectada por inatividade (60 min se
 
 ## Conexões
 
-- [[infraestrutura/hermes.md|Hermes Config]] — stack e arquitetura
-- [[conhecimento/wiki.md|Wiki]] — estrutura da wiki e regras de escrita
-- [[pendencias/proximos-passos.md|Próximos passos]]
+- [[systems/hermes.md|Hermes Config]] — stack e arquitetura
+- [[concepts/wiki.md|Wiki]] — estrutura da wiki e regras de escrita
+- [[todo/proximos-passos.md|Próximos passos]]

@@ -56,7 +56,7 @@ echo "HERMES_SESSION_CHAT_ID: $HERMES_SESSION_CHAT_ID"
 
 **Mecanismo esperado:** o gateway consome updates via long polling e injeta `message_id`, `chat_id` e `thread_id` da mensagem que disparou o turno no contexto da sessão antes de repassar ao agente — mesmo que `getUpdates` retorne vazio para o agente.
 
-> ⚠️ **Não validado de forma confiável.** Todos os testes realizados até 2026-06-27 não confirmaram funcionamento consistente. Os métodos de acesso acima são os mais promissores identificados, mas nenhum foi verificado como funcional em uso real. Ver [[pendencias/proximos-passos.md]] e a seção 4 (Reações) abaixo.
+> ⚠️ **Não validado de forma confiável.** Todos os testes realizados até 2026-06-27 não confirmaram funcionamento consistente. Os métodos de acesso acima são os mais promissores identificados, mas nenhum foi verificado como funcional em uso real. Ver [[todo/proximos-passos.md]] e a seção 4 (Reações) abaixo.
 
 ---
 
@@ -287,17 +287,17 @@ O padrão test-then-act (validar com 👍 antes da reação real) é o protocolo
 
 | Página | Como usa o Telegram |
 |---|---|
-| [[infraestrutura/hermes.md]] | Gateway principal — Telegram é o canal de entrada do Hermes |
-| [[infraestrutura/hermes-api.md]] | Endpoints REST de messaging (`/api/messaging/telegram/`) |
-| [[automacao/curador-wiki.md]] | Entrega curadorias e dailies ao Geral via `sendRichMessage` |
-| [[automacao/wiki-review.md]] | Notifica o tópico `wiki_review` após cada revisão |
+| [[systems/hermes.md]] | Gateway principal — Telegram é o canal de entrada do Hermes |
+| [[systems/hermes-api.md]] | Endpoints REST de messaging (`/api/messaging/telegram/`) |
+| [[procedures/curador-wiki.md]] | Entrega curadorias e dailies ao Geral via `sendRichMessage` |
+| [[procedures/wiki-review.md]] | Notifica o tópico `wiki_review` após cada revisão |
 
 ---
 
 ## Conexões
 
-- [[infraestrutura/hermes.md]]
-- [[infraestrutura/hermes-api.md]]
-- [[automacao/curador-wiki.md]]
-- [[automacao/wiki-review.md]]
-- [[pendencias/proximos-passos.md]]
+- [[systems/hermes.md]]
+- [[systems/hermes-api.md]]
+- [[procedures/curador-wiki.md]]
+- [[procedures/wiki-review.md]]
+- [[todo/proximos-passos.md]]

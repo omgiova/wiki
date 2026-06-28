@@ -49,7 +49,7 @@ O que existe agora é **débito técnico acumulado** — inconsistências pequen
 
 ### 1.4 — Campo `resource` ausente em páginas de recursos reais
 
-**Arquivos:** `infraestrutura/hermes-api.md`, `infraestrutura/vps.md`, `infraestrutura/telegram-topicos.md`  
+**Arquivos:** `systems/hermes-api.md`, `systems/vps.md`, `tools/telegram-topicos.md`  
 **Problema:** OKF §4.1 recomenda `resource: <URI>` para conceitos vinculados a ativos reais. `hermes-api.md` descreve endpoints reais (tem um `/openapi.json` de origem). `vps.md` descreve um servidor com IP fixo. `telegram-topicos.md` tem chat IDs e thread IDs.  
 **Ação:** Adicionar `resource:` nas três páginas. Exemplos:
   - `hermes-api.md` → `resource: http://2.24.121.135:8000/openapi.json`
@@ -58,7 +58,7 @@ O que existe agora é **débito técnico acumulado** — inconsistências pequen
 
 ### 1.5 — Nenhum `log.md` existe na wiki
 
-**Problema:** O OKF §7 define `log.md` como registro cronológico de mudanças — append-only, mais recente primeiro. Atualmente o `diario/` cumpre parte dessa função, mas de forma episódica e não estruturada. Um `log.md` na raiz da wiki registraria ingest, lint, reestruturação e marcos importantes de forma parseável.
+**Problema:** O OKF §7 define `log.md` como registro cronológico de mudanças — append-only, mais recente primeiro. Atualmente o `diary/` cumpre parte dessa função, mas de forma episódica e não estruturada. Um `log.md` na raiz da wiki registraria ingest, lint, reestruturação e marcos importantes de forma parseável.
 
 **Implementação detalhada:**
 
@@ -109,8 +109,8 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 ### 2.1 — Link quebrado crítico no index.md
 
 **Arquivo:** `index.md`, linha 19  
-**Problema:** A entrada da seção Infraestrutura aponta para `wiki/infraestrutura/pendencia-problema-ssh-claude.md` — este arquivo **não existe**. O arquivo real é `wiki/infraestrutura/termux-ssh-claude.md`.  
-**Ação:** Corrigir o link no `index.md` para `[[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]]`.
+**Problema:** A entrada da seção Infraestrutura aponta para `wiki/infraestrutura/pendencia-problema-ssh-claude.md` — este arquivo **não existe**. O arquivo real é `wiki/systems/termux-ssh-claude.md`.  
+**Ação:** Corrigir o link no `index.md` para `[[wiki/systems/termux-ssh-claude.md|Problema SSH/Claude]]`.
 
 ### 2.2 — AGENTS.md e index.md não estão em sync
 
@@ -118,10 +118,10 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 **Problema:** O AGENTS.md lista `termux-ssh-claude.md` corretamente na árvore da wiki. O `index.md` lista `pendencia-problema-ssh-claude.md` (nome errado). Estão fora de sync — viola a regra do próprio AGENTS.md ("esta seção deve estar sempre sincronizada com `git ls-files`").  
 **Ação:** Corrigir o `index.md` (ver 2.1). Verificar se existem outras discrepâncias com `git ls-files`.
 
-### 2.3 — wiki/diario/.gitkeep e wiki/raw/.gitkeep desnecessários
+### 2.3 — wiki/diary/.gitkeep e wiki/raw/.gitkeep desnecessários
 
-**Arquivos:** `wiki/diario/.gitkeep`, `wiki/raw/.gitkeep`  
-**Problema:** Os `.gitkeep` existem para rastrear pastas vazias. `wiki/diario/` já tem 10 arquivos. `wiki/raw/` tem `.gitkeep` dentro da pasta, mas a pasta `raw/` em si tem conteúdo. São arquivos mortos.  
+**Arquivos:** `wiki/diary/.gitkeep`, `wiki/raw/.gitkeep`  
+**Problema:** Os `.gitkeep` existem para rastrear pastas vazias. `wiki/diary/` já tem 10 arquivos. `wiki/raw/` tem `.gitkeep` dentro da pasta, mas a pasta `raw/` em si tem conteúdo. São arquivos mortos.  
 **Ação:** Deletar ambos. Não aparecem em `git ls-files` como arquivos relevantes, mas poluem `git status`.
 
 ### 2.4 — Página de perfil do usuário prometida mas não criada
@@ -131,9 +131,9 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 **Problema secundário:** O `/root/hermes-user.backup.md` contém dados inventados ("engenheiro civil") — confirmado no diário como incorreto.  
 **Ação dupla:** (1) Criar `wiki/perfil/giovani.md` como fonte da verdade do perfil do usuário. (2) Deletar `/root/hermes-user.backup.md` após aprovação.
 
-### 2.5 — Pasta `wiki/pendencias/` tem apenas um arquivo
+### 2.5 — Pasta `wiki/todo/` tem apenas um arquivo
 
-**Arquivo:** `wiki/pendencias/proximos-passos.md`  
+**Arquivo:** `wiki/todo/proximos-passos.md`  
 **Problema:** Estrutura de pasta para arquivo único é ruído. À medida que a wiki crescer, faz sentido — mas agora é overhead.  
 **Opção:** Não é urgente. Mas se a pasta nunca ganhar mais arquivos, cogitar mover `proximos-passos.md` para a raiz de `wiki/` e remover a pasta. Registrar como decisão diferida.
 
@@ -161,28 +161,28 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 3.3 — Timestamps inconsistentes com o arquivo
 
-**Arquivo:** `historico/crise-update.md`  
+**Arquivo:** `history/crise-update.md`  
 **Problema:** `timestamp: 2026-06-17T21:00:00-03:00` mas o título é "Sessão: 2026-06-18". A sessão aconteceu em 18/06, o timestamp diz 17/06.  
 **Ação:** Corrigir `timestamp` para `2026-06-18T00:00:00-03:00`.
 
-**Arquivo:** `wiki/diario/2026-06-20.md`  
+**Arquivo:** `wiki/diary/2026-06-20.md`  
 **Problema:** `timestamp: 2026-06-19T21:00:00-03:00` para uma daily note de 2026-06-20. O timestamp em BRT reflete a meia-noite (20/06 às 00:00 BRT = 19/06 às 21:00 UTC) — tecnicamente correto mas confuso. Considerar usar início do dia BRT (`2026-06-20T00:00:00-03:00`).
 
 ### 3.4 — Status `draft` em páginas que deveriam ser `stable`
 
 **Arquivos com `status: draft` que são estáveis:**
   - `wiki/conhecimento/agent-loop-architectures.md` — conteúdo completo e revisado, pesquisa profunda realizada, comparativo com código-fonte real. Pode mudar para `stable`.
-  - `wiki/diario/2026-06-24-20260624.md` — diários ficam em `draft` por convenção (inbox), mas o conteúdo está finalizado há dias. Considerar `stable` para diários com mais de 24h sem alterações.
+  - `wiki/diary/2026-06-24-20260624.md` — diários ficam em `draft` por convenção (inbox), mas o conteúdo está finalizado há dias. Considerar `stable` para diários com mais de 24h sem alterações.
 
 ### 3.5 — Datas hardcoded no corpo das páginas
 
-**Arquivo:** `wiki/conhecimento/wiki.md` (linhas 11-12)  
+**Arquivo:** `wiki/concepts/wiki.md` (linhas 11-12)  
 **Problema:** "Criado: 2026-06-17 / Última atualização: 2026-06-19" como texto plano no corpo. O `timestamp` no frontmatter já serve para isso — duplicação que vai ficar desatualizada.  
 **Ação:** Remover as linhas de data do corpo. O frontmatter é a fonte de verdade de timestamps.
 
 ### 3.6 — Diário 2026-06-23 com tags mínimas
 
-**Arquivo:** `wiki/diario/2026-06-23-20260623.md`  
+**Arquivo:** `wiki/diary/2026-06-23-20260623.md`  
 **Problema:** `tags: [sessao]` — singular em vez do padrão plural (`sessoes`). Além disso, tags muito genéricas para uma entrada que tem conteúdo técnico específico (dashboard, basic-auth, hermes).  
 **Ação:** Corrigir para `tags: [sessoes, hermes, dashboard, basic-auth]`.
 
@@ -192,7 +192,7 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 4.1 — Nomenclatura inconsistente dos arquivos de diário
 
-**Problema:** Três padrões de nome coexistem na pasta `wiki/diario/`:
+**Problema:** Três padrões de nome coexistem na pasta `wiki/diary/`:
   - `YYYY-MM-DD.md` → `2026-06-19.md`, `2026-06-20.md` (padrão antigo)
   - `YYYY-MM-DD-HHMM.md` → `2026-06-24-1710.md` (wiki_review v5/v6)
   - `YYYY-MM-DD-YYYYMMDD.md` → `2026-06-22-20260621.md`, `2026-06-22-20260622.md` (artefato de migração)
@@ -203,8 +203,8 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 4.2 — Entradas temáticas que não são daily notes
 
-**Arquivos:** `wiki/diario/2026-06-22-reacoes-telegram.md`, `wiki/diario/2026-06-22-descoberta-id-mensagem.md`  
-**Problema:** Estes arquivos são descobertas técnicas específicas (teste de reações no Telegram, técnica de descoberta sequencial de message-id), não daily notes episódicas. Estão no `diario/` mas deveriam ser páginas permanentes.  
+**Arquivos:** `wiki/diary/2026-06-22-reacoes-telegram.md`, `wiki/diary/2026-06-22-descoberta-id-mensagem.md`  
+**Problema:** Estes arquivos são descobertas técnicas específicas (teste de reações no Telegram, técnica de descoberta sequencial de message-id), não daily notes episódicas. Estão no `diary/` mas deveriam ser páginas permanentes.  
 **Ação:** Mover para `wiki/conhecimento/` ou `wiki/infraestrutura/` com frontmatter adequado. O índice deve ser atualizado. Se o conteúdo já está coberto em `telegram-topicos.md`, verificar redundância antes de mover.
 
 ### 4.3 — Sem processo de promoção diário → página permanente
@@ -216,13 +216,13 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
   - Perfil técnico do Giovani (método socrático, barreira de competência, autonomia sobre fontes) → `wiki/perfil/giovani.md`
   - Arquitetura de loop do OpenClaw (já promovida para `agent-loop-architectures.md` ✅)
   - Peter Steinberger (@steipete) e o tweet "design loops, not prompts" → merece menção em `agent-loop-architectures.md`
-  - Problema de escrita concorrente entre instâncias → issue de arquitetura, pode ir em `wiki/automacao/wiki-review.md`
+  - Problema de escrita concorrente entre instâncias → issue de arquitetura, pode ir em `wiki/procedures/wiki-review.md`
 
 **Ação:** Criar operação "Promote" no AGENTS.md (ao lado de Ingest, Query, Lint): varrer o diário a cada X dias, extrair insights estáveis, criar ou enriquecer páginas permanentes, e marcar a entrada do diário como promovida com `<!-- promoted: 2026-06-XX -->`.
 
 ### 4.4 — Diário com pendências resolvidas não marcadas
 
-**Arquivo:** `wiki/diario/2026-06-24-20260624.md`  
+**Arquivo:** `wiki/diary/2026-06-24-20260624.md`  
 **Problema:** O arquivo tem dezenas de seções "## Pendência: X" onde X foi resolvido na mesma sessão (ou sessões seguintes). Por exemplo: "Pendência: tweet do Peter Steinberger visto e discutido — 11:20" aparece como resolução, mas ainda há 5+ seções de pendência sobre o mesmo tema. O arquivo acumulou um histórico de pensamento, não uma lista limpa de abertos.  
 **Ação:** Não é necessário limpar retroativamente (seria perda de contexto histórico). Mas o processo de promoção (4.3) deve **não promover** pendências já resolvidas — só insights estáveis.
 
@@ -239,25 +239,25 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 5.1 — Documentação em v5 mas implementação em v6
 
-**Arquivo:** `wiki/automacao/wiki-review.md`  
+**Arquivo:** `wiki/procedures/wiki-review.md`  
 **Problema:** O header diz "Implementação atual (v6 — sessão por session_id, contador por sessão)" mas a seção de fluxo logo abaixo descreve v4/v5 ("Nome do arquivo: `YYYY-MM-DD-HHMM.md`", "estado em `wiki_review_session.json`"). A seção de "implementação anterior (v4/v5)" tem mais conteúdo técnico que a v6.  
 **Ação:** Atualizar a seção principal para descrever v6 corretamente. O que mudou em v6: dicionário `{session_id: {diary_path, last_activity, counter}}` vs o JSON plano da v5. Verificar `/root/.hermes/plugins/wiki-review/__init__.py` para confirmar o estado atual e documentar fielmente.
 
 ### 5.2 — Tabela de parâmetros com valor desatualizado
 
-**Arquivo:** `wiki/automacao/wiki-review.md`, linha 97 (tabela de Parâmetros)  
+**Arquivo:** `wiki/procedures/wiki-review.md`, linha 97 (tabela de Parâmetros)  
 **Problema:** A tabela mostra `memory.nudge_interval` com "Padrão: 10". O valor real no config.yaml é `2`. O diário de 24/06 (10:47) documenta exatamente esse erro: "documentação estava desatualizada mostrando '10' como valor real".  
 **Ação:** Corrigir a tabela para mostrar o valor configurado (`2`) e distinguir entre valor padrão do código (`10`) e valor configurado no `config.yaml` (`2`). Adicionar nota: "verificar sempre o config.yaml em runtime — o padrão do código difere do valor configurado".
 
 ### 5.3 — Sem workflow de promoção de diário no plugin
 
-**Arquivo:** `wiki/automacao/wiki-review.md`  
+**Arquivo:** `wiki/procedures/wiki-review.md`  
 **Problema:** O plugin captura insights mas não tem mecanismo de promoção para páginas permanentes. O gap entre "capturar no diário" e "integrar na wiki" é manual e não documentado.  
 **Ação:** Criar seção "Limitações conhecidas / Roadmap" na página do wiki-review documentando: (1) escrita concorrente, (2) ausência de promoção automática, (3) prompt só captura, não sintetiza entre sessões.
 
 ### 5.4 — wiki-review-vs-background-review.md com itens ❌ pendentes sem followup
 
-**Arquivo:** `wiki/automacao/wiki-review-vs-background-review.md`  
+**Arquivo:** `wiki/procedures/wiki-review-vs-background-review.md`  
 **Problema:** A tabela tem 4 itens `❌ pendentes` de alta prioridade (itens #15+16 cache parity, #22 digest logic, #3+26+32 cleanup defensivo). Foram identificados em 2026-06-24 e ainda não resolvidos. A comparação é rigorosa mas a resolução não foi acompanhada.  
 **Ação:** Adicionar um campo `last_reviewed:` no frontmatter e uma seção de status de cada pendência. Ou mover os ❌ para `proximos-passos.md` com data e contexto.
 
@@ -278,7 +278,7 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 ### 6.2 — AGENTS.md proíbe modificação mas Claude Code ignora Hermes e vice-versa
 
 **Arquivo:** `AGENTS.md`, seção "Como os agentes usam este repositório"  
-**Problema:** A tabela lista Hermes com acesso via `memory_query/memory_read_page/memory_write` (MCP tools). Mas o `ai-memory` MCP está **desabilitado** (`wiki/infraestrutura/hermes.md`: "ai-memory — disabled — não usar"). Hermes lê a wiki via `read_file / search_files`, não via MCP.  
+**Problema:** A tabela lista Hermes com acesso via `memory_query/memory_read_page/memory_write` (MCP tools). Mas o `ai-memory` MCP está **desabilitado** (`wiki/systems/hermes.md`: "ai-memory — disabled — não usar"). Hermes lê a wiki via `read_file / search_files`, não via MCP.  
 **Ação:** Atualizar a tabela de agentes no AGENTS.md para refletir o método real de acesso do Hermes.
 
 ### 6.3 — Sem protocolo de handoff entre sessões de Claude Code
@@ -302,16 +302,16 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 7.2 — Descobertas de ElevenLabs SFX sem página permanente ✅
 
-**Resolvido em 2026-06-27:** criada `wiki/infraestrutura/elevenlabs-mcp.md` com capabilities, limites do free tier, comportamento de `duration_seconds`, `loop=true`, créditos e prompt language. Linkada de `hermes.md` (MCP Servers) e `hermes-api.md`.
+**Resolvido em 2026-06-27:** criada `wiki/tools/elevenlabs-mcp.md` com capabilities, limites do free tier, comportamento de `duration_seconds`, `loop=true`, créditos e prompt language. Linkada de `hermes.md` (MCP Servers) e `hermes-api.md`.
 
 ### 7.3 — Técnica de message-id do Telegram sem página consolidada
 
-**Gap:** `wiki/diario/2026-06-22-descoberta-id-mensagem.md` existe mas está no diário, não no conhecimento. `telegram-topicos.md` tem IDs mas não tem a técnica de descoberta sequencial.  
+**Gap:** `wiki/diary/2026-06-22-descoberta-id-mensagem.md` existe mas está no diário, não no conhecimento. `telegram-topicos.md` tem IDs mas não tem a técnica de descoberta sequencial.  
 **Ação:** Integrar a técnica em `telegram-topicos.md` numa nova seção "Técnicas de descoberta de IDs".
 
 ### 7.4 — Sem documentação de configuração do Firecrawl no Hermes
 
-**Gap:** `wiki/automacao/firecrawl.md` descreve uso do Firecrawl (sintaxe site:, quando usar). Mas o diário de 24/06 documenta um gotcha crítico: `web.search_backend` e `web.extract_backend` estavam vazios no config.yaml mesmo com a API key presente — ferramenta não funcionava.  
+**Gap:** `wiki/tools/firecrawl.md` descreve uso do Firecrawl (sintaxe site:, quando usar). Mas o diário de 24/06 documenta um gotcha crítico: `web.search_backend` e `web.extract_backend` estavam vazios no config.yaml mesmo com a API key presente — ferramenta não funcionava.  
 **Ação:** Adicionar seção "Configuração no Hermes" em `firecrawl.md` com: variáveis do .env, campos do config.yaml que precisam ser setados, e o pitfall "key no .env não é suficiente — setar o backend também".
 
 ### 7.5 — Tweet "design loops, not prompts" sem registro permanente
@@ -334,28 +334,28 @@ Auditoria de quem linka para quem:
 
 | Página | Recebe links de |
 |---|---|
-| `automacao/wiki-review-vs-background-review.md` | Apenas de `wiki-review.md` |
-| `historico/2026-06-22-modelos-nim-elevenlabs.md` | Apenas do `index.md` |
-| `infraestrutura/telegram-topicos.md` | Apenas do `index.md` |
-| `infraestrutura/hermes-api.md` | Apenas do `index.md` |
-| `infraestrutura/termux-ssh-claude.md` | `index.md` (com link errado), `pendencias/proximos-passos.md` |
+| `procedures/wiki-review-vs-background-review.md` | Apenas de `wiki-review.md` |
+| `history/2026-06-22-modelos-nim-elevenlabs.md` | Apenas do `index.md` |
+| `tools/telegram-topicos.md` | Apenas do `index.md` |
+| `systems/hermes-api.md` | Apenas do `index.md` |
+| `systems/termux-ssh-claude.md` | `index.md` (com link errado), `todo/proximos-passos.md` |
 
 **Páginas de diário:** Nenhuma das daily notes recebe links de páginas permanentes (apenas do index.md). Isso é esperado — diários são inbox.  
-**Ação:** `historico/2026-06-22-modelos-nim-elevenlabs.md` e `infraestrutura/telegram-topicos.md` e `hermes-api.md` merecem ser linkados de `infraestrutura/hermes.md` nas seções relevantes (modelos, telegram, API).
+**Ação:** `history/2026-06-22-modelos-nim-elevenlabs.md` e `tools/telegram-topicos.md` e `hermes-api.md` merecem ser linkados de `systems/hermes.md` nas seções relevantes (modelos, telegram, API).
 
 ### 8.2 — Wikilinks com prefixo relativo inconsistente
 
 **Problema:** Alguns links usam o prefixo completo `wiki/pasta/arquivo.md`, outros usam apenas `pasta/arquivo.md` (relativo à pasta `wiki/`). Exemplos:
-  - `wiki/conhecimento/wiki.md` usa `[[wiki/infraestrutura/vps.md|vps]]`
-  - `wiki/automacao/wiki-review.md` usa `[[infraestrutura/hermes.md|Hermes Config]]` (sem `wiki/`)
-  - `wiki/diario/2026-06-24-20260624.md` usa `[[pendencias/proximos-passos.md]]` (sem `wiki/`)
+  - `wiki/concepts/wiki.md` usa `[[wiki/systems/vps.md|vps]]`
+  - `wiki/procedures/wiki-review.md` usa `[[systems/hermes.md|Hermes Config]]` (sem `wiki/`)
+  - `wiki/diary/2026-06-24-20260624.md` usa `[[todo/proximos-passos.md]]` (sem `wiki/`)
 
 O Obsidian resolve os dois, mas consumidores OKF ou buscas por path absoluto falhariam no segundo caso.  
 **Ação:** Padronizar todos os wikilinks internos com o prefixo `wiki/` explícito, ou todos sem. Recomendação: **sem prefixo** (caminho relativo à pasta `wiki/`) é mais limpo e ainda funciona no Obsidian, mas tornar isso uma regra explícita no AGENTS.md.
 
 ### 8.3 — `proximos-passos.md` numerado fora de ordem
 
-**Arquivo:** `wiki/pendencias/proximos-passos.md`  
+**Arquivo:** `wiki/todo/proximos-passos.md`  
 **Problema:** Os itens estão numerados: 1, 2, 3, 6, 5, 4, 8, 9, 10. Os números foram atribuídos ad hoc conforme os itens foram adicionados em sessões diferentes, nunca renumerados.  
 **Impacto:** Agentes que se referem a "item 4" podem estar falando de coisas diferentes. O diário usa "item #6", o `termux-ssh-claude.md` usa "item 8".  
 **Ação:** Renumerar sequencialmente. Atualizar referências nos diários e em `termux-ssh-claude.md`.
@@ -414,7 +414,7 @@ Prioridades organizadas por impacto e custo de execução.
 | M3 | Criar seção "Promote" no AGENTS.md | `AGENTS.md` | Médio |
 | M4 | Adicionar tweet "design loops" em agent-loop-architectures.md | `agent-loop-architectures.md` | Baixo |
 | M5 | Criar seção "Configuração Hermes" em firecrawl.md | `firecrawl.md` | Baixo |
-| M6 | Linkar historico/ e infraestrutura/ de hermes.md | `hermes.md` | Baixo |
+| M6 | Linkar history/ e infraestrutura/ de hermes.md | `hermes.md` | Baixo |
 | M7 | Documentar escrita concorrente como issue em wiki-review.md | `wiki-review.md` | Baixo |
 
 ### Baixa prioridade (refinamento e futuro)
@@ -423,9 +423,9 @@ Prioridades organizadas por impacto e custo de execução.
 |---|---|---|---|
 | B1 | Definir idioma de wikilinks (com/sem prefixo `wiki/`) e documentar no AGENTS.md | AGENTS.md | Baixo |
 | B2 | Decidir formato padrão de diário e renomear arquivos legacy | diário/ | Médio |
-| B3 | ~~Criar `wiki/conhecimento/elevenlabs-sfx.md`~~ ✅ criada como `infraestrutura/elevenlabs-mcp.md` | novo arquivo | Médio |
+| B3 | ~~Criar `wiki/conhecimento/elevenlabs-sfx.md`~~ ✅ criada como `tools/elevenlabs-mcp.md` | novo arquivo | Médio |
 | B4 | Adicionar seção "Tipos de busca" (factual vs temática) em firecrawl.md | `firecrawl.md` | Baixo |
-| B5 | Avaliar se `wiki/pendencias/` vale como pasta (só 1 arquivo) | estrutura | Baixo |
+| B5 | Avaliar se `wiki/todo/` vale como pasta (só 1 arquivo) | estrutura | Baixo |
 | B6 | Atualizar `user_profile.md` do Claude Code | memória externa | Baixo |
 
 ---
@@ -443,7 +443,7 @@ Prioridades organizadas por impacto e custo de execução.
 
 - [[AGENTS.md]] — schema da wiki, regras de escrita e operações
 - [[index.md]] — catálogo completo
-- [[conhecimento/wiki.md]] — fundação e princípios
-- [[conhecimento/okf.md]] — especificação OKF e conformidade
-- [[automacao/wiki-review.md]] — plugin de captura automática
-- [[pendencias/proximos-passos.md]] — to-do list ativa
+- [[concepts/wiki.md]] — fundação e princípios
+- [[concepts/okf.md]] — especificação OKF e conformidade
+- [[procedures/wiki-review.md]] — plugin de captura automática
+- [[todo/proximos-passos.md]] — to-do list ativa

@@ -112,6 +112,6 @@ Arquivos em `raw/google-okf/` (fontes imutáveis):
 
 ## Navegação
 
-- [[wiki/conhecimento/wiki.md|Wiki como Fonte da Verdade]] — como nossa wiki funciona
+- [[wiki/concepts/wiki.md|Wiki como Fonte da Verdade]] — como nossa wiki funciona
 - [[raw/google-okf/SPEC.md|SPEC.md oficial]]
 - [[index.md|🏠 Index]]

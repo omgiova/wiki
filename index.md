@@ -29,31 +29,32 @@ log.md
 │   │   └── SPEC.md
 │   └── karpathy-llm-wiki-pattern.md
 └── wiki/
-    ├── automacao/
-    │   ├── curador-wiki.md
-    │   ├── curador-wiki-historico.md
-    │   ├── firecrawl.md
-    │   └── wiki-review.md
-    ├── conhecimento/
-    │   ├── plano-implementacao-loop.md
+    ├── concepts/
     │   ├── okf.md
     │   ├── orquestrador.md
+    │   ├── plano-implementacao-loop.md
     │   └── wiki.md
-    ├── diario/
-    ├── historico/
+    ├── diary/
+    ├── history/
     │   ├── 2026-06-22-modelos-nim-elevenlabs.md
     │   ├── 2026-06-24-20260624.md
     │   └── crise-update.md
-    ├── infraestrutura/
+    ├── procedures/
+    │   ├── curador-wiki-historico.md
+    │   ├── curador-wiki.md
+    │   └── wiki-review.md
+    ├── systems/
     │   ├── hermes-api.md
     │   ├── hermes.md
-    │   ├── obsidian-git.md
-    │   ├── elevenlabs-mcp.md
-    │   ├── telegram.md
     │   ├── termux-ssh-claude.md
     │   └── vps.md
-    └── pendencias/
-        └── proximos-passos.md
+    ├── todo/
+    │   └── proximos-passos.md
+    └── tools/
+        ├── elevenlabs-mcp.md
+        ├── firecrawl.md
+        ├── obsidian-git.md
+        └── telegram.md
 ```
 
 ## raiz/
@@ -64,45 +65,48 @@ log.md
 
 ## wiki/
 
-### infraestrutura/
+### systems/
 
-- [[wiki/infraestrutura/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
-- [[wiki/infraestrutura/hermes.md|Hermes]] — identidade, regras, stack, modelos ativos e preferências do Hermes Agent
-- [[wiki/infraestrutura/telegram.md|Telegram]] — referência completa: IDs, tópicos, HERMES_SESSION_MESSAGE_ID, sendMessage, sendRichMessage, reações e integrações com o Hermes
-- [[wiki/infraestrutura/hermes-api.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
-- [[wiki/infraestrutura/termux-ssh-claude.md|Problema SSH/Claude]] — diagnóstico dos 3 problemas que travam sessões Claude via Remote Control (curl sem timeout, processo zumbi, prompt invisível)
-- [[wiki/infraestrutura/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
-- [[wiki/infraestrutura/elevenlabs-mcp.md|ElevenLabs MCP]] — capabilities e limites do free tier: text_to_sound_effects, compose_music (pago), limitação de duração, créditos
+- [[wiki/systems/hermes.md|Hermes]] — identidade, regras, stack, modelos ativos e preferências do Hermes Agent
+- [[wiki/systems/hermes-api.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
+- [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
+- [[wiki/systems/termux-ssh-claude.md|Termux + SSH + Claude]] — setup completo de acesso remoto: configuração, erros conhecidos e troubleshooting
 
-### conhecimento/
+### tools/
 
-- [[wiki/conhecimento/wiki.md|Wiki]] — o que é esta wiki, como funciona, regras de escrita e histórico de fundação
-- [[wiki/conhecimento/okf.md|Open Knowledge Format (OKF)]] — padrão open source do Google Cloud para wikis de agentes; nossa wiki já é conformante; repo oficial para consulta futura
-- [[wiki/conhecimento/plano-implementacao-loop.md|Plano de Implementação — Loops Agênticos]] — base de conhecimento e planejamento para construção de sistema de loop autônomo; fundamentado em fontes primárias (Steinberger, Boris Cherny, Addy Osmani, OpenClaw)
-- [[wiki/conhecimento/orquestrador.md|Orquestrador da Memória]] — auditoria completa da wiki: OKF, estrutura, diário, automação, coordenação de agentes e roadmap de melhorias
+- [[wiki/tools/telegram.md|Telegram]] — referência completa: IDs, tópicos, HERMES_SESSION_MESSAGE_ID, sendMessage, sendRichMessage, reações e integrações com o Hermes
+- [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — capabilities e limites do free tier: text_to_sound_effects, compose_music (pago), limitação de duração, créditos
+- [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
+- [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
 
-### automacao/
+### procedures/
 
-- [[wiki/automacao/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
-- [[wiki/automacao/wiki-review.md|Wiki Review]] — agente background que roda a cada 10 turnos e salva insights no diario/
-- [[wiki/automacao/curador-wiki.md|Curador da Wiki]] — papel, comportamento, arquitetura atual (v6/v5), formato de output e como executar
-- [[wiki/automacao/curador-wiki-historico.md|Curador da Wiki — Histórico]] — registro completo de todas as tentativas, scripts e decisões de design desde a v1
+- [[wiki/procedures/curador-wiki.md|Curador da Wiki]] — papel, comportamento, arquitetura atual (v6/v5), formato de output e como executar
+- [[wiki/procedures/curador-wiki-historico.md|Curador da Wiki — Histórico]] — registro completo de todas as tentativas, scripts e decisões de design desde a v1
+- [[wiki/procedures/wiki-review.md|Wiki Review]] — agente background que roda a cada 10 turnos e salva insights no diary/
 
-### historico/
+### concepts/
 
-- [[wiki/historico/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
-- [[wiki/historico/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
-- [[wiki/historico/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq
+- [[wiki/concepts/wiki.md|Wiki]] — o que é esta wiki, como funciona, regras de escrita e histórico de fundação
+- [[wiki/concepts/okf.md|Open Knowledge Format (OKF)]] — padrão open source do Google Cloud para wikis de agentes; nossa wiki já é conformante; repo oficial para consulta futura
+- [[wiki/concepts/plano-implementacao-loop.md|Plano de Implementação — Loops Agênticos]] — base de conhecimento e planejamento para construção de sistema de loop autônomo; fundamentado em fontes primárias (Steinberger, Boris Cherny, Addy Osmani, OpenClaw)
+- [[wiki/concepts/orquestrador.md|Orquestrador da Memória]] — auditoria completa da wiki: OKF, estrutura, diário, automação, coordenação de agentes e roadmap de melhorias
 
-### pendencias/
+### history/
 
-- [[wiki/pendencias/proximos-passos.md|Próximos passos]] — to-do list ativa da wiki
+- [[wiki/history/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
+- [[wiki/history/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
+- [[wiki/history/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq
 
-### diario/
+### todo/
+
+- [[wiki/todo/proximos-passos.md|Próximos passos]] — to-do list ativa da wiki
+
+### diary/
 
 Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém preferências reveladas, correções de comportamento, técnicas descobertas e pendências abertas. Não é destino final — insights estáveis devem ser extraídos e integrados em páginas permanentes.
 
-*(sem entradas — diários anteriores a 2026-06-24 foram arquivados em `wiki/historico/`)*
+*(sem entradas — diários anteriores a 2026-06-24 foram arquivados em `wiki/history/`)*
 
 ## raw/
 

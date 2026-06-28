@@ -43,7 +43,7 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 - **Mídia:** React + Remotion
 - **Gateway:** Telegram (celular)
 
-Detalhes de infra no [[wiki/infraestrutura/vps.md|vps]].
+Detalhes de infra no [[wiki/systems/vps.md|vps]].
 
 ## Componentes do Sistema
 
@@ -81,7 +81,7 @@ plugins:
 3. **`hermes-dashboard.service` não pode ser reiniciado de dentro do gateway** — erro "cannot restart or stop the gateway from inside the gateway process"; reinício deve ser feito via SSH direto no VPS: `systemctl restart hermes-dashboard.service`
 4. **`hermes config set` corrompe arrays** — serializa como string YAML com escapes (`"[\\n  spotify\\n  dashboard_auth/basic\\n]"`); sempre corrigir manualmente via Python para formato YAML válido após usar `hermes config set` em campos de array
 
-Ver [[wiki/infraestrutura/vps.md]] para porta 9119 e acesso SSH ao VPS.
+Ver [[wiki/systems/vps.md]] para porta 9119 e acesso SSH ao VPS.
 
 ## Skills — Bundled vs User
 
@@ -122,13 +122,13 @@ NIM free tier funciona bem em slots auxiliares (1 chamada por ativação), mas n
 ## MCP Servers
 
 - **n8n** — `/root/.hermes/mcp-installs/n8n/` (enabled)
-- **ElevenLabs** — `uvx elevenlabs-mcp` (enabled) — ver [[infraestrutura/elevenlabs-mcp.md]]
+- **ElevenLabs** — `uvx elevenlabs-mcp` (enabled) — ver [[tools/elevenlabs-mcp.md]]
 - **ai-memory** — `http://127.0.0.1:49374/mcp` (disabled — não usar)
 
 ## Conexões
 
-- [[wiki/infraestrutura/vps.md|vps]] — hardware e serviços da stack
-- [[wiki/conhecimento/wiki.md|wiki]] — base de conhecimento
-- [[wiki/automacao/firecrawl.md|Firecrawl]] — busca multi-plataforma
-- [[wiki/historico/crise-update.md|Crise update]] — recuperação de sessões
-- [[wiki/pendencias/proximos-passos.md|Próximos passos]]
+- [[wiki/systems/vps.md|vps]] — hardware e serviços da stack
+- [[wiki/concepts/wiki.md|wiki]] — base de conhecimento
+- [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
+- [[wiki/history/crise-update.md|Crise update]] — recuperação de sessões
+- [[wiki/todo/proximos-passos.md|Próximos passos]]

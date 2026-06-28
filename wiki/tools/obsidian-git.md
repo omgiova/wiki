@@ -325,19 +325,19 @@ Nas configurações do gráfico (ícone de engrenagem na visualização em gráf
 
 **Fix opção 2 — corrigir os links nas notas (definitivo):**
 Identificar e remover/atualizar os wikilinks quebrados nas notas afetadas. No repo atual, as notas com links para arquivos deletados são:
-- `wiki/automacao/curador-wiki-historico.md`
-- `wiki/historico/2026-06-22-modelos-nim-elevenlabs.md`
-- `wiki/historico/crise-update.md`
-- `wiki/historico/2026-06-24-20260624.md`
-- `wiki/infraestrutura/telegram-reacoes.md`
-- `wiki/infraestrutura/vps.md`
-- `wiki/conhecimento/wiki.md`
-- `wiki/conhecimento/orquestrador.md`
+- `wiki/procedures/curador-wiki-historico.md`
+- `wiki/history/2026-06-22-modelos-nim-elevenlabs.md`
+- `wiki/history/crise-update.md`
+- `wiki/history/2026-06-24-20260624.md`
+- `wiki/tools/telegram-reacoes.md`
+- `wiki/systems/vps.md`
+- `wiki/concepts/wiki.md`
+- `wiki/concepts/orquestrador.md`
 - `index.md`
 
 ---
 
 ## Conexões
 
-- [[wiki/infraestrutura/vps.md]] — caminho do vault no Android
-- [[wiki/infraestrutura/termux-ssh-claude.md]] — arquivo renomeado de pendencia-problema-ssh-claude.md
+- [[wiki/systems/vps.md]] — caminho do vault no Android
+- [[wiki/systems/termux-ssh-claude.md]] — arquivo renomeado de pendencia-problema-ssh-claude.md
