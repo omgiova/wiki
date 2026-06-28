@@ -135,3 +135,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | procedures/auditor-wiki — corrigir numeração de fases (0→1-based) e sugestões de nomes de prompt
 - Fases renumeradas: 0–5 → 1–6 no script e na documentação
 - auditor-wiki.md atualizado para refletir nova numeração
+
+## [2026-06-28] chore | auditor-wiki — renomear prompts para padrão prompt-awv1-<papel>
+- auditor-wiki-agent-prompt-v1.md → prompt-awv1-pasta.md
+- auditor-wiki-coord-prompt-v1.md → prompt-awv1-coordenador.md
+- auditor-wiki-corrector-prompt-v1.md → prompt-awv1-corretor.md
+- auditor-wiki-overlap-prompt-v1.md → prompt-awv1-overlap.md
+- auditor-wiki-links-prompt-v1.md → prompt-awv1-links.md
+- auditor-wiki-v1.sh e auditor-wiki.md atualizados com novos caminhos

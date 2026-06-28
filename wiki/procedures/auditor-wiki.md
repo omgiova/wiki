@@ -53,11 +53,11 @@ Log de execução: `/var/log/auditor-wiki.log`
 | Arquivo | Papel |
 |---|---|
 | `/root/auditor-wiki-v1.sh` | Script principal |
-| `/root/auditor-wiki-agent-prompt-v1.md` | System prompt dos agentes de pasta |
-| `/root/auditor-wiki-coord-prompt-v1.md` | System prompt do coordenador |
-| `/root/auditor-wiki-corrector-prompt-v1.md` | System prompt do agente corretor |
-| `/root/auditor-wiki-overlap-prompt-v1.md` | System prompt do agente de sobreposição |
-| `/root/auditor-wiki-links-prompt-v1.md` | System prompt do agente de links |
+| `/root/prompt-awv1-pasta.md` | System prompt dos agentes de pasta |
+| `/root/prompt-awv1-coordenador.md` | System prompt do coordenador |
+| `/root/prompt-awv1-corretor.md` | System prompt do agente corretor |
+| `/root/prompt-awv1-overlap.md` | System prompt do agente de sobreposição |
+| `/root/prompt-awv1-links.md` | System prompt do agente de links |
 
 ## Escopo dos agentes de pasta
 
