@@ -310,6 +310,30 @@ git -C ~/storage/shared/ai-memory-wiki clean -fd -e '.obsidian'
 8. Afirmou que existe "Sync Method: Reset" no plugin — **não existe**. Lista completa de comandos confirmada em 2026-06-28 via screenshot do Android (ver seção acima). Não há nenhum equivalente a `git clean` na interface do plugin
 9. Tentou instalar hook em `storage/shared/.git/hooks/` no Android — filesystem FAT não suporta bit de execução, `chmod +x` não funciona lá. Solução: `core.hooksPath` apontando para `~/git-hooks/` (armazenamento interno do Termux, ext4)
 10. Deu comando de sintaxe bash (`<< 'EOF'`) para usuário rodar no PowerShell do Windows — sintaxe incompatível. PowerShell usa `@"..."@ | Set-Content`
+11. Descartou teoria do usuário de que "páginas linkando arquivos deletados" causavam os fantasmas — a teoria estava **correta** para o gráfico. O filesystem estava limpo, mas wikilinks quebrados em notas existentes aparecem como nós fantasma na visualização em gráfico do Obsidian. São problemas diferentes: fantasmas no filesystem vs. fantasmas no gráfico por links quebrados
+
+---
+
+## Nós fantasma no gráfico (wikilinks quebrados)
+
+**Sintoma:** visualização em gráfico mostra nós para arquivos que não existem mais (`viz.html`, `2026-06-19`, etc.). O filesystem está limpo.
+
+**Causa:** notas existentes contêm wikilinks `[[arquivo-deletado]]`. O Obsidian renderiza esses links como nós no gráfico mesmo sem o arquivo existir.
+
+**Fix opção 1 — ocultar no gráfico (rápido, não corrige os links):**
+Nas configurações do gráfico (ícone de engrenagem na visualização em gráfico), ativar filtro para mostrar apenas arquivos existentes / desativar "Unresolved links".
+
+**Fix opção 2 — corrigir os links nas notas (definitivo):**
+Identificar e remover/atualizar os wikilinks quebrados nas notas afetadas. No repo atual, as notas com links para arquivos deletados são:
+- `wiki/automacao/curador-wiki-historico.md`
+- `wiki/historico/2026-06-22-modelos-nim-elevenlabs.md`
+- `wiki/historico/crise-update.md`
+- `wiki/historico/2026-06-24-20260624.md`
+- `wiki/infraestrutura/telegram-reacoes.md`
+- `wiki/infraestrutura/vps.md`
+- `wiki/conhecimento/wiki.md`
+- `wiki/conhecimento/orquestrador.md`
+- `index.md`
 
 ---
 

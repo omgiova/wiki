@@ -11,6 +11,12 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada instrução de leitura completa antes de qualquer ação
 - Incorporado log.md como etapa obrigatória dentro da seção Git e commits
 
+## [2026-06-28] edit | obsidian-git — nós fantasma no gráfico por wikilinks quebrados
+- Documentado: gráfico mostra nós fantasma por wikilinks quebrados, não por arquivos no filesystem
+- Erro histórico #11: teoria do usuário sobre links quebrados era correta — foi descartada errado
+- Lista de notas com wikilinks quebrados identificada (9 arquivos)
+- Duas opções de fix documentadas: ocultar no gráfico ou corrigir os links
+
 ## [2026-06-28] edit | obsidian-git — limitações git clean no Android e checklist de limpeza
 - Documentado: git clean -fd não remove diretórios não rastreados de forma confiável no FAT (Android)
 - Adicionado checklist completo de limpeza manual para Android
