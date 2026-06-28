@@ -4,7 +4,7 @@
 
 ---
 
-## Git e commits
+## Após qualquer operação
 
 > ⚠️ **OBRIGATÓRIO:** após criar, editar, renomear, mover ou excluir **qualquer** arquivo:
 >
