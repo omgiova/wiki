@@ -101,6 +101,7 @@ log.md
 - [[wiki/concepts/okf.md|Open Knowledge Format (OKF)]] — padrão open source do Google Cloud para wikis de agentes; nossa wiki já é conformante; repo oficial para consulta futura
 - [[wiki/concepts/plano-implementacao-loop.md|Plano de Implementação — Loops Agênticos]] — base de conhecimento e planejamento para construção de sistema de loop autônomo; fundamentado em fontes primárias (Steinberger, Boris Cherny, Addy Osmani, OpenClaw)
 - [[wiki/concepts/orquestrador.md|Orquestrador da Memória]] — auditoria completa da wiki: OKF, estrutura, diário, automação, coordenação de agentes e roadmap de melhorias
+- [[wiki/concepts/automacao-principios.md|Princípios de Automação e Testes]] — regras gerais para construção, validação e maturação de automações multi-agente (Karpathy, evals, observabilidade, fail-fast)
 
 ### history/
 
