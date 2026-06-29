@@ -293,7 +293,7 @@ Só inicia após Eval 2-A aprovado. Agora entra o `auditor-pasta` pela primeira 
 | **Total estimado** | **~13.025** | estimativa anterior (~1.025) ignorava o overhead base |
 
 **Prompt enviado ao subagente:**
-> `Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings.`
+> `Pasta: test/. Sem arquivos. Não faça Read calls. Retorne o JSON de caso sem findings.`
 
 **Resposta esperada (estrutura mínima):**
 ```json

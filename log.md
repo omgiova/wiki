@@ -378,3 +378,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Runner criado: /root/eval-2b-runner.md (autocontido, mesmo padrão do 2-A)
 - Wiki: seção Eval 2-B atualizada com instrução de execução (/clear + prompt exato), resposta esperada e estimativas de tokens corrigidas pós-2A
 - Arquivo tocado: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] edit | procedures — Eval 2-B: prompt corrigido para proibir Read calls explicitamente
+- Prompt anterior era ambíguo — agente poderia ler AGENTS.md antes de perceber que não havia arquivos
+- Correção: "Não faça Read calls" adicionado explicitamente ao prompt do subagente
+- Arquivos: /root/eval-2b-runner.md e wiki/procedures/auditor-wiki-evals.md
