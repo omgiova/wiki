@@ -205,56 +205,86 @@ Arquivo criado em `/root/.claude/agents/auditor-pasta.md`. Todos os 5 itens veri
 
 ---
 
-### Eval 2-A — Smoke test mínimo (zero lógica de auditoria)
+### Eval 2-A — Mecanismo: agente genérico retorna JSON? (custo mínimo absoluto)
 
-Primeiro teste com tokens. Sem conteúdo inline, sem problema plantado, sem lógica de auditoria. Equivalente ao "responda ok" — só verifica que o subagente spawna e fala JSON.
+Testa o mecanismo de spawn, sem nenhuma relação com o auditor. Agente genérico (sem system prompt próprio), prompt de 5 palavras. Só confirma que a ferramenta `Agent` funciona e que JSON chega parseável do outro lado.
 
 **Prompt enviado ao subagente:**
-> "Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings."
+> `Retorne apenas este JSON, sem nenhuma outra palavra: {"ok": true}`
 
-**De onde vêm os tokens — breakdown esperado:**
+**De onde vêm os tokens:**
+
+| Parte | Tokens estimados |
+|---|---|
+| Prompt enviado | ~20 |
+| Resposta `{"ok": true}` | ~10 |
+| **Total** | **~30** |
+
+Sem system prompt de agente nomeado, sem cache relevante, sem lógica de auditoria.
+
+**Critérios:**
+- [ ] Agente spawna sem erro
+- [ ] `json.loads(resposta)` não lança exceção
+- [ ] `resposta["ok"] == True`
+- [ ] Nenhuma prosa fora do JSON
+
+**Critério de reprovação:** JSON inválido | prosa fora do JSON.
+
+**Critério de aprovação:** `{"ok": true}` parseável, sem prosa.
+
+**Estatísticas a registrar:** `input_tokens`, `output_tokens` (via JSONL delta).
+
+---
+
+### Eval 2-B — `auditor-pasta` retorna JSON vazio? (sem lógica de auditoria)
+
+Só inicia após Eval 2-A aprovado. Agora entra o `auditor-pasta` pela primeira vez — mas sem nenhum conteúdo para auditar. Confirma que o agente nomeado spawna, carrega seu system prompt e retorna JSON válido com `findings: []`.
+
+**De onde vêm os tokens:**
 
 | Parte | Tokens estimados | Observação |
 |---|---|---|
-| System prompt do subagente (`auditor-pasta.md`) | ~950 | carregado automaticamente a cada spawn — é o maior custo |
-| Mensagem enviada (prompt acima) | ~20 | irrelevante comparado ao system prompt |
-| Resposta (JSON vazio) | ~60 | output pequeno |
-| **Total** | **~1.030** | |
+| System prompt (`auditor-pasta.md`) | ~950 | custo dominante — carregado automaticamente |
+| Prompt enviado | ~15 | |
+| Resposta (JSON vazio) | ~60 | |
+| **Total** | **~1.025** | primeira invocação: tudo em `cache_creation`; segunda em 5min: `cache_read` (~10× mais barato) |
 
-O system prompt de ~950 tokens é o custo dominante. Na **primeira** invocação ele vai para `cache_creation_input_tokens` (custo cheio). Em invocações seguintes dentro de 5 minutos vai para `cache_read_input_tokens` (~10x mais barato). O JSONL vai deixar claro em qual cenário estamos.
+**Prompt enviado ao subagente:**
+> `Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings.`
 
 **Critérios:**
-- [ ] Subagente spawna sem erro
-- [ ] Resposta é JSON válido (`json.loads()` não lança exceção)
+- [ ] Agente spawna sem erro
+- [ ] Resposta é JSON válido
 - [ ] Campos presentes: `folder`, `findings`, `agent`, `_meta`
 - [ ] `findings == []`
 - [ ] `_meta.read_calls == 0`
 - [ ] Nenhuma prosa fora do JSON
 
-**Critério de reprovação (qualquer um reprova):** JSON inválido | prosa fora do JSON | `findings` não vazio.
+**Critério de reprovação:** JSON inválido | prosa fora do JSON | `findings` não vazio.
 
 **Critério de aprovação:** JSON válido com estrutura mínima correta e `findings: []`.
 
-**Estatísticas a registrar:** `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens` (via JSONL delta) — separados para saber se o system prompt foi cacheado ou não.
+**Estatísticas a registrar:** `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens`.
 
 ---
 
-### Eval 2-B — Subagente detecta problema? (conteúdo inline com problema plantado)
+### Eval 2-C — `auditor-pasta` detecta problema? (conteúdo inline com problema plantado)
 
-Só inicia após Eval 2-A aprovado. Agora testa a lógica de auditoria — ainda sem Read calls, conteúdo passado inline.
+Só inicia após Eval 2-B aprovado. Primeiro teste de lógica de auditoria — conteúdo sintético passado inline, problema conhecido e plantado.
 
 **Prompt enviado ao subagente:**
-
-> "Pasta: test/. Arquivo: test/test.md. Conteúdo inline abaixo — não faça Read calls.
+> `Pasta: test/. Arquivo: test/test.md. Conteúdo inline abaixo — não faça Read calls.`
 >
-> ---  
-> type: system  
-> title: Arquivo de Teste  
-> description: Arquivo mínimo para eval.  
-> ---  
-> Conteúdo mínimo."
+> ```
+> ---
+> type: system
+> title: Arquivo de Teste
+> description: Arquivo mínimo para eval.
+> ---
+> Conteúdo mínimo.
+> ```
 
-Problema plantado: campo `status` ausente no frontmatter. O subagente deve detectar e retornar finding `critico`.
+Problema plantado: campo `status` ausente. O agente deve detectar e retornar finding `critico`.
 
 **Critérios:**
 - [ ] Resposta é JSON válido
@@ -264,7 +294,7 @@ Problema plantado: campo `status` ausente no frontmatter. O subagente deve detec
 - [ ] Finding F1: `severity: "critico"`, `problem` menciona ausência de `status`
 - [ ] Nenhuma prosa fora do JSON
 
-**Critério de reprovação (qualquer um reprova):** `output_tokens > 500` | `read_calls > 0` | JSON inválido | prosa fora do JSON | finding ausente ou severidade errada.
+**Critério de reprovação:** `output_tokens > 500` | `read_calls > 0` | JSON inválido | prosa fora do JSON | finding ausente ou severidade errada.
 
 **Critério de aprovação:** JSON válido com `read_calls == 0` e finding F1 correto.
 

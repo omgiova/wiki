@@ -339,3 +339,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Documentado comportamento de cache: primeira invocação = cache_creation (custo cheio), subsequentes em 5min = cache_read (~10x mais barato)
 - Estatísticas a registrar expandidas para incluir cache_creation_input_tokens e cache_read_input_tokens separadamente
 - Timestamp: 2026-06-29T08:40:00-03:00
+
+## [2026-06-29] edit | auditor-wiki-evals — Eval 2 reestruturado em 2-A, 2-B e 2-C
+- 2-A: agente genérico sem system prompt, prompt mínimo "retorne {ok: true}" — testa só o mecanismo, ~30 tokens
+- 2-B: auditor-pasta com findings vazio — primeiro contato com o agente nomeado, ~1.025 tokens
+- 2-C: auditor-pasta com problema plantado inline — primeiro teste de lógica de auditoria
+- Breakdown de tokens documentado por subeval com distinção cache_creation vs cache_read
+- Timestamp: 2026-06-29T08:50:00-03:00
