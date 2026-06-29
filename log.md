@@ -368,3 +368,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Stats da 2ª execução adicionados em tabela: subagent_tokens 12.603, input 3, cache_creation 12.599, cache_read 0, output 1, duration 1.807ms
 - Modelo explicitamente declarado via model: "sonnet" — lição da 1ª execução cumprida
 - Arquivo: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] edit | wiki/procedures — Eval 2-A: contexto de invocação da 2ª execução registrado
+- Adicionado: /clear antes do eval, prompt exato enviado, tabela comparativa entre 1ª e 2ª execuções
+- Lições: /clear elimina cache_read e reduz input_tokens; overhead base (~12.6K) domina sempre
+- Arquivo: wiki/procedures/auditor-wiki-evals.md

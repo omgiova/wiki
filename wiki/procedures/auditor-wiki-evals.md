@@ -246,19 +246,28 @@ Testa o mecanismo de spawn, sem nenhuma relação com o auditor. Agente genéric
 
 **✅ APROVADO — 2026-06-29 (2ª execução)**
 
-Modelo declarado explicitamente via `model: "sonnet"` ✅
+**Contexto de invocação:**
+- Sessão iniciada com `/clear` — contexto zerado antes do eval
+- Prompt enviado ao Claude Code (sessão pai):
+  > `leia só /root/eval-2a-runner.md e execute. não leia wiki nem outros arquivos.`
+- Runner lido: `/root/eval-2a-runner.md`
+- Modelo declarado explicitamente via `model: "sonnet"` ✅
 
-| Métrica | Estimado | Real |
-|---|---|---|
-| subagent_tokens (total do subagente) | ~30 | 12.603 |
-| input_tokens (prompt ao subagente) | ~20 | 3 |
-| cache_creation (system prompt interno) | não estimado | 12.599 |
-| cache_read | ~0 | 0 |
-| output_tokens (resposta do subagente) | ~10 | 1 |
-| tool_uses | 0 | 0 ✅ |
-| duration_ms | — | 1.807 |
+| Métrica | 1ª execução | 2ª execução | Diferença |
+|---|---|---|---|
+| contexto da sessão pai | sessão com histórico | `/clear` (zerado) | — |
+| input_tokens (prompt ao subagente) | 21 | 3 | sessão zerada = menos tokens de contexto pai |
+| cache_creation (system prompt interno) | não registrado | 12.599 | overhead base de qualquer subagente genérico |
+| cache_read | não registrado | 0 | sem histórico anterior para reaproveitar |
+| output_tokens | não registrado | 1 | |
+| subagent_tokens (total) | 12.603 | 12.603 | overhead de base domina — prompt quase não importa |
+| tool_uses | 0 | 0 ✅ | |
+| duration_ms | 1.245 | 1.807 | variação normal de rede |
 
-⚠️ **Lição confirmada:** o system prompt interno do Claude Code (~12.599 tokens) domina o custo de qualquer subagente genérico. A diferença de `input_tokens` entre as duas execuções (21 vs 3) reflete variação de contexto da sessão pai, não do prompt enviado.
+⚠️ **Lições desta comparação:**
+1. O system prompt interno do Claude Code (~12.599 tokens) domina o custo — o prompt enviado (3 tokens) é irrelevante no total.
+2. `/clear` antes do eval elimina `cache_read` da sessão pai e reduz `input_tokens` do subagente — condição mais limpa e reproduzível para evals.
+3. Para reproducibilidade: sempre iniciar nova sessão com `/clear` e usar `/root/eval-2a-runner.md` como runner autocontido.
 
 ---
 
