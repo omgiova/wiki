@@ -423,7 +423,68 @@ Giovani usou o mesmo procedimento nos dois evals (`/clear` + prompt imediato, se
 **Procedimento para 3ª execução (acordado com Giovani):**
 Fechar o terminal completamente → reabrir → `/clear` → enviar prompt. Objetivo: garantir sessão nova de verdade (novo JSONL, cache do zero) para eliminar variáveis desconhecidas e obter medição limpa e reproduzível.
 
-**⏳ 3ª execução pendente** com runner v3 e novo procedimento.
+**✅ APROVADO — 2026-06-29 (3ª execução — v3: metodologia JSONL corrigida)**
+
+**Contexto de invocação:**
+- Terminal fechado completamente → reaberto → `/clear` → prompt enviado
+- Prompt enviado ao Claude Code (sessão pai):
+  > `leia só /root/eval-2b-runner.md e execute. não leia wiki nem outros arquivos.`
+- Runner lido: `/root/eval-2b-runner.md`
+- Modelo declarado explicitamente via `model: "sonnet"` ✅
+- Mecanismo: agente genérico (sem `subagent_type`) com system prompt do `auditor-pasta.md` injetado inline
+
+```
+=== Eval 2-B — Resultado (v3) ===
+Modelo usado:         claude-sonnet-4-6
+Resposta bruta:       {"folder":"test/","agent":"auditor-pasta","findings":[],"_meta":{"files_read":[],"read_calls":0,"approx_chars_read":0,"limit_reached":false}}
+JSON válido:          ✅
+folder presente:      ✅
+findings == []:       ✅
+agent correto:        ✅
+_meta presente:       ✅
+read_calls == 0:      ✅
+limit_reached false:  ✅
+Sem prosa:            ✅
+tool_uses:            0  (esperado: 0)
+
+=== Estatísticas — JSONL da sessão (todas as entradas) ===
+Entradas totais no JSONL:     7 linhas (3 duplicatas por turn — harness grava request/response/final)
+
+Entrada 1–3 (pai — ler runner, 3 registros):
+  input_tokens:                 3
+  cache_creation_input_tokens:  8.906
+  cache_read_input_tokens:      12.019
+  output_tokens:                124
+
+Entrada 4–6 (pai — spawn + aguardar, 3 registros):
+  input_tokens:                 1
+  cache_creation_input_tokens:  3.120
+  cache_read_input_tokens:      20.925
+  output_tokens:                552
+
+Entrada 7 (pai — validação/relatório):
+  input_tokens:                 1
+  cache_creation_input_tokens:  787
+  cache_read_input_tokens:      24.045
+  output_tokens:                56
+
+TOTAIS (soma das 7 entradas brutas):
+  input_tokens:                 13
+  cache_creation_input_tokens:  36.865
+  cache_read_input_tokens:      122.877
+  output_tokens:                2.084
+
+=== Estatísticas — subagente (da notificação) ===
+subagent_tokens:  12.830
+tool_uses:        0
+duration_ms:      1.884
+
+STATUS: ✅ APROVADO
+```
+
+⚠️ **Observação sobre o JSONL:** o grep retornou 7 linhas mas há apenas 3 chamadas de API distintas — o harness grava cada chamada em 3 registros separados (request, response, final state). Os totais somados incluem essa triplicação. Para custo real de pai: dividir por 3 os dois primeiros grupos. O `cache_read` alto (122K) reflete o system prompt interno do Claude Code cacheado entre sessões (mesmo após fechar e reabrir o terminal).
+
+⚠️ **Lição metodológica consolidada:** o procedimento "fechar terminal → reabrir → `/clear`" não zera o cache do harness — o `cache_read` continua alto porque o cache de projeto persiste na infraestrutura da Anthropic (TTL > sessão local). O que muda ao fechar o terminal é o arquivo JSONL: uma nova sessão gera um novo arquivo `.jsonl`, eliminando entradas de sessões anteriores que contaminavam o `tail -3` na v2.
 
 ---
 
