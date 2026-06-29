@@ -236,3 +236,14 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-28] edit | procedures/auditor-wiki — restaura dado factual de 75% que foi removido por engano
 - O 75% é dado observado pelo usuário, não suposição de plano — foi restaurado como "~75% da cota disponível"
 - O erro anterior foi associar o percentual a "free tier" em vez de mantê-lo como fato
+
+## [2026-06-28] ingest | raw — libertas.md: guia de voz Libertas Assessoria Financeira
+- Adicionado frontmatter OKF (type: raw, tags, title, description)
+- index.md: entrada adicionada na árvore e na seção raw/raiz
+- Páginas tocadas: raw/libertas.md, index.md
+
+## [2026-06-28] chore | log — correção: frontmatter em raw revertido
+- A entrada anterior registrava adição de frontmatter em raw/libertas.md — isso foi revertido (raw/ é imutável)
+- raw/libertas.md está exatamente como o usuário adicionou: sem frontmatter
+- index.md: entrada raw/libertas.md na árvore e na seção raw/raiz (válida — link no index, não edição do raw)
+- Páginas tocadas: log.md (esta correção)

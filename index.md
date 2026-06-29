@@ -27,7 +27,8 @@ log.md
 │   │   ├── introducing-the-open-knowledge-format.md
 │   │   ├── README.md
 │   │   └── SPEC.md
-│   └── karpathy-llm-wiki-pattern.md
+│   ├── karpathy-llm-wiki-pattern.md
+│   └── libertas.md
 └── wiki/
     ├── concepts/
     │   ├── okf.md
@@ -121,3 +122,4 @@ Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém p
 ### raiz
 
 - [[raw/karpathy-llm-wiki-pattern.md|LLM Wiki Pattern (Karpathy)]] — documento original do padrão que esta wiki segue; fonte imutável
+- [[raw/libertas.md|Guia de Voz — Libertas Assessoria Financeira]] — documento de referência para copywriter com tom de voz, exemplos aprovados e estrutura de conteúdo
