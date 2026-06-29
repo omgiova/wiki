@@ -322,3 +322,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - **2026-06-29T08:12:03-03:00** | ingest(concepts) | criado automacao-principios.md — documento geral de princípios de automação e testes: 8 princípios (sintético antes de real, fail-fast, serial antes de paralelo, prompt-as-contract, custo como critério, _meta, soft timeout, orquestrador não confia no silêncio), ciclo de maturidade, mecanismo JSONL, postmortem v1 mapeado para princípios; adicionado ao index.md
 
 - **2026-06-29T08:13:34-03:00** | edit(concepts/procedures) | adicionados links faltantes nas Conexões: automacao-principios.md agora aponta para os raws (Karpathy + agents-cli); auditor-wiki-evals.md agora aponta para automacao-principios.md
+
+## [2026-06-29] edit | auditor-wiki-evals — Eval 2 dividido em 2-A e 2-B
+- Eval 2-A: smoke test mínimo (prompt "nenhum arquivo, retorne findings vazio") — sem lógica de auditoria, sem problema plantado
+- Eval 2-B: primeiro teste de lógica (conteúdo inline com campo status ausente)
+- Adicionada seção "Como capturar estatísticas de tokens" com metodologia JSONL delta
+- Campo _meta passa a ser obrigatório a partir do Eval 2-A
+- Timestamp: 2026-06-29T08:33:19-03:00

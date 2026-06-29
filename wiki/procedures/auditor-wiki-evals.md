@@ -155,7 +155,7 @@ Sequência única e bloqueante — Eval N só inicia se Eval N-1 passou. Nenhum 
 
 ### Campo `_meta` — definição
 
-Todo subagente deve incluir `_meta` no JSON de saída a partir do Eval 2. Campos obrigatórios:
+Todo subagente deve incluir `_meta` no JSON de saída a partir do Eval 2-A. Campos obrigatórios:
 
 | Campo | Tipo | O que é |
 |---|---|---|
@@ -163,6 +163,28 @@ Todo subagente deve incluir `_meta` no JSON de saída a partir do Eval 2. Campos
 | `read_calls` | integer | número de Read calls feitas |
 | `approx_chars_read` | integer | soma aproximada de `len()` de cada conteúdo lido |
 | `limit_reached` | boolean | `true` se atingiu o limite de calls antes de terminar |
+
+---
+
+### Como capturar estatísticas de tokens
+
+Cada chamada de API é registrada no JSONL de sessão do Claude Code em `~/.claude/projects/-root/<session-id>.jsonl`. O campo `message.usage` contém:
+
+```json
+{
+  "input_tokens": 950,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 950,
+  "output_tokens": 80
+}
+```
+
+**Metodologia de leitura por eval:**
+1. Antes de spawnar o subagente: registrar o número de linhas atual do JSONL
+2. Após a resposta: ler as entradas novas (linhas após o baseline) e somar os campos de `message.usage`
+3. Reportar: `input_tokens` (novos), `cache_read_input_tokens`, `output_tokens` — separados para distinguir custo real de cache hit
+
+`cache_read_input_tokens` alto indica que o system prompt do agente já estava cacheado (custo ~10x menor). O custo "de verdade" é `input_tokens + cache_creation_input_tokens`.
 
 ---
 
@@ -183,33 +205,59 @@ Arquivo criado em `/root/.claude/agents/auditor-pasta.md`. Todos os 5 itens veri
 
 ---
 
-### Eval 2 — Subagente retorna JSON? (sintético inline, zero reads)
+### Eval 2-A — Smoke test mínimo (zero lógica de auditoria)
 
-Primeiro teste com tokens. Input sintético passado **inline no prompt** — sem Read calls, sem arquivos reais. O subagente deve auditar o conteúdo recebido diretamente e retornar JSON.
+Primeiro teste com tokens. Sem conteúdo inline, sem problema plantado, sem lógica de auditoria. Equivalente ao "responda ok" — só verifica que o subagente spawna e fala JSON.
 
-**Input sintético (conteúdo inline):**
-```
----
-type: system
-title: Arquivo de Teste
-description: Arquivo mínimo para eval.
----
-Conteúdo mínimo.
-```
-Problema plantado: campo `status` ausente. O subagente deve detectar e retornar finding `critico`.
+**Prompt enviado ao subagente:**
+> "Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings."
 
 **Critérios:**
 - [ ] Subagente spawna sem erro
 - [ ] Resposta é JSON válido (`json.loads()` não lança exceção)
 - [ ] Campos presentes: `folder`, `findings`, `agent`, `_meta`
-- [ ] `_meta.read_calls == 0` — conteúdo passado inline, nenhum Read necessário
-- [ ] `_meta.limit_reached == false`
-- [ ] Finding F1: `severity: "critico"`, problem menciona ausência de `status`
+- [ ] `findings == []`
+- [ ] `_meta.read_calls == 0`
 - [ ] Nenhuma prosa fora do JSON
 
-**Critério de reprovação (qualquer um reprova):** `output_tokens > 500` | `read_calls > 0` | JSON inválido | prosa fora do JSON.
+**Critério de reprovação (qualquer um reprova):** JSON inválido | prosa fora do JSON | `findings` não vazio.
 
-**Critério de aprovação:** JSON válido com `_meta.read_calls == 0` e finding esperado presente.
+**Critério de aprovação:** JSON válido com estrutura mínima correta e `findings: []`.
+
+**Estatísticas a registrar:** `input_tokens`, `cache_read_input_tokens`, `output_tokens` (via JSONL delta).
+
+---
+
+### Eval 2-B — Subagente detecta problema? (conteúdo inline com problema plantado)
+
+Só inicia após Eval 2-A aprovado. Agora testa a lógica de auditoria — ainda sem Read calls, conteúdo passado inline.
+
+**Prompt enviado ao subagente:**
+
+> "Pasta: test/. Arquivo: test/test.md. Conteúdo inline abaixo — não faça Read calls.
+>
+> ---  
+> type: system  
+> title: Arquivo de Teste  
+> description: Arquivo mínimo para eval.  
+> ---  
+> Conteúdo mínimo."
+
+Problema plantado: campo `status` ausente no frontmatter. O subagente deve detectar e retornar finding `critico`.
+
+**Critérios:**
+- [ ] Resposta é JSON válido
+- [ ] Campos presentes: `folder`, `findings`, `agent`, `_meta`
+- [ ] `_meta.read_calls == 0`
+- [ ] `_meta.limit_reached == false`
+- [ ] Finding F1: `severity: "critico"`, `problem` menciona ausência de `status`
+- [ ] Nenhuma prosa fora do JSON
+
+**Critério de reprovação (qualquer um reprova):** `output_tokens > 500` | `read_calls > 0` | JSON inválido | prosa fora do JSON | finding ausente ou severidade errada.
+
+**Critério de aprovação:** JSON válido com `read_calls == 0` e finding F1 correto.
+
+**Estatísticas a registrar:** `input_tokens`, `cache_read_input_tokens`, `output_tokens`.
 
 ---
 
