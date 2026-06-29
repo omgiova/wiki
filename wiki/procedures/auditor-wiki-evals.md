@@ -268,29 +268,6 @@ Apenas após todos os gates anteriores passarem e com autorização explícita.
 
 ---
 
-## Mapeamento: validações originais → gates
-
-| Validação original | Gate correspondente | Status |
-|---|---|---|
-| V1 — Fase 1: descoberta dinâmica | Gate 10 (dry-run) | pendente |
-| V2 — Agente de pasta isolado | **Gate 2** | pendente |
-| V3 — Agente Overlap isolado | **Gate 6** | pendente |
-| V4 — Agente Links isolado | **Gate 6** | pendente |
-| V5 — Extração JSON (fallback) | **Gate 1** (estático) + Gate 3 | pendente |
-| V6 — Coordenador isolado | **Gate 7** | pendente |
-| V7 — Agente Corretor isolado | **Gate 8** | pendente |
-| V8 — Telegram: token e chat_id | Gate 9 (pré-requisito) | ✅ |
-| V9 — Telegram: interação completa | **Gate 9** | ✅ |
-| V10 — apply_edit: old_string exato | **Gate 8** | pendente |
-| V11 — Commits por finding | pós-Gate 11 (1º run real) | pendente |
-| V12 — Push final + hook conflict | pós-Gate 11 (1º run real) | pendente |
-| V13 — Execução paralela: recursos | **Gate 10** (dry-run paralelo) | pendente |
-| V14 — Pasta diary/ vazia | Gate 5 (cobertura por série) | pendente |
-| V15 — Timeout Telegram | **Gate 4** | pendente |
-| V16 — claude CLI: autenticação standalone | N/A — nova arquitetura não usa claude CLI como subprocess | — |
-| V17 — Dois findings no mesmo arquivo | **Gate 8** | pendente |
-
----
 
 ## Arquitetura candidata: subagentes nativos do Claude Code
 
