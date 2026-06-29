@@ -482,3 +482,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Critérios: adicionado "tokens capturados via JSONL" como obrigatório
 - Critério de reprovação: "tokens não capturados" adicionado
 - Prompt atualizado para one-shot (Read → checklist → Bash JSONL → relatório final)
+
+## [2026-06-29] edit | procedures — documenta 2ª execução Eval 2-C (incompleta)
+- 2ª execução: 1 Read call, status detectado ausente, severidade critico ✅
+- Tamanho correto confirmado: 311 chars Unicode (316 bytes UTF-8); 1ª execução tinha 231 (errado)
+- Bug documentado: script JSONL com range(0,n,3) captura linhas sem message.usage → retornou zeros
+- Status aguarda definição do Giovani
