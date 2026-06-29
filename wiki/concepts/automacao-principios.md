@@ -198,6 +198,8 @@ Causas raiz que este documento endereça:
 
 ## Conexões
 
+- [[raw/akshay-pachaar-karpathy-agentic-engineering-tooling.md|Karpathy's Agentic Engineering Finally Has Proper Tooling]] — fonte primária do framework spec design → eval loops → deploy
+- [[raw/agents-cli-README.md|Google Agents CLI — README oficial]] — fonte da distinção skills vs subprocessos e da ideia de eval como gate estrutural
 - [[wiki/procedures/auditor-wiki-evals.md|Auditor da Wiki — Evals e Validação]] — aplicação destes princípios em contexto concreto
 - [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]] — postmortem completo da execução v1
 - [[wiki/concepts/orquestrador.md|Orquestrador da Memória]] — automação que deve seguir estes princípios na próxima versão

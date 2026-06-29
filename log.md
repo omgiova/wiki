@@ -320,3 +320,5 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - **2026-06-29T08:07:02-03:00** | edit(auditor-wiki-evals) | reescrita da seção de princípios e evals: adicionado princípio 7 (sintético antes de real), campo _meta definido, soft timeout (10 calls), evals reestruturados de 10 para 12 com 2 novos (Eval 3: _meta validation; Eval 6: rampa de dados reais), critérios de reprovação explícitos em todos os evals com tokens
 
 - **2026-06-29T08:12:03-03:00** | ingest(concepts) | criado automacao-principios.md — documento geral de princípios de automação e testes: 8 princípios (sintético antes de real, fail-fast, serial antes de paralelo, prompt-as-contract, custo como critério, _meta, soft timeout, orquestrador não confia no silêncio), ciclo de maturidade, mecanismo JSONL, postmortem v1 mapeado para princípios; adicionado ao index.md
+
+- **2026-06-29T08:13:34-03:00** | edit(concepts/procedures) | adicionados links faltantes nas Conexões: automacao-principios.md agora aponta para os raws (Karpathy + agents-cli); auditor-wiki-evals.md agora aponta para automacao-principios.md

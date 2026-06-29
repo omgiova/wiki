@@ -366,6 +366,7 @@ Apenas após todos os evals anteriores passarem e com autorização explícita.
 
 ## Conexões
 
+- [[wiki/concepts/automacao-principios.md|Princípios de Automação e Testes]] — documento geral do qual estes evals são aplicação prática
 - [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]] — o script que este documento valida; contém a análise de tokens da primeira execução
 - [[raw/agents-cli-README.md|Google Agents CLI — README oficial]] — fonte dos princípios de skills e eval gates
 - [[raw/akshay-pachaar-karpathy-agentic-engineering-tooling.md|Karpathy's Agentic Engineering Finally Has Proper Tooling]] — fonte do framework spec design → eval loops → deploy
