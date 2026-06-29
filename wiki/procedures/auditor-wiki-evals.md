@@ -503,6 +503,9 @@ STATUS: ✅ APROVADO
 - Remover os passos de extração JSONL e Python eliminou o turno extra e os tool calls no pai — fluxo ficou em exatamente 2 turnos, 0 tool calls no turno 2.
 - `subagent_tokens` de 12.830 confirma o padrão: overhead base do harness (~12.6K) domina; conteúdo do prompt é marginal.
 - Validação inline (sem ferramentas) é suficiente e mais limpa — a notificação entrega tudo que é necessário.
+- ⚠️ Invalidado: tokens do pai não foram reportados — viola a regra obrigatória de transparência de custos adicionada após esta execução.
+
+**⏳ 5ª execução pendente** com runner v5 — turno 2 inline (igual v4) + turno 3 com bash/Python para tokens do pai, deduplicação correta, última entrada excluída.
 
 ---
 

@@ -419,3 +419,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova regra obrigatória: todo eval deve reportar tokens do subagente E da sessão pai
 - 4ª execução do Eval 2-B marcada como INVÁLIDO (runner v4 omitiu tokens do pai)
 - Arquivo: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] edit | runner — Eval 2-B runner reescrito para v5
+- v5: turno 2 inline sem tool calls + turno 3 separado com bash/Python para tokens do pai
+- Deduplicação correta: primeiro de cada grupo de 3 registros idênticos, última entrada excluída
+- Passo 4 agora é critério obrigatório de aprovação (tokens do pai não podem ser omitidos)
+- Arquivo: /root/eval-2b-runner.md
+- evals.md atualizado: 5ª execução marcada como pendente
