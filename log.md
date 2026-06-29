@@ -333,3 +333,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-29] ingest | todo/violacoes-agentes — criado registro de violações graves de agentes
 - V1 documentado: edição de entrada existente no log.md (regra append-only quebrada em 2026-06-29)
 - Timestamp: 2026-06-29T08:35:41-03:00
+
+## [2026-06-29] edit | auditor-wiki-evals — Eval 2-A: breakdown de tokens documentado honestamente
+- Adicionada tabela com origem real dos tokens: system prompt do subagente (~950) é o custo dominante, não o prompt enviado (~20)
+- Documentado comportamento de cache: primeira invocação = cache_creation (custo cheio), subsequentes em 5min = cache_read (~10x mais barato)
+- Estatísticas a registrar expandidas para incluir cache_creation_input_tokens e cache_read_input_tokens separadamente
+- Timestamp: 2026-06-29T08:40:00-03:00

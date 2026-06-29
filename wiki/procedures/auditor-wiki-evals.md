@@ -212,6 +212,17 @@ Primeiro teste com tokens. Sem conteúdo inline, sem problema plantado, sem lóg
 **Prompt enviado ao subagente:**
 > "Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings."
 
+**De onde vêm os tokens — breakdown esperado:**
+
+| Parte | Tokens estimados | Observação |
+|---|---|---|
+| System prompt do subagente (`auditor-pasta.md`) | ~950 | carregado automaticamente a cada spawn — é o maior custo |
+| Mensagem enviada (prompt acima) | ~20 | irrelevante comparado ao system prompt |
+| Resposta (JSON vazio) | ~60 | output pequeno |
+| **Total** | **~1.030** | |
+
+O system prompt de ~950 tokens é o custo dominante. Na **primeira** invocação ele vai para `cache_creation_input_tokens` (custo cheio). Em invocações seguintes dentro de 5 minutos vai para `cache_read_input_tokens` (~10x mais barato). O JSONL vai deixar claro em qual cenário estamos.
+
 **Critérios:**
 - [ ] Subagente spawna sem erro
 - [ ] Resposta é JSON válido (`json.loads()` não lança exceção)
@@ -224,7 +235,7 @@ Primeiro teste com tokens. Sem conteúdo inline, sem problema plantado, sem lóg
 
 **Critério de aprovação:** JSON válido com estrutura mínima correta e `findings: []`.
 
-**Estatísticas a registrar:** `input_tokens`, `cache_read_input_tokens`, `output_tokens` (via JSONL delta).
+**Estatísticas a registrar:** `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens` (via JSONL delta) — separados para saber se o system prompt foi cacheado ou não.
 
 ---
 
