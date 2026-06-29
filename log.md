@@ -426,3 +426,13 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Passo 4 agora é critério obrigatório de aprovação (tokens do pai não podem ser omitidos)
 - Arquivo: /root/eval-2b-runner.md
 - evals.md atualizado: 5ª execução marcada como pendente
+
+## [2026-06-29] edit | procedures — Eval 2-B 5ª execução: ✅ APROVADO (v5)
+- Runner v5 executado: terminal fechado/reaberto → /clear → prompt
+- Subagente genérico (model: sonnet) com system prompt inline
+- JSON válido, findings: [], read_calls == 0, sem prosa, tool_uses: 0
+- subagent_tokens: 12.830 (< 15.000 ✅)
+- Tokens do pai (JSONL deduplificado): input=4, cache_creation=3.042, cache_read=41.850, output=791
+- Passo 3 (turno 2): zero tool calls ✅ | Passo 4 (turno 3): bash/Python executado ✅
+- Todos os critérios de aprovação satisfeitos
+- auditor-wiki-evals.md atualizado com resultado completo

@@ -505,7 +505,53 @@ STATUS: ✅ APROVADO
 - Validação inline (sem ferramentas) é suficiente e mais limpa — a notificação entrega tudo que é necessário.
 - ⚠️ Invalidado: tokens do pai não foram reportados — viola a regra obrigatória de transparência de custos adicionada após esta execução.
 
-**⏳ 5ª execução pendente** com runner v5 — turno 2 inline (igual v4) + turno 3 com bash/Python para tokens do pai, deduplicação correta, última entrada excluída.
+**✅ APROVADO — 2026-06-29 (5ª execução — v5: tokens do pai via JSONL deduplificado)**
+
+**Contexto de invocação:**
+- Terminal fechado completamente → reaberto → `/clear` → prompt enviado
+- Prompt enviado ao Claude Code (sessão pai):
+  > `leia só /root/eval-2b-runner.md e execute. não leia wiki nem outros arquivos.`
+- Runner lido: `/root/eval-2b-runner.md` (v5)
+- Modelo declarado explicitamente via `model: "sonnet"` ✅
+- Mecanismo: agente genérico (sem `subagent_type`) com system prompt do `auditor-pasta.md` injetado inline
+- Turno 2: zero tool calls — validação inline a partir da notificação
+- Turno 3: bash/Python com deduplicação correta (primeiro de cada grupo de 3 registros idênticos), última entrada excluída
+
+```
+=== Eval 2-B — Resultado (v5) ===
+Modelo usado:         claude-sonnet-4-6
+Resposta bruta:       {"folder":"test/","agent":"auditor-pasta","findings":[],"_meta":{"files_read":[],"read_calls":0,"approx_chars_read":0,"limit_reached":false}}
+JSON válido:          ✅
+folder presente:      ✅
+findings == []:       ✅
+agent correto:        ✅
+_meta presente:       ✅
+read_calls == 0:      ✅
+limit_reached false:  ✅
+Sem prosa:            ✅
+tool_uses:            0  (esperado: 0) ✅
+
+=== Estatísticas — subagente (da notificação) ===
+subagent_tokens:  12.830  (limite: < 15.000) ✅
+tool_uses:        0
+duration_ms:      2.546
+
+=== Estatísticas — sessão pai (JSONL deduplificado) ===
+Chamadas do eval:     2 entradas marcadas EVAL
+input_tokens:         4
+cache_creation:       3.042
+cache_read:           41.850
+output_tokens:        791
+(turno de extração excluído — última entrada do JSONL)
+
+STATUS: ✅ APROVADO
+```
+
+**Lições desta execução:**
+- Deduplicação correta: JSONL tinha 3 entradas únicas (2 EVAL + 1 EXTRAÇÃO). Excluir a última eliminou o custo do próprio turno de medição.
+- `cache_read` do pai (41.850) é overhead do harness (deferred tools, skills, MEMORY.md) — inevitável, não é critério de falha.
+- `cache_creation` de apenas 3.042 indica que a maior parte do system prompt já estava cacheada de sessões anteriores.
+- Fluxo final: 3 turnos (spawn + notif/validação inline + extração JSONL), conforme spec v5.
 
 ---
 
