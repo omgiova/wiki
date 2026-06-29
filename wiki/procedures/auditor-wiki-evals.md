@@ -573,11 +573,11 @@ Esta seção não tem resultado APROVADO nem REPROVADO. Todas as execuções (v1
 **Transparência de custo:** sem subagente, sem JSONL, sem extração. O custo é proporcional ao conteúdo: 1 Read call + 1 resposta. O arquivo informa o tamanho em caracteres lidos — proxy direto do custo de input.
 
 **Critérios de aprovação:**
-- [ ] 1 Read call — apenas `/tmp/eval-2c-test.md`
-- [ ] `status` identificado como ausente
-- [ ] Severidade `critico` reportada
-- [ ] Tamanho em caracteres do arquivo informado na resposta
-- [ ] Nenhum arquivo extra lido
+- [x] 1 Read call — apenas `/tmp/eval-2c-test.md`
+- [x] `status` identificado como ausente
+- [x] Severidade `critico` reportada
+- [x] Tamanho em caracteres do arquivo informado na resposta
+- [x] Nenhum arquivo extra lido
 
 **Critério de reprovação:** campo errado reportado | problema não detectado | mais de 1 Read call | nenhum tamanho reportado.
 
@@ -592,6 +592,33 @@ Eval 2-C — sem subagentes. Leia /tmp/eval-2c-test.md. Verifique se o frontmatt
 2. `/clear`
 3. Colar o prompt acima
 4. Registrar o resultado aqui antes de qualquer outra ação
+
+**2026-06-29 — 1ª execução — realizada — ✅ APROVADA**
+
+**Contexto de invocação:**
+- Sessão sem `/clear` explícito — AGENTS.md e evals lidos na mesma sessão após o eval
+- Prompt enviado diretamente ao Claude Code (sem runner separado)
+- Arquitetura: sem subagentes — 1 Read call direto na sessão principal
+- Nenhum Agent tool, nenhum spawn, nenhum overhead de harness de subagente
+
+```
+=== Eval 2-C — Resultado ===
+Read calls:           1 (apenas /tmp/eval-2c-test.md)
+Arquivo extra lido:   nenhum ✅
+Campo ausente:        status ✅
+Severidade reportada: critico ✅
+Tamanho reportado:    231 caracteres ✅
+Prosa fora do report: nenhuma
+
+STATUS: ✅ APROVADA
+```
+
+**Transparência de custo:** sem subagente, sem JSONL, sem extração. Custo da sessão principal proporcional ao conteúdo do arquivo (~231 chars de input útil + contexto do harness). Não foi capturada a extração de tokens do pai por ausência de runner dedicado — limitação desta execução.
+
+**Lições:**
+- Arquitetura sem subagentes funciona: 1 Read call, campo ausente detectado, severidade e tamanho reportados corretamente.
+- O overhead de harness da sessão pai (deferred tools, skills, MEMORY.md) é inevitável mas não afeta o resultado — o auditor não depende de subagentes para funcionar.
+- Próximo: definir se o eval passa a ter runner dedicado para captura de tokens do pai, ou se a ausência de runner é aceitável para evals sem subagente.
 
 ---
 

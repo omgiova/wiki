@@ -457,3 +457,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Eval 2-C: completamente reescrito para nova arquitetura sem subagentes
 - Arquivo sintético criado: /tmp/eval-2c-test.md (status ausente, problema plantado)
 - Prompt exato para próxima sessão documentado no próprio 2-C
+
+## [2026-06-29] edit | procedures — documenta resultado do Eval 2-C (✅ APROVADA)
+- Eval 2-C: 1ª execução realizada e aprovada — arquitetura sem subagentes funciona
+- Campo `status` detectado como ausente, severidade `critico` reportada, tamanho 231 chars informado
+- Checkboxes de critérios atualizados ([ ] → [x]) no arquivo de evals
+- Limitação registrada: tokens do pai não capturados (sem runner dedicado nesta execução)
