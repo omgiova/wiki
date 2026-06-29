@@ -583,17 +583,19 @@ Esta seção não tem resultado APROVADO nem REPROVADO. Todas as execuções (v1
 
 **Critério de reprovação:** campo errado reportado | problema não detectado | mais de 1 Read call | nenhum tamanho reportado.
 
+**Runner:** `/root/eval-2c-runner.md` — autocontido, 3 passos, custo isolado por turno.
+
 **Prompt exato para a próxima sessão (copiar e colar):**
 
 ```
-Eval 2-C — sem subagentes. Leia /tmp/eval-2c-test.md. Verifique se o frontmatter contém todos os campos obrigatórios: type, tags, title, description, timestamp, status. Para cada campo ausente, reporte: nome do campo, severidade "critico", sugestão de correção. Informe o tamanho em caracteres do arquivo lido. Não leia mais nenhum arquivo.
+leia só /root/eval-2c-runner.md e execute. não leia wiki nem outros arquivos.
 ```
 
 **Como executar:**
 1. Fechar terminal completamente → reabrir
 2. `/clear`
 3. Colar o prompt acima
-4. Registrar o resultado aqui antes de qualquer outra ação
+4. Registrar o resultado aqui antes de qualquer outra ação — status só após confirmação do Giovani
 
 **2026-06-29 — 1ª execução — ⚠️ INCOMPLETA (tokens do pai não capturados)**
 

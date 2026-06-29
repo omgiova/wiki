@@ -468,3 +468,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - 1ª execução do Eval 2-C: status alterado de "APROVADA" para "INCOMPLETA" (tokens do pai não capturados)
 - Checkboxes revertidos para [ ] — status não confirmado pelo Giovani
 - Adicionada regra obrigatória no topo: status de eval é definido PELO USUÁRIO, nunca pelo agente
+
+## [2026-06-29] edit | procedures — cria runner 2-C e atualiza prompt/como-executar no evals
+- Criado /root/eval-2c-runner.md: 3 passos, custo isolado por turno via JSONL
+- Eval 2-C no evals: referência ao runner adicionada, prompt simplificado, nota de status pelo usuário
