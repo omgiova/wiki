@@ -272,3 +272,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-29] chore | raw — rename google-okf/README.md → google-okf-README.md
 - Renomeado para padronizar nomenclatura de READMEs na pasta raw/
 - Páginas tocadas: raw/google-okf-README.md
+
+## [2026-06-29] chore | index — corrigir entradas raw/ não atualizadas
+- Corrigido link google-okf/README.md → google-okf-README.md
+- Adicionado raw/akshay-pachaar-karpathy-agentic-engineering-tooling.md
+- Adicionado raw/agents-cli-README.md
+- Páginas tocadas: index.md
