@@ -384,10 +384,16 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Correção: "Não faça Read calls" adicionado explicitamente ao prompt do subagente
 - Arquivos: /root/eval-2b-runner.md e wiki/procedures/auditor-wiki-evals.md
 
-## [2026-06-29] eval | procedures — Eval 2-B: 3ª execução (v3) — APROVADO
-- Runner v3 com metodologia JSONL corrigida (grep full em vez de tail -3)
-- Procedimento: terminal fechado/reaberto + /clear + prompt imediato
-- Resultado: JSON válido, findings:[], read_calls:0, sem prosa, tool_uses:0
-- subagent_tokens: 12.830, duration_ms: 1.884
-- Observações: harness grava 3 registros por chamada no JSONL; cache_read (122K) persiste além do terminal
+## [2026-06-29] eval | procedures — Eval 2-B: 3ª execução (v3) — REPROVADO
+- Resultado do subagente correto (JSON válido, findings:[], read_calls:0), mas runner reprovado
+- Causa 1: Passo 3 (bash JSONL) gerou turno extra + tool calls → cache_read inflado (57K real)
+- Causa 2: JSONL tem 3 registros por chamada API — soma de todos triplicou os números (122K reportado)
+- Decisão: runner reescrito para v4 — sem bash, sem Python, validação inline, zero tool calls no turno 2
 - Arquivo: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] edit | runner — Eval 2-B runner reescrito para v4
+- Removidos: Passo 3 (extração JSONL) e Passo 4 (Python bash) inteiramente
+- Turno 2 passa a ter zero tool calls: validação feita inline a partir da notificação
+- Adicionado critério formal: subagent_tokens < 15.000
+- Histórico de versões atualizado no arquivo
+- Arquivo: /root/eval-2b-runner.md
