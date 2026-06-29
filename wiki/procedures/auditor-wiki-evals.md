@@ -664,18 +664,36 @@ Status final:         aguardando definição do Giovani
 
 **Observação sobre tamanho:** a 1ª execução reportou 231 chars; a 2ª reportou ~311 (manual). O arquivo tem 316 bytes e 311 chars Unicode (5 chars multibyte: é, ç, ã, ú, í). O valor correto é 311 chars — a 1ª execução estava errada.
 
-**2026-06-29 — 3ª execução — aguardando**
+**2026-06-29 — 3ª execução — ⚠️ INCOMPLETA (tokens não capturados — SyntaxError no script)**
 
-**O que mudou em relação à 2ª execução:**
-- Script JSONL corrigido: substituído `range(0, len(lines), 3)` por filtro de linhas com `message.usage` + deduplicação por chave consecutiva (mesmo padrão do Eval 2-B v5)
-- Prompt atualizado na seção "Prompt exato para a próxima sessão" acima
+**Contexto de invocação:**
+- Sessão com histórico (AGENTS.md e evals lidos na mesma sessão antes do prompt do eval)
+- Prompt enviado diretamente no chat — sem runner separado, sem `/clear` antes
+- Arquitetura: sem subagentes — 1 Read call direto na sessão principal
 
-**Procedimento:**
-1. Fechar terminal completamente → reabrir
-2. `/clear`
-3. Colar o prompt da seção "Prompt exato para a próxima sessão"
+```
+=== Eval 2-C — Checklist ===
+Read calls:           1 (apenas /tmp/eval-2c-test.md) ✅
+Arquivo extra lido:   nenhum ✅
+Campo ausente:        status ✅
+Severidade reportada: critico ✅
+Tamanho reportado:    ~311 chars ✅
+Prosa fora do report: nenhuma ✅
 
-**Resultado:** *(a preencher após execução)*
+Tokens da sessão pai: NÃO CAPTURADO — SyntaxError no script ❌
+Status final:         aguardando definição do Giovani
+```
+
+**Por que está incompleta:** o script do Passo 2 (salvo na seção "Prompt exato para a próxima sessão") contém uma corrupção no f-string: `cc={u.get(",0)}` — a chave `"cache_creation_input_tokens"` foi truncada, deixando `",0)` como literal inválido. Python retornou `SyntaxError: invalid syntax`. Nenhum dado de tokens foi capturado. O script precisa ser corrigido antes da 4ª execução.
+
+**Passo 1 funcionou corretamente:**
+- `status` identificado como ausente
+- Severidade `critico` reportada
+- Tamanho ~311 chars reportado (consistente com a 2ª execução)
+- Sugestão: adicionar `status: draft` após `timestamp:`
+
+**Fix necessário no prompt antes da 4ª execução:**
+Linha com `cc={u.get(",0)}` deve ser `cc={u.get("cache_creation_input_tokens",0)}`
 
 ---
 

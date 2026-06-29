@@ -510,3 +510,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-06-29] edit | procedures — documenta 3ª execução Eval 2-C antes de rodar
 - Entrada pré-execução adicionada: o que mudou, procedimento, resultado a preencher
 - Documenta fix do script JSONL como motivação da nova tentativa
+
+## [2026-06-29] edit | procedures — resultado 3ª execução Eval 2-C (incompleta)
+- Passo 1: status identificado como ausente, critico, ~311 chars ✅
+- Passo 2: SyntaxError no script — chave `cache_creation_input_tokens` truncada no prompt salvo
+- Tokens não capturados — execução incompleta
+- Fix necessário no prompt antes da 4ª execução
