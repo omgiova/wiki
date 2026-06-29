@@ -664,6 +664,19 @@ Status final:         aguardando definição do Giovani
 
 **Observação sobre tamanho:** a 1ª execução reportou 231 chars; a 2ª reportou ~311 (manual). O arquivo tem 316 bytes e 311 chars Unicode (5 chars multibyte: é, ç, ã, ú, í). O valor correto é 311 chars — a 1ª execução estava errada.
 
+**2026-06-29 — 3ª execução — aguardando**
+
+**O que mudou em relação à 2ª execução:**
+- Script JSONL corrigido: substituído `range(0, len(lines), 3)` por filtro de linhas com `message.usage` + deduplicação por chave consecutiva (mesmo padrão do Eval 2-B v5)
+- Prompt atualizado na seção "Prompt exato para a próxima sessão" acima
+
+**Procedimento:**
+1. Fechar terminal completamente → reabrir
+2. `/clear`
+3. Colar o prompt da seção "Prompt exato para a próxima sessão"
+
+**Resultado:** *(a preencher após execução)*
+
 ---
 
 ### Eval 3 — Detecção precisa: valor inválido (não só campo ausente)

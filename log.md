@@ -506,3 +506,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Eval 9 (coordenador isolado) removido completamente — não existe na nova arquitetura
 - Evals 10, 11, 12 renumerados para 9, 10, 11
 - Lista final: Evals 1, 2-A, 2-B, 2-C, 3, 4, 5, 6, 7, 8, 9, 10, 11
+
+## [2026-06-29] edit | procedures — documenta 3ª execução Eval 2-C antes de rodar
+- Entrada pré-execução adicionada: o que mudou, procedimento, resultado a preencher
+- Documenta fix do script JSONL como motivação da nova tentativa
