@@ -521,3 +521,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Causa raiz identificada: usuário copiou versão corrompida do prompt (não do arquivo)
 - Aviso adicionado na seção "Prompt exato" para copiar sem editar
 - 4ª execução placeholder adicionada com procedimento atualizado
+
+## [2026-06-29] edit | procedures — documenta 4ª execução Eval 2-C (incompleta)
+- Procedimento errado: invocado via /remote-control em vez de terminal fechado → /clear
+- Passo 1 funcionou: status ausente detectado, 311 chars confirmados
+- Passo 2 rodou contra JSONL errado (sessão anterior)
+- Passo 3 não executado — usuário interrompeu
+- Lição registrada: /remote-control não substitui procedimento de sessão limpa

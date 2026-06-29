@@ -709,7 +709,34 @@ O script salvo no arquivo (seção "Prompt exato para a próxima sessão") está
 2. `/clear`
 3. Copiar o bloco de código da seção "Prompt exato para a próxima sessão" (linhas entre os ` ``` `) e colar sem editar
 
-**Resultado:** *(a preencher após execução)*
+**2026-06-29 — 4ª execução — ⚠️ INCOMPLETA (procedimento errado + JSONL errado + interrompida)**
+
+**Contexto de invocação:**
+- Invocado via `/remote-control` skill — **viola o procedimento prescrito** (fechar terminal → reabrir → `/clear`)
+- Sessão com histórico (wiki lida antes na mesma sessão) — não foi sessão limpa
+- Arquitetura: sem subagentes — 1 Read call direto na sessão principal
+
+```
+=== Eval 2-C — Checklist (parcial) ===
+Read calls:           1 (apenas /tmp/eval-2c-test.md) ✅
+Arquivo extra lido:   nenhum no Passo 1 ✅
+Campo ausente:        status ✅
+Severidade reportada: critico ✅
+Tamanho reportado:    NÃO REPORTADO EXPLICITAMENTE ❌  (valor real: 311 chars — confirmado)
+Prosa fora do report: nenhuma ✅
+
+Tokens da sessão pai: NÃO CAPTURADO — script rodou contra JSONL errado ❌
+Passo 3:              NÃO EXECUTADO — usuário interrompeu ❌
+Status final:         aguardando definição do Giovani
+```
+
+**Por que está incompleta:**
+1. **Procedimento errado:** `/remote-control` não abre terminal novo nem executa `/clear` — sessão tinha histórico
+2. **JSONL errado:** o script do Passo 2 foi rodado contra `829d9ab7...` (2ª entrada mais recente — sessão anterior), não contra o arquivo da sessão atual (`e92da6ce...`)
+3. **Interrompida:** usuário disse "parou" antes do Passo 3 ser executado
+
+**Lição:**
+O `/remote-control` skill não satisfaz o procedimento de "fechar terminal → reabrir → `/clear`". O skill entrega o prompt dentro da sessão existente, com contexto acumulado. Para o Eval 2-C ser válido, o procedimento de sessão limpa é mandatório — o skill não é substituto.
 
 ---
 
