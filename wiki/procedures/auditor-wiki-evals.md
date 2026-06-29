@@ -209,18 +209,21 @@ Arquivo criado em `/root/.claude/agents/auditor-pasta.md`. Todos os 5 itens veri
 
 Testa o mecanismo de spawn, sem nenhuma relação com o auditor. Agente genérico (sem system prompt próprio), prompt de 5 palavras. Só confirma que a ferramenta `Agent` funciona e que JSON chega parseável do outro lado.
 
+**Modelo:** deve ser declarado explicitamente — `claude-sonnet-4-6`. Sempre exibir qual modelo foi usado no resultado.
+
 **Prompt enviado ao subagente:**
 > `Retorne apenas este JSON, sem nenhuma outra palavra: {"ok": true}`
 
-**De onde vêm os tokens:**
+**De onde vêm os tokens (estimativa corrigida pós-execução real):**
 
-| Parte | Tokens estimados |
-|---|---|
-| Prompt enviado | ~20 |
-| Resposta `{"ok": true}` | ~10 |
-| **Total** | **~30** |
+| Parte | Estimado original | Real (2026-06-29) |
+|---|---|---|
+| Prompt enviado | ~20 | 21 |
+| System prompt interno do Claude Code | não estimado | ~12.582 |
+| Resposta `{"ok": true}` | ~10 | incluído nos 2.426 de output da sessão |
+| **`subagent_tokens` total** | **~30** | **12.603** |
 
-Sem system prompt de agente nomeado, sem cache relevante, sem lógica de auditoria.
+⚠️ **Lição:** agentes genéricos no Claude Code carregam um system prompt interno substancial (~12K tokens) que não está visível em nenhum arquivo local. A estimativa de ~30 tokens estava errada por 400×. Todos os evals seguintes devem contar com esse overhead de base.
 
 **Critérios:**
 - [ ] Agente spawna sem erro
@@ -232,7 +235,14 @@ Sem system prompt de agente nomeado, sem cache relevante, sem lógica de auditor
 
 **Critério de aprovação:** `{"ok": true}` parseável, sem prosa.
 
-**Estatísticas a registrar:** `input_tokens`, `output_tokens` (via JSONL delta).
+**Estatísticas a registrar:** `subagent_tokens` (da notificação), `input_tokens`, `output_tokens`, modelo usado.
+
+**✅ APROVADO — 2026-06-29**
+- Resposta: `{"ok": true}` — JSON válido, sem prosa, `tool_uses: 0`
+- Duração: 1.245s
+- `subagent_tokens`: 12.603 (estimativa original: ~30 — erro de 400×)
+- `input_tokens` (meu prompt): 21
+- Modelo: ⚠️ não especificado explicitamente — herdou da sessão pai (claude-sonnet-4-6). Nos próximos evals declarar explicitamente.
 
 ---
 
@@ -240,14 +250,15 @@ Sem system prompt de agente nomeado, sem cache relevante, sem lógica de auditor
 
 Só inicia após Eval 2-A aprovado. Agora entra o `auditor-pasta` pela primeira vez — mas sem nenhum conteúdo para auditar. Confirma que o agente nomeado spawna, carrega seu system prompt e retorna JSON válido com `findings: []`.
 
-**De onde vêm os tokens:**
+**De onde vêm os tokens (estimativa corrigida pós Eval 2-A):**
 
 | Parte | Tokens estimados | Observação |
 |---|---|---|
-| System prompt (`auditor-pasta.md`) | ~950 | custo dominante — carregado automaticamente |
+| System prompt interno Claude Code | ~12.000 | overhead de base de qualquer agente — confirmado no 2-A |
+| System prompt (`auditor-pasta.md`) | ~950 | somado ao overhead acima |
 | Prompt enviado | ~15 | |
 | Resposta (JSON vazio) | ~60 | |
-| **Total** | **~1.025** | primeira invocação: tudo em `cache_creation`; segunda em 5min: `cache_read` (~10× mais barato) |
+| **Total estimado** | **~13.025** | estimativa anterior (~1.025) ignorava o overhead base |
 
 **Prompt enviado ao subagente:**
 > `Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings.`

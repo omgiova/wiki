@@ -346,3 +346,12 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - 2-C: auditor-pasta com problema plantado inline — primeiro teste de lógica de auditoria
 - Breakdown de tokens documentado por subeval com distinção cache_creation vs cache_read
 - Timestamp: 2026-06-29T08:50:00-03:00
+
+## [2026-06-29] edit | auditor-wiki-evals — Eval 2-A executado e aprovado; estimativas corrigidas
+- Eval 2-A: ✅ APROVADO — {"ok": true} válido, sem prosa, tool_uses 0, duração 1.245s
+- subagent_tokens real: 12.603 (estimativa era ~30 — erro de 400×)
+- Causa: system prompt interno do Claude Code (~12K tokens) não estava na estimativa
+- Estimativas do 2-B corrigidas: ~13.025 tokens (era ~1.025)
+- Adicionada regra: modelo deve ser declarado explicitamente e exibido no resultado de cada eval
+- Modelo do 2-A: herdou da sessão pai (claude-sonnet-4-6) — não foi declarado explicitamente
+- Timestamp: 2026-06-29T09:16:44-03:00
