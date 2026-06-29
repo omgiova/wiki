@@ -13,7 +13,26 @@ Documento de análise e processo de validação para o [[wiki/procedures/auditor
 
 ---
 
+## O que é o Auditor da Wiki
+
+Automação multi-agente de health-check completo da wiki. A ideia central: executar o checklist de Lint do [[AGENTS.md]] de forma sistemática e autônoma — verificando taxonomia, seções obrigatórias, frontmatter OKF, orphans, sync index vs git, sobreposição semântica e consistência de status — e entregar cada correção individualmente ao usuário via Telegram para aprovação antes de aplicar.
+
+**Arquitetura da ideia (independente de implementação):**
+- **Análise estrutural** sem LLM — descoberta dinâmica de arquivos, extração de frontmatter, mapa de wikilinks, diff git vs index
+- **Agentes especializados em paralelo** — um por pasta + agente de sobreposição cross-folder + agente de links quebrados
+- **Coordenador** — consolida relatórios, deduplica findings, prioriza por severidade
+- **Loop de aprovação via Telegram** — cada finding apresentado individualmente com botões; correção aplicada só com autorização explícita; commit imediato por finding aprovado
+- **Push único** ao final com resumo
+
+A implementação atual é um script bash (`/root/auditor-wiki-v1.sh`) com subagentes invocados via `claude` CLI. Nada nessa implementação é obrigatório — a ideia central (análise → aprovação granular → commit por finding) pode ser reimplementada de forma diferente.
+
+Documentação completa da implementação atual: [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]].
+
+---
+
 ## Diagnóstico da primeira execução
+
+> **Diagnóstico completo** (timeline, falhas, análise de consumo de tokens, lições): [[wiki/procedures/auditor-wiki.md#🔴-primeira-execução-real-—-2026-06-28-desastre|auditor-wiki.md § Primeira execução real]].
 
 ### O que aconteceu
 
