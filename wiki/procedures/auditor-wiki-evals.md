@@ -137,20 +137,20 @@ Cada system prompt deve incluir: (a) instrução de formato, (b) exemplo concret
 **5. Struct_str filtrado por agente**
 Cada agente recebe apenas os dados da sua pasta. O agente `todo/` não precisa saber dos 20 arquivos de outras pastas. Isso reduz o contexto de entrada e o custo por request.
 
-**6. Gate obrigatório — nenhum run completo sem todos os gates passados**
-Os gates abaixo substituem as validações opcionais V1–V17. A diferença: são sequenciais e bloqueantes. O Gate N não pode ser pulado se o Gate N-1 não passou.
+**6. Eval obrigatório — nenhum run completo sem todos os evals passados**
+Os evals abaixo substituem as validações opcionais V1–V17. A diferença: são sequenciais e bloqueantes. O Eval N não pode ser pulado se o Eval N-1 não passou.
 
 ---
 
-## Gates de validação
+## Evals de validação
 
-Sequência única e bloqueante — Gate N só inicia se Gate N-1 passou. Nenhum gate pode ser pulado.
+Sequência única e bloqueante — Eval N só inicia se Eval N-1 passou. Nenhum eval pode ser pulado.
 
 **Modelo para todos os subagentes:** `claude-sonnet-4-6`
 
 ---
 
-### Gate 1 — Contrato de output (estático, zero tokens)
+### Eval 1 — Contrato de output (estático, zero tokens)
 
 Verificação antes de qualquer execução — leitura do arquivo de definição do subagente e do system prompt.
 
@@ -164,7 +164,7 @@ Verificação antes de qualquer execução — leitura do arquivo de definição
 
 ---
 
-### Gate 2 — Subagente retorna JSON?
+### Eval 2 — Subagente retorna JSON?
 
 Primeiro teste com tokens. Um subagente, pasta mais pequena (`todo/`), invocado via ferramenta `Agent` pela sessão principal.
 
@@ -180,7 +180,7 @@ Primeiro teste com tokens. Um subagente, pasta mais pequena (`todo/`), invocado 
 
 ---
 
-### Gate 3 — Erro propaga ou engole silencioso?
+### Eval 3 — Erro propaga ou engole silencioso?
 
 Provocar falha intencional: invocar subagente sem instrução de formato JSON e verificar se a sessão principal recebe e reage ao erro — o teste que v1 nunca fez.
 
@@ -192,7 +192,7 @@ Provocar falha intencional: invocar subagente sem instrução de formato JSON e 
 
 ---
 
-### Gate 4 — Sessão aguenta esperar o Telegram?
+### Eval 4 — Sessão aguenta esperar o Telegram?
 
 O ponto mais crítico da arquitetura. Sessão Claude Code envia mensagem com botões e aguarda callback — não pode expirar durante a espera.
 
@@ -204,7 +204,7 @@ O ponto mais crítico da arquitetura. Sessão Claude Code envia mensagem com bot
 
 ---
 
-### Gate 5 — Agentes de pasta em série
+### Eval 5 — Agentes de pasta em série
 
 Todos os agentes de pasta, um por vez, antes de qualquer paralelismo.
 
@@ -216,7 +216,7 @@ Todos os agentes de pasta, um por vez, antes de qualquer paralelismo.
 
 ---
 
-### Gate 6 — Agentes Overlap e Links isolados
+### Eval 6 — Agentes Overlap e Links isolados
 
 - [ ] Agente Overlap retorna JSON válido sem falsos positivos óbvios
 - [ ] Agente Links detecta pelo menos um link quebrado se houver
@@ -226,9 +226,9 @@ Todos os agentes de pasta, um por vez, antes de qualquer paralelismo.
 
 ---
 
-### Gate 7 — Coordenador isolado
+### Eval 7 — Coordenador isolado
 
-Alimentado com outputs reais dos Gates 5 e 6.
+Alimentado com outputs reais dos Evals 5 e 6.
 
 - [ ] Output é JSON válido com `executive_summary` e `findings`
 - [ ] Campo `correctable` classificado coerentemente
@@ -239,7 +239,7 @@ Alimentado com outputs reais dos Gates 5 e 6.
 
 ---
 
-### Gate 8 — Agente Corretor isolado
+### Eval 8 — Agente Corretor isolado
 
 O maior risco técnico: LLMs normalizam espaços e quebras de linha — se `old_string` não bater exato com o arquivo, a edição falha.
 
@@ -252,7 +252,7 @@ O maior risco técnico: LLMs normalizam espaços e quebras de linha — se `old_
 
 ---
 
-### Gate 9 — Dry-run completo
+### Eval 9 — Dry-run completo
 
 Fluxo completo de análise e coordenação, sem aplicar nenhuma edição.
 
@@ -265,11 +265,11 @@ Fluxo completo de análise e coordenação, sem aplicar nenhuma edição.
 
 ---
 
-### Gate 10 — Run completo real
+### Eval 10 — Run completo real
 
-Apenas após todos os gates anteriores passarem e com autorização explícita.
+Apenas após todos os evals anteriores passarem e com autorização explícita.
 
-- [ ] Gates 1–9 todos aprovados e documentados aqui
+- [ ] Evals 1–9 todos aprovados e documentados aqui
 - [ ] Giovani autorizou este run
 - [ ] `WIKI_DIR` apontando para `/root/wiki`
 - [ ] Log de execução em `/var/log/auditor-wiki.log`

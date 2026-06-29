@@ -300,3 +300,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Gates 0–8 substituindo validações opcionais V1–V17 por sequência bloqueante obrigatória
 - Mapeamento V1–V17 → gates, princípios de redesign, consideração de arquitetura alternativa
 - Páginas tocadas: wiki/procedures/auditor-wiki-evals.md, index.md
+
+## [2026-06-29] edit | procedures — rename Gate → Eval em auditor-wiki-evals.md
+- Renomeado "Gate" para "Eval" em todos os títulos e referências
+- "## Gates de validação" → "## Evals de validação"
+- Gates 1–10 → Evals 1–10; referências internas atualizadas
+- Páginas tocadas: wiki/procedures/auditor-wiki-evals.md
