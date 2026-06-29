@@ -25,10 +25,12 @@ Durante sessão no Hermes (28/jun/2026), o usuário solicitou revisão de qualid
 
 ## Skills utilizadas
 
-- **`conversion-copywriting`** — forneceu o framework **7 Sweeps Editing Process**: Clarity, Voice, Proof, Specificity, Stickiness, Emotion, Zero
-- **`social`** (referências) — `references/platform-limits.md` e `references/post-templates.md` usados como contexto complementar
+- **`conversion-copywriting`** — usada em **duas etapas**:
+  1. **Criação (v1):** skill escolhida aleatoriamente pelo usuário ("escolha uma skill aleatória de copywriting"). Metodologia Joanna Wiebe aplicada: leitura do guia `raw/libertas.md`, extração de VOC, estrutura PAS (Problem-Agitate-Solve), messaging hierarchy, draft com split-screen method. Entregou carrossel de 7 cards + legenda.
+  2. **Revisão (v2→v3):** framework **7 Sweeps Editing Process** (Clarity, Voice, Proof, Specificity, Stickiness, Emotion, Zero) aplicado contra briefing + guia de voz.
+- **`social`** (referências) — `references/platform-limits.md` e `references/post-templates.md` usados como contexto complementar na revisão
 
-## Metodologia: 7 Sweeps
+## Metodologia
 
 Os 7 Sweeps foram aplicados comparando o conteúdo do carrossel (v2/v3) contra dois insumos:
 
