@@ -226,23 +226,39 @@ Testa o mecanismo de spawn, sem nenhuma relação com o auditor. Agente genéric
 ⚠️ **Lição:** agentes genéricos no Claude Code carregam um system prompt interno substancial (~12K tokens) que não está visível em nenhum arquivo local. A estimativa de ~30 tokens estava errada por 400×. Todos os evals seguintes devem contar com esse overhead de base.
 
 **Critérios:**
-- [ ] Agente spawna sem erro
-- [ ] `json.loads(resposta)` não lança exceção
-- [ ] `resposta["ok"] == True`
-- [ ] Nenhuma prosa fora do JSON
+- [x] Agente spawna sem erro
+- [x] `json.loads(resposta)` não lança exceção
+- [x] `resposta["ok"] == True`
+- [x] Nenhuma prosa fora do JSON
 
 **Critério de reprovação:** JSON inválido | prosa fora do JSON.
 
 **Critério de aprovação:** `{"ok": true}` parseável, sem prosa.
 
-**Estatísticas a registrar:** `subagent_tokens` (da notificação), `input_tokens`, `output_tokens`, modelo usado.
+**Estatísticas a registrar:** `subagent_tokens` (da notificação), `input_tokens`, `cache_creation`, `cache_read`, `output_tokens`, modelo usado.
 
-**✅ APROVADO — 2026-06-29**
+**✅ APROVADO — 2026-06-29 (1ª execução)**
 - Resposta: `{"ok": true}` — JSON válido, sem prosa, `tool_uses: 0`
 - Duração: 1.245s
-- `subagent_tokens`: 12.603 (estimativa original: ~30 — erro de 400×)
-- `input_tokens` (meu prompt): 21
-- Modelo: ⚠️ não especificado explicitamente — herdou da sessão pai (claude-sonnet-4-6). Nos próximos evals declarar explicitamente.
+- `subagent_tokens`: 12.603
+- `input_tokens`: 21
+- Modelo: ⚠️ não especificado explicitamente — herdou da sessão pai (claude-sonnet-4-6)
+
+**✅ APROVADO — 2026-06-29 (2ª execução)**
+
+Modelo declarado explicitamente via `model: "sonnet"` ✅
+
+| Métrica | Estimado | Real |
+|---|---|---|
+| subagent_tokens (total do subagente) | ~30 | 12.603 |
+| input_tokens (prompt ao subagente) | ~20 | 3 |
+| cache_creation (system prompt interno) | não estimado | 12.599 |
+| cache_read | ~0 | 0 |
+| output_tokens (resposta do subagente) | ~10 | 1 |
+| tool_uses | 0 | 0 ✅ |
+| duration_ms | — | 1.807 |
+
+⚠️ **Lição confirmada:** o system prompt interno do Claude Code (~12.599 tokens) domina o custo de qualquer subagente genérico. A diferença de `input_tokens` entre as duas execuções (21 vs 3) reflete variação de contexto da sessão pai, não do prompt enviado.
 
 ---
 

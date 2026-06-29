@@ -362,3 +362,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Inclui: spawn com model=sonnet explícito, validação via Bash, template de relatório
 - Métrica: subagent_tokens da notificação (não JSONL delta — lição do run anterior)
 - Timestamp: 2026-06-29T09:26:30-03:00
+
+## [2026-06-29] edit | wiki/procedures — Eval 2-A: 2ª execução documentada
+- Critérios marcados como [x] (todos aprovados)
+- Stats da 2ª execução adicionados em tabela: subagent_tokens 12.603, input 3, cache_creation 12.599, cache_read 0, output 1, duration 1.807ms
+- Modelo explicitamente declarado via model: "sonnet" — lição da 1ª execução cumprida
+- Arquivo: wiki/procedures/auditor-wiki-evals.md
