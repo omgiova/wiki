@@ -414,3 +414,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Runner v4: validação inline, zero tool calls no turno 2, subagent_tokens < 15.000
 - subagent_tokens: 12.830, tool_uses: 0, duration_ms: 2.427, JSON válido ✅
 - Arquivo: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] edit | evals — Regra de transparência de custos adicionada; 4ª execução invalidada
+- Nova regra obrigatória: todo eval deve reportar tokens do subagente E da sessão pai
+- 4ª execução do Eval 2-B marcada como INVÁLIDO (runner v4 omitiu tokens do pai)
+- Arquivo: wiki/procedures/auditor-wiki-evals.md

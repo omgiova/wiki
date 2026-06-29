@@ -11,6 +11,8 @@ status: draft
 
 > ⚠️ **REGRA OBRIGATÓRIA:** após executar qualquer eval — mesmo que seja revisão manual sem tokens — documentar o resultado aqui (data, checklist, aprovado/reprovado) antes de qualquer outra ação. Nenhum próximo eval começa sem o anterior estar registrado.
 
+> ⚠️ **REGRA OBRIGATÓRIA — TRANSPARÊNCIA DE CUSTOS:** todo eval que executa subagente deve reportar obrigatoriamente **tanto os tokens do subagente quanto os tokens da sessão pai**. Rastreabilidade de custo é o princípio central — omitir qualquer das duas partes invalida o resultado, independente do JSON retornado estar correto. O runner de cada eval deve incluir os tokens do pai como critério de aprovação, não como opcional.
+
 Documento de análise e processo de validação para o [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]]. Combina o diagnóstico da primeira execução real (2026-06-28) com lições extraídas dos raws [[raw/agents-cli-README.md|Google Agents CLI]] e [[raw/akshay-pachaar-karpathy-agentic-engineering-tooling.md|Karpathy's Agentic Engineering Finally Has Proper Tooling]].
 
 ---
@@ -465,7 +467,8 @@ STATUS: ❌ REPROVADO
 - Adicionar critério formal: `subagent_tokens < 15.000`
 - Fluxo final: 2 turnos, 0 tool calls no turno 2
 
-**✅ APROVADO — 2026-06-29 (4ª execução — v4: validação inline)**
+**❌ INVÁLIDO — 2026-06-29 (4ª execução — v4: validação inline)**
+*(invalidado retroativamente: runner v4 omitiu tokens da sessão pai — viola a regra obrigatória de transparência de custos)*
 
 **Contexto de invocação:**
 - Terminal fechado completamente → reaberto → `/clear` → prompt enviado
