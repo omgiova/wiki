@@ -113,6 +113,7 @@ log.md
 ### todo/
 
 - [[wiki/todo/proximos-passos.md|Próximos passos]] — to-do list ativa da wiki
+- [[wiki/todo/violacoes-agentes.md|Violações de Regras — Agentes]] — registro append-only de violações graves de regras do AGENTS.md cometidas por agentes
 
 ### diario/
 

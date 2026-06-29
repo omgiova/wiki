@@ -329,3 +329,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada seção "Como capturar estatísticas de tokens" com metodologia JSONL delta
 - Campo _meta passa a ser obrigatório a partir do Eval 2-A
 - Timestamp: 2026-06-29T08:33:19-03:00
+
+## [2026-06-29] ingest | todo/violacoes-agentes — criado registro de violações graves de agentes
+- V1 documentado: edição de entrada existente no log.md (regra append-only quebrada em 2026-06-29)
+- Timestamp: 2026-06-29T08:35:41-03:00
