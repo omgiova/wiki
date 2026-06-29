@@ -373,3 +373,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionado: /clear antes do eval, prompt exato enviado, tabela comparativa entre 1ª e 2ª execuções
 - Lições: /clear elimina cache_read e reduz input_tokens; overhead base (~12.6K) domina sempre
 - Arquivo: wiki/procedures/auditor-wiki-evals.md
+
+## [2026-06-29] ingest | procedures — Eval 2-B: runner criado e execução documentada
+- Runner criado: /root/eval-2b-runner.md (autocontido, mesmo padrão do 2-A)
+- Wiki: seção Eval 2-B atualizada com instrução de execução (/clear + prompt exato), resposta esperada e estimativas de tokens corrigidas pós-2A
+- Arquivo tocado: wiki/procedures/auditor-wiki-evals.md

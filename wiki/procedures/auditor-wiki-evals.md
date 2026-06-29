@@ -275,32 +275,56 @@ Testa o mecanismo de spawn, sem nenhuma relação com o auditor. Agente genéric
 
 Só inicia após Eval 2-A aprovado. Agora entra o `auditor-pasta` pela primeira vez — mas sem nenhum conteúdo para auditar. Confirma que o agente nomeado spawna, carrega seu system prompt e retorna JSON válido com `findings: []`.
 
+**Runner:** `/root/eval-2b-runner.md` — autocontido, mesmo padrão do 2-A.
+
+**Como executar (nova sessão):**
+1. Abrir nova sessão do Claude Code
+2. `/clear` — zerar contexto
+3. Enviar exatamente: `leia só /root/eval-2b-runner.md e execute. não leia wiki nem outros arquivos.`
+
 **De onde vêm os tokens (estimativa corrigida pós Eval 2-A):**
 
 | Parte | Tokens estimados | Observação |
 |---|---|---|
-| System prompt interno Claude Code | ~12.000 | overhead de base de qualquer agente — confirmado no 2-A |
-| System prompt (`auditor-pasta.md`) | ~950 | somado ao overhead acima |
+| System prompt interno Claude Code | ~12.000 | overhead de base confirmado no 2-A |
+| System prompt do `auditor-pasta.md` | ~950 | arquivo tem ~137 linhas |
 | Prompt enviado | ~15 | |
-| Resposta (JSON vazio) | ~60 | |
+| Resposta (JSON vazio + _meta) | ~60 | |
 | **Total estimado** | **~13.025** | estimativa anterior (~1.025) ignorava o overhead base |
 
 **Prompt enviado ao subagente:**
 > `Pasta: test/. Nenhum arquivo para auditar. Retorne o JSON de caso sem findings.`
 
+**Resposta esperada (estrutura mínima):**
+```json
+{
+  "folder": "test/",
+  "agent": "auditor-pasta",
+  "findings": [],
+  "_meta": {
+    "files_read": [],
+    "read_calls": 0,
+    "approx_chars_read": 0,
+    "limit_reached": false
+  }
+}
+```
+
 **Critérios:**
 - [ ] Agente spawna sem erro
 - [ ] Resposta é JSON válido
 - [ ] Campos presentes: `folder`, `findings`, `agent`, `_meta`
+- [ ] `agent == "auditor-pasta"`
 - [ ] `findings == []`
 - [ ] `_meta.read_calls == 0`
+- [ ] `_meta.limit_reached == false`
 - [ ] Nenhuma prosa fora do JSON
 
-**Critério de reprovação:** JSON inválido | prosa fora do JSON | `findings` não vazio.
+**Critério de reprovação:** JSON inválido | prosa fora do JSON | campo obrigatório ausente | `findings` não vazio | `read_calls != 0` | `agent != "auditor-pasta"`.
 
-**Critério de aprovação:** JSON válido com estrutura mínima correta e `findings: []`.
+**Critério de aprovação:** JSON válido, todos os campos presentes, `findings: []`, `read_calls == 0`, sem prosa.
 
-**Estatísticas a registrar:** `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens`.
+**Estatísticas a registrar:** `subagent_tokens`, `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens`, `duration_ms`.
 
 ---
 
