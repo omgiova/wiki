@@ -24,9 +24,9 @@ Automação multi-agente de health-check completo da wiki. A ideia central: exec
 - **Loop de aprovação via Telegram** — cada finding apresentado individualmente com botões; correção aplicada só com autorização explícita; commit imediato por finding aprovado
 - **Push único** ao final com resumo
 
-A implementação atual é um script bash (`/root/auditor-wiki-v1.sh`) com subagentes invocados via `claude` CLI. Nada nessa implementação é obrigatório — a ideia central (análise → aprovação granular → commit por finding) pode ser reimplementada de forma diferente.
+A primeira implementação foi um script bash (`/root/auditor-wiki-v1.sh`) com subagentes invocados via `claude` CLI. Essa implementação **falhou** na primeira execução real (2026-06-28) — zero findings entregues, 75% da cota de tokens consumida em 5 minutos. Está abandonada. Nada nela é obrigatório — a ideia central (análise → aprovação granular → commit por finding) está sendo reimplementada com uma arquitetura diferente, descrita na seção "Arquitetura candidata" abaixo.
 
-Documentação completa da implementação atual: [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]].
+Documentação completa da implementação v1 e do fracasso: [[wiki/procedures/auditor-wiki.md|Auditor da Wiki]].
 
 ---
 
@@ -100,12 +100,30 @@ Os prompts do auditor (`prompt-awv1-pasta.md`, etc.) tentam fazer isso, mas sem 
 
 ---
 
+## Arquitetura candidata: subagentes nativos do Claude Code
+
+O diagnóstico e os raws convergem para uma arquitetura concreta: em vez de um bash script invocando o `claude` CLI como subprocesso externo, o **Claude Code é o orquestrador**, usando sua ferramenta nativa `Agent` para spawnar sub-Claudes especializados.
+
+**Por que é diferente do v1:**
+No v1, o bash era o gerente — chamava o `claude` 8 vezes como ferramenta externa. Bash não foi feito pra gerenciar agentes: não controla estado, não propaga erros, não sabe o que fazer quando um filho falha silenciosamente. Na arquitetura candidata, o orquestrador é o próprio Claude Code: spawna subagentes via `Agent`, recebe os resultados de volta na sessão principal, lida com erros nativamente, e conduz o loop Telegram dentro da mesma sessão. A ideia de agentes especializados por pasta permanece válida — o que muda é o mecanismo.
+
+**Como funciona:**
+1. Sessão principal do Claude Code inicia a auditoria
+2. Para cada pasta, spawna um subagente especializado via ferramenta `Agent`
+3. Subagente lê os arquivos, retorna findings em JSON para a sessão principal
+4. Sessão principal recebe os resultados, coordena, envia pro Telegram
+5. Aguarda resposta do usuário (botão), aplica edição, commita — tudo dentro da mesma sessão
+
+**Modelo:** `claude-sonnet-4-6` para todos os subagentes.
+
+---
+
 ## Princípios de redesign
 
 Derivados do diagnóstico + raws. Não são mudanças de implementação ainda — são os critérios que qualquer nova versão precisa satisfazer.
 
 **1. Fail-fast, não silencioso**
-Se um agente produz prosa em vez de JSON, o script deve abortar imediatamente com log do output (primeiros 300 chars) e mensagem Telegram. Nunca aceitar silenciosamente e seguir com dados vazios.
+Se um subagente produz prosa em vez de JSON, o orquestrador deve detectar imediatamente, logar os primeiros 300 chars do output e alertar via Telegram. Nunca aceitar silenciosamente e seguir com dados vazios.
 
 **2. Testar o contrato de output antes de gastar tokens**
 O primeiro run de qualquer versão nova do auditor deve ser com um único agente, na pasta mais pequena, e verificar que o JSON retornado tem todos os campos obrigatórios. Zero tokens adicionais gastos antes disso passar.
@@ -268,24 +286,6 @@ Apenas após todos os gates anteriores passarem e com autorização explícita.
 
 ---
 
-
-## Arquitetura candidata: subagentes nativos do Claude Code
-
-O diagnóstico e os raws convergem para uma arquitetura concreta: em vez de um bash script invocando o `claude` CLI como subprocesso externo, o **Claude Code é o orquestrador**, usando sua ferramenta nativa `Agent` para spawnar sub-Claudes especializados.
-
-**Por que é diferente do v1:**
-No v1, o bash era o gerente — chamava o `claude` 8 vezes como ferramenta externa. Bash não foi feito pra gerenciar agentes: não controla estado, não propaga erros, não sabe o que fazer quando um filho falha silenciosamente. Na arquitetura candidata, o orquestrador é o próprio Claude Code: spawna subagentes via `Agent`, recebe os resultados de volta na sessão principal, lida com erros nativamente, e conduz o loop Telegram dentro da mesma sessão. A ideia de agentes especializados por pasta permanece válida — o que muda é o mecanismo.
-
-**Como funciona:**
-1. Sessão principal do Claude Code inicia a auditoria
-2. Para cada pasta, spawna um subagente especializado via ferramenta `Agent`
-3. Subagente lê os arquivos, retorna findings em JSON para a sessão principal
-4. Sessão principal recebe os resultados, coordena, envia pro Telegram
-5. Aguarda resposta do usuário (botão), aplica edição, commita — tudo dentro da mesma sessão
-
-**Modelo:** `claude-sonnet-4-6` para todos os subagentes.
-
----
 
 ## Conexões
 
