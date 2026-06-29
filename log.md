@@ -247,3 +247,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - raw/libertas.md está exatamente como o usuário adicionou: sem frontmatter
 - index.md: entrada raw/libertas.md na árvore e na seção raw/raiz (válida — link no index, não edição do raw)
 - Páginas tocadas: log.md (esta correção)
+
+## [2026-06-28] session | libertas — revisão carrossel com 7 Sweeps (conversion-copywriting)
+- Duplicado v2 → v3 em /root/Libertas/carrossel-financeiro-investimento-v3.md
+- Aplicado framework 7 Sweeps do conversion-copywriting: 10 intervenções identificadas
+- Insumos: raw/libertas.md (guia de voz) + briefing do próprio carrossel
+- Nada aplicado ao v3 — documentado para referência futura
+- Criado wiki/history/2026-06-28-libertas-carrossel-7sweeps.md
+- Páginas tocadas: history/2026-06-28-libertas-carrossel-7sweeps.md, index.md, log.md

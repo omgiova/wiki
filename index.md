@@ -100,6 +100,7 @@ log.md
 - [[wiki/history/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
 - [[wiki/history/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
 - [[wiki/history/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq
+- [[wiki/history/2026-06-28-libertas-carrossel-7sweeps.md|Revisão Libertas — 7 Sweeps]] — aplicação dos 7 Sweeps do conversion-copywriting no carrossel Libertas v2/v3, 10 intervenções documentadas contra o guia de voz
 
 ### todo/
 
