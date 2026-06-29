@@ -293,3 +293,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Arquivo movido indevidamente para raw/ raiz; revertido para raw/google-okf/google-okf-README.md
 - Index atualizado: árvore e seção google-okf/ corrigidas
 - Páginas tocadas: raw/google-okf/google-okf-README.md, index.md
+
+## [2026-06-29] ingest | procedures — criar auditor-wiki-evals.md
+- Novo arquivo: wiki/procedures/auditor-wiki-evals.md
+- Diagnóstico da 1ª execução (desastre 2026-06-28) + lições dos raws agents-cli e Karpathy
+- Gates 0–8 substituindo validações opcionais V1–V17 por sequência bloqueante obrigatória
+- Mapeamento V1–V17 → gates, princípios de redesign, consideração de arquitetura alternativa
+- Páginas tocadas: wiki/procedures/auditor-wiki-evals.md, index.md
