@@ -3,7 +3,7 @@ type: system
 tags: [hermes, config, identity, rules, modelos, mcp]
 title: Hermes Agent
 description: Sistema principal do Giovani — identidade, stack, modelos, interface REST e operação do Hermes Agent
-timestamp: 2026-06-28T00:00:00-03:00
+timestamp: 2026-07-02T00:00:00-03:00
 status: stable
 ---
 
@@ -66,9 +66,18 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 
 **MCP Servers:**
 
-- **n8n** — `/root/.hermes/mcp-installs/n8n/` (enabled)
-- **ElevenLabs** — `uvx elevenlabs-mcp` (enabled) — ver [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]]
-- **ai-memory** — `http://127.0.0.1:49374/mcp` (disabled — não usar)
+MCPs são instalados uma vez no sistema e **registrados** na config de cada agente que precisa deles — nunca reinstalar/duplicar. Registro por agente:
+
+- **Hermes:** bloco em `mcp_servers:` no `config.yaml`
+- **Claude Code:** `claude mcp add <nome> -s user -- <comando>`
+
+| MCP | Comando | Credenciais | Registrado em |
+|---|---|---|---|
+| n8n | `/root/.hermes/mcp-installs/n8n/.venv/bin/python /root/.hermes/mcp-installs/n8n/server.py` | `N8N_API_KEY` + `N8N_BASE_URL` em `~/.config/n8n-mcp/env` ⚠️ pendência: arquivo não existe em 2026-07-02 — MCP roda sem chave | Hermes, Claude Code |
+| ElevenLabs | `uvx elevenlabs-mcp` — ver [[wiki/tools/elevenlabs-mcp.md\|ElevenLabs MCP]] | `ELEVENLABS_API_KEY` | Hermes |
+| ai-memory | `http://127.0.0.1:49374/mcp` (disabled — não usar) | — | — |
+
+Instalar MCP novo = adicionar linha nesta tabela + registrar nos agentes necessários.
 
 ## Interface
 

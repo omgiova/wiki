@@ -532,3 +532,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-01] edit | raw — atualização de copies aprovadas em libertas.md
 - Arquivo raw/libertas.md atualizado pelo usuário com copies aprovadas/atualizadas
 - 151 linhas adicionadas, 117 removidas (268 linhas totais modificadas)
+
+## [2026-07-02] edit | hermes — seção MCP Servers expandida com guia de reaproveitamento entre agentes
+- Princípio documentado: MCP instala-se uma vez, registra-se por agente (Hermes via config.yaml, Claude Code via claude mcp add)
+- Tabela de MCPs com comando, credenciais e onde estão registrados
+- Pendência anotada: ~/.config/n8n-mcp/env não existe — MCP n8n roda sem N8N_API_KEY
+- n8n MCP registrado no Claude Code nesta data
