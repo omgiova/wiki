@@ -72,7 +72,7 @@ Agente separado que processa as dailies e recomenda o que migrar para páginas p
 
 ### Fundação (2026-06-18)
 
-Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que quebraram n8n e Node-RED (IPVS table corrompida → 502), foi criada a estrutura inicial da wiki — o embrião do que virou esta wiki.
+Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que quebraram [[wiki/systems/n8n.md|n8n]] e Node-RED (IPVS table corrompida → 502), foi criada a estrutura inicial da wiki — o embrião do que virou esta wiki.
 
 ### 5 Pilares do objetivo final
 

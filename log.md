@@ -542,3 +542,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-02] edit | todo — duas pendências novas em proximos-passos.md
 - Item 16: configurar N8N_API_KEY em ~/.config/n8n-mcp/env (MCP n8n roda sem chave)
 - Item 17 [ESTUDO]: migrar info de uso geral da VPS de hermes.md para vps.md ou arquivo novo
+
+## [2026-07-02] ingest | systems — página n8n.md criada e linkada em toda a wiki
+- Nova página wiki/systems/n8n.md: Swarm queue mode (editor/webhook/worker via EasyPanel), 24 workflows (5 ativos), API, MCP, credenciais e erros conhecidos
+- Pendência do N8N_API_KEY resolvida: ~/.config/n8n-mcp/env criado (chmod 600) a partir de /root/.hermes/.env; fallback $CWD/.env documentado (explica por que funcionava no Hermes e não no Claude Code)
+- Wikilinks para n8n.md adicionados em: hermes.md (stack, tabela MCP, conexões), vps.md (tabela de serviços), concepts/wiki.md, concepts/orquestrador.md, todo/proximos-passos.md (item 16 marcado resolvido)
+- index.md atualizado (árvore + seção systems)

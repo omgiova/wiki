@@ -297,7 +297,7 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
   - Quem é (produtor musical experimental, curiosidade técnica, mão-na-massa)
   - Estilo de trabalho (método socrático de ensino, barreira de competência, loop em vez de prompt)
   - Preferências de comunicação (ação > explicação, sem follow-up não solicitado, sem suposição)
-  - Stack pessoal (Hermes, Telegram, VPS, n8n, Node-RED, ElevenLabs)
+  - Stack pessoal (Hermes, Telegram, VPS, [[wiki/systems/n8n.md|n8n]], Node-RED, ElevenLabs)
   - Projetos ativos
 
 ### 7.2 — Descobertas de ElevenLabs SFX sem página permanente ✅

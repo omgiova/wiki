@@ -48,7 +48,7 @@ status: stable
 | Serviço | Porta | Função |
 |---|---|---|
 | Hermes Agent | 9119 | Dashboard |
-| n8n | — | Automação (MCP) |
+| [[wiki/systems/n8n.md\|n8n]] | 5678 (interna, via Traefik) | Automação — ver [[wiki/systems/n8n.md\|n8n]] |
 | Node-RED | 8800 | Automação residencial + Alexa |
 
 ## Stack de desenvolvimento

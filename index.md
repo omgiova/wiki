@@ -54,6 +54,7 @@ log.md
     ├── systems/
     │   ├── hermes-endpoints.md
     │   ├── hermes.md
+    │   ├── n8n.md
     │   ├── termux-ssh-claude.md
     │   └── vps.md
     ├── todo/
@@ -78,6 +79,7 @@ log.md
 - [[wiki/systems/hermes.md|Hermes]] — sistema principal: identidade, stack, modelos, interface REST e operação do Hermes Agent
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
 - [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
+- [[wiki/systems/n8n.md|n8n]] — plataforma de automação: Swarm queue mode via EasyPanel, workflows, API/MCP, credenciais e erros conhecidos
 - [[wiki/systems/termux-ssh-claude.md|Termux + SSH + Claude]] — setup completo de acesso remoto: configuração, erros conhecidos e troubleshooting
 
 ### tools/

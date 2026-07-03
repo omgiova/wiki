@@ -28,7 +28,7 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 ## Stack e configuração
 
 - **VPS:** Hostinger KVM 2 (Ubuntu) — ver [[wiki/systems/vps.md|vps]]
-- **Automação:** n8n + Node-RED
+- **Automação:** [[wiki/systems/n8n.md|n8n]] + Node-RED
 - **Mídia:** React + Remotion
 - **Gateway:** Telegram (celular)
 
@@ -73,7 +73,7 @@ MCPs são instalados uma vez no sistema e **registrados** na config de cada agen
 
 | MCP | Comando | Credenciais | Registrado em |
 |---|---|---|---|
-| n8n | `/root/.hermes/mcp-installs/n8n/.venv/bin/python /root/.hermes/mcp-installs/n8n/server.py` | `N8N_API_KEY` + `N8N_BASE_URL` em `~/.config/n8n-mcp/env` ⚠️ pendência: arquivo não existe em 2026-07-02 — MCP roda sem chave | Hermes, Claude Code |
+| n8n | `/root/.hermes/mcp-installs/n8n/.venv/bin/python /root/.hermes/mcp-installs/n8n/server.py` | `N8N_API_KEY` + `N8N_BASE_URL` em `~/.config/n8n-mcp/env` (criado 2026-07-02, `chmod 600` — pendência resolvida) — ver [[wiki/systems/n8n.md\|n8n]] | Hermes, Claude Code |
 | ElevenLabs | `uvx elevenlabs-mcp` — ver [[wiki/tools/elevenlabs-mcp.md\|ElevenLabs MCP]] | `ELEVENLABS_API_KEY` | Hermes |
 | ai-memory | `http://127.0.0.1:49374/mcp` (disabled — não usar) | — | — |
 
@@ -140,6 +140,7 @@ plugins:
 ## Conexões
 
 - [[wiki/systems/vps.md|VPS]] — hardware e serviços da stack
+- [[wiki/systems/n8n.md|n8n]] — plataforma de automação consumida via MCP
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos endpoints REST
 - [[wiki/concepts/wiki.md|Wiki]] — base de conhecimento
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
