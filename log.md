@@ -538,3 +538,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Tabela de MCPs com comando, credenciais e onde estão registrados
 - Pendência anotada: ~/.config/n8n-mcp/env não existe — MCP n8n roda sem N8N_API_KEY
 - n8n MCP registrado no Claude Code nesta data
+
+## [2026-07-02] edit | todo — duas pendências novas em proximos-passos.md
+- Item 16: configurar N8N_API_KEY em ~/.config/n8n-mcp/env (MCP n8n roda sem chave)
+- Item 17 [ESTUDO]: migrar info de uso geral da VPS de hermes.md para vps.md ou arquivo novo

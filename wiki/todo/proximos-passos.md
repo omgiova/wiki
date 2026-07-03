@@ -3,13 +3,17 @@ type: todo
 tags: [github, hermes, obsidian, todo, wiki]
 title: Próximos Passos
 description: Pendências ativas da wiki — migração de conhecimento, AGENTS.md, revisão do SOUL.md e estrutura de diário/raw
-timestamp: 2026-06-18T21:00:00-03:00
+timestamp: 2026-07-02T00:00:00-03:00
 status: stable
 ---
 
 ## Próximos Passos
 
 ### Pendente
+
+16. **Configurar `N8N_API_KEY` para o MCP n8n** — o servidor MCP (`/root/.hermes/mcp-installs/n8n/server.py`) procura a chave em `~/.config/n8n-mcp/env`, mas o arquivo não existe e o processo roda sem chave — provavelmente quebrado tanto pro Hermes quanto pro Claude Code. Gerar chave no painel do n8n (Settings → API) e salvar `N8N_API_KEY` + `N8N_BASE_URL` no arquivo. Ver seção MCP Servers em [[wiki/systems/hermes.md|hermes]]. *Registrado 2026-07-02.*
+
+17. **[ESTUDO] Migrar informações de uso geral da VPS para fora de `hermes.md`** — `hermes.md` acumula conteúdo que não é específico do Hermes e vale para qualquer agente da VPS (ex: seção MCP Servers, possivelmente APIs/credenciais compartilhadas). Estudar o que é "do Hermes" vs "da VPS" e mover o que for geral para [[wiki/systems/vps.md|vps]] ou para um arquivo novo (ex: `env`) — decidir estrutura antes de mover. *Registrado 2026-07-02.*
 
 0. **[PRIORIDADE ALTÍSSIMA] Corrigir wiki_review para gravar em `diario/` em vez de `diary/`** — o script atualmente grava os diários na pasta `diary/` (que está vazia), mas a pasta real com conteúdo é `wiki/diario/`. Fix necessário antes de qualquer nova execução do wiki_review. *Registrado 2026-06-29.*
 
