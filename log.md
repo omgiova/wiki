@@ -548,3 +548,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Pendência do N8N_API_KEY resolvida: ~/.config/n8n-mcp/env criado (chmod 600) a partir de /root/.hermes/.env; fallback $CWD/.env documentado (explica por que funcionava no Hermes e não no Claude Code)
 - Wikilinks para n8n.md adicionados em: hermes.md (stack, tabela MCP, conexões), vps.md (tabela de serviços), concepts/wiki.md, concepts/orquestrador.md, todo/proximos-passos.md (item 16 marcado resolvido)
 - index.md atualizado (árvore + seção systems)
+
+## [2026-07-05] edit | tools — MCP do n8n movida para página própria n8n-mcp.md
+- Regra definida pelo Giovani: plataforma é system, MCP dela é tool — todo MCP ganha página própria em tools/
+- Criada wiki/tools/n8n-mcp.md: trechos de MCP de systems/n8n.md movidos verbatim (bullet MCP da Interface e erro N8N_API_KEY) + capabilities observadas no Claude Code
+- systems/n8n.md: trechos movidos substituídos por wikilinks para a nova página; Conexões atualizada
+- index.md atualizado (árvore + seção tools)

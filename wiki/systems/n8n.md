@@ -29,7 +29,7 @@ Roteamento: Traefik (443) → DNS do Swarm → IPVS → container (porta interna
 
 - **UI/API:** `https://projetos-n8n-editor.igkokh.easypanel.host` (REST em `/api/v1`)
 - **Credenciais:** `N8N_API_KEY` + `N8N_BASE_URL` em `~/.config/n8n-mcp/env` (path canônico, `chmod 600`; fonte: `/root/.hermes/.env`)
-- **MCP:** server stdio em `/root/.hermes/mcp-installs/n8n/server.py` — interface para qualquer agente da VPS; registrado no gateway Hermes e no Claude Code. Ordem de resolução do env: `$N8N_MCP_ENV` → `~/.config/n8n-mcp/env` → `$CWD/.env`
+- **MCP:** ver [[wiki/tools/n8n-mcp.md|n8n MCP]] — página própria da ferramenta (server, registro nos clientes, env, capabilities e erros)
 
 ## Workflows (2026-07-02)
 
@@ -58,10 +58,11 @@ Base de conhecimento completa: 8 skills `n8n-*` em `/root/.hermes/skills/` (expr
 ## Erros conhecidos
 
 - **502 via Traefik** quando a tabela IPVS esvazia após scale/update do serviço — ver [[wiki/systems/vps.md|vps]] e case em `/root/.hermes/skills/docker-host-interaction-troubleshooting/`
-- **`N8N_API_KEY is missing` na MCP:** env não encontrado. Gateway Hermes mascara via fallback `$CWD/.env` (cwd `/root/.hermes/`); outros clientes exigem o path canônico. Resolvido 2026-07-02. Env só é relido no restart do MCP.
+- Erros específicos da MCP: ver [[wiki/tools/n8n-mcp.md|n8n MCP]]
 - Workflow "Teste de skills" com 2 falhas em 03/07 (madrugada) — investigar
 
 ## Conexões
 
 - [[wiki/systems/vps.md|VPS]] — host, Swarm, IPVS
 - [[wiki/systems/hermes.md|Hermes]] — agente que consome o n8n via MCP
+- [[wiki/tools/n8n-mcp.md|n8n MCP]] — interface MCP da plataforma para os agentes da VPS

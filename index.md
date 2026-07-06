@@ -62,6 +62,7 @@ log.md
     └── tools/
         ├── elevenlabs-mcp.md
         ├── firecrawl.md
+        ├── n8n-mcp.md
         ├── obsidian-git.md
         └── telegram.md
 ```
@@ -86,6 +87,7 @@ log.md
 
 - [[wiki/tools/telegram.md|Telegram]] — referência completa: IDs, tópicos, HERMES_SESSION_MESSAGE_ID, sendMessage, sendRichMessage, reações e integrações com o Hermes
 - [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — capabilities e limites do free tier: text_to_sound_effects, compose_music (pago), limitação de duração, créditos
+- [[wiki/tools/n8n-mcp.md|n8n MCP]] — interface MCP do n8n para os agentes da VPS: server stdio, registro nos clientes, env, capabilities e erros conhecidos
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
 
