@@ -29,10 +29,10 @@ No lançamento (2026): boards (ver/criar), listas (ver/mover), cards (ver/criar/
 
 ## Como usar
 
-Registrado no **Claude Code** (escopo user, `/root/.claude.json`) desde 2026-07-05:
+Registrado no **Claude Code** (escopo user, `/root/.claude.json`) desde 2026-07-05. Em 2026-07-06 foi renomeado de `trello` para `trello-oficial`, liberando o nome `trello` para o [[wiki/tools/trello-mcp.md|MCP da comunidade]]:
 
 ```
-claude mcp add --transport http --scope user trello https://mcp.trello.com/v1
+claude mcp add --transport http --scope user trello-oficial https://mcp.trello.com/v1
 ```
 
 Status: `Needs authentication` — autorizar via `/mcp` na sessão do Claude Code quando o acesso existir (ver Erros conhecidos).

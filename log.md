@@ -575,3 +575,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - wiki/systems/hermes.md: tabela de MCPs removida da seção MCP Servers; agora aponta pro registro central (aprovado pelo Giovani)
 - wiki/tools/trello-mcp.md: credenciais validadas via curl (token da dona do workspace, conta lemosluciana); status atualizado; registro no Claude Code e no config.yaml do Hermes documentado (restart pendente de autorização)
 - index.md: mcps.md adicionado (árvore + entrada); descrição do trello-mcp.md atualizada
+
+## [2026-07-06] chore | trello-mcp — registro efetivado nos clientes
+- Claude Code: MCP oficial renomeado `trello` → `trello-oficial`; comunidade registrado como `trello` (/root/mcp/trello-mcp.sh) — status ✔ Connected
+- Hermes: bloco `trello` adicionado em mcp_servers: no config.yaml — vale só após restart autorizado do gateway (não executado)
+- wiki/tools/trello-mcp-oficial.md: renomeação documentada
