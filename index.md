@@ -51,6 +51,8 @@ log.md
     │   ├── curador-wiki-historico.md
     │   ├── curador-wiki.md
     │   └── wiki-review.md
+    ├── projects/
+    │   └── finflow.md
     ├── systems/
     │   ├── hermes-endpoints.md
     │   ├── hermes.md
@@ -84,6 +86,15 @@ log.md
 - [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/systems/n8n.md|n8n]] — plataforma de automação: Swarm queue mode via EasyPanel, workflows, API/MCP, credenciais e erros conhecidos
 - [[wiki/systems/termux-ssh-claude.md|Termux + SSH + Claude]] — setup completo de acesso remoto: configuração, erros conhecidos e troubleshooting
+
+### projects/
+
+Repositórios criados pelo Giovani (dashboards, sites, jogos...). Cada página é um **ponteiro
+enxuto** — o que é, onde mora, como roda — apontando pra documentação completa no próprio repo
+(a wiki não duplica). Critério: *construí e é um produto* → `projects/`; *roda como serviço e
+sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
+
+- [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
 
 ### tools/
 

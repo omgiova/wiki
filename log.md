@@ -564,3 +564,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - systems/vps.md § Acesso SSH: nova subseção "Túnel de porta" — comando validado hoje no 4G (`ssh -p 2222 -L 3777:localhost:3777 root@IPv6`), receita genérica por porta (3777 = finflow dev), passo do New session no Termux, alternativas (cloudflared, Tailscale) e aviso de nunca expor dev server; tags ganham termux/celular/ssh pra busca
 - systems/termux-ssh-claude.md: nota de redirecionamento no topo apontando pra vps.md § Acesso SSH (conteúdo do diagnóstico intocado)
 - Motivo: acesso pelo celular é informação recorrente; página canônica = vps.md, apontadores onde um agente procuraria
+
+## [2026-07-06] ingest | projects — pasta nova projects/ com primeira página (finflow)
+- Criada wiki/projects/ — categoria pros repositórios criados pelo Giovani (dashboards, sites, jogos); critério decidido com ele: produto próprio → projects/, serviço de infra → systems/, ferramenta de terceiro → tools/
+- wiki/projects/finflow.md: página-ponteiro do finflow (o que é, /root/finflow, repo omgiova/finflow, dev na 3777, stack) apontando pra documentação completa no próprio repo (README/CLAUDE/CHANGELOG) — a wiki não duplica
+- index.md atualizado (árvore + seção projects/ com o critério de categorização)
