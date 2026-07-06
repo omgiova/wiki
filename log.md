@@ -554,3 +554,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criada wiki/tools/n8n-mcp.md: trechos de MCP de systems/n8n.md movidos verbatim (bullet MCP da Interface e erro N8N_API_KEY) + capabilities observadas no Claude Code
 - systems/n8n.md: trechos movidos substituídos por wikilinks para a nova página; Conexões atualizada
 - index.md atualizado (árvore + seção tools)
+
+## [2026-07-05] ingest | tools — páginas dos MCPs do Trello (comunidade e oficial)
+- wiki/tools/trello-mcp.md: MCP da comunidade (@delorenj/mcp-server-trello) — wrapper /root/mcp/trello-mcp.sh + credenciais em /root/mcp/trello.env (API key da dona do workspace validada; token pendente de geração), skill clonada em /root/.hermes/skills/trello/; status de validação pendente
+- wiki/tools/trello-mcp-oficial.md: MCP oficial Atlassian (mcp.trello.com/v1, OAuth) — registrado no Claude Code mas bloqueado: "No Trello workspaces found" porque Giovani é só convidado no board (OAuth exige membro do workspace); registro mantido para teste futuro
+- index.md atualizado (árvore + seção tools)

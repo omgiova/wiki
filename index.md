@@ -64,7 +64,9 @@ log.md
         ├── firecrawl.md
         ├── n8n-mcp.md
         ├── obsidian-git.md
-        └── telegram.md
+        ├── telegram.md
+        ├── trello-mcp-oficial.md
+        └── trello-mcp.md
 ```
 
 ## raiz/
@@ -90,6 +92,8 @@ log.md
 - [[wiki/tools/n8n-mcp.md|n8n MCP]] — interface MCP do n8n para os agentes da VPS: server stdio, registro nos clientes, env, capabilities e erros conhecidos
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
+- [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] — MCP local via npx com credenciais da dona do workspace; wrapper em /root/mcp/, skill em /root/.hermes/skills/trello/; validação pendente (aguardando token)
+- [[wiki/tools/trello-mcp-oficial.md|Trello MCP (oficial)]] — MCP na nuvem da Atlassian via OAuth; registrado no Claude Code mas bloqueado (Giovani é só convidado no board, OAuth exige membro do workspace)
 
 ### procedures/
 
