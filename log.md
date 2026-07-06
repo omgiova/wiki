@@ -585,3 +585,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Informação errada ("mudanças só valem após restart") tinha sido inserida sem verificação nos commits anteriores de hoje
 - Fonte da correção: documentação oficial do Hermes (website/docs/user-guide/features/mcp.md) — auto-reload das conexões MCP ao editar config.yaml + comando /reload-mcp; confirmado pelo Giovani (MCP trello apareceu habilitado no dashboard sem restart)
 - Corrigidos: wiki/concepts/mcps.md, wiki/systems/hermes.md, wiki/tools/trello-mcp.md, index.md
+
+## [2026-07-06] edit | hermes — tabela dos 8 backends de web search suportados
+- Web Search do hermes.md dizia só "Backend: Firecrawl"; adicionada tabela com os 8 backends suportados (Firecrawl, SearXNG, Brave, DDGS, Tavily, Exa, Parallel, xAI), env vars, capacidades e free tiers
+- Fonte: documentação oficial do Hermes (website/docs/user-guide/features/web-search.md)
+- Registrado que search_backend/extract_backend são independentes e a ordem de auto-detecção por credencial
+- Páginas tocadas: wiki/systems/hermes.md

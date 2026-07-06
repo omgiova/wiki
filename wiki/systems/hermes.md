@@ -64,6 +64,21 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 - API key e URL configurados no `.env` (`FIRECRAWL_API_KEY`, `FIRECRAWL_API_URL`)
 - Usar `web_search` para buscas rápidas, `firecrawl search` via terminal para buscas avançadas
 
+O Firecrawl é o backend **configurado**, não o único suportado. O Hermes aceita 8 backends de web search (docs: `website/docs/user-guide/features/web-search.md`), e `search_backend`/`extract_backend` são independentes — dá para combinar busca grátis com extração Firecrawl:
+
+| Backend | Env var | Busca | Extração | Free tier |
+|---|---|---|---|---|
+| **Firecrawl** (default; em uso) | `FIRECRAWL_API_KEY` | ✔ | ✔ | 500 créditos/mês |
+| SearXNG | `SEARXNG_URL` | ✔ | — | grátis (self-hosted) |
+| Brave Search | `BRAVE_SEARCH_API_KEY` | ✔ | — | 2.000 buscas/mês |
+| DDGS (DuckDuckGo) | — (sem chave) | ✔ | — | grátis |
+| Tavily | `TAVILY_API_KEY` | ✔ | ✔ | 1.000 buscas/mês |
+| Exa | `EXA_API_KEY` | ✔ | ✔ | 1.000 buscas/mês |
+| Parallel | `PARALLEL_API_KEY` | ✔ | ✔ | pago |
+| xAI (Grok) | `XAI_API_KEY` | ✔ | — | pago |
+
+Sem backend explícito no config, o Hermes auto-detecta pela primeira credencial presente (ordem: firecrawl → parallel → tavily → exa → searxng).
+
 **MCP Servers:**
 
 O Hermes registra MCPs no bloco `mcp_servers:` do `config.yaml`. **Não precisa de restart do gateway**: a documentação oficial (`website/docs/user-guide/features/mcp.md`) documenta auto-reload das conexões MCP ao editar o config, e o comando `/reload-mcp` como caminho explícito de recarga. A lista completa dos MCPs da VPS, com links e status de registro por agente, fica no [[wiki/concepts/mcps.md|Registro central de MCPs]].
