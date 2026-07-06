@@ -66,18 +66,7 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 
 **MCP Servers:**
 
-MCPs são instalados uma vez no sistema e **registrados** na config de cada agente que precisa deles — nunca reinstalar/duplicar. Registro por agente:
-
-- **Hermes:** bloco em `mcp_servers:` no `config.yaml`
-- **Claude Code:** `claude mcp add <nome> -s user -- <comando>`
-
-| MCP | Comando | Credenciais | Registrado em |
-|---|---|---|---|
-| n8n | `/root/.hermes/mcp-installs/n8n/.venv/bin/python /root/.hermes/mcp-installs/n8n/server.py` | `N8N_API_KEY` + `N8N_BASE_URL` em `~/.config/n8n-mcp/env` (criado 2026-07-02, `chmod 600` — pendência resolvida) — ver [[wiki/systems/n8n.md\|n8n]] | Hermes, Claude Code |
-| ElevenLabs | `uvx elevenlabs-mcp` — ver [[wiki/tools/elevenlabs-mcp.md\|ElevenLabs MCP]] | `ELEVENLABS_API_KEY` | Hermes |
-| ai-memory | `http://127.0.0.1:49374/mcp` (disabled — não usar) | — | — |
-
-Instalar MCP novo = adicionar linha nesta tabela + registrar nos agentes necessários.
+O Hermes registra MCPs no bloco `mcp_servers:` do `config.yaml` (mudanças só valem após restart do gateway). A lista completa dos MCPs da VPS, com links e status de registro por agente, fica no [[wiki/concepts/mcps.md|Registro central de MCPs]].
 
 ## Interface
 
@@ -143,6 +132,7 @@ plugins:
 - [[wiki/systems/n8n.md|n8n]] — plataforma de automação consumida via MCP
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos endpoints REST
 - [[wiki/concepts/wiki.md|Wiki]] — base de conhecimento
+- [[wiki/concepts/mcps.md|Registro central de MCPs]] — lista oficial dos MCPs da VPS e onde cada um está registrado
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
 - [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — síntese de voz via MCP
 - [[wiki/history/crise-update.md|Crise update]] — recuperação de sessões

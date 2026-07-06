@@ -2,8 +2,8 @@
 type: tool
 tags: [trello, mcp, agentes]
 title: Trello MCP (comunidade)
-description: MCP da comunidade (@delorenj/mcp-server-trello) rodando local via npx com credenciais da dona do workspace; wrapper e env em /root/mcp/, skill em /root/.hermes/skills/trello/
-timestamp: 2026-07-05T22:05:00-03:00
+description: MCP da comunidade (@delorenj/mcp-server-trello) rodando local via npx com credenciais da dona do workspace; wrapper e env em /root/mcp/, skill em /root/.hermes/skills/trello/; credenciais validadas 2026-07-06
+timestamp: 2026-07-06T18:49:00-03:00
 status: draft
 ---
 
@@ -36,7 +36,7 @@ Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-tr
 
 - **Wrapper:** `/root/mcp/trello-mcp.sh` — lê as credenciais de `/root/mcp/trello.env` e sobe o servidor via `npx -y @delorenj/mcp-server-trello`. É o comando que qualquer cliente MCP da VPS deve apontar.
 - **Skill:** `/root/.hermes/skills/trello/` — pacote `skill/` do repositório (clonado em 2026-07-05), com `SKILL.md`, `references/trello-mcp/` (api, patterns, gotchas, configuration), `assets/source/` e `scripts/install.sh`. Recurso de todos os agentes da VPS.
-- **Registro nos clientes:** pendente — nenhum cliente registrado ainda (aguardando token válido).
+- **Registro nos clientes:** Claude Code (`claude mcp add trello -s user -- /root/mcp/trello-mcp.sh`) e Hermes (bloco `trello` em `mcp_servers:` no `config.yaml` — só passa a valer após restart autorizado do gateway). Ver [[wiki/concepts/mcps.md|Registro central de MCPs]].
 
 ## Quando não usar
 
@@ -57,7 +57,7 @@ Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-tr
 
 ## Status de validação
 
-**Pendente.** Em 2026-07-05: API key validada contra a API (`invalid token` = key aceita); token ainda não gerado pela dona do workspace. Falta: token → teste real → registro no Claude Code → adaptação/uso da skill → registro no Hermes (sem restart sem autorização) → teste do Giovani em nova sessão.
+**Credenciais validadas, MCP ainda não testado ponta a ponta.** Em 2026-07-05: API key validada contra a API (`invalid token` = key aceita). Em 2026-07-06: token gerado pela dona e validado via curl — `/1/members/me` retorna a conta dela (`lemosluciana`) e `/1/members/me/boards` lista os quadros do workspace. Registrado no Claude Code e no `config.yaml` do Hermes (aguardando restart autorizado do gateway). Falta: teste real das tools MCP → adaptação/uso da skill → teste do Giovani em nova sessão.
 
 ## Conexões
 

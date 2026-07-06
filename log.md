@@ -569,3 +569,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criada wiki/projects/ — categoria pros repositórios criados pelo Giovani (dashboards, sites, jogos); critério decidido com ele: produto próprio → projects/, serviço de infra → systems/, ferramenta de terceiro → tools/
 - wiki/projects/finflow.md: página-ponteiro do finflow (o que é, /root/finflow, repo omgiova/finflow, dev na 3777, stack) apontando pra documentação completa no próprio repo (README/CLAUDE/CHANGELOG) — a wiki não duplica
 - index.md atualizado (árvore + seção projects/ com o critério de categorização)
+
+## [2026-07-06] edit | mcps — registro central de MCPs criado; Trello MCP validado e registrado
+- Criada wiki/concepts/mcps.md — registro oficial dos MCPs da VPS (link por página + agentes onde cada um está registrado)
+- wiki/systems/hermes.md: tabela de MCPs removida da seção MCP Servers; agora aponta pro registro central (aprovado pelo Giovani)
+- wiki/tools/trello-mcp.md: credenciais validadas via curl (token da dona do workspace, conta lemosluciana); status atualizado; registro no Claude Code e no config.yaml do Hermes documentado (restart pendente de autorização)
+- index.md: mcps.md adicionado (árvore + entrada); descrição do trello-mcp.md atualizada
