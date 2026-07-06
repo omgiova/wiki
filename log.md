@@ -596,3 +596,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Página lida por outro agente parecia regra geral ("preferir Firecrawl"); nova seção esclarece: no Hermes é o backend configurado (de 8 suportados), no Claude Code o padrão é a busca nativa (WebSearch/WebFetch), Firecrawl consome créditos (500/mês free)
 - Registrado que os skills firecrawl-* do Claude Code instruem "usar em vez do WebFetch" por conta própria (instrução do fornecedor, não do setup)
 - Conteúdo existente da página intocado; páginas tocadas: wiki/tools/firecrawl.md
+
+## [2026-07-06] edit | trello — MCP oficial autenticado; status atualizados
+- Giovani virou membro do workspace e o OAuth do MCP oficial foi autorizado na sessão do Claude Code; validado com trelloReadMember get_me (conta giovanigomesdeamorim)
+- trello-mcp-oficial.md: status "Bloqueado" → "Autenticado e validado", fluxo OAuth usado documentado (tools authenticate/complete_authentication + callback localhost que fica carregando sem impedir a conclusão), 15 tools verificadas na prática (Inbox, Planner, busca, ARIs), erro "No Trello workspaces found" marcado como resolvido
+- trello-mcp.md: bloqueio referido no passado; identidades distintas (comunidade = dona do workspace, oficial = Giovani); status de validação atualizado com o teste real de list_workspaces/list_boards (achou o board DEMANDAS GERAIS) e gotcha do output gigante de list_boards
+- mcps.md: linha do oficial na tabela — "bloqueado" → "autenticado 2026-07-06 como Giovani"
+- Referências completas fora da wiki: /root/mcp/trello-mcp-oficial-acoes.md e /root/mcp/trello-mcp-comunidade-acoes.md
+- Páginas tocadas: wiki/tools/trello-mcp-oficial.md, wiki/tools/trello-mcp.md, wiki/concepts/mcps.md

@@ -11,7 +11,7 @@ status: draft
 
 ## O que é
 
-Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-trello` ([repositório](https://github.com/delorenj/mcp-server-trello)), rodando localmente na VPS via `npx` (Node v22, sem instalação permanente). Escolhido em vez do [[wiki/tools/trello-mcp-oficial.md|MCP oficial]] porque o Giovani é apenas **convidado** no board principal (não é membro do workspace), o que bloqueia o OAuth do oficial. Este servidor usa API key + token da **dona do workspace**, que enxergam tudo que a conta dela enxerga.
+Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-trello` ([repositório](https://github.com/delorenj/mcp-server-trello)), rodando localmente na VPS via `npx` (Node v22, sem instalação permanente). Escolhido em vez do [[wiki/tools/trello-mcp-oficial.md|MCP oficial]] porque, na época (2026-07-05), o Giovani era apenas **convidado** no board principal (não membro do workspace), o que bloqueava o OAuth do oficial. Este servidor usa API key + token da **dona do workspace**, que enxergam tudo que a conta dela enxerga. Desde 2026-07-06 o bloqueio não existe mais (Giovani virou membro e o oficial foi autenticado); os dois MCPs coexistem com identidades distintas — este age como a dona do workspace, o oficial age como o Giovani.
 
 ## Capabilities
 
@@ -41,7 +41,7 @@ Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-tr
 ## Quando não usar
 
 - **n8n:** usar o nó nativo do Trello do próprio n8n, com a credencial (mesma API key + token) cadastrada na UI (Credentials → Trello API) — caminho natural do n8n, mais confiável que MCP dentro de workflow. Ver [[wiki/systems/n8n.md|n8n]].
-- Se o acesso de membro do workspace for obtido no futuro, avaliar o [[wiki/tools/trello-mcp-oficial.md|MCP oficial]] (OAuth, sem token guardado, sem deletes permanentes).
+- Quando a ação deve sair em nome do **Giovani** (não da dona do workspace), ou quando precisar de Inbox, Planner ou busca por texto — usar o [[wiki/tools/trello-mcp-oficial.md|MCP oficial]] (autenticado desde 2026-07-06; OAuth, sem token guardado, sem deletes permanentes).
 
 ## Configuração
 
@@ -57,7 +57,7 @@ Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-tr
 
 ## Status de validação
 
-**Credenciais validadas, MCP ainda não testado ponta a ponta.** Em 2026-07-05: API key validada contra a API (`invalid token` = key aceita). Em 2026-07-06: token gerado pela dona e validado via curl — `/1/members/me` retorna a conta dela (`lemosluciana`) e `/1/members/me/boards` lista os quadros do workspace. Registrado no Claude Code (✔ conectado) e no `config.yaml` do Hermes — já aparece habilitado no dashboard via auto-reload do config, sem restart. Falta: teste real das tools MCP → adaptação/uso da skill → teste do Giovani em nova sessão.
+**Credenciais validadas e primeiras tools testadas na prática.** Em 2026-07-05: API key validada contra a API (`invalid token` = key aceita). Em 2026-07-06: token gerado pela dona e validado via curl — `/1/members/me` retorna a conta dela (`lemosluciana`) e `/1/members/me/boards` lista os quadros do workspace. Registrado no Claude Code (✔ conectado) e no `config.yaml` do Hermes — já aparece habilitado no dashboard via auto-reload do config, sem restart. Ainda em 2026-07-06, em sessão do Claude Code: `list_workspaces` e `list_boards` executadas com sucesso (localizaram o board "DEMANDAS GERAIS | Open Mídia Digital" no workspace "Criação - Clientes"). Atenção: o retorno de `list_boards` é gigante (~1,4M caracteres) — estourou o limite de output e precisou ser lido via arquivo salvo. Falta: testar as tools de escrita → adaptação/uso da skill → teste do Giovani em nova sessão. Lista completa das tools realmente expostas: `/root/mcp/trello-mcp-comunidade-acoes.md` (a referência da skill lista 6 tools que o servidor atual não expõe).
 
 ## Conexões
 

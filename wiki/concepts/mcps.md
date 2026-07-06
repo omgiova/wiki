@@ -30,7 +30,7 @@ Fonte da verdade sobre os MCPs disponíveis na VPS. Detalhes de cada MCP (comand
 | n8n | [[wiki/tools/n8n-mcp.md\|n8n MCP]] | Hermes, Claude Code | ativo |
 | ElevenLabs | [[wiki/tools/elevenlabs-mcp.md\|ElevenLabs MCP]] | Hermes | ativo |
 | Trello (comunidade) | [[wiki/tools/trello-mcp.md\|Trello MCP]] | Claude Code, Hermes | credenciais validadas 2026-07-06 |
-| Trello (oficial Atlassian) | [[wiki/tools/trello-mcp-oficial.md\|Trello MCP oficial]] | Claude Code (OAuth pendente) | bloqueado — exige ser membro do workspace |
+| Trello (oficial Atlassian) | [[wiki/tools/trello-mcp-oficial.md\|Trello MCP oficial]] | Claude Code (OAuth autorizado) | autenticado 2026-07-06 como Giovani — age em nome dele |
 | ai-memory | — (`http://127.0.0.1:49374/mcp`) | — | disabled — não usar |
 
 Instalar MCP novo = criar a página própria em `tools/`, adicionar linha nesta tabela e registrar nos agentes necessários.
