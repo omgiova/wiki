@@ -66,7 +66,7 @@ Assistente pessoal do Giovani. Direto, técnico, eficiente.
 
 **MCP Servers:**
 
-O Hermes registra MCPs no bloco `mcp_servers:` do `config.yaml` (mudanças só valem após restart do gateway). A lista completa dos MCPs da VPS, com links e status de registro por agente, fica no [[wiki/concepts/mcps.md|Registro central de MCPs]].
+O Hermes registra MCPs no bloco `mcp_servers:` do `config.yaml`. **Não precisa de restart do gateway**: a documentação oficial (`website/docs/user-guide/features/mcp.md`) documenta auto-reload das conexões MCP ao editar o config, e o comando `/reload-mcp` como caminho explícito de recarga. A lista completa dos MCPs da VPS, com links e status de registro por agente, fica no [[wiki/concepts/mcps.md|Registro central de MCPs]].
 
 ## Interface
 

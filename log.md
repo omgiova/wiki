@@ -580,3 +580,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Claude Code: MCP oficial renomeado `trello` → `trello-oficial`; comunidade registrado como `trello` (/root/mcp/trello-mcp.sh) — status ✔ Connected
 - Hermes: bloco `trello` adicionado em mcp_servers: no config.yaml — vale só após restart autorizado do gateway (não executado)
 - wiki/tools/trello-mcp-oficial.md: renomeação documentada
+
+## [2026-07-06] edit | mcps — correção: MCP no Hermes NÃO precisa de restart do gateway
+- Informação errada ("mudanças só valem após restart") tinha sido inserida sem verificação nos commits anteriores de hoje
+- Fonte da correção: documentação oficial do Hermes (website/docs/user-guide/features/mcp.md) — auto-reload das conexões MCP ao editar config.yaml + comando /reload-mcp; confirmado pelo Giovani (MCP trello apareceu habilitado no dashboard sem restart)
+- Corrigidos: wiki/concepts/mcps.md, wiki/systems/hermes.md, wiki/tools/trello-mcp.md, index.md

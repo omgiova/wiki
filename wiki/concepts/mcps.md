@@ -19,7 +19,7 @@ Fonte da verdade sobre os MCPs disponíveis na VPS. Detalhes de cada MCP (comand
 
 ## Registro por agente
 
-- **Hermes:** bloco em `mcp_servers:` no `/root/.hermes/config.yaml` (mudanças só valem após restart do gateway — **nunca reiniciar sem autorização explícita**)
+- **Hermes:** bloco em `mcp_servers:` no `/root/.hermes/config.yaml` — sem restart: o config é auto-recarregado ao ser editado, e `/reload-mcp` força a recarga (documentação oficial, `features/mcp.md`)
 - **Claude Code:** `claude mcp add <nome> -s user -- <comando>`
 - **n8n:** preferir os nós nativos do n8n quando existirem, em vez de MCP dentro de workflow
 
@@ -29,7 +29,7 @@ Fonte da verdade sobre os MCPs disponíveis na VPS. Detalhes de cada MCP (comand
 |---|---|---|---|
 | n8n | [[wiki/tools/n8n-mcp.md\|n8n MCP]] | Hermes, Claude Code | ativo |
 | ElevenLabs | [[wiki/tools/elevenlabs-mcp.md\|ElevenLabs MCP]] | Hermes | ativo |
-| Trello (comunidade) | [[wiki/tools/trello-mcp.md\|Trello MCP]] | Claude Code, Hermes (aguardando restart do gateway) | credenciais validadas 2026-07-06 |
+| Trello (comunidade) | [[wiki/tools/trello-mcp.md\|Trello MCP]] | Claude Code, Hermes | credenciais validadas 2026-07-06 |
 | Trello (oficial Atlassian) | [[wiki/tools/trello-mcp-oficial.md\|Trello MCP oficial]] | Claude Code (OAuth pendente) | bloqueado — exige ser membro do workspace |
 | ai-memory | — (`http://127.0.0.1:49374/mcp`) | — | disabled — não usar |
 
