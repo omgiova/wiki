@@ -52,6 +52,13 @@ A tool `web_search` do Hermes agora está configurada com Firecrawl como backend
 
 Usar `web_search` para consultas simples. Usar `firecrawl search` via terminal quando precisar de mais controle (`--limit`, `--scrape`, sintaxe `site:`).
 
+## Escopo: quem usa e por quê
+
+- **Hermes:** Firecrawl é o backend **configurado** do `web_search`/`web_extract` (`config.yaml`), mas não é o único suportado — o Hermes aceita 8 backends, e busca e extração podem usar backends diferentes. Ver tabela em [[wiki/systems/hermes.md|Hermes]].
+- **Claude Code:** tem busca nativa (`WebSearch`/`WebFetch`) sem custo de créditos. Padrão: usar o nativo. Firecrawl só quando agrega — JS pesado, login, scraping em massa, busca `site:` com `--scrape`.
+- Todo scrape/search do Firecrawl **consome créditos da conta** (free tier: 500/mês) — não usar para páginas simples quando há alternativa.
+- Atenção: os skills `firecrawl-*` instalados no Claude Code instruem "usar em vez do WebFetch" — instrução do fornecedor do skill, não regra deste setup.
+
 ## Conexões
 
 - [[wiki/systems/hermes.md|Hermes Config]] — onde firecrawl está configurado na stack

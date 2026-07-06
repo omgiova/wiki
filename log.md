@@ -591,3 +591,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Fonte: documentação oficial do Hermes (website/docs/user-guide/features/web-search.md)
 - Registrado que search_backend/extract_backend são independentes e a ordem de auto-detecção por credencial
 - Páginas tocadas: wiki/systems/hermes.md
+
+## [2026-07-06] edit | firecrawl — seção "Escopo: quem usa e por quê"
+- Página lida por outro agente parecia regra geral ("preferir Firecrawl"); nova seção esclarece: no Hermes é o backend configurado (de 8 suportados), no Claude Code o padrão é a busca nativa (WebSearch/WebFetch), Firecrawl consome créditos (500/mês free)
+- Registrado que os skills firecrawl-* do Claude Code instruem "usar em vez do WebFetch" por conta própria (instrução do fornecedor, não do setup)
+- Conteúdo existente da página intocado; páginas tocadas: wiki/tools/firecrawl.md
