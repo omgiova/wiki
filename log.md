@@ -559,3 +559,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - wiki/tools/trello-mcp.md: MCP da comunidade (@delorenj/mcp-server-trello) — wrapper /root/mcp/trello-mcp.sh + credenciais em /root/mcp/trello.env (API key da dona do workspace validada; token pendente de geração), skill clonada em /root/.hermes/skills/trello/; status de validação pendente
 - wiki/tools/trello-mcp-oficial.md: MCP oficial Atlassian (mcp.trello.com/v1, OAuth) — registrado no Claude Code mas bloqueado: "No Trello workspaces found" porque Giovani é só convidado no board (OAuth exige membro do workspace); registro mantido para teste futuro
 - index.md atualizado (árvore + seção tools)
+
+## [2026-07-06] edit | vps — túnel de porta SSH pro celular documentado + sinalização
+- systems/vps.md § Acesso SSH: nova subseção "Túnel de porta" — comando validado hoje no 4G (`ssh -p 2222 -L 3777:localhost:3777 root@IPv6`), receita genérica por porta (3777 = finflow dev), passo do New session no Termux, alternativas (cloudflared, Tailscale) e aviso de nunca expor dev server; tags ganham termux/celular/ssh pra busca
+- systems/termux-ssh-claude.md: nota de redirecionamento no topo apontando pra vps.md § Acesso SSH (conteúdo do diagnóstico intocado)
+- Motivo: acesso pelo celular é informação recorrente; página canônica = vps.md, apontadores onde um agente procuraria

@@ -9,6 +9,10 @@ status: stable
 
 # Problema SSH/Claude — Sessões Travando no Remote Control
 
+> 📌 **Procurando o acesso SSH pelo celular (WiFi, 4G, túnel de porta pro localhost funcionar no
+> navegador)?** Está em [[systems/vps.md]] § Acesso SSH. Esta página é só o registro do diagnóstico
+> de travamentos de 2026-06-26.
+
 Diagnóstico realizado em 2026-06-26. Explica por que sessões do Claude via Remote Control apareciam como "Executando..." indefinidamente.
 
 ---

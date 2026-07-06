@@ -1,6 +1,6 @@
 ---
 type: concept
-tags: [docker, n8n, vps, infra]
+tags: [docker, n8n, vps, infra, termux, celular, ssh]
 title: Infraestrutura do VPS
 description: Hostinger KVM 2 — hardware, serviços rodando, stack Docker Swarm, IPVS, problemas conhecidos
 timestamp: 2026-06-17T21:00:00-03:00
@@ -25,6 +25,27 @@ status: stable
 - `/etc/ssh/sshd_config`: `Port 22` + `Port 2222`
 - sshd gerencia porta 2222 diretamente (fora do socket activation do systemd)
 - Chave ED25519 do Termux já autorizada em `/root/.ssh/authorized_keys`
+
+### Túnel de porta — ver projetos da VPS no navegador do celular
+
+Uma sessão SSH comum é só terminal, **não encaminha portas**: `localhost:<porta>` no navegador do
+celular não alcança a VPS. Pra funcionar, é preciso a "ponte" `-L` (túnel de porta) numa sessão
+própria — no Termux, abrir uma **segunda sessão** (deslizar da borda esquerda → New session) e rodar:
+
+```bash
+ssh -p 2222 -L 3777:localhost:3777 root@2a02:4780:75:41ec::1
+```
+
+Com essa sessão aberta, `http://localhost:3777` abre no navegador do celular. A sessão do túnel
+precisa ficar viva enquanto navega (a sessão de trabalho normal continua separada, intocada).
+
+**Receita genérica pra qualquer projeto:** trocar a porta no `-L <porta>:localhost:<porta>`
+(ex.: `3777` = servidor dev do finflow). Validado em 2026-07-06, no 4G, testando o finflow.
+
+**Alternativas conhecidas (não configuradas):**
+- Túnel público temporário via `cloudflared` (URL aleatória trycloudflare.com) — útil pra compartilhar sem SSH
+- Tailscale (VPN privada celular↔VPS) — solução permanente, avaliar no futuro
+- Nunca expor a porta do dev server direto na internet (sem autenticação)
 
 ## Devices — caminhos do vault Obsidian
 
