@@ -617,3 +617,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Mensagem reformatada (definida pelo Giovani): saudação + bloco 👤 Por / ➡️ lista / 🗓 Prazo / 🔗 link do card
 - Switch e mensagens passam a referenciar o gatilho via $('Trello Trigger (DEMANDAS GERAIS)')
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-07] edit | projects — restauração das saudações personalizadas + "por Fulano" volta pra linha principal
+- Saudações do Giovani (Gio~/Gabi/Lu, adicionado/adicionada) tinham sido sobrescritas por PUT via API; recuperadas do snapshot da execução 602
+- Novo formato: saudação personalizada + "por Fulano" na primeira linha; bloco final só com ➡️ lista / 🗓 prazo / 🔗 link (sem linha 👤)
+- Registrado incidente e regra: edição via API altera só o pedido, preserva o resto verbatim
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md

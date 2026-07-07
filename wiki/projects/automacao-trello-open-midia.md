@@ -37,16 +37,17 @@ Trello Trigger (webhook do board) → Filter (só addMemberToCard) → HTTP "Bus
 
 - **Gatilho:** nó `Trello Trigger` com o ID do board — ao ativar o workflow, o n8n registra webhook no Trello (push em tempo real; exige o n8n exposto publicamente, ok no nosso setup). Dispara pra **todo** evento do board; o Filter descarta o que não é `addMemberToCard`.
 - **Buscar card no Trello** (adicionado 2026-07-07): nó HTTP Request `GET https://api.trello.com/1/cards/{{ $json.action.data.card.id }}?fields=name,due,shortUrl&list=true&list_fields=name`, autenticação por credencial predefinida `trelloApi` ("Trello account"). Necessário porque o payload do webhook `addMemberToCard` **não traz** vencimento nem lista do card. Como esse nó troca o `$json`, o Switch e as mensagens passam a referenciar os dados do gatilho via `$('Trello Trigger (DEMANDAS GERAIS)')`.
-- **Mensagem** (expressão nos nós Evolution, formato definido pelo Giovani em 2026-07-07):
+- **Mensagem** (expressão nos nós Evolution, formato definido pelo Giovani em 2026-07-07). A saudação é **personalizada por nó** — Giovani ("adicionado"), Gabi, Lu e Nathalia ("adicionada") — e não deve ser reescrita em edições futuras:
 
 ```
-Oi, <Nome fixo do nó>, você foi adicionado ao card {{ $json.name }}
+Oi, <Saudação personalizada do nó>, você foi adicionad<o/a> ao card {{ $json.name }} por {{ $('Trello Trigger (DEMANDAS GERAIS)').item.json.action.memberCreator.fullName.split(' ')[0] }}
 
-👤 Por {{ $('Trello Trigger (DEMANDAS GERAIS)').item.json.action.memberCreator.fullName.split(' ')[0] }}
 ➡️ {{ $json.list.name }}
 🗓 Prazo: {{ $json.due ? new Date($json.due).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'sem prazo definido' }}
 🔗 Card no Trello: {{ $json.shortUrl }}
 ```
+
+> ⚠️ Incidente 2026-07-06/07: as saudações personalizadas do Giovani foram sobrescritas duas vezes por updates via API (PUT substitui o workflow inteiro). Recuperadas do snapshot de workflow guardado na execução 602. Regra: em qualquer edição via API, alterar **somente** o que foi pedido e preservar o resto verbatim.
 - **Envio:** nó comunitário da [[wiki/systems/evolution-api.md|Evolution API]], instância `Giobot`, credencial "Evolution account" (cadastrada na UI do n8n).
 
 ### Macetes do payload do webhook (custaram a descobrir)
