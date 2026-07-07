@@ -623,3 +623,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Novo formato: saudação personalizada + "por Fulano" na primeira linha; bloco final só com ➡️ lista / 🗓 prazo / 🔗 link (sem linha 👤)
 - Registrado incidente e regra: edição via API altera só o pedido, preserva o resto verbatim
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-07] ingest | projects — Fluxo 2 do Trello: lista semanal de prazos por membro
+- Novo workflow n8n `Trello Prazos por Membro - Open Mídia` (PRaGCXrFKcmiusfE), criado via API REST, desativado; testado com sucesso pelo Manual Trigger (200 cards, sem duplicação)
+- Estrutura: Schedule (segunda 8h) + Manual → Buscar cards do board (HTTP) e Buscar listas do board (HTTP, sem conexão de saída, referenciado por nome) → Code "Filtrar e agrupar por membro" → Switch por membro → 4 nós Evolution
+- Code node: janela rolante de 7 dias calculada explicitamente em America/Sao_Paulo; limpeza do nome da lista (regex + exceção fixa pra LIBERTAS); agrupamento por membro > lista > prazo
+- Mensagem validada: saudação com apelido (padrão do Fluxo 1), cabeçalho sem ano, nome da lista em negrito, card antes do prazo, prazo em negrito com ano
+- Dois bugs achados e corrigidos durante o teste: (1) HTTP Request rodando 1x por item de entrada — encadear Buscar listas → Buscar cards causava 9x duplicação de cada card; corrigido rodando os dois em paralelo; (2) Switch com as saídas de Gabriele e Nathalia sem conexão (mensagem nunca chegava pra elas, inclusive potencialmente no Fluxo 1) — reconstruídas as 4 conexões explicitamente
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
