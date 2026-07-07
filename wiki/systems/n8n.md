@@ -55,6 +55,17 @@ Regras de ouro para editar workflows via API/MCP (base: skill `n8n-workflow-buil
 
 Base de conhecimento completa: 8 skills `n8n-*` em `/root/.hermes/skills/` (expressões, nós Code JS/Python, padrões, validação, MCP tools) — recurso de todos os agentes da VPS.
 
+### Criar/editar workflows via API REST (verificado 2026-07-06)
+
+O MCP do n8n não cria workflows — criação/edição é via API REST (`$N8N_BASE_URL/api/v1/workflows`, header `X-N8N-API-KEY`; credenciais em `~/.config/n8n-mcp/env`). Pegadinhas reais encontradas:
+
+1. `POST /workflows` e `PUT /workflows/<id>` aceitam **só** `name`, `nodes`, `connections`, `settings` — campos extras dão 400
+2. Em `settings`, só chaves permitidas (`executionOrder`, `saveData*`, `timezone`, etc.) — o GET devolve chaves a mais (ex.: `binaryMode`) que precisam ser removidas antes do PUT, senão: `settings must NOT have additional properties`
+3. **Credenciais não são acessíveis via API** (segurança) — criar o workflow com os nós prontos e o usuário seleciona a credencial no dropdown da UI
+4. `active` é read-only no corpo — ativar/desativar é por endpoint próprio (ou UI/MCP)
+5. Workflow criado via API nasce desativado — bom padrão: criar desativado pro usuário revisar antes de ligar
+6. Caso real completo: workflow `Teste-Trello-Membro-Adicionado` em [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]]
+
 ## Erros conhecidos
 
 - **502 via Traefik** quando a tabela IPVS esvazia após scale/update do serviço — ver [[wiki/systems/vps.md|vps]] e case em `/root/.hermes/skills/docker-host-interaction-troubleshooting/`

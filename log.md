@@ -604,3 +604,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - mcps.md: linha do oficial na tabela — "bloqueado" → "autenticado 2026-07-06 como Giovani"
 - Referências completas fora da wiki: /root/mcp/trello-mcp-oficial-acoes.md e /root/mcp/trello-mcp-comunidade-acoes.md
 - Páginas tocadas: wiki/tools/trello-mcp-oficial.md, wiki/tools/trello-mcp.md, wiki/concepts/mcps.md
+
+## [2026-07-06] ingest | projects — projeto Automação Trello Open Mídia + página Evolution API
+- Nova página projects/automacao-trello-open-midia.md: fluxo n8n "Teste-Trello-Membro-Adicionado" (SiVxXjp2euu74SRO) — Trello Trigger → Filter addMemberToCard → Switch por membro → 4 nós Evolution; validado com 2 execuções reais; macetes do payload (member vs memberCreator); IDs dos 4 membros do board; pendências e ideias futuras (backup markdown/git)
+- Nova página systems/evolution-api.md (draft): gateway WhatsApp na VPS, instância Giobot, nó comunitário n8n-nodes-evolution-api, formato remoteJid; deploy/URL ainda não verificados
+- systems/n8n.md: seção nova "Criar/editar workflows via API REST" com as pegadinhas verificadas (campos aceitos no PUT, settings restrito, credenciais só pela UI, active read-only)
+- index.md: árvore e seções systems/ e projects/ atualizadas
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, wiki/systems/evolution-api.md, wiki/systems/n8n.md, index.md
