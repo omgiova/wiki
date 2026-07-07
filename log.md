@@ -631,3 +631,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Mensagem validada: saudação com apelido (padrão do Fluxo 1), cabeçalho sem ano, nome da lista em negrito, card antes do prazo, prazo em negrito com ano
 - Dois bugs achados e corrigidos durante o teste: (1) HTTP Request rodando 1x por item de entrada — encadear Buscar listas → Buscar cards causava 9x duplicação de cada card; corrigido rodando os dois em paralelo; (2) Switch com as saídas de Gabriele e Nathalia sem conexão (mensagem nunca chegava pra elas, inclusive potencialmente no Fluxo 1) — reconstruídas as 4 conexões explicitamente
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-08] edit | projects — Fluxo 2: seção "Como editar" + apelido corrigido
+- Nova seção "Como editar o Fluxo 2 (pela UI do n8n, sem precisar de agente)" — onde mexer no Schedule, remoteJid, e os 3 blocos seguros do nó Code (nicknames, windowDays, texto entre crases)
+- Registrado incidente: Giovani editou apelido "Giovani"→"Gio" direto no Code node, saiu "Giov" por engano, achou que tinha quebrado o fluxo — estrutura toda intacta, corrigida a string
+- Testado com sucesso com número próprio e com um segundo número adicionado
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md

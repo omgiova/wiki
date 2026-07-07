@@ -3,7 +3,7 @@ type: concept
 tags: [projects, trello, n8n, evolution-api, whatsapp, automacao]
 title: Automação Trello — Open Mídia
 description: Automações sobre o board "DEMANDAS GERAIS | Open Mídia Digital" — Fluxo 1 (n8n) avisa no WhatsApp quando um membro é adicionado a um card; Fluxo 2 manda lista semanal de prazos por membro. Ambos validados.
-timestamp: 2026-07-07T23:50:00-03:00
+timestamp: 2026-07-08T00:20:00-03:00
 status: draft
 ---
 
@@ -108,6 +108,19 @@ Oi, Lu!
 
 1. **Cards duplicados 9x:** a primeira versão encadeava `Buscar listas do board` (9 itens, um por lista) → `Buscar cards do board`. O nó HTTP Request do n8n roda **uma vez por item de entrada** por padrão — com 9 itens chegando, ele disparou a busca de cards 9 vezes, duplicando cada card 9x na saída. Correção: os dois HTTP passaram a rodar em paralelo direto dos gatilhos, sem um alimentar o outro (ver diagrama acima).
 2. **Switch com 2 saídas mortas:** ao reler o workflow após a primeira edição via API, as saídas do Switch para Gabriele e Nathalia estavam sem nó conectado (`[]`) — só Giovani e Luciana recebiam mensagem. Causa não totalmente clara (possível efeito colateral de PUT parcial via API); corrigido reconstruindo as 4 conexões do Switch explicitamente. Vale checar esse padrão em qualquer Switch editado via API daqui pra frente.
+
+### Como editar o Fluxo 2 (pela UI do n8n, sem precisar de agente)
+
+Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a mensagem do Fluxo 2 é montada dentro do nó de **Code** "Filtrar e agrupar por membro" (JavaScript) — precisa disso pra agrupar/ordenar cards. Onde mexer:
+
+- **Horário/dia do envio automático:** dois cliques no nó `Schedule (Segunda 8h)` → campos `Trigger at Hour/Minute` e `Trigger at Days of Week`.
+- **Número de WhatsApp de alguém:** dois cliques no nó Evolution da pessoa (ex. `Enviar texto - Gabriele`) → campo `remoteJid`.
+- **Apelido usado na saudação, quantidade de dias da janela, e o texto/emoji da mensagem:** dentro do nó `Filtrar e agrupar por membro`, três blocos seguros de editar sem tocar no resto do código:
+  1. `const nicknames = { ... }` — troca só o texto entre aspas
+  2. `const windowDays = 7;` — troca o número de dias
+  3. As linhas com crase (`` ` `` `texto ${variavel} texto` `` `` ``) que montam `header` e `cardLines` — o texto ao redor de `${...}` (emoji, palavras, `\n`, negrito com `*`) é livre; **não apagar os `${...}` nem as crases**
+- **Regra de ouro:** se a linha é só texto entre crases, é seguro editar. Se tem `for`, `if`, `.sort(`, `.map(` fora de uma crase, é lógica — não mexer sem entender.
+- Incidente real (2026-07-08): o Giovani tentou trocar o apelido "Giovani" → "Gio" direto no Code node e achou que tinha quebrado o fluxo (susto, não bug real) — a estrutura toda (conexões, Switch, Schedule) ficou intacta; só o texto do apelido saiu errado (`"Giov"` em vez de `"Gio"`). Corrigido trocando só essa string.
 
 ### Pendências
 
