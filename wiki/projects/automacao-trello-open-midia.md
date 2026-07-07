@@ -3,7 +3,7 @@ type: concept
 tags: [projects, trello, n8n, evolution-api, whatsapp, automacao]
 title: Automação Trello — Open Mídia
 description: Automações sobre o board "DEMANDAS GERAIS | Open Mídia Digital" — primeiro fluxo (n8n) avisa no WhatsApp via Evolution quando um membro é adicionado a um card; validado em 2026-07-06
-timestamp: 2026-07-06T22:19:00-03:00
+timestamp: 2026-07-07T10:05:00-03:00
 status: draft
 ---
 
@@ -28,7 +28,7 @@ Projeto de automações sobre o Trello da Open Mídia, começando pelo board **"
 **Workflow n8n:** `Teste-Trello-Membro-Adicionado` (ID `SiVxXjp2euu74SRO`), ativo e validado em 2026-07-06 (2 execuções reais de teste: auto-adição do Giovani e adição da Luciana pelo Giovani).
 
 ```
-Trello Trigger (webhook do board) → Filter (só addMemberToCard) → Switch (por ID do membro)
+Trello Trigger (webhook do board) → Filter (só addMemberToCard) → HTTP "Buscar card no Trello" → Switch (por ID do membro)
   ├─ Giovani  → Evolution "Enviar texto - Giovani"
   ├─ Gabriele → Evolution "Enviar texto - Gabriele"
   ├─ Luciana  → Evolution "Enviar texto - Luciana"
@@ -36,7 +36,17 @@ Trello Trigger (webhook do board) → Filter (só addMemberToCard) → Switch (p
 ```
 
 - **Gatilho:** nó `Trello Trigger` com o ID do board — ao ativar o workflow, o n8n registra webhook no Trello (push em tempo real; exige o n8n exposto publicamente, ok no nosso setup). Dispara pra **todo** evento do board; o Filter descarta o que não é `addMemberToCard`.
-- **Mensagem** (expressão nos nós Evolution): `Oi, <Nome fixo do nó>, você foi adicionado ao card {{ $json.action.data.card.name }} por {{ $json.action.memberCreator.fullName.split(' ')[0] }}`
+- **Buscar card no Trello** (adicionado 2026-07-07): nó HTTP Request `GET https://api.trello.com/1/cards/{{ $json.action.data.card.id }}?fields=name,due,shortUrl&list=true&list_fields=name`, autenticação por credencial predefinida `trelloApi` ("Trello account"). Necessário porque o payload do webhook `addMemberToCard` **não traz** vencimento nem lista do card. Como esse nó troca o `$json`, o Switch e as mensagens passam a referenciar os dados do gatilho via `$('Trello Trigger (DEMANDAS GERAIS)')`.
+- **Mensagem** (expressão nos nós Evolution, formato definido pelo Giovani em 2026-07-07):
+
+```
+Oi, <Nome fixo do nó>, você foi adicionado ao card {{ $json.name }}
+
+👤 Por {{ $('Trello Trigger (DEMANDAS GERAIS)').item.json.action.memberCreator.fullName.split(' ')[0] }}
+➡️ {{ $json.list.name }}
+🗓 Prazo: {{ $json.due ? new Date($json.due).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'sem prazo definido' }}
+🔗 Card no Trello: {{ $json.shortUrl }}
+```
 - **Envio:** nó comunitário da [[wiki/systems/evolution-api.md|Evolution API]], instância `Giobot`, credencial "Evolution account" (cadastrada na UI do n8n).
 
 ### Macetes do payload do webhook (custaram a descobrir)

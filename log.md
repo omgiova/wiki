@@ -611,3 +611,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - systems/n8n.md: seção nova "Criar/editar workflows via API REST" com as pegadinhas verificadas (campos aceitos no PUT, settings restrito, credenciais só pela UI, active read-only)
 - index.md: árvore e seções systems/ e projects/ atualizadas
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, wiki/systems/evolution-api.md, wiki/systems/n8n.md, index.md
+
+## [2026-07-07] edit | projects — Fluxo 1 do Trello ganha busca de card (lista, prazo, link) e novo formato de mensagem
+- Novo nó HTTP "Buscar card no Trello" entre Filter e Switch: GET /1/cards/{id} com fields=name,due,shortUrl + list=true (webhook não traz vencimento nem lista)
+- Mensagem reformatada (definida pelo Giovani): saudação + bloco 👤 Por / ➡️ lista / 🗓 Prazo / 🔗 link do card
+- Switch e mensagens passam a referenciar o gatilho via $('Trello Trigger (DEMANDAS GERAIS)')
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
