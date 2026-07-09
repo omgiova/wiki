@@ -637,3 +637,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Registrado incidente: Giovani editou apelido "Giovani"→"Gio" direto no Code node, saiu "Giov" por engano, achou que tinha quebrado o fluxo — estrutura toda intacta, corrigida a string
 - Testado com sucesso com número próprio e com um segundo número adicionado
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-08] edit | AGENTS.md — nova regra "Verificação de estado"
+- Adicionada seção "Verificação de estado" logo após "Autorização": estado atual de sistema (processo, serviço, cron, config, dado de aplicação) sempre se verifica ao vivo (docker ps, systemctl status, crontab -l, ss -tlnp, API/arquivo do próprio sistema) antes de qualquer ação — nunca por dedução
+- Motivo: sessão anterior registrou info desatualizada na memória sem verificar o Fluxo 2 do n8n; levantamento técnico da VPS nesta sessão também achou um cron quebrado (update-hermes-wiki.sh) não documentado
+- Páginas tocadas: AGENTS.md

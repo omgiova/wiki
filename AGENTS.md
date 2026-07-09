@@ -60,6 +60,12 @@ Arquivos que o agente NUNCA deve modificar: `.git/`, `.obsidian/`, `AGENTS.md`
 
 ---
 
+## Verificação de estado
+
+Estado atual de sistema (processo, serviço, cron, config, dado de aplicação) sempre se verifica ao vivo antes de qualquer ação — via `docker ps`, `systemctl status`, `crontab -l`, `ss -tlnp` ou API/arquivo do próprio sistema — nunca por dedução.
+
+---
+
 ## Estrutura da wiki
 
 Ver [[index.md]] — fonte de verdade da estrutura. Ao criar, renomear ou remover qualquer arquivo ou pasta, atualizar o `index.md`.
