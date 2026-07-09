@@ -51,6 +51,7 @@ log.md
     │   ├── auditor-wiki-evals.md
     │   ├── curador-wiki-historico.md
     │   ├── curador-wiki.md
+    │   ├── sync-automatico-wiki.md
     │   └── wiki-review.md
     ├── projects/
     │   ├── automacao-trello-open-midia.md
@@ -58,6 +59,7 @@ log.md
     ├── systems/
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
+    │   ├── hermes-estado.md
     │   ├── hermes.md
     │   ├── n8n.md
     │   ├── termux-ssh-claude.md
@@ -86,6 +88,7 @@ log.md
 
 - [[wiki/systems/hermes.md|Hermes]] — sistema principal: identidade, stack, modelos, interface REST e operação do Hermes Agent
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
+- [[wiki/systems/hermes-estado.md|Hermes — Estado das Configurações]] — snapshot vivo de MCPs, skills, webhooks, toolsets e modelo (gerado automaticamente)
 - [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/systems/n8n.md|n8n]] — plataforma de automação: Swarm queue mode via EasyPanel, workflows, API/MCP, credenciais e erros conhecidos
 - [[wiki/systems/evolution-api.md|Evolution API]] — gateway de WhatsApp na VPS (instância Giobot); canal de saída das automações do n8n
@@ -118,6 +121,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/procedures/curador-wiki.md|Curador da Wiki]] — papel, comportamento, arquitetura atual (v6/v5), formato de output e como executar
 - [[wiki/procedures/curador-wiki-historico.md|Curador da Wiki — Histórico]] — registro completo de todas as tentativas, scripts e decisões de design desde a v1
 - [[wiki/procedures/wiki-review.md|Wiki Review]] — agente background que roda a cada 10 turnos e salva insights no diary/
+- [[wiki/procedures/sync-automatico-wiki.md|Sync automático da wiki (pull)]] — cron a cada 5min que puxa a wiki do GitHub, convergindo edições feitas em outros devices
 
 ### concepts/
 

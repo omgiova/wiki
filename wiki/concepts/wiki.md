@@ -58,6 +58,10 @@ Arquivos criados automaticamente pelo wiki_review. São **temporários e imutáv
 
 Agente separado que processa as dailies e recomenda o que migrar para páginas permanentes, o que criar como nova página e o que descartar. Ver [[procedures/curador-wiki.md]].
 
+### sync automático (pull)
+
+Cron que puxa `/root/wiki` do GitHub a cada 5 minutos, convergindo edições feitas em outros devices (Obsidian PC/celular) sem `git pull` manual. Complementa o hook `post-commit` (que só cobre o push). Ver [[wiki/procedures/sync-automatico-wiki.md|Sync automático da wiki (pull)]].
+
 ## Regras
 
 1. **Conhecimento durável vai pra wiki, não pra `memory()`** — toda decisão, gotcha, procedimento, regra vira markdown

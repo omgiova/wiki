@@ -642,3 +642,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Adicionada seção "Verificação de estado" logo após "Autorização": estado atual de sistema (processo, serviço, cron, config, dado de aplicação) sempre se verifica ao vivo (docker ps, systemctl status, crontab -l, ss -tlnp, API/arquivo do próprio sistema) antes de qualquer ação — nunca por dedução
 - Motivo: sessão anterior registrou info desatualizada na memória sem verificar o Fluxo 2 do n8n; levantamento técnico da VPS nesta sessão também achou um cron quebrado (update-hermes-wiki.sh) não documentado
 - Páginas tocadas: AGENTS.md
+
+## [2026-07-08] edit | scripts/procedures — fusão dos scripts do Hermes + doc do sync automático
+- Fundidos update-hermes-wiki.sh e update-hermes-api-wiki.sh em um único script (/root/scripts/update-hermes-wiki.sh), corrigindo caminho antigo (wiki/infraestrutura/ não existe mais) e bug de duplo "wiki/wiki/" no git add; script órfão apagado
+- Script fundido testado com sucesso: regenerou wiki/systems/hermes-endpoints.md e criou wiki/systems/hermes-estado.md (novo — snapshot vivo de MCPs, skills, webhooks, toolsets, modelo, cron, plataformas)
+- Cron semanal (segunda 3h) que estava quebrado desde a reestruturação da wiki agora funciona
+- Criado wiki/procedures/sync-automatico-wiki.md documentando o cron de pull automático (*/5min) que já existia sem documentação — complementa o hook post-commit (push) já documentado
+- Páginas tocadas: wiki/systems/hermes.md, wiki/systems/hermes-endpoints.md (auto), wiki/systems/hermes-estado.md (novo), wiki/concepts/wiki.md, wiki/procedures/sync-automatico-wiki.md (novo), index.md

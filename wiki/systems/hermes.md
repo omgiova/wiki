@@ -96,7 +96,7 @@ REST API disponível em `http://localhost:9119`. Docs interativas: `http://local
 | Password | `15071995` |
 | Password hash | scrypt — gerado via `plugins.dashboard_auth.basic.hash_password('15071995')` |
 
-Referência completa dos ~180 endpoints REST agrupados por domínio: [[wiki/systems/hermes-endpoints.md|Hermes API]].
+Referência completa dos ~180 endpoints REST agrupados por domínio: [[wiki/systems/hermes-endpoints.md|Hermes API]]. Estado vivo das configurações (MCPs, skills, webhooks, toolsets, modelo, cron, plataformas): [[wiki/systems/hermes-estado.md|Hermes — Estado das Configurações]].
 
 ## Operação
 
@@ -146,6 +146,7 @@ plugins:
 - [[wiki/systems/vps.md|VPS]] — hardware e serviços da stack
 - [[wiki/systems/n8n.md|n8n]] — plataforma de automação consumida via MCP
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos endpoints REST
+- [[wiki/systems/hermes-estado.md|Hermes — Estado das Configurações]] — snapshot vivo de MCPs, skills, webhooks, toolsets e modelo
 - [[wiki/concepts/wiki.md|Wiki]] — base de conhecimento
 - [[wiki/concepts/mcps.md|Registro central de MCPs]] — lista oficial dos MCPs da VPS e onde cada um está registrado
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
