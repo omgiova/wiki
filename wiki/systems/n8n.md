@@ -33,7 +33,7 @@ Roteamento: Traefik (443) → DNS do Swarm → IPVS → container (porta interna
 
 ## Workflows (2026-07-02)
 
-**Ativos (5):**
+**Ativos (6):**
 
 | Workflow | ID | Função |
 |---|---|---|
@@ -42,6 +42,7 @@ Roteamento: Traefik (443) → DNS do Swarm → IPVS → container (porta interna
 | Telegram Node-red | `sqvE7a2PH85iKggx` | — |
 | Lembretes | `AIuS4W24Ka88kDP6` | — |
 | Hermes Cron - Teste | `2jq12kdGs92osySs` | — |
+| Alerta de Erro | `3MI1k15YL5OUrEXF` | Error Workflow genérico (Telegram) — qualquer workflow pode apontar pra ele em Settings → Error Workflow |
 
 **Inativos (19):** testes e experimentos (`herminho1–4`, `teste-hermes`, `My workflow 1–3`, `skills 2`, `Teste de skills`, etc.).
 

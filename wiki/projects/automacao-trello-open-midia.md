@@ -64,7 +64,7 @@ Oi, <Saudação personalizada do nó>, você foi adicionad<o/a> ao card {{ $json
 
 ## Fluxo 2 — Lista semanal de prazos por membro (funcionando, validado 2026-07-07)
 
-**Workflow n8n:** `Trello Prazos por Membro - Open Mídia` (ID `PRaGCXrFKcmiusfE`), criado via API REST em 2026-07-07, testado com sucesso pelo Manual Trigger (200 cards processados, sem duplicação). Ainda **desativado** — falta ligar o Schedule Trigger em produção.
+**Workflow n8n:** `Trello Prazos por Membro - Open Mídia` (ID `PRaGCXrFKcmiusfE`), criado via API REST em 2026-07-07, testado com sucesso pelo Manual Trigger (200 cards processados, sem duplicação). **Ativo em produção** desde 2026-07-08, com números reais dos 4 membros e Error Workflow apontado (ver [[wiki/systems/n8n.md|n8n]]). JSON completo desta versão (primeira oficial validada) arquivado em [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md]].
 
 ```
 Schedule Trigger (segunda 8h) ─┐
@@ -124,9 +124,10 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 
 ### Pendências
 
-- [ ] Remover o Manual Trigger depois que o fluxo rodar em produção
-- [ ] Ativar (`active: true`) quando o Giovani decidir ligar o Schedule
-- [ ] Resolver junto com a pendência do Fluxo 1: `remoteJid` dos 4 nós Evolution
+- [ ] Remover o Manual Trigger e o 2º Schedule de teste, desconectados no canvas
+- [x] Ativar (`active: true`) — feito, workflow em produção desde 2026-07-08
+- [x] `remoteJid` dos 4 nós Evolution — números reais dos 4 membros
+- [x] Alerta de erro — Error Workflow `Alerta de Erro` (ver [[wiki/systems/n8n.md|n8n]]) apontado nas Settings em 2026-07-09
 
 ## Ideias futuras (desenhadas, não construídas)
 
@@ -139,6 +140,7 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 
 ## Conexões
 
-- [[wiki/systems/n8n.md|n8n]] — onde o workflow roda (ver seção Operação: criação de workflows via API REST)
+- [[wiki/systems/n8n.md|n8n]] — onde o workflow roda (ver seção Operação: criação de workflows via API REST; e a entrada do Error Workflow "Alerta de Erro")
 - [[wiki/systems/evolution-api.md|Evolution API]] — envio de WhatsApp
 - [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] e [[wiki/tools/trello-mcp-oficial.md|Trello MCP (oficial)]] — acesso ao Trello pelos agentes
+- [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md]] — JSON completo do Fluxo 2, primeira versão oficial em produção

@@ -649,3 +649,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Cron semanal (segunda 3h) que estava quebrado desde a reestruturação da wiki agora funciona
 - Criado wiki/procedures/sync-automatico-wiki.md documentando o cron de pull automático (*/5min) que já existia sem documentação — complementa o hook post-commit (push) já documentado
 - Páginas tocadas: wiki/systems/hermes.md, wiki/systems/hermes-endpoints.md (auto), wiki/systems/hermes-estado.md (novo), wiki/concepts/wiki.md, wiki/procedures/sync-automatico-wiki.md (novo), index.md
+
+## [2026-07-09] edit | automacao-trello — Fluxo 2 em produção documentado + Error Workflow genérico
+- Corrigido status desatualizado do Fluxo 2 (Trello Prazos por Membro): estava documentado como "desativado/números de teste", na verdade ativo em produção desde 2026-07-08 com números reais dos 4 membros
+- Pendências do Fluxo 2 marcadas como resolvidas: ativação, remoteJid reais, e novo Error Workflow apontado
+- Criado workflow n8n "Alerta de Erro" (ID 3MI1k15YL5OUrEXF) — Error Trigger → IF (tipo de erro) → Set → Telegram; genérico, pensado para ser reaproveitado em outros workflows do n8n; documentado como uma linha na tabela de Workflows de wiki/systems/n8n.md (não como página própria — só 1 workflow usando por enquanto)
+- Salvo export JSON completo do Fluxo 2 (primeira versão oficial validada/em produção) em raw/fluxo-2-trello-prazos-workflow-2026-07-09.md
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, wiki/systems/n8n.md, raw/fluxo-2-trello-prazos-workflow-2026-07-09.md (novo), index.md
