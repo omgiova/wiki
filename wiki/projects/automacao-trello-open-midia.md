@@ -49,6 +49,7 @@ Oi, <Saudação personalizada do nó>, você foi adicionad<o/a> ao card {{ $json
 
 > ⚠️ Incidente 2026-07-06/07: as saudações personalizadas do Giovani foram sobrescritas duas vezes por updates via API (PUT substitui o workflow inteiro). Recuperadas do snapshot de workflow guardado na execução 602. Regra: em qualquer edição via API, alterar **somente** o que foi pedido e preservar o resto verbatim.
 - **Envio:** nó comunitário da [[wiki/systems/evolution-api.md|Evolution API]], instância `Giobot`, credencial "Evolution account" (cadastrada na UI do n8n).
+- **Filtro anti-auto-notificação** (adicionado 2026-07-09): o nó `Só addMemberToCard` ganhou uma 2ª condição (combinador `and`) — `action.data.idMember != action.memberCreator.id`. Se o membro se adiciona ao próprio card, o item é descartado ali e nenhuma mensagem é enviada (ele já sabe que se adicionou). Editado via PUT na API REST alterando **só** os `parameters` desse nó; os outros 7 nós, conexões, credenciais e settings foram enviados de volta idênticos ao GET anterior, para não repetir o incidente de sobrescrita das saudações.
 
 ### Macetes do payload do webhook (custaram a descobrir)
 

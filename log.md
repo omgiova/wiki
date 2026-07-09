@@ -656,3 +656,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criado workflow n8n "Alerta de Erro" (ID 3MI1k15YL5OUrEXF) — Error Trigger → IF (tipo de erro) → Set → Telegram; genérico, pensado para ser reaproveitado em outros workflows do n8n; documentado como uma linha na tabela de Workflows de wiki/systems/n8n.md (não como página própria — só 1 workflow usando por enquanto)
 - Salvo export JSON completo do Fluxo 2 (primeira versão oficial validada/em produção) em raw/fluxo-2-trello-prazos-workflow-2026-07-09.md
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, wiki/systems/n8n.md, raw/fluxo-2-trello-prazos-workflow-2026-07-09.md (novo), index.md
+
+## [2026-07-09] edit | automacao-trello-open-midia — filtro anti-auto-notificação no Fluxo 1
+- Nó `Só addMemberToCard` (Filter) ganhou 2ª condição: `action.data.idMember != action.memberCreator.id`, combinador `and` — descarta notificação quando o membro se adiciona a ele mesmo no card
+- Editado via PUT `/api/v1/workflows/SiVxXjp2euu74SRO`, alterando só os `parameters` desse nó; demais 7 nós, conexões, credenciais e settings enviados de volta idênticos ao GET anterior (evita repetir incidente de sobrescrita)
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
