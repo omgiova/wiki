@@ -130,6 +130,28 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 - [x] `remoteJid` dos 4 nós Evolution — números reais dos 4 membros
 - [x] Alerta de erro — Error Workflow `Alerta de Erro` (ver [[wiki/systems/n8n.md|n8n]]) apontado nas Settings em 2026-07-09
 
+## Fluxo 3 — Banco de dados de cards em Markdown (em construção, fase 1)
+
+**Workflow n8n:** `Trello Open Mídia - Banco de Dados` (ID `VPIpLm5pujpZvVDY`), casca criada pelo Giovani na UI em 2026-07-12, inativo.
+
+**Objetivo:** extrair todos os dados de cada card do board (inclusive arquivados; **exceto** a lista "Informações Gerais") e gerar um arquivo Markdown com frontmatter OKF por card, em `/root/om-database/` (repo git **local**, fora da wiki, sem remoto por enquanto). **Não é backup** — é banco de dados de conteúdo, navegável no Obsidian. Evolução da ideia "Backup do board em Markdown + git" da seção Ideias futuras abaixo, renomeada e redirecionada pelo Giovani em 2026-07-12.
+
+**Decisões de formato (definidas com o Giovani em 2026-07-12):**
+
+- **Frontmatter por card:** `type` derivado da lista (`post-<cliente>`, ex. `post-open-midia`, com a mesma limpeza de nome de lista do Fluxo 2, incl. exceção LIBERTAS); `formato` (carrossel/estatico/reels — 1º tenta o nome do card, 2º etiqueta como fallback; "vídeo" = reels); `canal` (etiquetas LINKEDIN/INSTAGRAM); `tags` (demais etiquetas com nome); + `title`, `description`, `timestamp` (BRT), `status`, `trello_id`, `lista`, `membros`, `prazo`, `arquivado`, `url`
+- **Parser tolerante do nome do card** (padrões reais variam: `FORMATO | ASSUNTO`, `DATA | FORMATO | ASSUNTO`, livre): tokens separados por `|`; data e formato detectados por dicionário fixo; o resto vira assunto. Card fora do padrão não quebra — `formato` fica vazio
+- **Mapa fixo de etiquetas no código** (16 etiquetas em 2026-07-12): formato = CARROSSEL/REELS/ESTÁTICO; canal = LINKEDIN/INSTAGRAM; demais etiquetas com nome viram `tags`; etiquetas só-cor são ignoradas
+- **Nome do arquivo:** `<formato>-<assunto-kebab>-<shortLink>.md`, na raiz do repo (sem subpasta "cards")
+- **Corpo:** descrição verbatim, checklists com estado, comentários (autor/data/texto), anexos (nome/URL)
+- Sem IA por enquanto; sem campos `etapa`/`status_producao`
+- Re-execução sobrescreve os arquivos (git guarda o histórico); card deletado no Trello não remove o arquivo
+- **Gravação em disco: pendente** — os containers do n8n não têm mount no host; opção SSH foi proposta e **não aprovada** (decidir na fase 2)
+
+**Fases de teste (definidas pelo Giovani):**
+
+1. **(atual)** Gatilho manual + URL de 1 card colada num nó Set → busca completa via API → nó Code gera o markdown → output cru visto direto no n8n. Sem pasta, sem salvar arquivo
+2. Após validação do formato: criar `/root/om-database/`, definir mecanismo de gravação e rodar o board inteiro
+
 ## Ideias futuras (desenhadas, não construídas)
 
 - **Backup do board em Markdown + git:** exportar JSON do board e explodir em um arquivo por card (frontmatter, descrição, checklists, comentários, wikilinks pra lista/labels/membros), repo git próprio (ex.: `/root/trello-backup/`, fora da wiki) — git diff vira auditoria do que as automações mudaram. Regra anti-estrago: automações nunca usam Delete (só Archive, que é reversível).

@@ -661,3 +661,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nó `Só addMemberToCard` (Filter) ganhou 2ª condição: `action.data.idMember != action.memberCreator.id`, combinador `and` — descarta notificação quando o membro se adiciona a ele mesmo no card
 - Editado via PUT `/api/v1/workflows/SiVxXjp2euu74SRO`, alterando só os `parameters` desse nó; demais 7 nós, conexões, credenciais e settings enviados de volta idênticos ao GET anterior (evita repetir incidente de sobrescrita)
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-12] edit | automacao-trello — Fluxo 3 (banco de dados de cards em Markdown) documentado antes da construção
+- Nova seção "Fluxo 3" em wiki/projects/automacao-trello-open-midia.md: objetivo, decisões de formato (frontmatter OKF, parser tolerante de nome, mapa fixo de etiquetas, nome de arquivo) e fases de teste definidas pelo Giovani
+- Não é backup: banco de dados de conteúdo em /root/om-database/ (fase 2); fase 1 é só output cru no n8n, sem salvar arquivo; SSH não aprovado
+- Workflow casca: "Trello Open Mídia - Banco de Dados" (VPIpLm5pujpZvVDY), criada pelo Giovani na UI
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
