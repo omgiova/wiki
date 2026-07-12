@@ -681,3 +681,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Bugs/lições documentados: `labels` faltando no fields da busca (etiquetas nunca chegavam); Save da UI do n8n sobrescreve edições via API (recarregar a página antes de salvar)
 - JSON completo da v1 exportado via API e arquivado em raw/fluxo-3-om-database-workflow-2026-07-12.md (novo)
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, raw/fluxo-3-om-database-workflow-2026-07-12.md (novo), index.md
+
+## [2026-07-12] edit | automacao-trello — Fluxo 4 (board inteiro) construído, EM TESTE
+- Nova seção "Fluxo 4" em wiki/projects/automacao-trello-open-midia.md: workflow "Trello Open Mídia - Banco de Dados auto" (Dl4vDai92a39Cvfy), duplicado do Fluxo 3 v1 pelo Giovani e completado via API — entrada por board inteiro (cards/all), ordenação do mais antigo pro mais novo pelo ID, fila de 1 em 1 com Wait 2s, retries, Filter→If (evita travar o loop em card ignorado), Error Workflow apontado, resumo no Telegram
+- Status: aguardando teste do Giovani; seção será atualizada com o feedback e JSON irá pra raw/ quando validado
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md

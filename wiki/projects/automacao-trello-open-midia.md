@@ -164,6 +164,36 @@ Manual Trigger → Set "Card de teste (colar URL aqui)" → HTTP "Buscar card co
 
 **Próximo passo (não construído):** versão board inteiro — duplicar este flow e trocar a entrada por `GET /1/boards/<id>/cards/all` (todos os cards, inclusive arquivados); o restante do fluxo já processa múltiplos itens naturalmente.
 
+## Fluxo 4 — Banco de dados do board inteiro (construído em 2026-07-12, EM TESTE)
+
+**Workflow n8n:** `Trello Open Mídia - Banco de Dados auto` (ID `Dl4vDai92a39Cvfy`), inativo, gatilho manual. Criado pelo Giovani na UI **duplicando o Fluxo 3 v1** (que permanece imutável); a entrada, a fila e o resumo foram construídos via API (PUT) em 2026-07-12.
+
+> ⏳ **Status: aguardando teste e validação do Giovani.** Esta seção descreve o que foi construído; será atualizada com o feedback do teste.
+
+**O que faz:** roda o mesmo processamento do Fluxo 3 para **todos os cards do board** (inclusive arquivados), do mais antigo pro mais novo, gravando um arquivo por card no repo `omgiova/om-database` — e no final manda um resumo no Telegram.
+
+```
+Manual Trigger → HTTP "Listar cards do board" (GET /1/boards/6908bffbc7473c1134fe279d/cards/all, fields=id)
+  → Code "Ordenar do mais antigo pro mais novo" → Split in Batches "Fila (1 por vez)"
+       → Buscar card completo → Montar markdown (OKF) → If "Card válido?"
+            ├─ sim → Gravar no GitHub (novo) ──(erro: já existe)──> Atualizar no GitHub (já existe)
+            └─ não → pula o GitHub
+       → Wait "Esperar 2s" → volta pra Fila
+  → (fila vazia = fim) → Code "Resumo" → Telegram "Resumo no Telegram" (chat do Giovani)
+```
+
+**Decisões de desenho (escolhidas pelo Giovani em 2026-07-12):**
+
+- **Fiel ao Fluxo 3 v1:** manteve-se 1 commit por card (nó de GitHub da v1), descartando as alternativas de commits em lote (API de árvore do GitHub) e de gravação em grupos de 10 — a fidelidade ao flow validado pesou mais que eficiência
+- **Ordem cronológica de criação:** ordenação pelos IDs dos cards em ordem crescente (a data de criação está embutida no ID — mesma fonte do campo `criado` do frontmatter)
+- **Fila anti-falha:** 1 card por vez + Wait de 2s entre cards (~30 gravações/min, folga sobre o limite prático de ~80/min do GitHub; ~200 cards ≈ 10–15 min). Retry on Fail (3 tentativas, 5s) nos dois nós HTTP do Trello e no "Atualizar no GitHub" — sem retry no "Gravar (novo)" de propósito, porque o erro dele é o caminho normal de "arquivo já existe"
+- **Término garantido, sem loop infinito:** a lista de cards é buscada uma única vez no início e vira fila fechada; o Split in Batches termina sozinho quando ela acaba. Sem repetição: nome de arquivo determinístico (shortLink), re-execução sobrescreve
+- **Filter → If:** o Filter da v1 foi trocado por um If no Fluxo 4 porque, dentro do loop de 1 em 1, um card ignorado morreria no Filter e **travaria a fila no meio** — com o If, o card ignorado desvia do GitHub e volta pra fila
+- **Error Workflow:** settings do workflow apontam para "Alerta de Erro" (`3MI1k15YL5OUrEXF`) — configurado no Fluxo 4, sem mexer no fluxo de erro (ele é genérico)
+- **Resumo no Telegram** ao final: total de cards no board, ignorados, gravados novos, atualizados (o Code "Resumo" soma os itens de todas as voltas do loop)
+
+**Pendências:** teste real com o board inteiro pelo Giovani; atualização desta seção com o resultado; exportar JSON pra `raw/` quando validado.
+
 ## Ideias futuras (desenhadas, não construídas)
 
 - **Backup do board em Markdown + git:** exportar JSON do board e explodir em um arquivo por card (frontmatter, descrição, checklists, comentários, wikilinks pra lista/labels/membros), repo git próprio (ex.: `/root/trello-backup/`, fora da wiki) — git diff vira auditoria do que as automações mudaram. Regra anti-estrago: automações nunca usam Delete (só Archive, que é reversível).
