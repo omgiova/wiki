@@ -164,17 +164,18 @@ Manual Trigger → Set "Card de teste (colar URL aqui)" → HTTP "Buscar card co
 
 **Próximo passo (não construído):** versão board inteiro — duplicar este flow e trocar a entrada por `GET /1/boards/<id>/cards/all` (todos os cards, inclusive arquivados); o restante do fluxo já processa múltiplos itens naturalmente.
 
-## Fluxo 4 — Banco de dados do board inteiro (construído em 2026-07-12, EM TESTE)
+## Fluxo 4 — Banco de dados do board inteiro (VALIDADO 2026-07-12, ativo com rodada semanal)
 
-**Workflow n8n:** `Trello Open Mídia - Banco de Dados auto` (ID `Dl4vDai92a39Cvfy`), inativo, gatilho manual. Criado pelo Giovani na UI **duplicando o Fluxo 3 v1** (que permanece imutável); a entrada, a fila e o resumo foram construídos via API (PUT) em 2026-07-12.
+**Workflow n8n:** `Trello Open Mídia - Banco de Dados auto` (ID `Dl4vDai92a39Cvfy`), **ativo** (Schedule semanal + gatilho manual). Criado pelo Giovani na UI **duplicando o Fluxo 3 v1** (que permanece imutável); a entrada, a fila e o resumo foram construídos via API (PUT) em 2026-07-12.
 
-> ⏳ **Status: aguardando teste e validação do Giovani.** Esta seção descreve o que foi construído; será atualizada com o feedback do teste.
+**Validação:** o Giovani rodou a carga completa do board em 2026-07-12 e **deu tudo certo** — o repo `omgiova/om-database` ficou com todos os cards atuais documentados. No mesmo dia o fluxo ganhou a implementação que faltava desde o início (rodada semanal incremental, ver abaixo) e foi publicado/ativado pelo Giovani. Primeira execução agendada esperada: **segunda 2026-07-13, 7h**.
 
-**O que faz:** roda o mesmo processamento do Fluxo 3 para **todos os cards do board** (inclusive arquivados), do mais antigo pro mais novo, gravando um arquivo por card no repo `omgiova/om-database` — e no final manda um resumo no Telegram.
+**O que faz:** roda o mesmo processamento do Fluxo 3 para os cards do board (inclusive arquivados), do mais antigo pro mais novo, gravando um arquivo por card no repo `omgiova/om-database` — e no final manda um resumo no Telegram. Desde a versão semanal, cada rodada processa **só os cards com atividade nos últimos 8 dias** (novos ou editados); como o nome do arquivo é determinístico, reprocessar card já gravado apenas atualiza o arquivo, nunca duplica.
 
 ```
-Manual Trigger → HTTP "Listar cards do board" (GET /1/boards/6908bffbc7473c1134fe279d/cards/all, fields=id)
-  → Code "Ordenar do mais antigo pro mais novo" → Split in Batches "Fila (1 por vez)"
+Schedule (Segunda 7h) ─┬→ HTTP "Listar cards do board" (GET /1/boards/6908bffbc7473c1134fe279d/cards/all, fields=id,dateLastActivity)
+Manual Trigger ────────┘
+  → Code "Ordenar do mais antigo pro mais novo" (filtra últimos 8 dias + ordena) → Split in Batches "Fila (1 por vez)"
        → Buscar card completo → Montar markdown (OKF) → If "Card válido?"
             ├─ sim → Gravar no GitHub (novo) ──(erro: já existe)──> Atualizar no GitHub (já existe)
             └─ não → pula o GitHub
@@ -192,7 +193,22 @@ Manual Trigger → HTTP "Listar cards do board" (GET /1/boards/6908bffbc7473c113
 - **Error Workflow:** settings do workflow apontam para "Alerta de Erro" (`3MI1k15YL5OUrEXF`) — configurado no Fluxo 4, sem mexer no fluxo de erro (ele é genérico)
 - **Resumo no Telegram** ao final: total de cards no board, ignorados, gravados novos, atualizados (o Code "Resumo" soma os itens de todas as voltas do loop)
 
-**Pendências:** teste real com o board inteiro pelo Giovani; atualização desta seção com o resultado; exportar JSON pra `raw/` quando validado.
+### Rodada semanal incremental (implementada via API em 2026-07-12, após a validação da carga completa)
+
+Três mudanças aplicadas por PUT (todo o resto devolvido verbatim; diff conferido nó a nó após a gravação):
+
+1. **Novo nó `Schedule (Segunda 7h)`** ligado na listagem, ao lado do Manual Trigger (que fica pra testes/reprocessamentos)
+2. **`Listar cards do board`** passou a pedir `fields=id,dateLastActivity`
+3. **Code `Ordenar do mais antigo pro mais novo`** ganhou filtro no início: só passam cards com `dateLastActivity` nos últimos 8 dias (7 + 1 de folga). A janela é editável na linha `const diasJanela = 8;` — mesmo padrão do `windowDays` do Fluxo 2. Pra reprocessar o board inteiro manualmente, basta aumentar temporariamente esse número (ex.: 36500)
+
+Comportamentos a saber:
+
+- O filtro pega cards **novos e editados** na semana (descrição, prazo, comentário, checklist) — o arquivo no repo é atualizado junto
+- **Semana sem card mexido = nenhum resumo no Telegram** (o fluxo termina cedo, com 0 itens). Ausência de mensagem na segunda não é erro; erro real dispara o Error Workflow "Alerta de Erro"
+- **Limitação conhecida:** card renomeado ou movido de lista muda o nome do arquivo — o novo é criado e o antigo fica órfão no repo; limpar manualmente quando acontecer (decisão de 2026-07-12: não vale complicar o fluxo por isso)
+- Corrida de versões UI × API (lição do Fluxo 3) não ocorreu aqui: o Publish do Giovani preservou a edição via API — verificado por GET + diff logo após (13 nós, schedule presente, filtro no lugar)
+
+**Pendências:** conferir a 1ª execução agendada (2026-07-13 7h) e o resumo no Telegram; exportar JSON pra `raw/` depois dessa confirmação.
 
 ## Ideias futuras (desenhadas, não construídas)
 

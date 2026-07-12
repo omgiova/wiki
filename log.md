@@ -686,3 +686,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova seção "Fluxo 4" em wiki/projects/automacao-trello-open-midia.md: workflow "Trello Open Mídia - Banco de Dados auto" (Dl4vDai92a39Cvfy), duplicado do Fluxo 3 v1 pelo Giovani e completado via API — entrada por board inteiro (cards/all), ordenação do mais antigo pro mais novo pelo ID, fila de 1 em 1 com Wait 2s, retries, Filter→If (evita travar o loop em card ignorado), Error Workflow apontado, resumo no Telegram
 - Status: aguardando teste do Giovani; seção será atualizada com o feedback e JSON irá pra raw/ quando validado
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-12] edit | projects — Fluxo 4 validado e rodada semanal incremental implementada
+- Carga completa do board rodada e validada pelo Giovani (repo om-database com todos os cards atuais)
+- 3 mudanças via API no workflow Dl4vDai92a39Cvfy: Schedule (Segunda 7h), fields=id,dateLastActivity, filtro de 8 dias no Code de ordenação
+- Workflow publicado/ativado pelo Giovani; 1ª execução agendada esperada 2026-07-13 7h
+- Página tocada: wiki/projects/automacao-trello-open-midia.md (seção Fluxo 4)
