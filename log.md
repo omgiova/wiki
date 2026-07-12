@@ -667,3 +667,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Não é backup: banco de dados de conteúdo em /root/om-database/ (fase 2); fase 1 é só output cru no n8n, sem salvar arquivo; SSH não aprovado
 - Workflow casca: "Trello Open Mídia - Banco de Dados" (VPIpLm5pujpZvVDY), criada pelo Giovani na UI
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-12] edit | automacao-trello — Fluxo 3 construído e em teste (banco de dados de cards → GitHub)
+- Seção "Fluxo 3" da página do projeto reescrita com o estado real validado: workflow VPIpLm5pujpZvVDY com Manual Trigger → Set (URL do card) → HTTP busca completa → Code markdown OKF → Filter → GitHub create→edit (repo privado omgiova/om-database, credencial do Giovani no n8n)
+- Formato validado em testes de card único: type = lista limpa (sem prefixo "post"), arquivo <lista>-<formato>-<assunto>-<shortLink>.md, seções fixas com _[sem dados]_, parser tolerante, mapa de formatos verificado nos dados (R/RT/Reels teste→reels, C→carrossel, STORIE, nome vence etiqueta), canal por nome ou etiqueta
+- Descartes: lista "Informações gerais" e 41 organizadores de semana (📅/SEMANA n)
+- Plano antigo de gravação (pasta local + SSH) substituído por commit direto no GitHub pelo n8n
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
