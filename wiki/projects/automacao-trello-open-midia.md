@@ -58,11 +58,6 @@ Oi, <Saudação personalizada do nó>, você foi adicionad<o/a> ao card {{ $json
 - Nome do card: `action.data.card.name`
 - Evento de membro adicionado ao **quadro** (não a card) é outro type: `addMemberToBoard`
 
-### Pendências
-
-- [ ] Trocar o `remoteJid` dos nós Gabriele/Luciana/Nathalia — os 3 ainda apontam pro número do Giovani (clones de teste)
-- [ ] Renomear o workflow quando sair de teste
-
 ## Fluxo 2 — Lista semanal de prazos por membro (funcionando, validado 2026-07-07)
 
 **Workflow n8n:** `Trello Prazos por Membro - Open Mídia` (ID `PRaGCXrFKcmiusfE`), criado via API REST em 2026-07-07, testado com sucesso pelo Manual Trigger (200 cards processados, sem duplicação). **Ativo em produção** desde 2026-07-08, com números reais dos 4 membros e Error Workflow apontado (ver [[wiki/systems/n8n.md|n8n]]). JSON completo desta versão (primeira oficial validada) arquivado em [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md]].
@@ -78,7 +73,7 @@ Buscar cards do board → Code "Filtrar e agrupar por membro" → Switch (por me
   └─ Nathalia → Evolution "Enviar texto - Nathalia"
 ```
 
-- **Gatilhos:** `Schedule Trigger` semanal (segunda-feira 8h) + `Manual Trigger` de teste, ambos ligados em paralelo direto nos dois nós HTTP (não um atrás do outro — ver bug abaixo). Pendência: remover o Manual quando o fluxo for pra produção.
+- **Gatilhos:** `Schedule Trigger` semanal (segunda-feira 8h) + `Manual Trigger` de teste, ambos ligados em paralelo direto nos dois nós HTTP (não um atrás do outro — ver bug abaixo).
 - **Buscar cards do board:** `GET /1/boards/{id}/cards?fields=name,due,shortUrl,idList,idMembers`.
 - **Buscar listas do board:** `GET /1/boards/{id}/lists?fields=name` — sem conexão de saída no canvas; o Code node lê os dados por referência (`$('Buscar listas do board').all()`), não por fio. Isso é válido no n8n: basta o nó ter executado na mesma run, a conexão direta não é exigida.
 - **Code "Filtrar e agrupar por membro"** (JS, `runOnceForAllItems`):
@@ -125,7 +120,6 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 
 ### Pendências
 
-- [ ] Remover o Manual Trigger e o 2º Schedule de teste, desconectados no canvas
 - [x] Ativar (`active: true`) — feito, workflow em produção desde 2026-07-08
 - [x] `remoteJid` dos 4 nós Evolution — números reais dos 4 membros
 - [x] Alerta de erro — Error Workflow `Alerta de Erro` (ver [[wiki/systems/n8n.md|n8n]]) apontado nas Settings em 2026-07-09
@@ -207,8 +201,6 @@ Comportamentos a saber:
 - **Semana sem card mexido = nenhum resumo no Telegram** (o fluxo termina cedo, com 0 itens). Ausência de mensagem na segunda não é erro; erro real dispara o Error Workflow "Alerta de Erro"
 - **Limitação conhecida:** card renomeado ou movido de lista muda o nome do arquivo — o novo é criado e o antigo fica órfão no repo; limpar manualmente quando acontecer (decisão de 2026-07-12: não vale complicar o fluxo por isso)
 - Corrida de versões UI × API (lição do Fluxo 3) não ocorreu aqui: o Publish do Giovani preservou a edição via API — verificado por GET + diff logo após (13 nós, schedule presente, filtro no lugar)
-
-**Pendências:** conferir a 1ª execução agendada (2026-07-13 7h) e o resumo no Telegram; exportar JSON pra `raw/` depois dessa confirmação.
 
 ## Ideias futuras (desenhadas, não construídas)
 

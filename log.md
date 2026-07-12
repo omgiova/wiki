@@ -692,3 +692,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - 3 mudanças via API no workflow Dl4vDai92a39Cvfy: Schedule (Segunda 7h), fields=id,dateLastActivity, filtro de 8 dias no Code de ordenação
 - Workflow publicado/ativado pelo Giovani; 1ª execução agendada esperada 2026-07-13 7h
 - Página tocada: wiki/projects/automacao-trello-open-midia.md (seção Fluxo 4)
+
+## [2026-07-12] edit | projects — removidas pseudo-pendências dos Fluxos 1, 2 e 4 (a pedido do Giovani)
+- remoteJid/renomear (Fluxo 1), triggers de teste soltos (Fluxo 2) e "conferir 1ª execução" (Fluxo 4) não são pendências: fase de teste é intencional e triggers soltos não impactam nada
+- Página tocada: wiki/projects/automacao-trello-open-midia.md
