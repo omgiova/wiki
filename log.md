@@ -674,3 +674,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Descartes: lista "Informações gerais" e 41 organizadores de semana (📅/SEMANA n)
 - Plano antigo de gravação (pasta local + SSH) substituído por commit direto no GitHub pelo n8n
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-12] edit | automacao-trello — Fluxo 3 v1 VALIDADA pelo Giovani + JSON arquivado em raw/
+- Seção do Fluxo 3 atualizada pro estado final validado: frontmatter definitivo (tags e description reservadas/vazias, etiquetas verbatim, criado extraído do ID do card, status por último; sem prazo/data_no_nome/arquivado), gravação real testada no repo GitHub omgiova/om-database
+- Regra do Giovani registrada: v1 é IMUTÁVEL — automações derivadas (ex. board inteiro) devem DUPLICAR o flow no n8n, nunca editar o validado
+- Bugs/lições documentados: `labels` faltando no fields da busca (etiquetas nunca chegavam); Save da UI do n8n sobrescreve edições via API (recarregar a página antes de salvar)
+- JSON completo da v1 exportado via API e arquivado em raw/fluxo-3-om-database-workflow-2026-07-12.md (novo)
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md, raw/fluxo-3-om-database-workflow-2026-07-12.md (novo), index.md

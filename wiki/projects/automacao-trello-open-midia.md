@@ -130,11 +130,13 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 - [x] `remoteJid` dos 4 nós Evolution — números reais dos 4 membros
 - [x] Alerta de erro — Error Workflow `Alerta de Erro` (ver [[wiki/systems/n8n.md|n8n]]) apontado nas Settings em 2026-07-09
 
-## Fluxo 3 — Banco de dados de cards em Markdown (em teste, gravando no GitHub)
+## Fluxo 3 — Banco de dados de cards em Markdown (v1 VALIDADA em 2026-07-12)
 
-**Workflow n8n:** `Trello Open Mídia - Banco de Dados` (ID `VPIpLm5pujpZvVDY`), inativo (execução manual). Construído em 2026-07-12 com o Giovani, iterado sobre testes reais no mesmo dia.
+**Workflow n8n:** `Trello Open Mídia - Banco de Dados` (ID `VPIpLm5pujpZvVDY`), inativo (execução manual, card único por URL). Construído e iterado com o Giovani em 2026-07-12 sobre testes reais; **validado por ele no mesmo dia**, com gravação real no GitHub. JSON completo desta versão arquivado em [[raw/fluxo-3-om-database-workflow-2026-07-12.md]].
 
-**Objetivo:** extrair todos os dados de cada card do board e gerar um arquivo Markdown com frontmatter OKF por card, commitado direto no repo GitHub **privado `omgiova/om-database`** pelo próprio n8n (credencial "GitHub account" do Giovani no n8n). **Não é backup** — é banco de dados de conteúdo, navegável no Obsidian; cada re-execução sobrescreve o arquivo e o histórico fica nos commits.
+> ⚠️ **Esta v1 é IMUTÁVEL (regra do Giovani):** o workflow validado não será mais editado. A próxima automação (versão board inteiro) deve **duplicar** o flow no n8n e editar a cópia.
+
+**O que faz:** extrai todos os dados de um card do Trello e gera um arquivo Markdown com frontmatter OKF, commitado direto no repo GitHub **privado `omgiova/om-database`** pelo próprio n8n (credencial "GitHub account" do Giovani). **Não é backup** — é banco de dados de conteúdo, navegável no Obsidian; re-execução sobrescreve o arquivo e o histórico fica nos commits.
 
 ```
 Manual Trigger → Set "Card de teste (colar URL aqui)" → HTTP "Buscar card completo"
@@ -142,21 +144,25 @@ Manual Trigger → Set "Card de teste (colar URL aqui)" → HTTP "Buscar card co
   → GitHub "Gravar no GitHub (novo)" ──(erro: já existe)──> GitHub "Atualizar no GitHub (já existe)"
 ```
 
-- **Buscar card completo:** `GET /1/cards/<id>` (id extraído da URL colada), credencial `trelloApi` "Trello account"; traz fields+list+members+checklists+attachments+actions=commentCard (limit 1000)
-- **Create→edit:** o nó "Gravar" usa operação create com `onError: continueErrorOutput`; se o arquivo já existe o GitHub recusa e o item desvia pro nó de edit — é isso que faz re-execução sobrescrever. Commit message: `card: <filename>`
-- **Cards que NÃO entram** (descartados no Code node, saem como `ignorado: true` e barrados no Filter): lista "Informações gerais" (`6908c0021d3d2a7086b24430`), organizadores de semana (nome começando com 📅 ou contendo `SEMANA <n>` — 41 cards em 2026-07-12)
+- **Buscar card completo:** `GET /1/cards/<id>` (id extraído da URL colada), credencial `trelloApi` "Trello account"; `fields=name,desc,due,closed,idList,shortLink,shortUrl,dateLastActivity,labels` + list, members, checklists=all, attachments, actions=commentCard (limit 1000)
+- **Create→edit:** o nó "Gravar" usa create com `onError: continueErrorOutput`; se o arquivo já existe, o GitHub recusa e o item desvia pro nó de edit (re-execução = sobrescrita). Commit: `card: <filename>`
+- **Cards que NÃO entram** (saem do Code como `ignorado: true`, barrados no Filter): lista "Informações gerais" (`6908c0021d3d2a7086b24430`) e organizadores de semana (nome começando com 📅 ou contendo `SEMANA <n>`)
 
-**Formato do arquivo (validado pelo Giovani em 2026-07-12 nos testes de card único):**
+**Arquivo gerado** — nome `<lista>-<formato>-<assunto-kebab>-<shortLink>.md`, na raiz do repo:
 
-- **Nome:** `<lista>-<formato>-<assunto-kebab>-<shortLink>.md`, na raiz do repo (sem subpasta)
-- **Frontmatter:** `type` = nome da lista limpo (`open-midia`, `libertas` — mesma limpeza do Fluxo 2, sem prefixo "post", removido a pedido do Giovani); `formato`; `canal`; `tags` (etiquetas restantes); `title` (nome original), `description` (assunto), `timestamp` (BRT), `status: draft`, `lista`, `membros`, `prazo`, `data_no_nome`, `arquivado`, `trello_id`, `url`
-- **Corpo com seções fixas** — Descrição, Checklists, Comentários, Anexos sempre presentes; vazias recebem `_[sem dados]_`
-- **Parser tolerante do nome do card** (padrões reais variam: `FORMATO | ASSUNTO`, `DATA | FORMATO | ASSUNTO`, livre): tokens por `|`; data, formato e canal detectados por dicionário fixo; o resto vira assunto; fora do padrão não quebra, `formato` fica vazio
-- **Mapa de formatos** (verificado contra os dados do board em 2026-07-12, cruzando nomes × etiquetas): `carrossel`/`C` → carrossel; `estático` → estatico; `reels`/`R`/`RT`/`Reels teste`/`vídeo` → reels; `STORIE`/`stories` → storie (formato real com 22 cards e sem etiqueta própria). **Conflito nome × etiqueta: nome vence** (etiqueta é só fallback)
-- **Canal:** token `Linkedin`/`Instagram` no nome do card OU etiqueta — vira `canal`, sem duplicar
-- Etiquetas só-cor ignoradas; sem IA; sem campos etapa/status_producao
+- **Frontmatter (ordem validada):** `type` (lista limpa: `open-midia`, `libertas` — mesma limpeza do Fluxo 2, sem prefixo), `tags: []` (**reservada** pra futura etapa com IA), `etiquetas` (TODAS as etiquetas do card, verbatim, sem filtro), `title` (nome original), `description: ""` (**reservada** pra etapa futura), `timestamp` (BRT), `formato`, `canal`, `lista` (nome original), `membros`, `criado` (data de criação extraída dos 8 primeiros hex do ID do card — o Trello não dá esse campo), `trello_id`, `url`, `status: draft` (por último, a pedido do Giovani)
+- **Corpo com seções fixas:** Descrição, Checklists, Comentários, Anexos — sempre presentes, vazias = `_[sem dados]_`. Anexos são **links** (nome + URL), não cópia dos arquivos; capa não é destacada (decisão do Giovani)
+- **Parser tolerante do nome do card** (`FORMATO | ASSUNTO`, `DATA | FORMATO | ASSUNTO`, livre): tokens por `|`; data, formato e canal por dicionário fixo; resto vira assunto; fora do padrão não quebra (`formato` vazio)
+- **Mapa de formatos** (verificado nos dados do board cruzando nomes × etiquetas): `carrossel`/`C` → carrossel; `estático` → estatico; `reels`/`R`/`RT`/`Reels teste`/`vídeo` → reels; `STORIE`/`stories` → storie. **Conflito nome × etiqueta: nome vence** (etiqueta é só fallback de formato)
+- **Canal:** token `Linkedin`/`Instagram` no nome OU etiqueta — sem duplicar. Etiquetas só-cor ignoradas
 
-**Estado (2026-07-12):** card único validado pelo Giovani no output cru e gravação no GitHub montada. Próximo: testar gravação real (create e re-execução/edit) e depois a versão board inteiro (todos os cards, inclusive arquivados). O repo `om-database` foi criado pelo Giovani na UI do GitHub (token da VPS não tem permissão de criar repo e não enxerga o repo privado).
+### Bugs e lições da construção (2026-07-12)
+
+1. **`labels` faltando no `fields`:** a busca do card não pedia `labels` à API — etiquetas chegavam vazias no Code node (e o fallback de formato por etiqueta nunca tinha funcionado). Corrigido adicionando `labels` ao `fields`
+2. **Save da UI sobrescreve edições via API:** com o workflow aberto no editor do n8n, o Save da UI gravou a versão antiga da tela por cima de 2 edições feitas via PUT (campos `criado` e `etiquetas` sumiram — pareceu regressão do código, era corrida de versões). Regra prática: **depois de editar via API, recarregar a página do n8n antes de salvar qualquer coisa na UI**
+3. Criação do repo GitHub: o token fine-grained da VPS não cria repo nem enxerga repo privado fora da sua lista — o `om-database` foi criado pelo Giovani na UI (com README, pra já nascer com branch `main`, exigida pelo nó do GitHub)
+
+**Próximo passo (não construído):** versão board inteiro — duplicar este flow e trocar a entrada por `GET /1/boards/<id>/cards/all` (todos os cards, inclusive arquivados); o restante do fluxo já processa múltiplos itens naturalmente.
 
 ## Ideias futuras (desenhadas, não construídas)
 

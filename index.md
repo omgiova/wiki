@@ -30,6 +30,7 @@ log.md
 │   ├── agents-cli-README.md
 │   ├── akshay-pachaar-karpathy-agentic-engineering-tooling.md
 │   ├── fluxo-2-trello-prazos-workflow-2026-07-09.md
+│   ├── fluxo-3-om-database-workflow-2026-07-12.md
 │   ├── karpathy-llm-wiki-pattern.md
 │   └── libertas.md
 └── wiki/
@@ -164,5 +165,6 @@ Inbox da wiki — captura bruta automática por sessão (wiki-review). Contém p
 - [[raw/karpathy-llm-wiki-pattern.md|LLM Wiki Pattern (Karpathy)]] — documento original do padrão que esta wiki segue; fonte imutável
 - [[raw/libertas.md|Guia de Voz — Libertas Assessoria Financeira]] — documento de referência para copywriter com tom de voz, exemplos aprovados e estrutura de conteúdo
 - [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md|JSON do workflow "Trello Prazos por Membro" (v1 oficial, 2026-07-09)]] — export completo da primeira versão validada e em produção do Fluxo 2
+- [[raw/fluxo-3-om-database-workflow-2026-07-12.md|JSON do workflow "Trello Open Mídia - Banco de Dados" (v1 validada, 2026-07-12)]] — export completo da v1 imutável do Fluxo 3; derivadas devem duplicar o flow, não editar
 - [[raw/akshay-pachaar-karpathy-agentic-engineering-tooling.md|Karpathy's Agentic Engineering Finally Has Proper Tooling]] — artigo de Akshay Pachaar sobre Google Agents CLI (jun/2026)
 - [[raw/agents-cli-README.md|Google Agents CLI — README oficial]] — README do repositório google/agents-cli
