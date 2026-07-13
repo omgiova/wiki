@@ -696,3 +696,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-12] edit | projects — removidas pseudo-pendências dos Fluxos 1, 2 e 4 (a pedido do Giovani)
 - remoteJid/renomear (Fluxo 1), triggers de teste soltos (Fluxo 2) e "conferir 1ª execução" (Fluxo 4) não são pendências: fase de teste é intencional e triggers soltos não impactam nada
 - Página tocada: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-12] ingest | projects — nova página remotion.md (automação de vídeos)
+- Projeto único em /root/projects/remotion (ex remotion-video; remotion-reels excluído); HyperFrames CLI instalado na VPS
+- Código dos projetos antigos do PC extraído para referencia-pc/ (um .md por projeto) + fontes em public/
+- Decisão: whisper.cpp/legendas fica no PC (RAM/CPU da VPS insuficientes pro modelo medium)
+- Páginas tocadas: wiki/projects/remotion.md (nova), index.md
