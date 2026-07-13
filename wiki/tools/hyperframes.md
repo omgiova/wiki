@@ -51,11 +51,17 @@ código do vídeo e rendam sozinhos**.
 
 - `hyperframes browser ensure` falha com "no zip archiver is available" se o sistema não tiver
   `unzip` — resolvido instalando `unzip` via apt
+- **Replay/câmera lenta precisa ser seek-safe:** o render dá *seek* (pulo) para cada frame e lê
+  o estado no instante — `.from()` empilhado no mesmo elemento **não** é seek-safe e renderiza
+  errado. Usar `set()` + `fromTo()` com `immediateRender: false`. (Descoberto no
+  [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|primeiro render]].)
 
 ## Status de validação
 
-- Instalada e "Ready to render" ✓ — **nenhum vídeo real renderizado ainda**
+- Instalada e "Ready to render" ✓
 - Skills instaladas e visíveis em sessão Claude no `/root` ✓ (verificado em 2026-07-12: as 28 apareceram na sessão ativa)
+- **Primeiro vídeo real renderizado em 2026-07-13** ✓ — projeto `estilos-animacoes` (36s, 9:16,
+  6 estilos de animação motion). Ver [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|history]].
 
 ## Conexões
 

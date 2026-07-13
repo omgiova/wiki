@@ -719,3 +719,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-12] edit | projects — projeto renomeado: Automação Remotion → Automação Vídeos
 - Escopo é maior que Remotion (inclui HyperFrames); arquivo movido para wiki/projects/automacao-videos.md
 - Links atualizados em index.md, tools/hyperframes.md e tools/remotion.md
+## [2026-07-13] session | hyperframes — primeiro render real (projeto estilos-animacoes)
+- Criada wiki/history/2026-07-13-primeiro-render-hyperframes.md (36s, 9:16, 6 estilos de motion; requisito seek-safe descoberto)
+- tools/hyperframes.md atualizado: Erros conhecidos (seek-safe) e Status de validação (primeiro render ✓)
+- index.md: nova entrada em history/ + árvore
