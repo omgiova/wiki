@@ -2,7 +2,7 @@
 type: session
 tags: [history, hyperframes, videos, render, motion-graphics]
 title: Primeiro render real com HyperFrames — projeto estilos-animacoes
-description: Primeiro vídeo de fato renderizado com HyperFrames na VPS (36s, 9:16, 6 estilos de animação), incluindo a descoberta do requisito seek-safe
+description: Primeiro vídeo de fato renderizado com HyperFrames na VPS (72s, 9:16, 12 estilos de animação), incluindo a descoberta do requisito seek-safe
 timestamp: 2026-07-13T00:10:00-03:00
 status: stable
 ---

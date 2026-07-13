@@ -2,7 +2,7 @@
 type: tool
 tags: [tools, hyperframes, videos, html, heygen]
 title: HyperFrames
-description: CLI open-source da HeyGen que renderiza HTML/CSS/JS em vídeo MP4 — feita para agentes de IA; instalada globalmente na VPS, ainda sem uso real
+description: CLI open-source da HeyGen que renderiza HTML/CSS/JS em vídeo MP4 — feita para agentes de IA; instalada globalmente na VPS, primeiro vídeo renderizado em 2026-07-13
 timestamp: 2026-07-12T23:45:00-03:00
 status: draft
 ---

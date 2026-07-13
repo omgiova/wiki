@@ -731,3 +731,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Fluxo 1 (Teste-Trello-Membro-Adicionado, SiVxXjp2euu74SRO): linha `➡️ Lista:` dos 4 nós Evolution passou a mapear list.id → nome limpo (caixa normal), fallback pro nome cru
 - Editado via PUT na API REST; só messageText dos 4 nós; resto verbatim; Switch e conexões verificados
 - páginas tocadas: projects/automacao-trello-open-midia.md (seção Fluxo 1)
+
+## [2026-07-13] edit | hyperframes — correção de inconsistências de frontmatter
+- tools/hyperframes.md: description atualizada ("ainda sem uso real" → primeiro render em 2026-07-13)
+- history/2026-07-13-primeiro-render-hyperframes.md: description corrigida (36s/6 estilos → 72s/12 estilos, batendo com o corpo)
