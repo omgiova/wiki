@@ -30,6 +30,7 @@ código do vídeo e rendam sozinhos**.
 ## Como usar
 
 - CLI global: `hyperframes` (help embutido)
+- **Criar um projeto novo:** `hyperframes init <nome>` cria a pasta `<nome>` já com o esqueleto do vídeo dentro — **não precisa criar a pasta antes**. A pasta nasce **onde você estiver** no momento, então rodar sempre a partir de `/root/projects/hyperframes` (senão a pasta cai no lugar errado, ex. `/root/<nome>`). Dá pra já definir o formato: `--resolution portrait` (9:16 vertical) ou `--resolution landscape` (16:9, padrão). Obs: `init` **não instala** a ferramenta (já é global na VPS) — só cria a pasta-projeto.
 - Projetos de vídeo centralizados em `/root/projects/hyperframes`
 - Skills disponíveis em qualquer sessão Claude iniciada no `/root` (ver Configuração)
 - Ainda sem workflow definido — aguardando definição do projeto [[wiki/projects/automacao-videos.md|Automação Vídeos]]

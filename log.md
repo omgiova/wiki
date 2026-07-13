@@ -735,3 +735,6 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-13] edit | hyperframes — correção de inconsistências de frontmatter
 - tools/hyperframes.md: description atualizada ("ainda sem uso real" → primeiro render em 2026-07-13)
 - history/2026-07-13-primeiro-render-hyperframes.md: description corrigida (36s/6 estilos → 72s/12 estilos, batendo com o corpo)
+
+## [2026-07-13] edit | hyperframes — dica de criacao de projeto (init)
+- tools/hyperframes.md: seção "Como usar" ganhou nota sobre `hyperframes init <nome>` criar a pasta sozinho, rodar de /root/projects/hyperframes, flag --resolution, e que init não instala nada
