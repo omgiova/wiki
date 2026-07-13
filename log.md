@@ -723,3 +723,6 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criada wiki/history/2026-07-13-primeiro-render-hyperframes.md (36s, 9:16, 6 estilos de motion; requisito seek-safe descoberto)
 - tools/hyperframes.md atualizado: Erros conhecidos (seek-safe) e Status de validação (primeiro render ✓)
 - index.md: nova entrada em history/ + árvore
+## [2026-07-13] edit | hyperframes — projeto estilos-animacoes expandido para 12 estilos
+- history/2026-07-13-primeiro-render-hyperframes.md atualizado: 12 estilos, 72s, legendas com nome técnico + parâmetros
+- tools/hyperframes.md e index.md: status/descrição atualizados (72s, 12 estilos)

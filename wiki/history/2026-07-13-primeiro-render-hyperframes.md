@@ -17,12 +17,19 @@ na VPS, validando toda a instalação feita no dia anterior. Motivado pelo proje
 
 - **Pasta:** `/root/projects/hyperframes/estilos-animacoes` (inicialmente `projeto1`, renomeada após aprovação)
 - **Vídeo:** "Hello World" acompanhado de um quadrado, um círculo e um triângulo, animados em
-  **6 estilos de motion diferentes**: 1) fade + escala, 2) deslizar, 3) girar, 4) quicar (bounce),
-  5) pop em sequência, 6) zoom.
+  **12 estilos de motion diferentes** (cobrindo o vocabulário de entrada/ênfase da skill):
+  1) `scale_grow`, 2) `slide` multi-direção, 3) `spin`/rotate, 4) `bounce_in`, 5) `scale_punch` (pop),
+  6) `zoom`, 7) `fade_blur`, 8) `slam`+`shake`, 9) `wave`, 10) `typewriter` (clipPath), 11) `glow`
+  (drop-shadow yoyo), 12) `shake` (keyframes).
 - **Formato:** vertical 9:16 (1080×1920), gerado via skill `/motion-graphics`, animação GSAP.
-- **Duração final:** 36s — cada cena tem 6s (2s em velocidade normal + 4s repetindo a mesma
-  animação em câmera lenta, a meia velocidade). Pedido do Giovani para ver as animações em detalhe.
-- **Render:** `hyperframes render` na VPS (2 vCPU, low-memory profile, 1 worker); ~1m35s para os 36s.
+- **Duração final:** 72s — 12 cenas de 6s cada (2s em velocidade normal + 4s repetindo a mesma
+  animação em câmera lenta, a meia velocidade, via multiplicador `k`). Pedido do Giovani para ver
+  as animações em detalhe.
+- **Legendas didáticas:** cada cena mostra na tela o **nome técnico real** (primitivo do vocabulário
+  + ease GSAP) e os **parâmetros usados** (from, duração, stagger, ease) — valores da velocidade normal.
+- **Render:** `hyperframes render` na VPS (2 vCPU, low-memory profile, 1 worker); ~4m13s para os 72s.
+- **Escopo:** este é o **tipo 1** (motion graphic de formas+texto) dos 10 tipos que a skill cobre;
+  plano combinado é fazer um vídeo por tipo, e depois um vídeo dedicado só a transições.
 
 ## Descoberta técnica — render é seek-safe
 

@@ -143,7 +143,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 ### history/
 
-- [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|Primeiro render HyperFrames]] — primeiro vídeo real renderizado (projeto estilos-animacoes, 36s, 6 estilos de motion); descoberta do requisito seek-safe (set + fromTo, não .from empilhado)
+- [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|Primeiro render HyperFrames]] — primeiro vídeo real renderizado (projeto estilos-animacoes, 72s, 12 estilos de motion com nome técnico + parâmetros na tela); descoberta do requisito seek-safe (set + fromTo, não .from empilhado)
 - [[wiki/history/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
 - [[wiki/history/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
 - [[wiki/history/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq

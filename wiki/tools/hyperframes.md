@@ -60,8 +60,9 @@ código do vídeo e rendam sozinhos**.
 
 - Instalada e "Ready to render" ✓
 - Skills instaladas e visíveis em sessão Claude no `/root` ✓ (verificado em 2026-07-12: as 28 apareceram na sessão ativa)
-- **Primeiro vídeo real renderizado em 2026-07-13** ✓ — projeto `estilos-animacoes` (36s, 9:16,
-  6 estilos de animação motion). Ver [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|history]].
+- **Primeiro vídeo real renderizado em 2026-07-13** ✓ — projeto `estilos-animacoes` (72s, 9:16,
+  12 estilos de animação motion, com nome técnico + parâmetros na tela). Ver
+  [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|history]].
 
 ## Conexões
 
