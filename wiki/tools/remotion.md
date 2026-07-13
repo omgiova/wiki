@@ -72,7 +72,7 @@ web de preview que sobe sob demanda (`npx remotion studio`) — não é serviço
 
 ## Conexões
 
-- [[wiki/projects/automacao-remotion.md|Automação Remotion]] — projeto do Giovani que usa esta ferramenta
+- [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto do Giovani que usa esta ferramenta
 - [[wiki/tools/hyperframes.md|HyperFrames]] — ferramenta complementar HTML→vídeo
 - [[wiki/systems/hermes.md|Hermes]] — stack de mídia da VPS (React + Remotion)
 - [[wiki/systems/vps.md|VPS]] — limites de RAM/CPU relevantes para render e whisper

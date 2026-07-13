@@ -32,7 +32,7 @@ código do vídeo e rendam sozinhos**.
 - CLI global: `hyperframes` (help embutido)
 - Projetos de vídeo centralizados em `/root/projects/hyperframes`
 - Skills disponíveis em qualquer sessão Claude iniciada no `/root` (ver Configuração)
-- Ainda sem workflow definido — aguardando definição do projeto [[wiki/projects/automacao-remotion.md|Automação Remotion]]
+- Ainda sem workflow definido — aguardando definição do projeto [[wiki/projects/automacao-videos.md|Automação Vídeos]]
 
 ## Quando não usar
 
@@ -59,5 +59,5 @@ código do vídeo e rendam sozinhos**.
 
 ## Conexões
 
-- [[wiki/projects/automacao-remotion.md|Automação Remotion]] — projeto que motivou a instalação
+- [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto que motivou a instalação
 - [[wiki/tools/remotion.md|Remotion]] — ferramenta complementar para vídeos elaborados

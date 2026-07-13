@@ -1,13 +1,13 @@
 ---
 type: concept
-tags: [projects, automacao-remotion, videos, remotion, hyperframes]
-title: Automação Remotion
+tags: [projects, automacao-videos, videos, remotion, hyperframes]
+title: Automação Vídeos
 description: Projeto do Giovani de automação de vídeos (Remotion e/ou HyperFrames) — em definição; meta é geração totalmente automática
 timestamp: 2026-07-12T23:05:00-03:00
 status: draft
 ---
 
-# Automação Remotion
+# Automação Vídeos
 
 Projeto de **automação de vídeos** do Giovani, iniciado em 2026-07-12. **Ainda em definição** —
 o Giovani tem ideias em mente que ainda não foram detalhadas; esta página registra só o que já

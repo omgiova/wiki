@@ -716,3 +716,6 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Pasta de projetos criada: /root/projects/hyperframes; 20 skills instaladas via `npx skills add heygen-com/hyperframes`
 - Skills expostas globalmente via symlinks em /root/.claude/skills (28: 20 HyperFrames + 8 Remotion); .claude dos projetos removidas
 - Página tocada: wiki/tools/hyperframes.md (Capabilities, Como usar, Configuração, Status de validação)
+## [2026-07-12] edit | projects — projeto renomeado: Automação Remotion → Automação Vídeos
+- Escopo é maior que Remotion (inclui HyperFrames); arquivo movido para wiki/projects/automacao-videos.md
+- Links atualizados em index.md, tools/hyperframes.md e tools/remotion.md

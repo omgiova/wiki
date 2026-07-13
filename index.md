@@ -56,7 +56,7 @@ log.md
     │   ├── sync-automatico-wiki.md
     │   └── wiki-review.md
     ├── projects/
-    │   ├── automacao-remotion.md
+    │   ├── automacao-videos.md
     │   ├── automacao-trello-open-midia.md
     │   └── finflow.md
     ├── systems/
@@ -108,7 +108,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
-- [[wiki/projects/automacao-remotion.md|Automação Remotion]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
+- [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
 
 ### tools/
 
