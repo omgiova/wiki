@@ -56,9 +56,9 @@ log.md
     │   ├── sync-automatico-wiki.md
     │   └── wiki-review.md
     ├── projects/
+    │   ├── automacao-remotion.md
     │   ├── automacao-trello-open-midia.md
-    │   ├── finflow.md
-    │   └── remotion.md
+    │   └── finflow.md
     ├── systems/
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
@@ -72,7 +72,9 @@ log.md
     └── tools/
         ├── elevenlabs-mcp.md
         ├── firecrawl.md
+        ├── hyperframes.md
         ├── n8n-mcp.md
+        ├── remotion.md
         ├── obsidian-git.md
         ├── telegram.md
         ├── trello-mcp-oficial.md
@@ -106,13 +108,15 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
-- [[wiki/projects/remotion.md|Remotion — automação de vídeos]] — projeto único de vídeos em /root/projects/remotion (Remotion + HyperFrames); referência dos projetos antigos do PC em referencia-pc/; whisper fica no PC
+- [[wiki/projects/automacao-remotion.md|Automação Remotion]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
 
 ### tools/
 
 - [[wiki/tools/telegram.md|Telegram]] — referência completa: IDs, tópicos, HERMES_SESSION_MESSAGE_ID, sendMessage, sendRichMessage, reações e integrações com o Hermes
 - [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — capabilities e limites do free tier: text_to_sound_effects, compose_music (pago), limitação de duração, créditos
 - [[wiki/tools/n8n-mcp.md|n8n MCP]] — interface MCP do n8n para os agentes da VPS: server stdio, registro nos clientes, env, capabilities e erros conhecidos
+- [[wiki/tools/remotion.md|Remotion]] — framework React para vídeos programáticos; projeto único em /root/projects/remotion, skills oficiais, referência dos projetos do PC em referencia-pc/, whisper fica no PC
+- [[wiki/tools/hyperframes.md|HyperFrames]] — CLI open-source da HeyGen (HTML→MP4, feita pra agentes); instalada globalmente na VPS, ainda sem uso real
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
 - [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] — MCP local via npx com credenciais da dona do workspace; wrapper em /root/mcp/, skill em /root/.hermes/skills/trello/; credenciais validadas 2026-07-06, registrado no Claude Code e no Hermes

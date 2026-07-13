@@ -702,3 +702,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Código dos projetos antigos do PC extraído para referencia-pc/ (um .md por projeto) + fontes em public/
 - Decisão: whisper.cpp/legendas fica no PC (RAM/CPU da VPS insuficientes pro modelo medium)
 - Páginas tocadas: wiki/projects/remotion.md (nova), index.md
+
+## [2026-07-12] edit | tools — Remotion e HyperFrames reclassificados como ferramentas; projeto vira automacao-remotion
+- Correção do Giovani: Remotion é ferramenta de terceiro, não projeto — projects/remotion.md removida
+- Criadas tools/remotion.md e tools/hyperframes.md (seções obrigatórias de tools/)
+- Criada projects/automacao-remotion.md — o projeto real do Giovani, em definição
+- Páginas tocadas: tools/remotion.md, tools/hyperframes.md, projects/automacao-remotion.md, index.md
