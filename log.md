@@ -726,3 +726,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-13] edit | hyperframes — projeto estilos-animacoes expandido para 12 estilos
 - history/2026-07-13-primeiro-render-hyperframes.md atualizado: 12 estilos, 72s, legendas com nome técnico + parâmetros
 - tools/hyperframes.md e index.md: status/descrição atualizados (72s, 12 estilos)
+
+## [2026-07-13] edit | trello — Fluxo 1: nome da lista limpo
+- Fluxo 1 (Teste-Trello-Membro-Adicionado, SiVxXjp2euu74SRO): linha `➡️ Lista:` dos 4 nós Evolution passou a mapear list.id → nome limpo (caixa normal), fallback pro nome cru
+- Editado via PUT na API REST; só messageText dos 4 nós; resto verbatim; Switch e conexões verificados
+- páginas tocadas: projects/automacao-trello-open-midia.md (seção Fluxo 1)
