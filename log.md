@@ -708,3 +708,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criadas tools/remotion.md e tools/hyperframes.md (seções obrigatórias de tools/)
 - Criada projects/automacao-remotion.md — o projeto real do Giovani, em definição
 - Páginas tocadas: tools/remotion.md, tools/hyperframes.md, projects/automacao-remotion.md, index.md
+
+## [2026-07-12] edit | tools — remotion.md atualizada após reconstrução dos projetos do PC na VPS
+- 25 composições do PC reconstruídas em src/ e verificadas; referencia-pc/ enxugada (só inventário)
+- Páginas tocadas: wiki/tools/remotion.md

@@ -35,8 +35,9 @@ web de preview que sobe sob demanda (`npx remotion studio`) — não é serviço
 - Studio: `npx remotion studio --port 3333` na pasta; acesso do PC/celular via túnel SSH
 - Render: scripts em `package.json` (`npm run build`, `build-4k`, `build-gif`, `still`)
 - Skills oficiais em `.agents/skills/` (8 skills de `remotion-dev/skills`; symlinks em `.claude/skills/`)
-- Código de referência dos projetos antigos do PC: `referencia-pc/` — um `.md` por projeto,
-  índice no `README.md` da pasta
+- `referencia-pc/` — resta só `_inventario-pc.md` (listagem do que ficou no PC do Giovani:
+  áudios, imagens, whisper.cpp); os `.md` de código foram apagados em 2026-07-12 após a
+  reconstrução dos projetos em `src/`
 - Fontes em `public/`: TheBoldFont + ClashDisplay completa, com licenças
 
 ## Quando não usar
@@ -59,8 +60,14 @@ web de preview que sobe sob demanda (`npx remotion studio`) — não é serviço
 
 ## Status de validação
 
-- Projeto herdado do antigo `remotion-video` (componentes de título, cards, transições) —
-  renderizava no passado; ainda não re-testado após a reorganização de 2026-07-12
+- **2026-07-12** — todos os projetos do PC do Giovani reconstruídos em `src/` (75 arquivos):
+  25 composições listadas sem erro por `npx remotion compositions` (MotionProject, ReelsOM,
+  LegendaProject, Projeto3/4/5, KaruMarketingVideo, TransitionTest + 17 Curvable-* do Projeto6).
+  `package.json` adotado do PC (React 19, Remotion 4.0.469), instalação limpa
+- Assets que ficaram no PC: músicas e imagens do Reels OM (composição abre com essas partes
+  quebradas/mudas); `public/test2.mp4` é placeholder preto de 5s criado na VPS pro LegendaProject
+- Composição antiga do ex-`remotion-video` (título/cards) saiu do `Root.tsx` (arquivos mantidos
+  em `src/components/`); o id `HelloWorld` atual é do Projeto6
 - Histórico: `remotion-reels` (transição de logo) excluído em 2026-07-12 a pedido do Giovani
 
 ## Conexões
