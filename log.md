@@ -712,3 +712,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-12] edit | tools — remotion.md atualizada após reconstrução dos projetos do PC na VPS
 - 25 composições do PC reconstruídas em src/ e verificadas; referencia-pc/ enxugada (só inventário)
 - Páginas tocadas: wiki/tools/remotion.md
+## [2026-07-12] edit | hyperframes — skills instaladas e setup de projetos documentado
+- Pasta de projetos criada: /root/projects/hyperframes; 20 skills instaladas via `npx skills add heygen-com/hyperframes`
+- Skills expostas globalmente via symlinks em /root/.claude/skills (28: 20 HyperFrames + 8 Remotion); .claude dos projetos removidas
+- Página tocada: wiki/tools/hyperframes.md (Capabilities, Como usar, Configuração, Status de validação)

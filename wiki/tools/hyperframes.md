@@ -3,7 +3,7 @@ type: tool
 tags: [tools, hyperframes, videos, html, heygen]
 title: HyperFrames
 description: CLI open-source da HeyGen que renderiza HTML/CSS/JS em vídeo MP4 — feita para agentes de IA; instalada globalmente na VPS, ainda sem uso real
-timestamp: 2026-07-12T22:34:00-03:00
+timestamp: 2026-07-12T23:45:00-03:00
 status: draft
 ---
 
@@ -20,7 +20,7 @@ código do vídeo e rendam sozinhos**.
 
 - HTML/CSS/JS → MP4; animações via CSS, GSAP, Lottie, shaders, Three.js
 - Ideal para volume: dados/planilhas → vídeos, artigos → reels, template → variações personalizadas
-- Skill oficial para agentes: `npx skills add heygen-com/hyperframes` (ainda não instalada)
+- Skills oficiais para agentes: instaladas em 2026-07-12 via `npx skills add heygen-com/hyperframes` — 20 skills (core, CLI, animação, keyframes, e casos de uso como `website-to-video`, `slideshow`, `faceless-explainer`, `music-to-video`, `remotion-to-hyperframes`)
 
 ## Limites
 
@@ -30,6 +30,8 @@ código do vídeo e rendam sozinhos**.
 ## Como usar
 
 - CLI global: `hyperframes` (help embutido)
+- Projetos de vídeo centralizados em `/root/projects/hyperframes`
+- Skills disponíveis em qualquer sessão Claude iniciada no `/root` (ver Configuração)
 - Ainda sem workflow definido — aguardando definição do projeto [[wiki/projects/automacao-remotion.md|Automação Remotion]]
 
 ## Quando não usar
@@ -41,6 +43,9 @@ código do vídeo e rendam sozinhos**.
 - Instalada em 2026-07-12: CLI global v0.7.55 (`npm install -g hyperframes`)
 - Chrome Headless Shell v152 em `~/.cache/hyperframes` (~262 MB), baixado via `hyperframes browser ensure`
 - Requisitos na VPS: Node 22 ✓, FFmpeg 6.1 ✓, `unzip` (instalado em 2026-07-12 para o download do Chrome)
+- Pasta de projetos: `/root/projects/hyperframes` (criada em 2026-07-12), ao lado do projeto Remotion
+- 20 skills de agente instaladas nessa pasta (conteúdo real em `.agents/skills/`)
+- Skills expostas globalmente via links simbólicos em `/root/.claude/skills` (28 links no total: 20 HyperFrames + 8 Remotion) — como o Giovani sempre roda o Claude no `/root`, as skills ficam disponíveis em toda sessão; as pastas `.claude` dentro dos projetos foram removidas por redundância
 
 ## Erros conhecidos
 
@@ -50,6 +55,7 @@ código do vídeo e rendam sozinhos**.
 ## Status de validação
 
 - Instalada e "Ready to render" ✓ — **nenhum vídeo real renderizado ainda**
+- Skills instaladas e visíveis em sessão Claude no `/root` ✓ (verificado em 2026-07-12: as 28 apareceram na sessão ativa)
 
 ## Conexões
 
