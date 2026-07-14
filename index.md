@@ -47,6 +47,7 @@ log.md
     ├── history/
     │   ├── 2026-06-22-modelos-nim-elevenlabs.md
     │   ├── 2026-06-24-20260624.md
+    │   ├── 2026-07-13-game-loop-mario-hyperframes.md
     │   ├── 2026-07-13-primeiro-render-hyperframes.md
     │   └── crise-update.md
     ├── procedures/
@@ -144,6 +145,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 ### history/
 
 - [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|Primeiro render HyperFrames]] — primeiro vídeo real renderizado (projeto estilos-animacoes, 72s, 12 estilos de motion com nome técnico + parâmetros na tela); descoberta do requisito seek-safe (set + fromTo, não .from empilhado)
+- [[wiki/history/2026-07-13-game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 - [[wiki/history/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
 - [[wiki/history/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
 - [[wiki/history/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq

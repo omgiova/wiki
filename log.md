@@ -738,3 +738,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 
 ## [2026-07-13] edit | hyperframes — dica de criacao de projeto (init)
 - tools/hyperframes.md: seção "Como usar" ganhou nota sobre `hyperframes init <nome>` criar a pasta sozinho, rodar de /root/projects/hyperframes, flag --resolution, e que init não instala nada
+
+## [2026-07-13] session | game-loop — nova página do projeto de parallax (Mario) no HyperFrames
+- criada history/2026-07-13-game-loop-mario-hyperframes.md (v1 vetorial SMB3 → v2 final sprites SNES/SMW; técnicas de recorte de sprite e composição)
+- tools/hyperframes.md: adicionados links em Conexões (primeiro render + game-loop)
+- index.md: árvore + lista de history atualizadas
