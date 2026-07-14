@@ -47,7 +47,6 @@ log.md
     ├── history/
     │   ├── 2026-06-22-modelos-nim-elevenlabs.md
     │   ├── 2026-06-24-20260624.md
-    │   ├── 2026-07-13-game-loop-mario-hyperframes.md
     │   ├── 2026-07-13-primeiro-render-hyperframes.md
     │   └── crise-update.md
     ├── procedures/
@@ -60,7 +59,8 @@ log.md
     ├── projects/
     │   ├── automacao-videos.md
     │   ├── automacao-trello-open-midia.md
-    │   └── finflow.md
+    │   ├── finflow.md
+    │   └── game-loop-mario-hyperframes.md
     ├── systems/
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
@@ -111,6 +111,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
+- [[wiki/projects/game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax no HyperFrames; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 
 ### tools/
 
@@ -145,7 +146,6 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 ### history/
 
 - [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|Primeiro render HyperFrames]] — primeiro vídeo real renderizado (projeto estilos-animacoes, 72s, 12 estilos de motion com nome técnico + parâmetros na tela); descoberta do requisito seek-safe (set + fromTo, não .from empilhado)
-- [[wiki/history/2026-07-13-game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 - [[wiki/history/2026-06-24-20260624.md|Diário 2026-06-24]] — daily longa (64KB); sessão com ElevenLabs SFX, agent loops, OpenClaw, escrita concorrente entre instâncias
 - [[wiki/history/crise-update.md|Crise update]] — múltiplos /update corromperam state.db; backup salvou; fixes aplicados
 - [[wiki/history/2026-06-22-modelos-nim-elevenlabs.md|Modelos NIM + ElevenLabs]] — migração para Nvidia NIM, rate limit agêntico, MCP ElevenLabs, tentativa Groq

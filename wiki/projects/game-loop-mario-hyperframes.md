@@ -1,6 +1,6 @@
 ---
-type: session
-tags: [history, hyperframes, videos, parallax, pixel-art, mario, sprites]
+type: concept
+tags: [projects, hyperframes, videos, parallax, pixel-art, mario, sprites]
 title: Projeto game-loop — cenário de jogo com parallax (Mario) no HyperFrames
 description: Vídeo de 10s simulando um cenário de jogo com parallax; evoluiu de recriação vetorial (SMB3) para sprites reais de Super Mario World (Yoshi's Island 2) com Mario correndo; inclui técnicas de recorte de sprite
 timestamp: 2026-07-13T22:20:00-03:00

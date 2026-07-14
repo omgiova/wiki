@@ -70,4 +70,4 @@ código do vídeo e rendam sozinhos**.
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto que motivou a instalação
 - [[wiki/tools/remotion.md|Remotion]] — ferramenta complementar para vídeos elaborados
 - [[wiki/history/2026-07-13-primeiro-render-hyperframes.md|Primeiro render]] — projeto estilos-animacoes (motion graphics)
-- [[wiki/history/2026-07-13-game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — parallax com sprites reais do SNES + técnicas de recorte de sprite (color-key, flood fill, tile espelhado)
+- [[wiki/projects/game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — parallax com sprites reais do SNES + técnicas de recorte de sprite (color-key, flood fill, tile espelhado)

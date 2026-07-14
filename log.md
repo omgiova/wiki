@@ -743,3 +743,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - criada history/2026-07-13-game-loop-mario-hyperframes.md (v1 vetorial SMB3 → v2 final sprites SNES/SMW; técnicas de recorte de sprite e composição)
 - tools/hyperframes.md: adicionados links em Conexões (primeiro render + game-loop)
 - index.md: árvore + lista de history atualizadas
+
+## [2026-07-13] edit | game-loop — página movida de history/ para projects/
+- git mv wiki/history/2026-07-13-game-loop-mario-hyperframes.md -> wiki/projects/game-loop-mario-hyperframes.md
+- frontmatter: type session->concept, tag history->projects (corpo verbatim)
+- links atualizados em tools/hyperframes.md e index.md (árvore + listas)
