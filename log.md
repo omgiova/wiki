@@ -777,3 +777,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Data Table `fila-mencoes-trello-openmidia` criada inteira via `POST /api/v1/data-tables` (descoberta: a API cria tabela + colunas num request)
 - Mensagens com 🟡 (amarelo) pra diferenciar do Fluxo 1; remoteJid de todos os nós no número do Giovani (fase de teste)
 - Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-18] edit | n8n — API pública cria Data Table inteira
+- Adicionado `POST /api/v1/data-tables` (cria tabela + colunas num request) à seção Data Tables
+- Páginas tocadas: wiki/systems/n8n.md

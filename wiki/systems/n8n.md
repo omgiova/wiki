@@ -96,6 +96,7 @@ O n8n da VPS tem **Data Tables** nativas — armazenamento persistente por proje
 - `GET /api/v1/data-tables` — lista tabelas (id, nome, projectId, colunas)
 - `GET /api/v1/data-tables/<id>` — detalhe de uma tabela
 - `POST /api/v1/data-tables/<id>/columns` com `{"name": "...", "type": "string|date|number|boolean"}` — cria coluna (usado pra criar as 4 colunas da tabela `fila-horario-trello-openmidia`, id `9x6YWmbkf3dI00Be`)
+- `POST /api/v1/data-tables` com `{"name": "...", "columns": [{"name": "...", "type": "..."}, ...]}` — **cria a tabela inteira** (com colunas) num request só, sem precisar da UI (verificado 2026-07-18 criando a `fila-mencoes-trello-openmidia`, id `66w7MT67Dvp5LOqY`, do Fluxo 5 da automação Trello)
 
 **Limitação do Simple Memory em queue mode** (doc oficial, não testado aqui): o sub-nó Simple Memory (memória de chat dos AI Agents) **não funciona em workflow ativo de produção quando o n8n roda em queue mode** — chamadas podem cair em workers diferentes — e a memória dele é só do processo (restart apaga). Como o n8n da VPS é queue mode, não usar Simple Memory em produção; pra estado persistente, usar Data Tables. Fonte: docs.n8n.io (common issues do nó, consultado 2026-07-18).
 
