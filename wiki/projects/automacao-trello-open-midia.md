@@ -236,6 +236,50 @@ Schedule (dias úteis 8h) → Ler fila → Buscar card da fila → Code "Montar 
 
 **Pendente:** revisão na UI, ativação (registra o webhook novo no Trello), teste real de menção, e depois os números reais de cada membro nos `remoteJid`.
 
+## Fluxo 6 — Tarefas vencendo hoje (construído 2026-07-18, AGUARDANDO VALIDAÇÃO)
+
+**Workflow n8n:** `Trello Prazos Vencendo Hoje - Open Mídia` (ID `86R5NirJ7BBSdRiY`), **desativado** — criado via API (POST) em 2026-07-18 **duplicando o desenho do Fluxo 2** (Giovani escolheu o Fluxo 2 como base, não o Fluxo 4 que é banco de dados). Aguardando teste e ativação pelo Giovani. Ainda não validado.
+
+**O que faz:** todo dia útil às **10h30 (BRT)** manda no WhatsApp a lista de cards do board que **vencem naquele mesmo dia**, agrupados por membro. Mesma estrutura do Fluxo 2, com três diferenças: janela (só hoje, não 7 dias), horário (diário seg–sex em vez de segunda) e destino (fase de teste, tudo pro Giovani).
+
+```
+Schedule (Seg-Sex 10h30) ─┐
+Manual Trigger (teste)   ─┴→ Buscar cards do board (HTTP) → Code "Filtrar e agrupar por membro" → Switch (por membro)
+  ├─ Giovani  → Evolution "Enviar texto - Giovani"
+  ├─ Gabriele → Evolution "Enviar texto - Gabriele"
+  ├─ Luciana  → Evolution "Enviar texto - Luciana"
+  └─ Nathalia → Evolution "Enviar texto - Nathalia"
+```
+
+- **Gatilho:** `Schedule Trigger` semanal com `triggerAtDay: [1,2,3,4,5]` (seg a sex), hora 10 minuto 30 — dispara nos 5 dias úteis às 10h30. Mais o `Manual Trigger` de teste, os dois ligados direto no HTTP.
+- **Buscar cards do board:** `GET /1/boards/6908bffbc7473c1134fe279d/cards?fields=name,due,shortUrl,idList,idMembers`, credencial `trelloApi` "Trello account" — idêntico ao Fluxo 2.
+- **Code "Filtrar e agrupar por membro"** (JS, `runOnceForAllItems`): mesma base do Fluxo 2, mas **janela = só hoje**. `start` = hoje 00:00 na tz `America/Sao_Paulo` (lido via `Intl` e montado como instante UTC absoluto, imune à tz do container); `end` = `start + 24h - 1ms` (fim do dia de hoje em BRT). Descarta cards sem `due` ou fora do dia. Agrupa por membro (card com vários membros aparece pra cada um) e, dentro do membro, por lista (ordem = `pos` do `listMap`) e por prazo. Reusa o `listMap` (nomes limpos em caixa alta), `members` e `nicknames` (Gio, Gabi, Lu, Nathalia) do Fluxo 2.
+- **Switch:** mesmos 4 IDs de membro, testando `$json.memberId`; 4 saídas conectadas (conferido por GET após a criação — o bug de saída morta do Fluxo 2 não ocorreu).
+- **Envio:** 4 nós Evolution (instância `Giobot`, credencial "Evolution account"). **`remoteJid` dos 4 apontando pro número do Giovani** (`5511986501499`, verbatim do Fluxo 1/2) — de propósito, fase de teste antes de pôr os números reais.
+- **Error Workflow** "Alerta de Erro" (`3MI1k15YL5OUrEXF`) apontado nas Settings desde a criação.
+
+**Formato da mensagem** (uma por membro):
+
+```
+Oi, Lu!
+
+⏰ Suas tarefas vencendo hoje (18/07/2026):
+
+*LIBERTAS*
+
+📌 Estático | Planilha não é gestão financeira
+🕐 Vence hoje às 12:00
+🔗 https://trello.com/c/k0zxpTRg
+```
+
+**Comportamentos a saber:**
+
+- **Ninguém com card vencendo hoje = nenhuma mensagem** (o Code retorna 0 itens; normal, não é erro). Erro real dispara o Error Workflow.
+- Janela editável: no Code, `end` fixa em fim do dia de hoje; pra virar "hoje + N dias" bastaria somar dias ao `end` (não foi pedido — Giovani escolheu **só vence hoje**, descartada a opção "hoje + atrasadas").
+- Para produção: trocar o `remoteJid` de cada um dos 4 nós Evolution pelo número real da pessoa (dois cliques no nó → campo `remoteJid`), mesma manobra do Fluxo 2.
+
+**Pendente:** teste real pelo gatilho manual, ativação (`active: true`) e depois os números reais de cada membro nos `remoteJid`.
+
 ## Ideias futuras (desenhadas, não construídas)
 
 - **Backup do board em Markdown + git:** exportar JSON do board e explodir em um arquivo por card (frontmatter, descrição, checklists, comentários, wikilinks pra lista/labels/membros), repo git próprio (ex.: `/root/trello-backup/`, fora da wiki) — git diff vira auditoria do que as automações mudaram. Regra anti-estrago: automações nunca usam Delete (só Archive, que é reversível).

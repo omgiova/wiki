@@ -786,3 +786,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Removida a linha 💬 das 5 mensagens (4 tempo real + fila agrupada) via PUT na API do n8n, resto verbatim
 - Página atualizada: bullet de mensagens e bullet de edições pós-criação
 - wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-18] edit | automacao-trello — Fluxo 6 (tarefas vencendo hoje)
+- Documentado o Fluxo 6 `Trello Prazos Vencendo Hoje - Open Mídia` (ID 86R5NirJ7BBSdRiY), criado via API duplicando o Fluxo 2; desativado, aguardando validação
+- Schedule seg-sex 10h30, janela só-hoje, 4 nós Evolution todos no número do Giovani (fase de teste)
+- projects/automacao-trello-open-midia.md
