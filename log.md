@@ -762,3 +762,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova seção "Data Tables (verificado 2026-07-18)" em systems/n8n.md: recurso nativo + endpoints da API pública (/api/v1/data-tables, verificados ao vivo; a skill n8n-node-configuration não os conhecia) + Simple Memory não funciona em queue mode (fonte: doc oficial)
 - Contexto: tabela fila-horario-trello-openmidia criada pro Fluxo 1 do projeto Trello Open Mídia (nova versão do fluxo aguarda validação do Giovani pra ser documentada)
 - Página tocada: wiki/systems/n8n.md
+
+## [2026-07-18] edit | automacao-trello-open-midia — Fluxo 1: horário comercial + fila validados
+- Nova subseção no Fluxo 1: envio só seg–sex 8h–17h; fora do horário grava na Data Table fila-horario-trello-openmidia e um Schedule seg–sex 8h manda mensagem única agrupada por membro com timestamp; deleteRows limpa a fila
+- Registradas as edições de mensagem do Giovani (🟢 no início, "Cliente" no lugar de "Lista") e a iteração intermediária com Wait substituída no mesmo dia
+- Página tocada: wiki/projects/automacao-trello-open-midia.md
