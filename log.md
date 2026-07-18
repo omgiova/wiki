@@ -748,3 +748,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - git mv wiki/history/2026-07-13-game-loop-mario-hyperframes.md -> wiki/projects/game-loop-mario-hyperframes.md
 - frontmatter: type session->concept, tag history->projects (corpo verbatim)
 - links atualizados em tools/hyperframes.md e index.md (árvore + listas)
+
+## [2026-07-18] edit | n8n — mapa das 8 skills n8n-* na página do sistema
+- Linha genérica "8 skills n8n-*" virou tabela skill → cobertura, incluindo destaque pro nó Data Table (skill n8n-node-configuration, verificada ao vivo, pegadinha do deleteRows)
+- Página tocada: wiki/systems/n8n.md

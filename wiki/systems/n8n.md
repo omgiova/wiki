@@ -54,7 +54,20 @@ Regras de ouro para editar workflows via API/MCP (base: skill `n8n-workflow-buil
 2. Erro 400 → ler `error` e `hint` da resposta
 3. Cada nó exige `id` UUID v4 único e `position`
 
-Base de conhecimento completa: 8 skills `n8n-*` em `/root/.hermes/skills/` (expressões, nós Code JS/Python, padrões, validação, MCP tools) — recurso de todos os agentes da VPS.
+### Base de conhecimento: 8 skills `n8n-*` em `/root/.hermes/skills/`
+
+Recurso de todos os agentes da VPS. Mapa do que cada uma cobre (consultar a skill certa **antes** de mexer no assunto dela):
+
+| Skill | Cobre |
+|---|---|
+| `n8n-workflow-builder` | criar/editar workflows via MCP tools (create/update/get/execute/activate etc.) |
+| `n8n-workflow-patterns` | arquiteturas prontas: webhook, integração HTTP/API, banco de dados, IA, batch, agendados |
+| `n8n-node-configuration` | parâmetros por nó e operação; campos obrigatórios; **Storage Nodes → nó Data Table** (armazenamento nativo persistente, aba "Data tables" da UI) — referência verificada ao vivo em 2026-04-08, inclui pegadinha do `deleteRows` (não `delete`) |
+| `n8n-code-javascript` | Code node em JS: `$input`/`$json`/`$node`, DateTime, loops com SplitInBatches, agregação |
+| `n8n-code-python` | Code node em Python (usar só se JS não servir; JS é o recomendado em ~95% dos casos) |
+| `n8n-expression-syntax` | expressões `{{ }}`, referência a dados de outros nós, erros comuns de mapeamento |
+| `n8n-validation-expert` | interpretar erros/warnings de validação; quais warnings são falsos positivos |
+| `n8n-mcp-tools-expert` | formatos e patterns das tools do MCP n8n; consultar antes de chamar qualquer tool |
 
 ### Criar/editar workflows via API REST (verificado 2026-07-06)
 
