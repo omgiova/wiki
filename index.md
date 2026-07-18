@@ -72,6 +72,7 @@ log.md
     ├── todo/
     │   └── proximos-passos.md
     └── tools/
+        ├── autoloop.md
         ├── elevenlabs-mcp.md
         ├── firecrawl.md
         ├── hyperframes.md
@@ -124,6 +125,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
 - [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] — MCP local via npx com credenciais da dona do workspace; wrapper em /root/mcp/, skill em /root/.hermes/skills/trello/; credenciais validadas 2026-07-06, registrado no Claude Code e no Hermes
 - [[wiki/tools/trello-mcp-oficial.md|Trello MCP (oficial)]] — MCP na nuvem da Atlassian via OAuth; registrado no Claude Code mas bloqueado (Giovani é só convidado no board, OAuth exige membro do workspace)
+- [[wiki/tools/autoloop.md|autoloop]] — harness de loops autônomos de agentes LLM (padrão autoresearch do Karpathy); presets com papéis planner/builder/critic/finalizer, dashboard web local, limites de custo/iterações no autoloops.toml; instalado na VPS 2026-07-18, ainda sem execução real
 
 ### procedures/
 

@@ -791,3 +791,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Documentado o Fluxo 6 `Trello Prazos Vencendo Hoje - Open Mídia` (ID 86R5NirJ7BBSdRiY), criado via API duplicando o Fluxo 2; desativado, aguardando validação
 - Schedule seg-sex 10h30, janela só-hoje, 4 nós Evolution todos no número do Giovani (fase de teste)
 - projects/automacao-trello-open-midia.md
+
+## [2026-07-18] ingest | tools — autoloop
+- Nova página wiki/tools/autoloop.md: harness de loops autônomos de agentes LLM (mikeyobrien/autoloop v0.9.2, padrão autoresearch do Karpathy), instalado globalmente na VPS via npm
+- Documentados presets, topologia de papéis (planner/builder/critic/finalizer com portão de evidências), autoloops.toml, dashboard local (túnel SSH), controles ao vivo; status draft — nenhum loop executado ainda
+- index.md atualizado (árvore + seção tools/)
