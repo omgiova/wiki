@@ -2,8 +2,8 @@
 type: tool
 tags: [tools, autoloop, agentes, loops, orquestracao, claude-code]
 title: autoloop
-description: Harness de loops autônomos de agentes LLM (inspirado no autoresearch do Karpathy) — presets com papéis distintos, dashboard web local, controle de custo/iterações; instalado globalmente na VPS em 2026-07-18, ainda sem execução real
-timestamp: 2026-07-18T13:30:00-03:00
+description: Harness de loops autônomos de agentes LLM (inspirado no autoresearch do Karpathy) — presets com papéis distintos, dashboard web local, controle de custo/iterações; testado em 2026-07-18 (caro e lento para tarefas simples — ver Lições aprendidas)
+timestamp: 2026-07-18T18:30:00-03:00
 status: draft
 ---
 
@@ -58,30 +58,58 @@ max_iteration_runtime = "60s"  # tempo máximo por rodada
 command = "claude"          # motor do loop
 ```
 
-Acesso ao dashboard a partir do PC (túnel SSH): `ssh -N -L 3778:localhost:3778 root@<ip-da-vps>` e abrir `http://localhost:3778`.
+**ATENÇÃO — o preset sobrepõe o toml do projeto.** O preset `autocode` traz `max_iterations = 100` embutido, que vence o `autoloops.toml` da raiz. Limites reais devem ser gravados como override por repositório: `autoloop config set --repo --preset autocode event_loop.max_iterations=10` (grava em `.autoloop/overrides/autocode.toml`). Flags do backend também vão ali, via `backend.args` (não concatenadas em `backend.command` — comando com espaços quebra com "not found").
+
+Acesso ao dashboard a partir do PC: proxy com senha em `http://<ip-da-vps>:3900` (script `/root/scripts/dashboard-proxy.js`, HTTP Basic Auth, repassa para o dashboard em localhost:3778; não sobrevive a reboot). Túnel SSH e port-forward do VS Code também funcionam, mas se mostraram frágeis.
 
 Papéis customizados: `autoloop init --preset <nome>` cria `presets/<nome>/` com `topology.toml` + `roles/*.md` (prompts em Markdown editáveis).
+
+## Como funciona por dentro (verificado no código)
+
+- **Cada iteração = sessão NOVA do Claude em modo headless** (`claude -p`), sem `--resume`/`--continue` e sem subagentes. As sessões não têm memória umas das outras; a continuidade vem dos arquivos no disco, do journal (`.autoloop/journal.jsonl`) e de até 8.000 chars de memória destilada injetada no prompt ("disco é estado, git é memória" — mesma filosofia do ralph-orchestrator).
+- Cada ativação de papel (planner/builder/critic/finalizer) conta como **uma iteração** — o caminho feliz mínimo do `autocode` já gasta 4.
+- O preset invoca o Claude com `--dangerously-skip-permissions` — o agente do loop **não pede permissão para nada**. Worktree/usuário isolado não é opcional.
+
+## Lições aprendidas (teste real de 2026-07-18)
+
+Teste: criar 3 templates visuais HyperFrames (tarefa que em chat direto leva segundos). Resultado: 1 template bom entregue, 5 runs disparados, ~8 min no run que completou, **≈ US$ 7,80 em equivalente-API** (Sonnet 5, medido nos transcripts de `/home/looper/.claude/projects/`) — consumido da cota do plano.
+
+1. **Custo é dominado pelo "pedágio da sessão fria"**: dos ~$7,80, mais de 70% foi contexto recarregado (15,9M tokens de cache lido + 974k escritos em 9 sessões) — catálogo de ~30 skills, MCPs, memória, plano e releitura do projeto a cada acordar. O trabalho útil (214k tokens de saída) foi minoria.
+2. **Claude recusa `--dangerously-skip-permissions` como root** — obrigatório rodar loops como usuário comum. Criado o usuário `looper` (`/home/looper`), com credenciais do Claude copiadas e cache do Chrome/fontes do hyperframes em `/home/looper/.cache/hyperframes/`.
+3. **Sem MCPs no loop**: `backend.args` com `--strict-mcp-config --mcp-config '{"mcpServers":{}}'` (o JSON `{}` puro é rejeitado — precisa da chave `mcpServers`). Corta ~90 tools de Trello/n8n do contexto e elimina o risco de um loop autônomo mexer neles sem pedir permissão.
+4. **Timeout por iteração precisa de folga**: 300s decapitou o builder duas vezes (o trabalho parcial fica no disco; `autoloop resume` continua). Iterações reais de construção levam vários minutos.
+5. **Nunca 2 loops em paralelo nesta VPS** (2 vCPUs): as sessões competem por CPU e se derrubam por timeout.
+6. **Custo por iteração NÃO é capturado por padrão** — `claude -p` texto puro não devolve usage; journal e `stats` mostram $0. Exige `--output-format json` + `backend.usage_from` (não configurado ainda). Sem isso, `max_cost_usd` não funciona e o consumo fica invisível.
+7. **Ambiente deve estar pré-preparado**: scaffold, dependências e navegador instalados ANTES do run — preparar ambiente é trabalho do operador, não do loop (senão a 1ª iteração morre baixando dependências).
+8. **Veredito**: para tarefas pequenas/médias, chat direto é ordens de magnitude mais rápido e barato. Loop só compensa em tarefa longa e repetitiva, com critério objetivo de pronto, rodando sem supervisão — e idealmente num usuário com poucas skills/MCPs instalados (menos pedágio por sessão).
 
 ## Quando não usar
 
 - Tarefa que exige aprovação humana a cada ação individual (cada comando/edição) — isso é o Claude Code interativo, não um loop autônomo. O controle do autoloop é por rodada, não por ação
-- Tarefa pequena de um passo só — o overhead do loop não compensa
+- **Tarefa pequena ou média** — o overhead de sessões frias custa mais que o trabalho (ver Lições aprendidas)
+- Mais de um loop simultâneo nesta VPS
 
 ## Configuração
 
 - Binário global: `autoloop` (npm, pacote `@mobrienv/autoloop`)
-- Config por projeto: `autoloops.toml` na raiz (criado por `autoloop init`); estado do run em `.autoloop/` (gitignorado)
+- Config por projeto: `autoloops.toml` na raiz; **limites efetivos** em `.autoloop/overrides/<preset>.toml` (ver aviso em Como usar); estado do run em `.autoloop/` (gitignorado)
 - Presets empacotados em `/usr/lib/node_modules/@mobrienv/autoloop/node_modules/@mobrienv/autoloop-presets/presets/`
-- Projeto de teste preparado em `/root/autoloop-teste` (config `max_iterations = 1`, `max_iteration_runtime = "60s"`; nenhum run executado)
+- **Loops rodam como o usuário `looper`** (nunca root); projeto de loops em `/home/looper/projects/Loop 1/` (com `template-1/2/3`, cada um repo git próprio com overrides: 10 iterações, 300s, stall 3, sem MCPs)
+- Dashboard com senha: `node /root/scripts/dashboard-proxy.js` (porta 3900 → 3778); credenciais no próprio script
 
 ## Erros conhecidos
 
-- Nenhum até agora — nenhuma execução real ainda.
+- `command = "claude --flags"` no toml → "not found" (o comando é executado como um binário único; flags vão em `backend.args`)
+- `--mcp-config '{}'` → "mcpServers: Invalid input" (usar `'{"mcpServers":{}}'`)
+- `--dangerously-skip-permissions` como root → recusado pelo Claude ("cannot be used with root/sudo")
+- `backend_timeout` mata o run inteiro (não só a iteração); retomar com `autoloop resume <run-id>`
+- Dashboard reiniciado derruba o port-forward automático do VS Code do PC do Giovani (motivo do proxy na 3900)
 
 ## Status de validação
 
-- ✅ Verificado na VPS (2026-07-18): instalação, `--version`, `--help`, `list`, `config show`, dashboard sobe na porta 3778, estrutura de roles/topologia do preset `autocode` lida nos arquivos
-- ⚠️ **Nunca executado um loop real** — capabilities de execução (worktree, control, resume, custos, dashboard com dados) vêm da documentação oficial, não de teste próprio. Giovani vai testar quando for oportuno
+- ✅ Loop real executado e completado (2026-07-18, run `clear-source` no template-1: planner→builder→critic→finalizer, portão de evidências, `task.complete`) — frame HyperFrames válido produzido
+- ✅ Verificados na prática: overrides de preset, isolamento do usuário `looper`, exclusão de MCPs, dashboard, journal, interrupção por timeout e por stall
+- ⚠️ Não testados: worktree, `control guide/respond`, `resume`, captura de custo via `usage_from`, `max_cost_usd`
 
 ## Conexões
 

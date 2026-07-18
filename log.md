@@ -796,3 +796,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página wiki/tools/autoloop.md: harness de loops autônomos de agentes LLM (mikeyobrien/autoloop v0.9.2, padrão autoresearch do Karpathy), instalado globalmente na VPS via npm
 - Documentados presets, topologia de papéis (planner/builder/critic/finalizer com portão de evidências), autoloops.toml, dashboard local (túnel SSH), controles ao vivo; status draft — nenhum loop executado ainda
 - index.md atualizado (árvore + seção tools/)
+
+## [2026-07-18] edit | tools — autoloop: teste real e lições aprendidas
+- Página wiki/tools/autoloop.md atualizada com o primeiro teste real (3 templates HyperFrames): sessão nova por iteração, --dangerously-skip-permissions, usuário looper, overrides de preset, exclusão de MCPs, custo real ≈ US$7,80 (>70% em contexto de sessão fria), veredito "chat direto vence em tarefa pequena/média"
+- Novas seções: Como funciona por dentro, Lições aprendidas (8 itens), Erros conhecidos reais; Status de validação atualizado (loop completado com sucesso no template-1)
+- wiki/tools/autoloop.md
