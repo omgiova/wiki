@@ -767,3 +767,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova subseção no Fluxo 1: envio só seg–sex 8h–17h; fora do horário grava na Data Table fila-horario-trello-openmidia e um Schedule seg–sex 8h manda mensagem única agrupada por membro com timestamp; deleteRows limpa a fila
 - Registradas as edições de mensagem do Giovani (🟢 no início, "Cliente" no lugar de "Lista") e a iteração intermediária com Wait substituída no mesmo dia
 - Página tocada: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-18] chore | automacao-trello-open-midia — Error Workflow no Fluxo 1
+- Settings do Fluxo 1 apontadas pro "Alerta de Erro" (3MI1k15YL5OUrEXF) via API; observação da página do projeto atualizada
+- Página tocada: wiki/projects/automacao-trello-open-midia.md
