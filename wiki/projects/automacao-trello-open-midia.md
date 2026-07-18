@@ -214,6 +214,28 @@ Comportamentos a saber:
 - **Limitação conhecida:** card renomeado ou movido de lista muda o nome do arquivo — o novo é criado e o antigo fica órfão no repo; limpar manualmente quando acontecer (decisão de 2026-07-12: não vale complicar o fluxo por isso)
 - Corrida de versões UI × API (lição do Fluxo 3) não ocorreu aqui: o Publish do Giovani preservou a edição via API — verificado por GET + diff logo após (13 nós, schedule presente, filtro no lugar)
 
+## Fluxo 5 — Aviso de menção em comentário (construído 2026-07-18, AGUARDANDO VALIDAÇÃO)
+
+**Workflow n8n:** `Trello Menção em Comentário - Open Mídia` (ID `dx1Dz80y8AEGx1ET`), **desativado** — criado via API (POST) em 2026-07-18, aguardando revisão, teste e ativação pelo Giovani. Ainda não validado.
+
+**O que faz:** avisa no WhatsApp quando alguém é mencionado (`@usuario`) em um comentário novo de card do board, com a mesma regra de horário comercial + fila do Fluxo 1. 22 nós, mesmo desenho do Fluxo 1 (horário comercial validado em 2026-07-18), com Error Workflow "Alerta de Erro" (`3MI1k15YL5OUrEXF`) apontado desde a criação.
+
+```
+Trello Trigger (webhook do board) → Filter (só commentCard) → Code "Extrair menções" → Code "Horário comercial?" → If "Fora do horário?"
+  ├─ fora  → Data Table "Guardar na fila"
+  └─ dentro → HTTP "Buscar card no Trello" → Switch (por membroId) → 4 nós Evolution "Enviar texto - <nome>"
+Schedule (dias úteis 8h) → Ler fila → Buscar card da fila → Code "Montar mensagem por membro" → Switch → 4 nós Evolution "Fila - <nome>" → Limpar fila
+```
+
+- **Extrair menções** (Code): procura `@usuario` no texto do comentário (`action.data.text`) e mapeia pros 4 membros pelo username do Trello (giovanigomesdeamorim, gabrielelemos1, lemosluciana, nathaliabernardess). Um comentário mencionando 2 pessoas gera 2 avisos. Regras: auto-menção não avisa (autor == mencionado); menção repetida no mesmo comentário conta 1x; comentário >300 caracteres é cortado com "…". A menção só é detectada se o `@usuario` estiver no texto gravado pelo Trello (autocomplete de menção).
+- **Mensagens começam com 🟡** (círculo amarelo — decisão do Giovani em 2026-07-18, pra diferenciar do 🟢 do Fluxo 1). Tempo real: `🟡 Oi, <apelido>, você foi mencionad<o/a> em um comentário no card *X* por *Fulano*` + texto do comentário (💬) + Cliente (mesmo mapa de nomes limpos do Fluxo 1) + Prazo + link. Fila: uma mensagem agrupada por pessoa, cada menção com timestamp (`por *Giovani* (17/07 às 23h14)`) e o texto do comentário.
+- **Fila:** Data Table **`fila-mencoes-trello-openmidia`** (id `66w7MT67Dvp5LOqY`; colunas `card_id`, `membro_id`, `comentado_por`, `quando`, `comentario`). Comportamentos iguais ao Fluxo 1: fila vazia às 8h = nenhuma mensagem; card apagado é pulado na busca (`onError: continueRegularOutput`).
+- **Descoberta de API:** diferente da fila do Fluxo 1 (tabela criada na UI + colunas via API), esta tabela foi criada **inteira via API pública** — `POST /api/v1/data-tables` com `{"name": ..., "columns": [...]}` cria tabela e colunas num request só.
+- **`remoteJid` dos 8 nós Evolution** (4 tempo real + 4 fila): todos apontando pro número do Giovani (copiados verbatim do Fluxo 1) — de propósito, pra fase de teste antes da ativação.
+- **Edição pós-criação (2026-07-18):** troca do 🟢 pelo 🟡 nas 5 mensagens (4 nós `Enviar texto` + Code `Montar mensagem por membro`) via PUT, resto devolvido verbatim.
+
+**Pendente:** revisão na UI, ativação (registra o webhook novo no Trello), teste real de menção, e depois os números reais de cada membro nos `remoteJid`.
+
 ## Ideias futuras (desenhadas, não construídas)
 
 - **Backup do board em Markdown + git:** exportar JSON do board e explodir em um arquivo por card (frontmatter, descrição, checklists, comentários, wikilinks pra lista/labels/membros), repo git próprio (ex.: `/root/trello-backup/`, fora da wiki) — git diff vira auditoria do que as automações mudaram. Regra anti-estrago: automações nunca usam Delete (só Archive, que é reversível).

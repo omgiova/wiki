@@ -771,3 +771,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-18] chore | automacao-trello-open-midia — Error Workflow no Fluxo 1
 - Settings do Fluxo 1 apontadas pro "Alerta de Erro" (3MI1k15YL5OUrEXF) via API; observação da página do projeto atualizada
 - Página tocada: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-18] edit | projects — Fluxo 5 (menção em comentário) documentado na página da automação Trello
+- Workflow `Trello Menção em Comentário - Open Mídia` (dx1Dz80y8AEGx1ET) criado via API, desativado, aguardando validação do Giovani
+- Data Table `fila-mencoes-trello-openmidia` criada inteira via `POST /api/v1/data-tables` (descoberta: a API cria tabela + colunas num request)
+- Mensagens com 🟡 (amarelo) pra diferenciar do Fluxo 1; remoteJid de todos os nós no número do Giovani (fase de teste)
+- Páginas tocadas: wiki/projects/automacao-trello-open-midia.md
