@@ -781,3 +781,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-18] edit | n8n — API pública cria Data Table inteira
 - Adicionado `POST /api/v1/data-tables` (cria tabela + colunas num request) à seção Data Tables
 - Páginas tocadas: wiki/systems/n8n.md
+
+## [2026-07-18] edit | automacao-trello-open-midia — Fluxo 5: mensagens sem texto do comentário
+- Removida a linha 💬 das 5 mensagens (4 tempo real + fila agrupada) via PUT na API do n8n, resto verbatim
+- Página atualizada: bullet de mensagens e bullet de edições pós-criação
+- wiki/projects/automacao-trello-open-midia.md
