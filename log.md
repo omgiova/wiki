@@ -752,3 +752,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-18] edit | n8n — mapa das 8 skills n8n-* na página do sistema
 - Linha genérica "8 skills n8n-*" virou tabela skill → cobertura, incluindo destaque pro nó Data Table (skill n8n-node-configuration, verificada ao vivo, pegadinha do deleteRows)
 - Página tocada: wiki/systems/n8n.md
+
+## [2026-07-18] edit | n8n — MCP sem create/update explícito + seção Recursos para construir workflows
+- n8n-mcp.md: Capabilities agora avisa que o MCP não cria/edita workflows (é via API REST); Como usar aponta pro mapa de skills
+- systems/n8n.md: nova seção "Recursos para construir workflows" (referências /root/mcp/, skill trello, JSONs validados em raw/, externos)
+- Páginas tocadas: wiki/tools/n8n-mcp.md, wiki/systems/n8n.md

@@ -69,6 +69,13 @@ Recurso de todos os agentes da VPS. Mapa do que cada uma cobre (consultar a skil
 | `n8n-validation-expert` | interpretar erros/warnings de validação; quais warnings são falsos positivos |
 | `n8n-mcp-tools-expert` | formatos e patterns das tools do MCP n8n; consultar antes de chamar qualquer tool |
 
+### Recursos para construir workflows (além do MCP e das skills acima)
+
+- **Referências em `/root/mcp/`** (fora da wiki): `n8n-trello-node.md` (nó nativo Trello do n8n — recursos e operações completos, fonte: doc oficial + código-fonte, 2026-07-06); `trello-mcp-comunidade-acoes.md` e `trello-mcp-oficial-acoes.md` (tabelas de ações dos dois MCPs de Trello)
+- **Skill `trello`** em `/root/.hermes/skills/` — MCP de Trello da comunidade (boards, cards, checklists, labels, membros)
+- **Exemplos validados no próprio setup:** JSONs completos de workflows em produção arquivados em `raw/` da wiki (Fluxos 2 e 3 do projeto [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]]) — modelos do padrão Trello → Code → Switch → Evolution; a página do projeto reúne as lições reais de construção (PUT verbatim, HTTP roda 1x por item, Switch com saídas mortas, corrida UI × API)
+- **Externos:** templates da comunidade (n8n.io/workflows) e doc oficial (docs.n8n.io)
+
 ### Criar/editar workflows via API REST (verificado 2026-07-06)
 
 O MCP do n8n não cria workflows — criação/edição é via API REST (`$N8N_BASE_URL/api/v1/workflows`, header `X-N8N-API-KEY`; credenciais em `~/.config/n8n-mcp/env`). Pegadinhas reais encontradas:

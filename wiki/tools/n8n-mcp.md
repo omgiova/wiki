@@ -23,6 +23,8 @@ Ferramentas expostas no Claude Code (conjunto observado em 2026-07-05):
 - **Execuções:** `list_executions`, `get_execution`, `recent_failures`
 - **Operação:** `health`, `container_logs`
 
+**O MCP não cria nem edita workflows** — não há `create_workflow`/`update_workflow` no conjunto. Criação/edição é via API REST, documentada em [[wiki/systems/n8n.md|n8n]] (Operação → Criar/editar workflows via API REST).
+
 O conjunto exposto no gateway Hermes pode diferir — conferir na skill `n8n-mcp-tools-expert` em `/root/.hermes/skills/`.
 
 ## Limites
@@ -32,7 +34,7 @@ O conjunto exposto no gateway Hermes pode diferir — conferir na skill `n8n-mcp
 
 ## Como usar
 
-Já registrado no gateway Hermes e no Claude Code — os agentes chamam as ferramentas diretamente. Base de conhecimento: 8 skills `n8n-*` em `/root/.hermes/skills/` (recurso de todos os agentes da VPS).
+Já registrado no gateway Hermes e no Claude Code — os agentes chamam as ferramentas diretamente. Base de conhecimento: ver o mapa das 8 skills `n8n-*` e a seção "Recursos para construir workflows" em [[wiki/systems/n8n.md|n8n]] (Operação).
 
 ## Quando não usar
 
