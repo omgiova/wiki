@@ -757,3 +757,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - n8n-mcp.md: Capabilities agora avisa que o MCP não cria/edita workflows (é via API REST); Como usar aponta pro mapa de skills
 - systems/n8n.md: nova seção "Recursos para construir workflows" (referências /root/mcp/, skill trello, JSONs validados em raw/, externos)
 - Páginas tocadas: wiki/tools/n8n-mcp.md, wiki/systems/n8n.md
+
+## [2026-07-18] edit | n8n — Data Tables: nó, API pública e limitação do Simple Memory
+- Nova seção "Data Tables (verificado 2026-07-18)" em systems/n8n.md: recurso nativo + endpoints da API pública (/api/v1/data-tables, verificados ao vivo; a skill n8n-node-configuration não os conhecia) + Simple Memory não funciona em queue mode (fonte: doc oficial)
+- Contexto: tabela fila-horario-trello-openmidia criada pro Fluxo 1 do projeto Trello Open Mídia (nova versão do fluxo aguarda validação do Giovani pra ser documentada)
+- Página tocada: wiki/systems/n8n.md

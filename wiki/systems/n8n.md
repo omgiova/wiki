@@ -87,6 +87,18 @@ O MCP do n8n não cria workflows — criação/edição é via API REST (`$N8N_B
 5. Workflow criado via API nasce desativado — bom padrão: criar desativado pro usuário revisar antes de ligar
 6. Caso real completo: workflow `Teste-Trello-Membro-Adicionado` em [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]]
 
+### Data Tables (verificado 2026-07-18)
+
+O n8n da VPS tem **Data Tables** nativas — armazenamento persistente por projeto, visível e editável na aba "Data tables" da UI. Uso: buffers/filas, deduplicação, contadores, estado entre execuções, sem banco externo. Referência completa do **nó** (`n8n-nodes-base.dataTable`, operações, filtros, pegadinha do `deleteRows`): skill `n8n-node-configuration` → `OPERATION_PATTERNS.md` → Storage Nodes.
+
+**A API pública também expõe Data Tables** (a skill não sabia disso; verificado ao vivo em 2026-07-18, mesma autenticação da API de workflows):
+
+- `GET /api/v1/data-tables` — lista tabelas (id, nome, projectId, colunas)
+- `GET /api/v1/data-tables/<id>` — detalhe de uma tabela
+- `POST /api/v1/data-tables/<id>/columns` com `{"name": "...", "type": "string|date|number|boolean"}` — cria coluna (usado pra criar as 4 colunas da tabela `fila-horario-trello-openmidia`, id `9x6YWmbkf3dI00Be`)
+
+**Limitação do Simple Memory em queue mode** (doc oficial, não testado aqui): o sub-nó Simple Memory (memória de chat dos AI Agents) **não funciona em workflow ativo de produção quando o n8n roda em queue mode** — chamadas podem cair em workers diferentes — e a memória dele é só do processo (restart apaga). Como o n8n da VPS é queue mode, não usar Simple Memory em produção; pra estado persistente, usar Data Tables. Fonte: docs.n8n.io (common issues do nó, consultado 2026-07-18).
+
 ## Erros conhecidos
 
 - **502 via Traefik** quando a tabela IPVS esvazia após scale/update do serviço — ver [[wiki/systems/vps.md|vps]] e case em `/root/.hermes/skills/docker-host-interaction-troubleshooting/`
