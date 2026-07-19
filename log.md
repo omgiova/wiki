@@ -801,3 +801,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Página wiki/tools/autoloop.md atualizada com o primeiro teste real (3 templates HyperFrames): sessão nova por iteração, --dangerously-skip-permissions, usuário looper, overrides de preset, exclusão de MCPs, custo real ≈ US$7,80 (>70% em contexto de sessão fria), veredito "chat direto vence em tarefa pequena/média"
 - Novas seções: Como funciona por dentro, Lições aprendidas (8 itens), Erros conhecidos reais; Status de validação atualizado (loop completado com sucesso no template-1)
 - wiki/tools/autoloop.md
+
+## [2026-07-19] edit | automacao-trello — ponteiro pra receita de edição via API
+- Adicionado callout no topo do doc dos fluxos: escrita via API (editar/criar/Data Table/ativar) exige ler systems/n8n.md §Criar/editar workflows via API REST
+- Motivo: link pra n8n.md existia só inline/rodapé, não no ponto de decisão antes de escrever

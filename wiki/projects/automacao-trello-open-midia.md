@@ -9,6 +9,8 @@ status: draft
 
 # Automação Trello — Open Mídia
 
+> ⚠️ **Vai escrever num fluxo via API (editar/criar/Data Table/ativar)?** Ler antes [[wiki/systems/n8n.md|n8n]] §Criar/editar workflows via API REST. 3 pegadinhas que dão 400 ou apagam credenciais: (a) PUT/POST aceitam só `name`/`nodes`/`connections`/`settings`; (b) `settings` não pode ter `binaryMode` nem chaves fora da whitelist; (c) credenciais só vêm do GET cru pela API — o MCP `get_workflow` as censura. Só ler o fluxo não exige isso.
+
 Projeto de automações sobre o Trello da Open Mídia, começando pelo board **"DEMANDAS GERAIS | Open Mídia Digital"** (`6908bffbc7473c1134fe279d`, https://trello.com/b/GGYc7L1M, workspace "Criação - Clientes"). Construído em 2026-07-06 com o Giovani.
 
 ## Contexto do board
