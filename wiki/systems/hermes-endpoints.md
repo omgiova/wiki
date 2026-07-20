@@ -3,7 +3,7 @@ type: system
 tags: [hermes, api, rest, openapi]
 title: Hermes Agent — API REST (OpenAPI)
 description: Referência completa dos endpoints REST do Hermes Agent, gerada automaticamente do /openapi.json — seção Interface do sistema Hermes
-timestamp: 2026-07-13T03:00:02-03:00
+timestamp: 2026-07-20T03:00:01-03:00
 status: stable
 ---
 
@@ -11,7 +11,7 @@ status: stable
 
 > **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.18.0, OAS 3.1).
 > Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-07-13T03:00:02-03:00 | Total de endpoints: 212
+> Última atualização: 2026-07-20T03:00:01-03:00 | Total de endpoints: 212
 
 - **Base URL:** `http://localhost:9119`
 - **Auth:** POST `/auth/password-login` com `{"username":"...","password":"...","provider":"basic"}`
