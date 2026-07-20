@@ -812,3 +812,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Fluxo 6 ativado (`active: true`), horário mantido em 10h30 (não tem fila nem corte — relatório diário)
 - Correção factual Fluxo 2: gatilho é segunda 10h (nó `Schedule (Segunda 10h)`), a doc dizia 8h — verificado ao vivo
 - Tudo via PUT na API (só o nó alterado, resto verbatim) e verificado ao vivo; página automacao-trello-open-midia.md
+
+## [2026-07-20] edit | automacao-trello — Fluxo 6: 🔴 na saudação + remoção da linha de horário
+- Nó `Filtrar e agrupar por membro`: saudação virou `🔴 Oi, <apelido>!` e cada card perdeu a linha `🕐 Vence hoje às <hora>` (só 📌 nome + 🔗 link)
+- Alterado via PUT (só esse nó, resto verbatim), verificado ao vivo; fluxo segue ativo

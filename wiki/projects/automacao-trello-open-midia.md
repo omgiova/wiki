@@ -292,7 +292,20 @@ Oi, Lu!
 
 **Pendente:** teste real pelo gatilho manual, ativação (`active: true`) e depois os números reais de cada membro nos `remoteJid`.
 
-> **Atualização 2026-07-20:** o fluxo foi **ativado** (`active: true`, verificado ao vivo) e recebeu os **números reais** nos 4 nós Evolution `Enviar texto - <nome>` (via PUT, resto verbatim) — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`. **Horário mantido em 10h30** (seg–sex): num teste do mesmo dia chegou a virar 10h10 e foi revertido a pedido do Giovani. Lembrete: este fluxo **não tem fila nem corte** — é um relatório diário; o 10h30 é a hora fixa em que ele varre o board e manda os cards que vencem naquele dia.
+> **Atualização 2026-07-20 (validada pelo Giovani):** o fluxo foi **ativado** (`active: true`, verificado ao vivo) e recebeu os **números reais** nos 4 nós Evolution `Enviar texto - <nome>` (via PUT, resto verbatim) — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`. **Horário mantido em 10h30** (seg–sex): num teste do mesmo dia chegou a virar 10h10 e foi revertido a pedido do Giovani. Lembrete: este fluxo **não tem fila nem corte** — é um relatório diário; o 10h30 é a hora fixa em que ele varre o board e manda os cards que vencem naquele dia.
+>
+> **Ajuste da mensagem (2026-07-20, no nó `Filtrar e agrupar por membro`, via PUT, resto verbatim):** a saudação passou a começar com **🔴** (`🔴 Oi, <apelido>!`) e a **linha de horário do card foi removida** — cada card virou só `📌 <nome>` + `🔗 <link>`, sem o `🕐 Vence hoje às <hora>`. Substitui o "Formato da mensagem" descrito acima. Exemplo do estado atual:
+> ```
+> 🔴 Oi, Gabi!
+>
+> ⏰ Suas tarefas vencendo hoje (20/07/2026):
+>
+> *LIBERTAS*
+>
+> 📌 ID VISUAL
+> 🔗 https://trello.com/c/G4R0bRY5
+> ```
+> (Detalhe técnico: a função `fmtHour` ficou declarada mas sem uso — inócua.)
 
 ## Ideias futuras (desenhadas, não construídas)
 
