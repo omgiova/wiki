@@ -805,3 +805,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-19] edit | automacao-trello — ponteiro pra receita de edição via API
 - Adicionado callout no topo do doc dos fluxos: escrita via API (editar/criar/Data Table/ativar) exige ler systems/n8n.md §Criar/editar workflows via API REST
 - Motivo: link pra n8n.md existia só inline/rodapé, não no ponto de decisão antes de escrever
+
+## [2026-07-20] edit | automacao-trello — horários 10h10, corte real, Fluxo 6 ativo, números reais
+- Fluxos 1 e 5: fila esvaziada às 10h10 (cron `10 10 * * 1-5`, era 8h) e corte real — janela de tempo real virou 10h10–17h (nó `Horário comercial?` por minutos, 610–1020); antes era 8h–16h59
+- Fluxos 1, 5 e 6: `remoteJid` dos nós Evolution (tempo real + fila) agora com números reais dos 4 membros (não mais só Giovani)
+- Fluxo 6 ativado (`active: true`), horário mantido em 10h30 (não tem fila nem corte — relatório diário)
+- Correção factual Fluxo 2: gatilho é segunda 10h (nó `Schedule (Segunda 10h)`), a doc dizia 8h — verificado ao vivo
+- Tudo via PUT na API (só o nó alterado, resto verbatim) e verificado ao vivo; página automacao-trello-open-midia.md

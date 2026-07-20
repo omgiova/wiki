@@ -3,7 +3,7 @@ type: concept
 tags: [projects, trello, n8n, evolution-api, whatsapp, automacao]
 title: Automação Trello — Open Mídia
 description: Automações sobre o board "DEMANDAS GERAIS | Open Mídia Digital" — Fluxo 1 (n8n) avisa no WhatsApp quando um membro é adicionado a um card; Fluxo 2 manda lista semanal de prazos por membro. Ambos validados.
-timestamp: 2026-07-08T00:20:00-03:00
+timestamp: 2026-07-20T10:20:00-03:00
 status: draft
 ---
 
@@ -65,6 +65,11 @@ O fluxo ganhou regra de horário comercial, construída em 2026-07-18 via PUTs n
 - **Mensagens (dois caminhos):** começam com 🟢 e a linha de lista virou `➡️ Cliente:` (edições do Giovani em 2026-07-18). Tempo real **sem** timestamp; só a mensagem agrupada da fila tem.
 - **Iteração intermediária:** a primeira versão do mesmo dia usava nó Wait (1 execução dormindo por evento, 1 mensagem por card); foi substituída pela fila com Data Table pra agrupar em mensagem única — decisão do Giovani, descartadas as alternativas de só filtrar o horário (perderia avisos) e de fila externa ao n8n.
 
+> **Atualização 2026-07-20 (validada pelo Giovani):** a janela de tempo real e o horário da fila mudaram, e os números reais entraram. Substitui os "8h/16h59" e "Schedule 8h" descritos acima. Alterado via PUT na API (nó `Horário comercial?` e nó Schedule), resto verbatim.
+> - **Corte real às 10h10:** a janela de tempo real passou de "8h–16h59" para **10h10–17h** (seg–sex). O nó `Horário comercial?` agora compara por minutos (`minutos >= 610 && minutos < 1020`, onde 610 = 10h10 e 1020 = 17h). Nada é enviado ao vivo antes das 10h10 — o que chega antes fica na fila.
+> - **Fila esvaziada às 10h10:** o Schedule da fila passou de `0 8 * * 1-5` para `10 10 * * 1-5`. Resultado prático: tudo que chega a partir das 17h (ou de madrugada, ou no fim de semana) sai no próximo dia útil às 10h10.
+> - **Números reais:** os 8 nós Evolution (4 tempo real `Enviar texto - <nome>` + 4 fila `Fila - <nome>`) deixaram de apontar todos pro número do Giovani e passaram a mandar pra cada membro — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`.
+
 ### Macetes do payload do webhook (custaram a descobrir)
 
 - `action.member` / `action.data.idMember` = quem **foi adicionado** (usado no Switch)
@@ -77,7 +82,7 @@ O fluxo ganhou regra de horário comercial, construída em 2026-07-18 via PUTs n
 **Workflow n8n:** `Trello Prazos por Membro - Open Mídia` (ID `PRaGCXrFKcmiusfE`), criado via API REST em 2026-07-07, testado com sucesso pelo Manual Trigger (200 cards processados, sem duplicação). **Ativo em produção** desde 2026-07-08, com números reais dos 4 membros e Error Workflow apontado (ver [[wiki/systems/n8n.md|n8n]]). JSON completo desta versão (primeira oficial validada) arquivado em [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md]].
 
 ```
-Schedule Trigger (segunda 8h) ─┐
+Schedule Trigger (segunda 10h) ─┐
 Manual Trigger (teste)      ───┼→ Buscar cards do board (HTTP, 200 items)
                                 └→ Buscar listas do board (HTTP, 9 items — sem saída conectada, só para o Code node referenciar por nome)
 Buscar cards do board → Code "Filtrar e agrupar por membro" → Switch (por membro)
@@ -87,7 +92,7 @@ Buscar cards do board → Code "Filtrar e agrupar por membro" → Switch (por me
   └─ Nathalia → Evolution "Enviar texto - Nathalia"
 ```
 
-- **Gatilhos:** `Schedule Trigger` semanal (segunda-feira 8h) + `Manual Trigger` de teste, ambos ligados em paralelo direto nos dois nós HTTP (não um atrás do outro — ver bug abaixo).
+- **Gatilhos:** `Schedule Trigger` semanal (segunda-feira 10h, nó `Schedule (Segunda 10h)`) + `Manual Trigger` de teste, ambos ligados em paralelo direto nos dois nós HTTP (não um atrás do outro — ver bug abaixo). _(Correção 2026-07-20: a doc dizia "8h", mas o gatilho em produção sempre foi 10h — verificado ao vivo.)_
 - **Buscar cards do board:** `GET /1/boards/{id}/cards?fields=name,due,shortUrl,idList,idMembers`.
 - **Buscar listas do board:** `GET /1/boards/{id}/lists?fields=name` — sem conexão de saída no canvas; o Code node lê os dados por referência (`$('Buscar listas do board').all()`), não por fio. Isso é válido no n8n: basta o nó ter executado na mesma run, a conexão direta não é exigida.
 - **Code "Filtrar e agrupar por membro"** (JS, `runOnceForAllItems`):
@@ -123,7 +128,7 @@ Oi, Lu!
 
 Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a mensagem do Fluxo 2 é montada dentro do nó de **Code** "Filtrar e agrupar por membro" (JavaScript) — precisa disso pra agrupar/ordenar cards. Onde mexer:
 
-- **Horário/dia do envio automático:** dois cliques no nó `Schedule (Segunda 8h)` → campos `Trigger at Hour/Minute` e `Trigger at Days of Week`.
+- **Horário/dia do envio automático:** dois cliques no nó `Schedule (Segunda 10h)` → campos `Trigger at Hour/Minute` e `Trigger at Days of Week`.
 - **Número de WhatsApp de alguém:** dois cliques no nó Evolution da pessoa (ex. `Enviar texto - Gabriele`) → campo `remoteJid`.
 - **Apelido usado na saudação, quantidade de dias da janela, e o texto/emoji da mensagem:** dentro do nó `Filtrar e agrupar por membro`, três blocos seguros de editar sem tocar no resto do código:
   1. `const nicknames = { ... }` — troca só o texto entre aspas
@@ -238,6 +243,11 @@ Schedule (dias úteis 8h) → Ler fila → Buscar card da fila → Code "Montar 
 
 **Pendente:** revisão na UI, ativação (registra o webhook novo no Trello), teste real de menção, e depois os números reais de cada membro nos `remoteJid`.
 
+> **Atualização 2026-07-20:** o fluxo foi **ativado** (`active: true`, verificado ao vivo) e recebeu as mesmas mudanças do Fluxo 1, via PUT na API (resto verbatim):
+> - **Corte real às 10h10:** o nó `Horário comercial?` passou da janela "8h–16h59" para **10h10–17h** (seg–sex), mesma lógica por minutos do Fluxo 1 (`minutos >= 610 && minutos < 1020`).
+> - **Fila esvaziada às 10h10:** o Schedule `Schedule (dias úteis 8h)` passou de `0 8 * * 1-5` para `10 10 * * 1-5` (o nome do nó ficou "dias úteis 8h", só a expressão cron mudou).
+> - **Números reais:** os 8 nós Evolution (4 tempo real + 4 fila) deixaram de apontar pro número do Giovani e passaram a mandar pra cada membro — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`.
+
 ## Fluxo 6 — Tarefas vencendo hoje (construído 2026-07-18, AGUARDANDO VALIDAÇÃO)
 
 **Workflow n8n:** `Trello Prazos Vencendo Hoje - Open Mídia` (ID `86R5NirJ7BBSdRiY`), **desativado** — criado via API (POST) em 2026-07-18 **duplicando o desenho do Fluxo 2** (Giovani escolheu o Fluxo 2 como base, não o Fluxo 4 que é banco de dados). Aguardando teste e ativação pelo Giovani. Ainda não validado.
@@ -281,6 +291,8 @@ Oi, Lu!
 - Para produção: trocar o `remoteJid` de cada um dos 4 nós Evolution pelo número real da pessoa (dois cliques no nó → campo `remoteJid`), mesma manobra do Fluxo 2.
 
 **Pendente:** teste real pelo gatilho manual, ativação (`active: true`) e depois os números reais de cada membro nos `remoteJid`.
+
+> **Atualização 2026-07-20:** o fluxo foi **ativado** (`active: true`, verificado ao vivo) e recebeu os **números reais** nos 4 nós Evolution `Enviar texto - <nome>` (via PUT, resto verbatim) — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`. **Horário mantido em 10h30** (seg–sex): num teste do mesmo dia chegou a virar 10h10 e foi revertido a pedido do Giovani. Lembrete: este fluxo **não tem fila nem corte** — é um relatório diário; o 10h30 é a hora fixa em que ele varre o board e manda os cards que vencem naquele dia.
 
 ## Ideias futuras (desenhadas, não construídas)
 
