@@ -816,3 +816,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-20] edit | automacao-trello — Fluxo 6: 🔴 na saudação + remoção da linha de horário
 - Nó `Filtrar e agrupar por membro`: saudação virou `🔴 Oi, <apelido>!` e cada card perdeu a linha `🕐 Vence hoje às <hora>` (só 📌 nome + 🔗 link)
 - Alterado via PUT (só esse nó, resto verbatim), verificado ao vivo; fluxo segue ativo
+
+## [2026-07-20] edit | n8n — regra do webhook de gatilho em queue mode
+- Callout no topo de ## Operação: não desativar→reativar só pra editar (reinstala webhook e pode furar entrega no queue mode); editar no estado atual via PUT; conferir webhook após mexer no nó de gatilho
+- Motivado pelo incidente 2026-07-20 (Fluxos 1 e 5 sem execution após edições via API à tarde)

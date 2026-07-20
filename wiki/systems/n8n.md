@@ -48,6 +48,8 @@ Roteamento: Traefik (443) → DNS do Swarm → IPVS → container (porta interna
 
 ## Operação
 
+> ⚠️ **Webhook de gatilho — vale pra toda edição de fluxo (2026-07-20).** Ativar/desativar um workflow reinstala o webhook na origem (Trello); em queue mode isso pode furar a entrega (eventos sem execution e sem erro). **Editar no estado atual via PUT — nunca desativar→reativar só pra editar.** Editar nó comum não mexe no webhook; editar o **nó de gatilho** (ou toggle inevitável) exige conferir depois: `GET /1/tokens/<token>/webhooks` deve ter um `active:true` com `callbackURL` do fluxo.
+
 Regras de ouro para editar workflows via API/MCP (base: skill `n8n-workflow-builder`):
 
 1. Sempre `get_workflow` antes de `update_workflow` — o n8n substitui o workflow inteiro; nó omitido é perdido
