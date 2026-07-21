@@ -820,3 +820,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-20] edit | n8n — regra do webhook de gatilho em queue mode
 - Callout no topo de ## Operação: não desativar→reativar só pra editar (reinstala webhook e pode furar entrega no queue mode); editar no estado atual via PUT; conferir webhook após mexer no nó de gatilho
 - Motivado pelo incidente 2026-07-20 (Fluxos 1 e 5 sem execution após edições via API à tarde)
+
+## [2026-07-20] edit | projects — plano de ação SEO Libertas (Fase 0)
+- Criado wiki/projects/slide-plano-de-ação.md: guia técnico da Fase 0 (fundação pré-1º artigo) fundamentado em docs oficiais do Google
+- Registra decisões (URLs planas, slug base a definir pelo cliente, cadência 1/semana) e correção crítica: schema FAQPage e HowTo descontinuados pelo Google (não estão mais nos slides)
+- Doc de trabalho para retomar em nova sessão
