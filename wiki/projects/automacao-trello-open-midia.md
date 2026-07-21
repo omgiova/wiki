@@ -70,6 +70,8 @@ O fluxo ganhou regra de horário comercial, construída em 2026-07-18 via PUTs n
 > - **Fila esvaziada às 10h10:** o Schedule da fila passou de `0 8 * * 1-5` para `10 10 * * 1-5`. Resultado prático: tudo que chega a partir das 17h (ou de madrugada, ou no fim de semana) sai no próximo dia útil às 10h10.
 > - **Números reais:** os 8 nós Evolution (4 tempo real `Enviar texto - <nome>` + 4 fila `Fila - <nome>`) deixaram de apontar todos pro número do Giovani e passaram a mandar pra cada membro — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`.
 
+> **Atualização 2026-07-21:** os 8 nós Evolution ganharam **Retry On Fail** (`maxTries: 3`, `waitBetweenTries: 5000ms`) via PUT na API, resto verbatim. Motivo: um envio da fila falhou com `getaddrinfo EAI_AGAIN` (soluço momentâneo de DNS ao alcançar a Evolution) e, como o nó falhou, a fila não foi limpa. Com o retry, o próprio nó re-tenta em 5s, 3x, antes de falhar.
+
 ### Macetes do payload do webhook (custaram a descobrir)
 
 - `action.member` / `action.data.idMember` = quem **foi adicionado** (usado no Switch)
@@ -142,6 +144,8 @@ Diferente do Fluxo 1 (mensagem em expressões diretas nos nós Evolution), a men
 - [x] Ativar (`active: true`) — feito, workflow em produção desde 2026-07-08
 - [x] `remoteJid` dos 4 nós Evolution — números reais dos 4 membros
 - [x] Alerta de erro — Error Workflow `Alerta de Erro` (ver [[wiki/systems/n8n.md|n8n]]) apontado nas Settings em 2026-07-09
+
+> **Atualização 2026-07-21:** os 4 nós Evolution ganharam **Retry On Fail** (`maxTries: 3`, `waitBetweenTries: 5000ms`) via PUT na API, resto verbatim (nesse PUT o `settings` precisou soltar as chaves fora da whitelist `binaryMode`, `timeSavedMode`, `availableInMCP` — comportamento conhecido da API, sem impacto prático).
 
 ## Fluxo 3 — Banco de dados de cards em Markdown (v1 VALIDADA em 2026-07-12)
 
@@ -248,6 +252,12 @@ Schedule (dias úteis 8h) → Ler fila → Buscar card da fila → Code "Montar 
 > - **Fila esvaziada às 10h10:** o Schedule `Schedule (dias úteis 8h)` passou de `0 8 * * 1-5` para `10 10 * * 1-5` (o nome do nó ficou "dias úteis 8h", só a expressão cron mudou).
 > - **Números reais:** os 8 nós Evolution (4 tempo real + 4 fila) deixaram de apontar pro número do Giovani e passaram a mandar pra cada membro — Gabriele `5511944007603`, Luciana `5511988389199`, Nathalia `5511971803910`, Giovani `5511986501499`.
 
+> **Atualização 2026-07-21:** dois ajustes via PUT na API (resto verbatim):
+> - **Fila movida de 10:10 para 10:11** — o Schedule `Schedule (dias úteis 8h)` passou de `10 10 * * 1-5` para `11 10 * * 1-5`, pra não acordar no mesmo minuto da fila do Fluxo 1 (que roda 10:10) e reduzir dois envios simultâneos batendo na Evolution.
+> - **Retry On Fail** (`maxTries: 3`, `waitBetweenTries: 5000ms`) ligado nos 8 nós Evolution.
+>
+> No dia 21/07 a fila deste fluxo tinha 1 linha presa (menção da Luciana no card "Teste Gio | 2", `quando` 20/07 19:22) porque o envio das 10:10 falhou com `EAI_AGAIN`. A mensagem já tinha sido entregue por outro caminho, então a linha foi **apagada manualmente** via API — `DELETE /api/v1/data-tables/<id>/rows/delete?filter=...` (a rota certa; `DELETE /rows` dá 405 nesta versão, n8n 2.28.6).
+
 ## Fluxo 6 — Tarefas vencendo hoje (construído 2026-07-18, AGUARDANDO VALIDAÇÃO)
 
 **Workflow n8n:** `Trello Prazos Vencendo Hoje - Open Mídia` (ID `86R5NirJ7BBSdRiY`), **desativado** — criado via API (POST) em 2026-07-18 **duplicando o desenho do Fluxo 2** (Giovani escolheu o Fluxo 2 como base, não o Fluxo 4 que é banco de dados). Aguardando teste e ativação pelo Giovani. Ainda não validado.
@@ -306,6 +316,8 @@ Oi, Lu!
 > 🔗 https://trello.com/c/G4R0bRY5
 > ```
 > (Detalhe técnico: a função `fmtHour` ficou declarada mas sem uso — inócua.)
+
+> **Atualização 2026-07-21:** os 4 nós Evolution ganharam **Retry On Fail** (`maxTries: 3`, `waitBetweenTries: 5000ms`) via PUT na API, resto verbatim. Horário confirmado em **seg–sex 10:30** (num teste do dia o Schedule foi temporariamente movido pra disparar às 10:58 e revertido logo depois — o disparo saiu certo, confirmando que o fluxo lê e envia os cards que vencem no dia).
 
 ## Ideias futuras (desenhadas, não construídas)
 

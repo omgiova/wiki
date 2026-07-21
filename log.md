@@ -825,3 +825,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Criado wiki/projects/slide-plano-de-ação.md: guia técnico da Fase 0 (fundação pré-1º artigo) fundamentado em docs oficiais do Google
 - Registra decisões (URLs planas, slug base a definir pelo cliente, cadência 1/semana) e correção crítica: schema FAQPage e HowTo descontinuados pelo Google (não estão mais nos slides)
 - Doc de trabalho para retomar em nova sessão
+
+## [2026-07-21] edit | automacao-trello — Retry On Fail + horário Fluxo 5
+- Fluxos 1, 2, 5 e 6: Retry On Fail (maxTries 3, waitBetweenTries 5s) nos nós Evolution
+- Fluxo 5 (menção): fila movida de 10:10 para 10:11; linha presa da fila apagada via API
+- Fluxo 6: horário confirmado seg-sex 10:30 após teste de disparo
+- Contexto: envio da fila falhou com EAI_AGAIN (soluço de DNS na Evolution)
+- Página tocada: wiki/projects/automacao-trello-open-midia.md
