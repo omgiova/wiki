@@ -837,3 +837,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Novo: wiki/projects/progresso-libertas-seo.md — checklist vivo e apresentável (cliente Libertas + CEO Luciana); bloco de instruções para LLMs (não editar sem falar com o Giovani; só itens validados); 4 itens feitos (Search Console, Clarity, GA4, Bing)
 - Novo: wiki/todo/pendencias-libertas-seo.md — rascunho interno; pendência do key event de clique no WhatsApp (conversão GA4)
 - index.md atualizado (árvore + seções projects/ e todo/)
+
+## [2026-07-24] edit | libertas-seo — cria doc central e reorganiza
+- Renomeado wiki/todo/pendencias-libertas-seo.md -> wiki/projects/Libertas-SEO.md (é projeto, não to-do); type todo->concept
+- Libertas-SEO.md agora é o doc central de trabalho: setup técnico (repo, Netlify, Hugo, fluxo branch/PR, contas), pendências, plano de ação de código (schema JSON-LD, robots.txt, key event) e processo de redação dos artigos
+- Links atualizados em index.md (árvore + seção projects/) e em progresso-libertas-seo.md

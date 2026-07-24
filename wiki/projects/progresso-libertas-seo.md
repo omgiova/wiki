@@ -16,7 +16,7 @@ Checklist de acompanhamento apresentável à Libertas e à Luciana (CEO da agên
 > Este **não** é um log técnico nem um histórico do site. É um **checklist vivo, voltado ao cliente**, que será **compartilhado com a Libertas (cliente) e a Luciana (CEO da agência)**. Portanto:
 >
 > 1. **Não edite, não acrescente e não remova nada aqui sem falar com o Giovani primeiro.** É um documento super específico e sensível — só o Giovani decide o que entra.
-> 2. **Só entra item que o Giovani validou.** Ter feito algo no site **não** basta para registrar aqui. Enquanto ele não aprovar explicitamente, o item **não** vai para este checklist (pode ficar em [[wiki/todo/pendencias-libertas-seo.md]], que é o rascunho interno).
+> 2. **Só entra item que o Giovani validou.** Ter feito algo no site **não** basta para registrar aqui. Enquanto ele não aprovar explicitamente, o item **não** vai para este checklist (pode ficar em [[wiki/projects/Libertas-SEO.md]], que é o rascunho interno).
 > 3. **Formato obrigatório de cada item:** `DD-MM · Verbo de ação + o quê` — seguido de **explicação curta, sem jargão**, entendível por quem não é técnico (ex.: "Instalação do Google Analytics — medidor de visitas..."). Verbos: *Cadastro, Instalação, Implementação, Publicação, Configuração...*
 > 4. **Ordem sempre cronológica** (data mais antiga no topo).
 > 5. **Tom apresentável:** linguagem simples, orientada a resultado e valor para o cliente — nada de detalhes de código, IDs, nomes de arquivo ou termos técnicos internos.
