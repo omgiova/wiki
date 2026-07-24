@@ -832,3 +832,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Fluxo 6: horário confirmado seg-sex 10:30 após teste de disparo
 - Contexto: envio da fila falhou com EAI_AGAIN (soluço de DNS na Evolution)
 - Página tocada: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-07-24] ingest | libertas-seo — criação do progresso e pendências do projeto SEO Libertas
+- Novo: wiki/projects/progresso-libertas-seo.md — checklist vivo e apresentável (cliente Libertas + CEO Luciana); bloco de instruções para LLMs (não editar sem falar com o Giovani; só itens validados); 4 itens feitos (Search Console, Clarity, GA4, Bing)
+- Novo: wiki/todo/pendencias-libertas-seo.md — rascunho interno; pendência do key event de clique no WhatsApp (conversão GA4)
+- index.md atualizado (árvore + seções projects/ e todo/)

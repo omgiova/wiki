@@ -60,7 +60,8 @@ log.md
     │   ├── automacao-videos.md
     │   ├── automacao-trello-open-midia.md
     │   ├── finflow.md
-    │   └── game-loop-mario-hyperframes.md
+    │   ├── game-loop-mario-hyperframes.md
+    │   └── progresso-libertas-seo.md
     ├── systems/
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
@@ -70,6 +71,7 @@ log.md
     │   ├── termux-ssh-claude.md
     │   └── vps.md
     ├── todo/
+    │   ├── pendencias-libertas-seo.md
     │   └── proximos-passos.md
     └── tools/
         ├── autoloop.md
@@ -112,6 +114,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
+- [[wiki/projects/progresso-libertas-seo.md|Progresso Libertas SEO]] — checklist vivo e apresentável (cliente Libertas + CEO Luciana) do progresso do projeto de SEO; só entra item validado pelo Giovani, não editar sem falar com ele
 - [[wiki/projects/game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax no HyperFrames; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 
 ### tools/
@@ -155,6 +158,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 ### todo/
 
+- [[wiki/todo/pendencias-libertas-seo.md|Pendências Libertas SEO]] — rascunho interno de pendências do projeto de SEO da Libertas; itens validados migram para o checklist apresentável em projects/
 - [[wiki/todo/proximos-passos.md|Próximos passos]] — to-do list ativa da wiki
 - [[wiki/todo/violacoes-agentes.md|Violações de Regras — Agentes]] — registro append-only de violações graves de regras do AGENTS.md cometidas por agentes
 
