@@ -849,3 +849,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - As 8 perguntas com subtítulos e opções ficaram na página; seção de estado de validação separa o que o Giovani validou palavra por palavra (focos, eixos, escala, perguntas 1 e 2) do que ainda falta revisar (perguntas 3 a 8 e os 36 cruzamentos)
 - Protótipo documentado: rota /diagnostico no repo omgiova/om (commits 0898909 e f7240e6), conteúdo em om-site/public/dados/diagnostico.csv, visual sem marca, botão de engrenagem para revisar os 36 cruzamentos
 - index.md atualizado (árvore + seção projects/)
+
+## [2026-07-29] edit | isca-diagnostico-open-midia — grifo via CSV, título por frase e remoção de travessões
+- Documentadas as decisões novas do protótipo: marcador ** no CSV vira grifo (fundo cinza + negrito), primeira frase de cada resposta vira título da seção, e os 36 diagnósticos ficaram sem travessão (dois pontos / vírgula / parênteses, caso a caso)
+- Repo omgiova/om: commits 636b9f8 (grifo + título + travessões) e 0ab9401 (citação da metodologia no resultado)
+
+## [2026-07-29] chore | libertas-seo — commita alteração pendente de sessão anterior
+- Arquivo wiki/projects/Libertas-SEO.md estava modificado e não commitado (falha de outro agente): medição de baseline movida para Pendências, seções 3 e 4 marcadas como rascunho não validado, nota de "já resolvido" reescrita
+- Commitado a pedido do Giovani, sem alteração de conteúdo por mim

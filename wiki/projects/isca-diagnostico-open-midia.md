@@ -84,6 +84,9 @@ Decisões do protótipo:
 - **Uma pergunta por vez**, com contador e botão de voltar. O resultado traz um parágrafo curto sobre a metodologia (sem citar nomes de níveis nem quantidades) seguido das 4 frases, sem título de nível.
 - **Botão de engrenagem** abaixo da caixa abre "Ver respostas", que lista os 36 cruzamentos agrupados pelos 4 níveis — revisão de conteúdo sem responder o formulário.
 - O CSV ficou em `public/dados/` e não em `public/diagnostico/` porque o build estático gera `diagnostico.html` no mesmo nível, e a colisão de caminho poderia fazer a Netlify servir a pasta em vez da página.
+- **Grifo controlado pelo CSV:** trecho entre `**` na coluna `diagnostico` é renderizado com fundo cinza claro e negrito. Linha sem `**` funciona igual — o marcador é opcional. Foi escolhido em vez de coluna separada (duplicaria o texto) ou tags HTML (obrigaria a injetar HTML cru).
+- **Primeira frase como título:** o corte é feito no primeiro ponto seguido de espaço, sem marcação no CSV. Se um grifo atravessa o corte, o código fecha e reabre o `**` para o grifo não vazar para o resto do texto.
+- **Sem travessões nas 36 respostas:** substituídos caso a caso — dois pontos onde introduz explicação, vírgula onde liga oração, parênteses onde isola aposto. Os subtítulos das perguntas mantêm os travessões.
 
 Score e timeline ainda não foram implementados — a coluna `pontos` do CSV (2 a 6 por foco, 8 a 24 no total) já está pronta para isso.
 

@@ -60,10 +60,13 @@ Documento **interno de trabalho** do projeto de SEO da Libertas: reúne o setup 
 ## 📌 2. Pendências
 
 - [ ] **Marcar o clique no botão de WhatsApp como conversão (key event) no GA4** — hoje o Google Analytics mede *visita*, mas não *resultado*. Precisamos marcar o clique no botão de contato do WhatsApp como **"key event"** (a nomenclatura atual do GA4 para "conversão"). Sem isso, medimos quantas pessoas visitaram, mas não quantas de fato tentaram entrar em contato — que é o que importa para provar retorno à Libertas. Passo mais técnico; exige configurar o evento no GA4 (via GTM ou evento personalizado).
+- [ ] **Medição de baseline ("mês 0")** — antes do 1º artigo, registrar o ponto de partida para o comparativo "antes × depois" de 3 meses: rodar `pagespeed.web.dev` e anotar os Core Web Vitals (LCP, INP, CLS), e tirar prints de Search Console e GA4 ainda zerados, com data.
 
 ---
 
 ## 🚀 3. Plano de ação — antes do 1º artigo
+
+> 🚧 **RASCUNHO** — seção em construção, ainda não validada pelo Giovani. Não usar como fonte definitiva.
 
 Só o que falta de fato no código/configuração, repriorizado com o que já sabemos do site. Sem hipóteses.
 
@@ -87,18 +90,13 @@ No Hugo: `enableRobotsTXT = true` no `hugo.toml` (com template) **ou** arquivo e
 
 ### 3.3 Key event do WhatsApp (ver Pendências) — conversão no GA4.
 
-### 3.4 Medições de baseline ("mês 0")
-- Rodar `pagespeed.web.dev` e registrar Core Web Vitals (LCP, INP, CLS). Vilão provável: imagens.
-- Tirar prints de Search Console e GA4 zerados + data = base do "antes × depois" dos 3 meses.
-
-### 3.5 Decisão de marca (cliente)
-- **Slug base** dos artigos: hoje o site usa **`/blog/`**. Se for manter, ok; se quiserem `/conteudo` ou `/artigos`, decidir **antes** de publicar (mudar depois quebra URLs).
-
-> Já resolvido "de fábrica" pelo Hugo (não precisa fazer): `<title>` e meta description por página, Open Graph/Twitter, sitemap.xml, página índice `/blog`, cache/performance.
+> Já resolvido — **não fazer:** slug base já é `/blog/` (correto). `<title>` e meta description por página, Open Graph/Twitter, sitemap.xml, página índice `/blog`, cache/performance — tudo automático de fábrica pelo Hugo.
 
 ---
 
 ## ✍️ 4. Redação dos artigos
+
+> 🚧 **RASCUNHO** — seção em construção, ainda não validada pelo Giovani. Não usar como fonte definitiva.
 
 ### Estratégia (do plano validado)
 - **3 pilares primeiro** (artigos-guia, hub dos clusters):
