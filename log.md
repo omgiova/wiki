@@ -842,3 +842,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Renomeado wiki/todo/pendencias-libertas-seo.md -> wiki/projects/Libertas-SEO.md (é projeto, não to-do); type todo->concept
 - Libertas-SEO.md agora é o doc central de trabalho: setup técnico (repo, Netlify, Hugo, fluxo branch/PR, contas), pendências, plano de ação de código (schema JSON-LD, robots.txt, key event) e processo de redação dos artigos
 - Links atualizados em index.md (árvore + seção projects/) e em progresso-libertas-seo.md
+
+## [2026-07-29] ingest | isca-diagnostico-open-midia — cria doc do diagnóstico de presença digital
+- Nova página wiki/projects/isca-diagnostico-open-midia.md: isca de captação da Open Mídia sobre o modelo CBBE de Kevin Lane Keller (4 níveis = 4 focos), com Ehrenberg-Bass e Edelman-LinkedIn como referência de apoio nos textos
+- Estrutura documentada: 8 perguntas (2 por foco), 3 opções cada, 36 cruzamentos pré-escritos, 4 frases entregues; escala A/B/C onde nem o topo fecha o diagnóstico
+- As 8 perguntas com subtítulos e opções ficaram na página; seção de estado de validação separa o que o Giovani validou palavra por palavra (focos, eixos, escala, perguntas 1 e 2) do que ainda falta revisar (perguntas 3 a 8 e os 36 cruzamentos)
+- Protótipo documentado: rota /diagnostico no repo omgiova/om (commits 0898909 e f7240e6), conteúdo em om-site/public/dados/diagnostico.csv, visual sem marca, botão de engrenagem para revisar os 36 cruzamentos
+- index.md atualizado (árvore + seção projects/)
