@@ -868,3 +868,13 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Definido: Thairine Santana (fundadora) assina os artigos; SEO local não se aplica
 - Nenhuma alteração no site nem instalação de skills
 - páginas tocadas: wiki/projects/Libertas-SEO.md
+
+## [2026-07-31] edit | Libertas-SEO — consolidação do embasamento em guia de decisão
+- Adicionada seção 6 ao doc central (4 parágrafos)
+- Criado /root/Libertas-SEO/GUIA-DECISAO.md (fora da wiki): consolida os 8 docs por item de trabalho, ordenado por impacto, com escala alto/médio/higiene
+- Fixado: SEO/AEO/GEO não são três trabalhos; schema não é alavanca de AEO/GEO
+- Achado novo no código: [outputs] home = ["HTML"] no hugo.toml impede a geração do robots.txt mesmo com enableRobotsTXT = true
+- Corrigida afirmação não verificada ("a Libertas roda tráfego pago") — pendente removê-la de fundacao-tecnica.md
+- Entregue PDF de 20 páginas gerado por script próprio, sem instalar pacote na VPS
+- Nenhuma alteração no site
+- páginas tocadas: wiki/projects/Libertas-SEO.md
