@@ -857,3 +857,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-29] chore | libertas-seo — commita alteração pendente de sessão anterior
 - Arquivo wiki/projects/Libertas-SEO.md estava modificado e não commitado (falha de outro agente): medição de baseline movida para Pendências, seções 3 e 4 marcadas como rascunho não validado, nota de "já resolvido" reescrita
 - Commitado a pedido do Giovani, sem alteração de conteúdo por mim
+
+## [2026-07-30] edit | wiki — corrigida descrição do repositório no AGENTS.md
+- "Hermes AI Memory Wiki" → "AI Memory Wiki"; wiki é do setup/VPS, compartilhada por todos os agentes; Hermes é só mais um consumidor
+- páginas tocadas: AGENTS.md

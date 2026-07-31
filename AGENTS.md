@@ -46,9 +46,9 @@
 
 ## O que é este repositório
 
-**Hermes AI Memory Wiki** — base de conhecimento persistente do agente Hermes (assistente pessoal do Giovani). Segue o padrão **LLM Wiki de Karpathy**: Markdown puro como fonte da verdade, versionado por Git, indexado por SQLite + FTS5, visualizado no Obsidian.
+**AI Memory Wiki** — base de conhecimento persistente do setup do Giovani, compartilhada por todos os agentes que operam na VPS. Não pertence a nenhum agente específico; o Hermes é apenas mais um consumidor dela. Segue o padrão **LLM Wiki de Karpathy**: Markdown puro como fonte da verdade, versionado por Git, indexado por SQLite + FTS5, visualizado no Obsidian.
 
-**Princípio central:** conhecimento durável vai para a wiki. A `memory()` do Hermes (2.200 chars, volátil) é cache de sessão, não fonte da verdade.
+**Princípio central:** conhecimento durável vai para a wiki. As memórias voláteis de sessão de cada agente são cache, não fonte da verdade.
 
 ---
 
