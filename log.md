@@ -861,3 +861,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-07-30] edit | wiki — corrigida descrição do repositório no AGENTS.md
 - "Hermes AI Memory Wiki" → "AI Memory Wiki"; wiki é do setup/VPS, compartilhada por todos os agentes; Hermes é só mais um consumidor
 - páginas tocadas: AGENTS.md
+
+## [2026-07-30] edit | Libertas-SEO — sessão de pesquisa e embasamento em fonte primária
+- Adicionada seção 5 ao doc central com resumo da sessão (2 parágrafos)
+- 8 docs novos criados em /root/Libertas-SEO/ (fora da wiki, aguardando validação): eeat-ymyl-financeiro, padrao-editorial-artigo, arquitetura-entidade-schema, aeo-busca-com-ia, fundacao-tecnica, checklist-pre-publicacao, avaliacao-skills-seo, ferramentas-e-mcps
+- Definido: Thairine Santana (fundadora) assina os artigos; SEO local não se aplica
+- Nenhuma alteração no site nem instalação de skills
+- páginas tocadas: wiki/projects/Libertas-SEO.md
