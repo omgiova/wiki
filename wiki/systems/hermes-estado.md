@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-07-27T03:00:01-03:00
+timestamp: 2026-08-03T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-07-27T03:00:01-03:00
+> Última atualização: 2026-08-03T03:00:02-03:00
 
 ## Status geral
 
@@ -19,7 +19,10 @@ status: stable
 
 ## Servidores MCP
 
-_(erro ao processar: Expecting value: line 1 column 1 (char 0))_
+- `ai-memory` ✗
+- `elevenlabs` ✓
+- `n8n` ✓
+- `trello` ✓
 
 ## Skills
 
@@ -31,19 +34,19 @@ _(erro ao processar: Expecting value: line 1 column 1 (char 0))_
 - `analytics` ✓ — When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
 - `claude-code` ✓ — Delegate coding to Claude Code CLI (features, PRs).
 - `codex` ✓ — Delegate coding to OpenAI Codex CLI (features, PRs).
-- `hermes-agent` ✓ — Configure, extend, or contribute to Hermes Agent.
-- `opencode` ✓ — Delegate coding to OpenCode CLI (features, PR review).
-- `brand-architect` ✓ — Use this skill when users need to develop brand strategy, choose a company name, define brand positioning, create brand voice, or build brand identity from day one. Activates for "what should I name it," "brand strategy," "positioning," or identity questions.
-- `brand-copywriter` ✓ — Writes marketing copy using proven copywriting frameworks. Use when user needs copy for ads (Facebook, Instagram, TikTok, YouTube), landing pages, sales pages, email sequences, LinkedIn posts, product descriptions, or any marketing content.
-- `brand-storytelling` ✓ — Help users craft compelling brand narratives. Use when someone is defining brand strategy, writing company positioning, creating pitch narratives, developing messaging frameworks, or trying to make their company story more memorable.
-- `caption-writer-sms` ✓ — When the user wants to write a caption for a visual-first social media post on Facebook, Instagram, TikTok, Pinterest, or YouTube. Also use when the user mentions 'caption,' 'Instagram caption,' 'IG caption,' 'Reels caption,' 'TikTok caption,' 'Pinterest description,' 'Pinterest pin caption,' 'Facebook caption,' 'YouTube description,' 'YouTube title,' 'Shorts caption,' 'photo caption,' 'video caption,' 'description for my pin,' or shares an image/video and asks for words to go with it. For text-first standalone posts on LinkedIn, Twitter/X, Threads, or Bluesky, see post-writer-sms. For multi-slide carousels, see carousel-writer-sms. For opening lines, see hook-writer-sms.
-- `carousel-writer-sms` ✓ — When the user wants to write content for a LinkedIn carousel, Instagram carousel, Facebook carousel, TikTok photo carousel, Pinterest Idea Pin, or any swipeable multi-slide format. Also use when the user mentions 'carousel,' 'slides,' 'LinkedIn carousel,' 'Instagram carousel,' 'IG carousel,' 'photo carousel,' 'TikTok photo carousel,' 'Idea Pin,' 'Pinterest Idea Pin,' 'swipe post,' 'slide deck,' or 'visual content.' Outputs slide-by-slide text content (not visual design). For single posts, see post-writer-sms. For threads, see thread-writer-sms. For caption copy under each slide post, see caption-writer-sms.
 - `computer-use` ✓ — Drive the user's desktop in the background — clicking, typing,
 scrolling, dragging — without stealing the cursor, keyboard focus,
 or switching virtual desktops / Spaces. Cross-platform: macOS,
 Windows, Linux. Works with any tool-capable model. Load this skill
 whenever the `computer_use` tool is available.
 
+- `hermes-agent` ✓ — Use, configure, theme, extend, and orchestrate Hermes Agent.
+- `opencode` ✓ — Delegate coding to OpenCode CLI (features, PR review).
+- `brand-architect` ✓ — Use this skill when users need to develop brand strategy, choose a company name, define brand positioning, create brand voice, or build brand identity from day one. Activates for "what should I name it," "brand strategy," "positioning," or identity questions.
+- `brand-copywriter` ✓ — Writes marketing copy using proven copywriting frameworks. Use when user needs copy for ads (Facebook, Instagram, TikTok, YouTube), landing pages, sales pages, email sequences, LinkedIn posts, product descriptions, or any marketing content.
+- `brand-storytelling` ✓ — Help users craft compelling brand narratives. Use when someone is defining brand strategy, writing company positioning, creating pitch narratives, developing messaging frameworks, or trying to make their company story more memorable.
+- `caption-writer-sms` ✓ — When the user wants to write a caption for a visual-first social media post on Facebook, Instagram, TikTok, Pinterest, or YouTube. Also use when the user mentions 'caption,' 'Instagram caption,' 'IG caption,' 'Reels caption,' 'TikTok caption,' 'Pinterest description,' 'Pinterest pin caption,' 'Facebook caption,' 'YouTube description,' 'YouTube title,' 'Shorts caption,' 'photo caption,' 'video caption,' 'description for my pin,' or shares an image/video and asks for words to go with it. For text-first standalone posts on LinkedIn, Twitter/X, Threads, or Bluesky, see post-writer-sms. For multi-slide carousels, see carousel-writer-sms. For opening lines, see hook-writer-sms.
+- `carousel-writer-sms` ✓ — When the user wants to write content for a LinkedIn carousel, Instagram carousel, Facebook carousel, TikTok photo carousel, Pinterest Idea Pin, or any swipeable multi-slide format. Also use when the user mentions 'carousel,' 'slides,' 'LinkedIn carousel,' 'Instagram carousel,' 'IG carousel,' 'photo carousel,' 'TikTok photo carousel,' 'Idea Pin,' 'Pinterest Idea Pin,' 'swipe post,' 'slide deck,' or 'visual content.' Outputs slide-by-slide text content (not visual design). For single posts, see post-writer-sms. For threads, see thread-writer-sms. For caption copy under each slide post, see caption-writer-sms.
 - `content-strategy-sms` ✓ — When the user wants to plan a social media content strategy, decide what to post, or figure out topic clusters and content mix. Also use when the user mentions 'content strategy,' 'what should I post,' 'content ideas,' 'topic clusters,' 'content pillars,' 'content planning,' 'content mix,' 'I don't know what to post,' or 'social media strategy.' Use this to define the what and why of posting. For writing actual posts, see post-writer-sms. For scheduling, see content-calendar-sms. For platform-specific tactics, see platform-strategy-sms.
 - `content-strategy` ✓ — When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," "content planning," "editorial calendar," "content marketing," "content roadmap," "what content should I create," "blog topics," "content pillars," or "I don't know what to write." Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.
 - `conversion-copywriting` ✓ — Write copy that gets a "yes" using Joanna Wiebe's research-first, Voice of Customer methodology Use when: **Writing landing pages, emails, or sales pages** that need measurable conversion results; **Starting a new copy project** and need a systematic process to follow; **Struggling with what to write** and staring at a blank page; **Wanting to prove ROI** to clients with data-backed decisions; **Improving existing copy** through validation and testing
@@ -55,7 +58,7 @@ whenever the `computer_use` tool is available.
 - `baoyu-comic` ✓ — Knowledge comics (知识漫画): educational, biography, tutorial.
 - `baoyu-infographic` ✓ — Infographics: 21 layouts x 21 styles (信息图, 可视化).
 - `claude-design` ✓ — Design one-off HTML artifacts (landing, deck, prototype).
-- `comfyui` ✓ — Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution.
+- `comfyui` ✓ — Generate images, video, and audio via diffusion workflows.
 - `ideation` ✓ — Generate project ideas via creative constraints.
 - `design-md` ✓ — Author/validate/export Google's DESIGN.md token spec files.
 - `excalidraw` ✓ — Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).
@@ -64,13 +67,12 @@ whenever the `computer_use` tool is available.
 - `p5js` ✓ — p5.js sketches: gen art, shaders, interactive, 3D.
 - `pixel-art` ✓ — Pixel art w/ era palettes (NES, Game Boy, PICO-8).
 - `popular-web-designs` ✓ — 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.
-- `pretext` ✓ — Use when building creative browser demos with @chenglou/pretext — DOM-free text layout for ASCII art, typographic flow around obstacles, text-as-geometry games, kinetic typography, and text-powered generative art. Produces single-file HTML demos by default.
+- `pretext` ✓ — Build creative browser demos with DOM-free text layout.
 - `sketch` ✓ — Throwaway HTML mockups: 2-3 design variants to compare.
 - `songwriting-and-ai-music` ✓ — Songwriting craft and Suno AI music prompts.
-- `touchdesigner-mcp` ✓ — Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools.
+- `touchdesigner-mcp` ✓ — Control TouchDesigner via twozero MCP.
 - `cron-news-scraping` ✓ — Set up and maintain scheduled news-scraping cron jobs with firecrawl CLI. Covers the full pipeline: search, language filter, dedup, webhook POST, silent delivery.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
-- `jupyter-live-kernel` ✓ — Iterative Python via live Jupyter kernel (hamelnb).
 - `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
@@ -81,7 +83,6 @@ Covers communication style, data sourcing, session startup, knowledge storage,
 and correction handling. Broader than system-modification-protocol (system tasks only).
 - `vps-service-deployment` ✓ — Deploy and expose services via Docker (Swarm) + EasyPanel + Traefik on the Hostinger KVM 2 VPS.
 - `docker-host-interaction-troubleshooting` ✓ — Troubleshoot and resolve configuration issues related to Docker host interactions, container networking, volume mounts, and permission problems.
-- `dogfood` ✓ — Exploratory QA of web apps: find bugs, evidence, reports.
 - `himalaya` ✓ — Himalaya CLI: IMAP/SMTP email from terminal.
 - `embedded-captions` ✓ — Add captions to a talking-head video. ONE catalog (CATALOG.md) of 36 visual identities behind two engines: column-flow (captions composited INTO the scene — matte occlusion + mix-blend; cream/ink/editorial/keynote/documentary/loud/neon/glitch/chrome/velocity) and themed constitutions (anchor/ordnance/terminal/neonsign/stardust/stomp/scoreboard/transit/vhs/arcade/dossier/laser/thunder/hologram/biolume/aurora/spectrum/papercut/popup/chalkboard/graffiti/brush/inkwater/ransom/lastpage/nightcity — e.g. a glyph-decode climax, a neon sign WRITTEN stroke by stroke, or the quiet `anchor` rail default). Route by identity, never by mode. Trigger on "captions/subtitles", "embed/cinematic captions", "VFX captions", "炸/特效/酷炫字幕", a named identity, or top-tier motion-graphics asks. Embedding every word is wrong for most talking-head content — `anchor` is the verbatim default. Runs locally end-to-end (transcribes and mattes the subject itself, no API key). Requires hyperframes and a single-subject clip (multi-shot clips ar...
 - `faceless-explainer` ✓ — Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video: there is no site or footage to capture, so the visuals are invented per scene (typography, abstract graphics, diagrams, data-viz). Use for topic explainers, concept breakdowns, how-tos, listicles. Not a product promo (/product-launch-video) or a site tour (/website-to-video). Unclear → /hyperframes.
@@ -114,7 +115,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `media-use` ✓ — Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Keeps search noise on disk, hands the agent one path or block. Use for any audio, image, icon, logo, voiceover, caption, color-grading, or media-asset need.
 - `elevenlabs-sfx` ✓ — Generate sound effects via ElevenLabs text_to_sound_effects MCP tool — text descriptions to audio files.
 - `gif-search` ✓ — Search/download GIFs from Tenor via curl + jq.
-- `heartmula` ✓ — HeartMuLa: Suno-like song generation from lyrics + tags.
 - `songsee` ✓ — Audio spectrograms/features (mel, chroma, MFCC) via CLI.
 - `youtube-content` ✓ — YouTube transcripts to summaries, threads, blogs.
 - `evaluating-llms-harness` ✓ — lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).
@@ -122,8 +122,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `huggingface-hub` ✓ — HuggingFace hf CLI: search/download/upload models, datasets.
 - `llama-cpp` ✓ — llama.cpp local GGUF inference + HF Hub model discovery.
 - `serving-llms-vllm` ✓ — vLLM: high-throughput LLM serving, OpenAI API, quantization.
-- `audiocraft-audio-generation` ✓ — AudioCraft: MusicGen text-to-music, AudioGen text-to-sound.
-- `segment-anything-model` ✓ — SAM: zero-shot image segmentation via points, boxes, masks.
 - `dspy` ✓ — DSPy: declarative LM programs, auto-optimize prompts, RAG.
 - `motion-graphics` ✓ — A short, design-led motion graphic where motion is the message — kinetic typography, stat count-up, chart/data-viz hit, logo sting / brand lockup, lower-third / callout / social overlay, animated map (highlight regions, connect places, zoom to a location), animated tweet / news-article / headline, webpage / UI animation (scroll, cursor, callouts), or fusing a real image's geometry into a chart. Usually under 10s (up to ~30s), no narration or live-action subject; renders to MP4 or transparent overlay. Longer / narrated / multi-scene → /general-video. Unclear → /hyperframes.
 
@@ -143,14 +141,16 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `pr-to-video` ✓ — Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video — changelog, feature reveal, fix, or refactor walkthrough built from the diff, commits, and files: the input is a code change, not a website. Not a product promo (/product-launch-video) or a no-PR topic explainer (/faceless-explainer). Unclear → /hyperframes.
 - `product-launch-video` ✓ — Turn a product or marketing URL, pasted script, or brief into a product launch / promo video — SaaS promos, feature reveals, product demos, app and company launches. Use when the user wants to market, launch, promote, or reveal a product; the default for any commercial URL. Not a general site tour (/website-to-video). Unclear → /hyperframes.
 - `airtable` ✓ — Airtable REST API via curl. Records CRUD, filters, upserts.
+- `docx` ✓ — Create, read, edit Word .docx documents and templates.
 - `google-workspace` ✓ — Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.
 - `maps` ✓ — Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.
-- `nano-pdf` ✓ — Edit PDF text/typos/titles via nano-pdf CLI (NL prompts).
+- `nano-pdf` ✓ — Edit text in existing PDFs via natural-language prompts.
 - `notion` ✓ — Notion API + ntn CLI: pages, databases, markdown, Workers.
 - `ocr-and-documents` ✓ — Extract text from PDFs/scans (pymupdf, marker-pdf).
-- `petdex` ✓ — Install and select animated petdex mascots for Hermes.
+- `pdf` ✓ — Create, merge, split, fill, and secure PDF files.
 - `powerpoint` ✓ — Create, read, edit .pptx decks, slides, notes, templates.
-- `teams-meeting-pipeline` ✓ — Operate the Teams meeting summary pipeline via Hermes CLI — summarize meetings, inspect pipeline status, replay jobs, manage Microsoft Graph subscriptions.
+- `teams-meeting-pipeline` ✓ — Teams meeting summaries, job replay, Graph subscriptions.
+- `xlsx` ✓ — Create, read, edit Excel .xlsx spreadsheets and CSVs.
 - `agent-memory-architecture` ✓ — Design agent memory systems combining manual knowledge bases (Obsidian vaults) with automatic capture tools (ai-memory). Covers vault structure, complementary layers, and integration patterns for cross-agent persistence.
 - `arxiv` ✓ — Search arXiv papers by keyword, author, category, or ID.
 - `blogwatcher` ✓ — Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.
@@ -164,15 +164,17 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `slideshow` ✓ — Author a HyperFrames slideshow — a presentation, pitch deck, or interactive deck with discrete slides, fragment reveals, branching, hotspot navigation, and built-in presenter mode with speaker notes; also converts an existing page into a deck. Output is a navigable deck, not a rendered MP4. If the user didn't explicitly ask for a slideshow, confirm before authoring. Unclear → /hyperframes.
 - `openhue` ✓ — Control Philips Hue lights, scenes, rooms via OpenHue CLI.
 - `social-content` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' or 'viral content.' This skill covers content creation, repurposing, and platform-specific strategies.
-- `xurl` ✓ — X/Twitter via xurl CLI: post, search, DM, media, v2 API.
+- `xurl` ✓ — X/Twitter via xurl CLI: raw post search, posting, DM, media.
 - `social` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.
 - `ai-memory-wiki` ✓ — Gerenciar vault wiki markdown com OKF + ai-memory — editar, commit, push, sincronizar SQLite
-- `hermes-agent-skill-authoring` ✓ — Author in-repo SKILL.md: frontmatter, validator, structure, and writing-quality principles.
+- `dogfood` ✓ — Exploratory QA of web apps: find bugs, evidence, reports.
+- `hermes-agent-skill-authoring` ✓ — Author in-repo SKILL.md files: frontmatter and structure.
+- `inspecting-hermes-desktop-dom` ✓ — Read the live Hermes desktop DOM/CSS over CDP.
 - `node-inspect-debugger` ✓ — Debug Node.js via --inspect + Chrome DevTools Protocol CLI.
-- `plan` ✓ — Plan mode: write an actionable markdown plan to .hermes/plans/, no execution. Bite-sized tasks, exact paths, complete code.
+- `plan` ✓ — Write a markdown plan to .hermes/plans/; no execution.
 - `python-debugpy` ✓ — Debug Python: pdb REPL + debugpy remote (DAP).
 - `requesting-code-review` ✓ — Pre-commit review: security scan, quality gates, auto-fix.
-- `simplify-code` ✓ — Parallel 3-agent cleanup of recent code changes.
+- `simplify-code` ✓ — Parallel 4-agent cleanup of recent code changes.
 - `spike` ✓ — Throwaway experiments to validate an idea before build.
 - `systematic-debugging` ✓ — 4-phase root cause debugging: understand bugs before fixing.
 - `test-driven-development` ✓ — TDD: enforce RED-GREEN-REFACTOR, tests before code.
@@ -190,7 +192,6 @@ that the reaction was applied to the correct message. Eliminates guesswork
 by requiring validation before action and user confirmation after.
 - `mcp-server-trello` ✓ — Trello MCP Server skill for board discovery, card workflows, checklist management, comments, attachments, labels, members, board/workspace selection, and health monitoring through the bundled @delorenj/mcp-server-trello server.
 - `website-to-video` ✓ — Capture a general website/URL and turn it into a video OF the site — tour, showcase, or social clip built from captured screenshots and the site's own brand assets. Use for portfolio / blog / docs / landing-page showcases. Not a product launch or promo, even from a URL (/product-launch-video). Unclear → /hyperframes.
-- `yuanbao` ✓ — Yuanbao (元宝) groups: @mention users, query info/members.
 
 ## Webhooks
 
@@ -198,11 +199,38 @@ by requiring validation before action and user confirmation after.
 
 ## Toolsets
 
-_(erro ao processar: Expecting value: line 1 column 1 (char 0))_
+- `web` ✓ — web_search, web_extract
+- `browser` ✓ — navigate, click, type, scroll
+- `terminal` ✓ — terminal, process
+- `file` ✓ — read, write, patch, search
+- `code_execution` ✓ — execute_code
+- `vision` ✓ — vision_analyze
+- `video` ✗ — video_analyze (requires video-capable model)
+- `image_gen` ✓ — image_generate
+- `video_gen` ✗ — video_generate (text/image/reference)
+- `x_search` ✗ — x_search (requires xAI OAuth or XAI_API_KEY)
+- `tts` ✓ — text_to_speech
+- `stt` ✓ — voice transcription (gateway voice messages + voice mode)
+- `skills` ✓ — list, view, manage
+- `todo` ✓ — todo
+- `memory` ✓ — persistent memory across sessions
+- `context_engine` ✗ — runtime tools from the active context engine
+- `session_search` ✓ — search past conversations
+- `clarify` ✓ — clarify
+- `delegation` ✓ — delegate_task
+- `cronjob` ✓ — create/list/update/pause/resume/run, with optional attached skills
+- `homeassistant` ✗ — smart home device control
+- `spotify` ✗ — playback, search, playlists, library
+- `discord` ✗ — fetch messages, search members, create thread
+- `discord_admin` ✗ — list channels/roles, pin, assign roles
+- `yuanbao` ✗ — group info, member queries, DM
+- `computer_use` ✓ — background desktop control via cua-driver
 
 ## Perfis
 
 - `default` — deepseek-v4-flash
+- `gio` — deepseek-v4-flash
+- `gio2` — deepseek-v4-flash
 
 ## Cron jobs
 
@@ -231,16 +259,17 @@ _(nenhum configurado)_
 - `Yuanbao (元宝)` ✗ — Connect Hermes to Tencent Yuanbao.
 - `API server` ✗ — Expose Hermes as an OpenAI-compatible HTTP API for tools like Open WebUI.
 - `Webhooks` ✗ — Receive events from GitHub, GitLab, and other webhook sources.
-- `Irc` ✗
-- `Line` ✗
-- `Msgraph Webhook` ✗
-- `Ntfy` ✗
-- `Photon` ✗
-- `Raft` ✗
-- `Relay` ✗
-- `Simplex` ✗
-- `Teams` ✗
-- `Whatsapp Cloud` ✗
+- `Buzz` ✗ — Requires the buzz CLI binary (https://github.com/block/buzz) on PATH or at BUZZ_CLI_PATH
+- `iMessage via Photon` ✗ — Use Hermes through iMessage via Photon's managed Spectrum platform.
+- `IRC` ✗ — Relay messages between an IRC channel (or DMs) and Hermes.
+- `LINE` ✗ — Use Hermes from LINE via the LINE Messaging API webhook.
+- `Microsoft Graph Webhook` ✗ — Receive Microsoft Graph change notifications (Teams meetings, Outlook, …).
+- `Microsoft Teams` ✗ — Connect Hermes to Microsoft Teams chats via the Bot Framework.
+- `ntfy` ✗ — Chat with Hermes over ntfy push topics (ntfy.sh or self-hosted).
+- `Raft` ✗ — Join a Raft workspace as an external agent.
+- `Relay (experimental)` ✗ — Generic relay adapter fronted by the Hermes Relay connector.
+- `SimpleX Chat` ✗ — Talk to Hermes over SimpleX Chat via a local simplex-chat daemon.
+- `WhatsApp Cloud API` ✗ — Use Hermes via Meta's hosted WhatsApp Cloud API (no local bridge).
 
 ---
 

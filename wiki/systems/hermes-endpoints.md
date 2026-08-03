@@ -3,15 +3,15 @@ type: system
 tags: [hermes, api, rest, openapi]
 title: Hermes Agent — API REST (OpenAPI)
 description: Referência completa dos endpoints REST do Hermes Agent, gerada automaticamente do /openapi.json — seção Interface do sistema Hermes
-timestamp: 2026-07-27T03:00:01-03:00
+timestamp: 2026-08-03T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — API REST
 
-> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.18.0, OAS 3.1).
+> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.19.0, OAS 3.1).
 > Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-07-27T03:00:01-03:00 | Total de endpoints: 212
+> Última atualização: 2026-08-03T03:00:02-03:00 | Total de endpoints: 240
 
 - **Base URL:** `http://localhost:9119`
 - **Auth:** POST `/auth/password-login` com `{"username":"...","password":"...","provider":"basic"}`
@@ -25,7 +25,7 @@ status: stable
 - `GET /api/actions/{name}/status` **Get Action Status** — Tail an action log and report whether the process is still running.
 
 ### analytics
-- `GET /api/analytics/models` **Get Models Analytics** — Rich per-model analytics for the Models dashboard page.
+- `GET /api/analytics/models` **Get Models Analytics** — Return model analytics without blocking the serving event loop.
 - `GET /api/analytics/usage` **Get Usage Analytics**
 
 ### assets
@@ -43,7 +43,13 @@ status: stable
 - `GET /auth/callback` **Auth Callback**
 - `GET /auth/login` **Auth Login**
 - `POST /auth/logout` **Auth Logout**
+- `GET /auth/native/authorize` **Auth Native Authorize** — Begin an RFC 8252 native-app login for the desktop app.
+- `POST /auth/native/refresh` **Auth Native Refresh** — Rotate a native-app session using the desktop-held refresh token.
+- `POST /auth/native/token` **Auth Native Token** — Exchange a loopback gateway code + PKCE verifier for bearer tokens.
 - `POST /auth/password-login` **Auth Password Login** — Authenticate a username/password against a password provider.
+
+### chat
+- `POST /api/chat/image-upload` **Upload Chat Image** — Persist a browser-provided chat image where the embedded TUI can read it.
 
 ### config
 - `GET /api/config` **Get Config**
@@ -70,7 +76,7 @@ status: stable
 - `DELETE /api/cron/jobs/{job_id}` **Delete Cron Job**
 - `POST /api/cron/jobs/{job_id}/pause` **Pause Cron Job**
 - `POST /api/cron/jobs/{job_id}/resume` **Resume Cron Job**
-- `GET /api/cron/jobs/{job_id}/runs` **List Cron Job Runs** — Run sessions produced by a cron job, newest first.
+- `GET /api/cron/jobs/{job_id}/runs` **List Cron Job Runs**
 - `POST /api/cron/jobs/{job_id}/trigger` **Trigger Cron Job**
 
 ### curator
@@ -96,6 +102,9 @@ status: stable
 
 ### dashboard-plugins
 - `GET /dashboard-plugins/{plugin_name}/{file_path}` **Serve Plugin Asset** — Serve static assets from a dashboard plugin directory.
+
+### egress
+- `GET /api/egress/status` **Get Egress Status** — Dashboard/Desktop-readable egress proxy status and remediation text.
 
 ### env
 - `GET /api/env` **Get Env Vars**
@@ -127,6 +136,7 @@ status: stable
 - `POST /api/gateway/stop` **Stop Gateway**
 
 ### git
+- `GET /api/git/base-branches` **Git Base Branches Route**
 - `POST /api/git/branch/switch` **Git Branch Switch Route**
 - `GET /api/git/branches` **Git Branches Route**
 - `GET /api/git/file-diff` **Git File Diff Route**
@@ -145,6 +155,9 @@ status: stable
 - `POST /api/git/worktree/add` **Git Worktree Add Route**
 - `POST /api/git/worktree/remove` **Git Worktree Remove Route**
 - `GET /api/git/worktrees` **Git Worktrees Route**
+
+### health
+- `GET /api/health` **Get Health** — Lightweight process liveness for desktop/backend readiness probes.
 
 ### hermes
 - `POST /api/hermes/update` **Update Hermes** — Kick off ``hermes update`` in the background.
@@ -165,9 +178,13 @@ status: stable
 ### mcp
 - `GET /api/mcp/catalog` **List Mcp Catalog** — Browse the Nous-approved MCP catalog (the optional-mcps/ manifests).
 - `POST /api/mcp/catalog/install` **Install Mcp Catalog Entry** — Install a catalog MCP into config.yaml.
+- `GET /api/mcp/oauth/callback/{server_name}` **Mcp Oauth Callback**
+- `GET /api/mcp/oauth/flows/{flow_id}` **Mcp Oauth Flow Status**
 - `GET /api/mcp/servers` **List Mcp Servers**
 - `POST /api/mcp/servers` **Add Mcp Server**
+- `PUT /api/mcp/servers` **Replace Mcp Servers** — Replace the entire ``mcp_servers`` map (the GUI mcp.json editor's save).
 - `DELETE /api/mcp/servers/{name}` **Remove Mcp Server**
+- `POST /api/mcp/servers/{name}/auth` **Auth Mcp Server** — Start MCP OAuth and hand the authorization URL to the dashboard browser.
 - `PUT /api/mcp/servers/{name}/enabled` **Set Mcp Server Enabled** — Enable or disable an MCP server (takes effect on next session/gateway).
 - `POST /api/mcp/servers/{name}/test` **Test Mcp Server** — Connect to the server, list its tools, disconnect.  Returns tool list.
 
@@ -179,6 +196,7 @@ status: stable
 - `PUT /api/memory/provider` **Set Memory Provider**
 - `GET /api/memory/providers/{name}/config` **Get Memory Provider Config**
 - `PUT /api/memory/providers/{name}/config` **Update Memory Provider Config**
+- `POST /api/memory/providers/{name}/setup` **Setup Memory Provider**
 - `POST /api/memory/providers/{provider}/oauth/start` **Start Memory Oauth** — Begin a provider's zero-CLI OAuth flow — opens the browser and captures
 - `GET /api/memory/providers/{provider}/oauth/status` **Memory Oauth Status** — Poll a provider's OAuth flow: idle | pending | connected | error.
 - `POST /api/memory/reset` **Reset Memory**
@@ -191,6 +209,10 @@ status: stable
 - `GET /api/messaging/telegram/onboarding/{pairing_id}` **Get Telegram Onboarding Status**
 - `DELETE /api/messaging/telegram/onboarding/{pairing_id}` **Cancel Telegram Onboarding**
 - `POST /api/messaging/telegram/onboarding/{pairing_id}/apply` **Apply Telegram Onboarding**
+- `POST /api/messaging/whatsapp/onboarding/start` **Start Whatsapp Onboarding**
+- `GET /api/messaging/whatsapp/onboarding/{pairing_id}` **Get Whatsapp Onboarding Status**
+- `DELETE /api/messaging/whatsapp/onboarding/{pairing_id}` **Cancel Whatsapp Onboarding**
+- `POST /api/messaging/whatsapp/onboarding/{pairing_id}/apply` **Apply Whatsapp Onboarding**
 
 ### model
 - `GET /api/model/auxiliary` **Get Auxiliary Models** — Return current auxiliary task assignments.
@@ -233,6 +255,7 @@ status: stable
 - `GET /api/profiles/active` **Get Active Profile Endpoint** — Return the sticky active profile and the profile this dashboard
 - `POST /api/profiles/active` **Set Active Profile Endpoint** — Set the sticky active profile (mirrors ``hermes profile use``).
 - `GET /api/profiles/sessions` **Get Profiles Sessions** — Unified, read-only session list aggregated across ALL profiles.
+- `GET /api/profiles/sessions/sidebar` **Get Profiles Sessions Sidebar** — Batched sidebar session slices — one profile-DB open per refresh.
 - `PATCH /api/profiles/{name}` **Rename Profile Endpoint**
 - `DELETE /api/profiles/{name}` **Delete Profile Endpoint** — Delete a profile. The dashboard collects the user's confirmation in
 - `POST /api/profiles/{name}/describe-auto` **Describe Profile Auto Endpoint** — Auto-generate a profile's description via the auxiliary LLM
@@ -244,6 +267,11 @@ status: stable
 - `PUT /api/profiles/{name}/soul` **Update Profile Soul**
 
 ### providers
+- `GET /api/providers/custom-endpoints` **List Custom Endpoints** — Return configured OpenAI-compatible custom endpoints for Desktop.
+- `POST /api/providers/custom-endpoints` **Upsert Custom Endpoint** — Create or update a v12+ ``providers`` custom endpoint entry.
+- `POST /api/providers/custom-endpoints/validate` **Validate Custom Endpoint** — Probe a custom endpoint by calling its OpenAI-compatible /models URL.
+- `DELETE /api/providers/custom-endpoints/{endpoint_id}` **Delete Custom Endpoint** — Remove a configured custom endpoint from ``providers``.
+- `POST /api/providers/custom-endpoints/{endpoint_id}/activate` **Activate Custom Endpoint** — Set a configured custom endpoint as the default model provider.
 - `GET /api/providers/oauth` **List Oauth Providers** — Enumerate every OAuth-capable LLM provider with current status.
 - `DELETE /api/providers/oauth/sessions/{session_id}` **Cancel Oauth Session** — Cancel a pending OAuth session. Token-protected.
 - `DELETE /api/providers/oauth/{provider_id}` **Disconnect Oauth Provider** — Disconnect an OAuth provider. Token-protected (matches /env/reveal).
@@ -257,12 +285,13 @@ status: stable
 - `POST /api/sessions/bulk-delete` **Bulk Delete Sessions Endpoint** — Delete every session in ``body.ids`` in a single DB transaction.
 - `DELETE /api/sessions/empty` **Delete Empty Sessions Endpoint** — Delete every empty (``message_count == 0``), ended,
 - `GET /api/sessions/empty/count` **Count Empty Sessions Endpoint** — Return the number of empty, ended, non-archived sessions.
-- `POST /api/sessions/prune` **Prune Sessions Endpoint** — Delete ended sessions older than N days (mirrors `hermes sessions prune`).
+- `POST /api/sessions/import` **Import Sessions Endpoint** — Import one or more sessions exported from the dashboard or CLI.
+- `POST /api/sessions/prune` **Prune Sessions Endpoint** — Delete ended sessions matching filters without blocking the event loop.
 - `GET /api/sessions/search` **Search Sessions** — Search sessions by ID plus full-text message content using FTS5.
 - `GET /api/sessions/stats` **Get Session Stats** — Session-store statistics for the Sessions page (mirrors `hermes sessions stats`).
 - `GET /api/sessions/{session_id}` **Get Session Detail**
 - `DELETE /api/sessions/{session_id}` **Delete Session Endpoint**
-- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename (or clear its title) and/or archive it.
+- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename, archive, and/or pin it.
 - `GET /api/sessions/{session_id}/export` **Export Session Endpoint** — Export a single session (metadata + messages) as JSON.
 - `GET /api/sessions/{session_id}/latest-descendant` **Get Session Latest Descendant**
 - `GET /api/sessions/{session_id}/messages` **Get Session Messages**
@@ -281,6 +310,9 @@ status: stable
 - `POST /api/skills/hub/update` **Update Skills Hub**
 - `PUT /api/skills/toggle` **Toggle Skill**
 
+### ssh
+- `GET /api/ssh/ownership` **Get Ssh Ownership**
+
 ### status
 - `GET /api/status` **Get Status**
 
@@ -290,10 +322,14 @@ status: stable
 ### tools
 - `POST /api/tools/computer-use/permissions/grant` **Grant Computer Use Permissions** — Spawn ``hermes computer-use permissions grant`` as a background action.
 - `GET /api/tools/computer-use/status` **Get Computer Use Status** — Cross-platform Computer Use readiness for the desktop card.
+- `PUT /api/tools/terminal/backend` **Select Terminal Backend** — Persist ``terminal.backend`` in config.yaml.
+- `GET /api/tools/terminal/backends` **Get Terminal Backends** — Terminal execution backend rows with health probes for the picker panel.
 - `GET /api/tools/toolsets` **Get Toolsets**
-- `PUT /api/tools/toolsets/{name}` **Toggle Toolset** — Enable/disable a configurable toolset for the desktop (cli) platform.
+- `PUT /api/tools/toolsets/{name}` **Toggle Toolset** — Enable/disable a configurable toolset for its configuration platform.
 - `GET /api/tools/toolsets/{name}/config` **Get Toolset Config** — Return the provider matrix + key status for a toolset's config panel.
 - `PUT /api/tools/toolsets/{name}/env` **Save Toolset Env** — Persist API keys for a toolset's provider env vars.
+- `PUT /api/tools/toolsets/{name}/model` **Select Toolset Model** — Persist a backend model selection (``image_gen.model`` / ``video_gen.model``).
+- `GET /api/tools/toolsets/{name}/models` **Get Toolset Models** — Return the model catalog for a toolset backend (image/video gen).
 - `POST /api/tools/toolsets/{name}/post-setup` **Run Toolset Post Setup** — Spawn a provider's post-setup install hook as a background action.
 - `PUT /api/tools/toolsets/{name}/provider` **Select Toolset Provider** — Persist a provider selection for a toolset (no key prompting).
 
