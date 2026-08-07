@@ -29,7 +29,11 @@ Checklist de acompanhamento apresentável à Libertas e à Luciana (CEO da agên
 - [x] **23-07 · Instalação do Microsoft Clarity** — ferramenta de gravações de tela e mapas de calor, que mostra visualmente como as pessoas navegam e onde clicam no site.
 - [x] **24-07 · Instalação do Google Analytics (GA4)** — medidor do comportamento de quem visita o site: número de visitas, tempo de permanência e de onde as pessoas vêm.
 - [x] **24-07 · Cadastro no Bing Webmaster Tools** — equivalente do Search Console para o buscador da Microsoft (Bing); também alimenta o Copilot e outras IAs.
+- [x] **01-08 · Estrutura schema e credenciais Libertas** — ajustes para que os artigos e o site apareçam nas buscas. Adição dos dados de autoridade (CNPJ, LinkedIn e outros).
+- [x] **06-08 · Otimizações técnicas antes do primeiro post** — upload das páginas das 3 categorias/pilares de posts; melhoria página Sobre.
+
 
 ## 🔜 A fazer
 
-_(a preencher)_
+- [ ] Adicionar o site no campo exato de site do LinkedIn da Libertas.
+- [ ] Padronizar o nome da marca em todos os canais [prioridade alta para autoridade]
