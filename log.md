@@ -878,3 +878,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Entregue PDF de 20 páginas gerado por script próprio, sem instalar pacote na VPS
 - Nenhuma alteração no site
 - páginas tocadas: wiki/projects/Libertas-SEO.md
+
+## [2026-08-09] edit | isca-diagnostico — caminho atual + paleta da marca
+- Protótipo atualizado: repo omgiova/om-diagnostico, pasta /root/om-diagnostico, no ar em form.openmidiadigital.com (raiz /)
+- Nova seção "Paleta da marca" com as 6 cores (letra + hex)
+- páginas tocadas: wiki/projects/isca-diagnostico-open-midia.md

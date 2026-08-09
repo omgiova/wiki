@@ -69,13 +69,15 @@ Duas decisões de desenho: as opções descrevem apenas realidade observável, s
 
 ## Protótipo
 
-Rodando no repositório de UI da Open Mídia, [github.com/omgiova/om](https://github.com/omgiova/om), na rota **`/diagnostico`** (commits `0898909` e `f7240e6`).
+Repositório próprio [github.com/omgiova/om-diagnostico](https://github.com/omgiova/om-diagnostico) — site Next.js estático (`output: 'export'`), publicado pela Netlify. O diagnóstico é o site inteiro, na raiz `/`.
 
 | Item | Onde |
 |---|---|
-| Página | `om-site/app/diagnostico/page.tsx` |
-| Conteúdo | `om-site/public/dados/diagnostico.csv` — 36 linhas, 16 colunas |
-| Local | dev em `npm run dev` (porta 4319 nos testes) |
+| No ar | form.openmidiadigital.com |
+| Pasta (VPS) | `/root/om-diagnostico` |
+| Página | `app/page.tsx` |
+| Conteúdo | `public/dados/diagnostico.csv` — 36 linhas, 16 colunas |
+| Local (dev) | `npm run dev` na pasta acima |
 
 Decisões do protótipo:
 
@@ -188,6 +190,19 @@ Score e timeline ainda não foram implementados — a coluna `pontos` do CSV (2 
 - Score e timeline no resultado (gamificação) — a coluna `pontos` do CSV já sustenta
 - Validação do conjunto pela Open Mídia
 - Formato de captação e canal de aplicação (onde a isca fica hospedada, o que se pede em troca)
+
+## Paleta da marca
+
+As 6 cores oficiais, referenciadas por letra:
+
+| Letra | Hex | Cor |
+|---|---|---|
+| A | #580F40 | vinho/roxo escuro |
+| B | #7C1F4A | vinho médio |
+| C | #B4D2E7 | azul claro |
+| D | #46007A | roxo |
+| E | #C52567 | rosa/magenta |
+| F | #F7F7F7 | quase branco (branco da marca) |
 
 ## Conexões
 
