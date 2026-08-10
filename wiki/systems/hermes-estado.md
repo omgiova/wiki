@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-08-03T03:00:02-03:00
+timestamp: 2026-08-10T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-03T03:00:02-03:00
+> Última atualização: 2026-08-10T03:00:02-03:00
 
 ## Status geral
 
@@ -75,7 +75,9 @@ whenever the `computer_use` tool is available.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
 - `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
+- `hermes-update-verification` ✓ — Verify a Hermes update applied; diagnose version confusion.
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
+- `proportional-response` ✓ — Use when a request is simple or a tool fails. Reply short.
 - `system-modification-protocol` ✓ — Protocol for setup, configuration, and system-modification tasks.
 Governs how to approach, communicate, and execute changes to the VPS.
 - `user-interaction-protocol` ✓ — Governs how the agent interacts with Giovani across ALL contexts.
@@ -154,10 +156,12 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `agent-memory-architecture` ✓ — Design agent memory systems combining manual knowledge bases (Obsidian vaults) with automatic capture tools (ai-memory). Covers vault structure, complementary layers, and integration patterns for cross-agent persistence.
 - `arxiv` ✓ — Search arXiv papers by keyword, author, category, or ID.
 - `blogwatcher` ✓ — Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.
+- `grounded-citations` ✓ — Ground answers and documents in cited, verifiable sources.
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
 - `llm-wiki` ✓ — Karpathy's LLM Wiki: build/query interlinked markdown KB.
 - `polymarket` ✓ — Query Polymarket: markets, prices, orderbooks, history.
 - `research-paper-writing` ✓ — Write ML papers for NeurIPS/ICML/ICLR: design→submit.
+- `web-research-delivery` ✓ — Answer research questions; web fallbacks when tools fail.
 - `senior-react-video-developer` ✓ — Skill para desenvolvimento de videos com React e Remotion. Instalacao, componentes, manipulacao de midia, renderizacao e exportacao.
 - `seo-audit` ✓ — When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 - `skill-catalog-format` ✓ — Template de formatação para skills no catálogo do Telegram no tópico Skills
@@ -208,6 +212,7 @@ by requiring validation before action and user confirmation after.
 - `video` ✗ — video_analyze (requires video-capable model)
 - `image_gen` ✓ — image_generate
 - `video_gen` ✗ — video_generate (text/image/reference)
+- `bfl` ✓ — bfl_flux3_*
 - `x_search` ✗ — x_search (requires xAI OAuth or XAI_API_KEY)
 - `tts` ✓ — text_to_speech
 - `stt` ✓ — voice transcription (gateway voice messages + voice mode)
@@ -225,6 +230,11 @@ by requiring validation before action and user confirmation after.
 - `discord_admin` ✗ — list channels/roles, pin, assign roles
 - `yuanbao` ✗ — group info, member queries, DM
 - `computer_use` ✓ — background desktop control via cua-driver
+- `a2a` ✗ — A2A (Agent-to-Agent) protocol v1.0 support for Hermes Agent — both directions of the open Linux Foundation standard for inter-agent communication.
+OUTBOUND (client tools): a2a_discover, a2a_call, a2a_list, a2a_history, and a2a_orchestrate let the agent fetch another agent's Agent Card and send it tasks over JSON-RPC — works with any A2A-compliant peer (Hermes, LangChain, CrewAI, Google ADK, OpenClaw, ...).
+INBOUND (platform adapter): exposes Hermes as an A2A-discoverable agent. An Agent Card is served at /.well-known/agent-card.json (v1.0 canonical path; legacy agent.json also answers) and incoming tasks are routed into the agent's live gateway session like any other platform — so the agent that replies is the same one talking to its user, with full memory and context, not a throwaway clone.
+Security is on by default: no bearer token configured => localhost-only bind. Inbound task text passes through prompt-injection filters; outbound text is scrubbed of credential-shaped strings; every exchange is audit-logged and persisted to disk outside the context-compaction pipeline so conversations survive compaction and restarts.
+Pure stdlib transport (http.server + urllib) — no a2a-sdk dependency required.
 
 ## Perfis
 
@@ -259,6 +269,7 @@ _(nenhum configurado)_
 - `Yuanbao (元宝)` ✗ — Connect Hermes to Tencent Yuanbao.
 - `API server` ✗ — Expose Hermes as an OpenAI-compatible HTTP API for tools like Open WebUI.
 - `Webhooks` ✗ — Receive events from GitHub, GitLab, and other webhook sources.
+- `A2A` ✗ — No extra packages needed (stdlib only)
 - `Buzz` ✗ — Requires the buzz CLI binary (https://github.com/block/buzz) on PATH or at BUZZ_CLI_PATH
 - `iMessage via Photon` ✗ — Use Hermes through iMessage via Photon's managed Spectrum platform.
 - `IRC` ✗ — Relay messages between an IRC channel (or DMs) and Hermes.
