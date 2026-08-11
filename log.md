@@ -883,3 +883,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Protótipo atualizado: repo omgiova/om-diagnostico, pasta /root/om-diagnostico, no ar em form.openmidiadigital.com (raiz /)
 - Nova seção "Paleta da marca" com as 6 cores (letra + hex)
 - páginas tocadas: wiki/projects/isca-diagnostico-open-midia.md
+
+## [2026-08-11] ingest | hermes-desktop — conexão do app desktop com o gateway remoto
+- Nova página wiki/tools/hermes-desktop.md (type tool): modos de auth token/oauth, reconexão por cookie, TTL de sessão, erros conhecidos, validação ponta a ponta
+- index.md atualizado (árvore + seção tools/)
+- páginas tocadas: wiki/tools/hermes-desktop.md, index.md
