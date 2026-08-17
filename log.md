@@ -888,3 +888,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página wiki/tools/hermes-desktop.md (type tool): modos de auth token/oauth, reconexão por cookie, TTL de sessão, erros conhecidos, validação ponta a ponta
 - index.md atualizado (árvore + seção tools/)
 - páginas tocadas: wiki/tools/hermes-desktop.md, index.md
+
+## [2026-08-17] ingest | llm-providers — registro central de providers de LLM
+- Nova página wiki/tools/llm-providers.md (type tool, status draft): OpenCode Go completo (provider nativo opencode-go, key OPENCODE_GO_API_KEY, modelo default deepseek-v4-flash) + stubs de DeepSeek, OpenRouter, Gemini, Nvidia NIM e Anthropic
+- index.md atualizado (árvore + seção tools/)
+- páginas tocadas: wiki/tools/llm-providers.md, index.md

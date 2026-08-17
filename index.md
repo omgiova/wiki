@@ -80,6 +80,7 @@ log.md
         ├── firecrawl.md
         ├── hermes-desktop.md
         ├── hyperframes.md
+        ├── llm-providers.md
         ├── n8n-mcp.md
         ├── remotion.md
         ├── obsidian-git.md
@@ -128,6 +129,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/tools/n8n-mcp.md|n8n MCP]] — interface MCP do n8n para os agentes da VPS: server stdio, registro nos clientes, env, capabilities e erros conhecidos
 - [[wiki/tools/remotion.md|Remotion]] — framework React para vídeos programáticos; projeto único em /root/projects/remotion, skills oficiais, referência dos projetos do PC em referencia-pc/, whisper fica no PC
 - [[wiki/tools/hermes-desktop.md|Hermes Desktop]] — app Electron (Windows, 0.15.1) que conecta ao gateway remoto da VPS; modos de auth token/oauth, reconexão por cookie na partição `persist:hermes-remote-oauth`, TTL de sessão no dashboard; validado ponta a ponta 2026-08-11
+- [[wiki/tools/llm-providers.md|LLM Providers]] — registro central dos providers de LLM da VPS: OpenCode Go completo (provider nativo do Hermes, key `OPENCODE_GO_API_KEY`, default `deepseek-v4-flash`) + stubs de DeepSeek, OpenRouter, Gemini, Nvidia NIM e Anthropic
 - [[wiki/tools/hyperframes.md|HyperFrames]] — CLI open-source da HeyGen (HTML→MP4, feita pra agentes); instalada globalmente na VPS, ainda sem uso real
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 - [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
