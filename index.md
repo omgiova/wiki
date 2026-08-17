@@ -63,7 +63,8 @@ log.md
     │   ├── Libertas-SEO.md
     │   ├── finflow.md
     │   ├── game-loop-mario-hyperframes.md
-    │   └── progresso-libertas-seo.md
+    │   ├── progresso-libertas-seo.md
+    │   └── promptgolf.md
     ├── systems/
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
@@ -120,6 +121,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
 - [[wiki/projects/Libertas-SEO.md|Libertas SEO — Doc Central]] — documento interno de trabalho do projeto SEO da Libertas: setup técnico, pendências, plano de ação (código) e processo de redação dos artigos
 - [[wiki/projects/progresso-libertas-seo.md|Progresso Libertas SEO]] — checklist vivo e apresentável (cliente Libertas + CEO Luciana) do progresso do projeto de SEO; só entra item validado pelo Giovani, não editar sem falar com ele
+- [[wiki/projects/promptgolf.md|Prompt Golf (pt-BR)]] — tradução pt-BR do jogo promptgolf (holyphoton): PHP + SQLite em /root/projects/promptgolf, IA via OpenCode Go (deepseek-v4-flash), vivo em https://promptgolf.igkokh.easypanel.host via Traefik/EasyPanel
 - [[wiki/projects/game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax no HyperFrames; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 
 ### tools/

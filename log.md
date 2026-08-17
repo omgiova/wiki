@@ -907,3 +907,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Causa: checker procurava a frase bruta; asteriscos/underscores/backticks quebravam a regex; modelo varia formatação por geração/modelo (seletor de modelos aumentou a variação)
 - Fix: `includes/checkers.php` `output_check()` remove `**`, `*`, `_`, `` ` `` do texto ANTES de checar (display via JS converte ** em <strong>, intacto)
 - páginas tocadas: nenhuma wiki (pitfall registrado no log)
+
+## [2026-08-17] edit | projects — página Prompt Golf (pt-BR) criada na wiki
+- Novo arquivo wiki/projects/promptgolf.md (documentação completa: localização, stack, IA via OpenCode Go + seletor por jogador, deploy Traefik/EasyPanel, dados SQLite, sessões, operação, erros conhecidos)
+- index.md atualizado (árvore + link na seção projects/)
+- página tocadas: wiki/projects/promptgolf.md, index.md
