@@ -901,3 +901,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - APP_URL do projeto atualizado de http://localhost:8090 para o domínio
 - Container antigo `promptgolf` parado (docker start promptgolf para rollback)
 - páginas tocadas: systems/vps.md
+
+## [2026-08-17] edit | promptgolf — output_check normaliza markdown da IA antes de verificar
+- Sintoma: round 4 não computava "You are absolutely right" quando a IA respondia com **bold** ("You are **absolutely right**.")
+- Causa: checker procurava a frase bruta; asteriscos/underscores/backticks quebravam a regex; modelo varia formatação por geração/modelo (seletor de modelos aumentou a variação)
+- Fix: `includes/checkers.php` `output_check()` remove `**`, `*`, `_`, `` ` `` do texto ANTES de checar (display via JS converte ** em <strong>, intacto)
+- páginas tocadas: nenhuma wiki (pitfall registrado no log)
