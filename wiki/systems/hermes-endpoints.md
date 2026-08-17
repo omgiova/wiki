@@ -3,15 +3,15 @@ type: system
 tags: [hermes, api, rest, openapi]
 title: Hermes Agent — API REST (OpenAPI)
 description: Referência completa dos endpoints REST do Hermes Agent, gerada automaticamente do /openapi.json — seção Interface do sistema Hermes
-timestamp: 2026-08-10T03:00:02-03:00
+timestamp: 2026-08-17T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — API REST
 
-> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.20.0, OAS 3.1).
+> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.20.2, OAS 3.1).
 > Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-10T03:00:02-03:00 | Total de endpoints: 240
+> Última atualização: 2026-08-17T03:00:01-03:00 | Total de endpoints: 251
 
 - **Base URL:** `http://localhost:9119`
 - **Auth:** POST `/auth/password-login` com `{"username":"...","password":"...","provider":"basic"}`
@@ -68,7 +68,7 @@ status: stable
 - `GET /api/cron/blueprints` **List Cron Blueprints** — Return the blueprint catalog as form schemas for the dashboard gallery.
 - `POST /api/cron/blueprints/instantiate` **Instantiate Blueprint** — Fill a blueprint's slots and create the cron job (form-submit path).
 - `GET /api/cron/delivery-targets` **Get Cron Delivery Targets** — Delivery targets the cron dropdown should offer.
-- `POST /api/cron/fire` **Cron Fire Webhook** — Chronos managed-cron fire webhook (NAS -> agent).
+- `POST /api/cron/fire` **Cron Fire Webhook** — Chronos managed-cron fire webhook (NAS -> agent) — gateway forwarder.
 - `GET /api/cron/jobs` **List Cron Jobs**
 - `POST /api/cron/jobs` **Create Cron Job**
 - `GET /api/cron/jobs/{job_id}` **Get Cron Job**
@@ -118,11 +118,14 @@ status: stable
 - `GET /api/files/download` **Download Managed File** — Stream a managed file as an attachment download.
 - `POST /api/files/mkdir` **Create Managed Directory**
 - `GET /api/files/read` **Read Managed File**
+- `HEAD /api/files/stream` **Stream Managed File** — Stream managed audio/video inline with HTTP Range support.
+- `GET /api/files/stream` **Stream Managed File** — Stream managed audio/video inline with HTTP Range support.
 - `POST /api/files/upload` **Upload Managed File**
 - `POST /api/files/upload-stream` **Upload Managed File Stream**
 
 ### fs
 - `GET /api/fs/default-cwd` **Fs Default Cwd**
+- `GET /api/fs/download` **Fs Download**
 - `GET /api/fs/git-root` **Fs Git Root**
 - `GET /api/fs/list` **Fs List**
 - `GET /api/fs/read-data-url` **Fs Read Data Url**
@@ -140,11 +143,13 @@ status: stable
 - `POST /api/git/branch/switch` **Git Branch Switch Route**
 - `GET /api/git/branches` **Git Branches Route**
 - `GET /api/git/file-diff` **Git File Diff Route**
+- `GET /api/git/gh-auth` **Gh Auth Status Route** — Report whether the `gh` CLI is present and authenticated.
 - `POST /api/git/review/commit` **Git Commit Route**
 - `GET /api/git/review/commit-context` **Git Commit Context Route**
 - `POST /api/git/review/create-pr` **Git Create Pr Route**
 - `GET /api/git/review/diff` **Git Review Diff Route**
 - `GET /api/git/review/list` **Git Review List Route**
+- `POST /api/git/review/pr-list` **Git Pr List Route**
 - `POST /api/git/review/push` **Git Push Route**
 - `GET /api/git/review/rev-parse` **Git Rev Parse Route**
 - `POST /api/git/review/revert` **Git Revert Route**
@@ -180,6 +185,7 @@ status: stable
 - `POST /api/mcp/catalog/install` **Install Mcp Catalog Entry** — Install a catalog MCP into config.yaml.
 - `GET /api/mcp/oauth/callback/{server_name}` **Mcp Oauth Callback**
 - `GET /api/mcp/oauth/flows/{flow_id}` **Mcp Oauth Flow Status**
+- `DELETE /api/mcp/oauth/flows/{flow_id}` **Cancel Mcp Oauth Flow** — Cancel an in-flight MCP OAuth flow (the desktop's inline-card/pill
 - `GET /api/mcp/servers` **List Mcp Servers**
 - `POST /api/mcp/servers` **Add Mcp Server**
 - `PUT /api/mcp/servers` **Replace Mcp Servers** — Replace the entire ``mcp_servers`` map (the GUI mcp.json editor's save).
@@ -254,12 +260,17 @@ status: stable
 - `POST /api/profiles` **Create Profile Endpoint**
 - `GET /api/profiles/active` **Get Active Profile Endpoint** — Return the sticky active profile and the profile this dashboard
 - `POST /api/profiles/active` **Set Active Profile Endpoint** — Set the sticky active profile (mirrors ``hermes profile use``).
+- `POST /api/profiles/import` **Import Profile Endpoint**
+- `GET /api/profiles/projects/tree` **Get Profiles Projects Tree** — Project tree for every profile at once, for the all-profiles sidebar.
 - `GET /api/profiles/sessions` **Get Profiles Sessions** — Unified, read-only session list aggregated across ALL profiles.
+- `POST /api/profiles/sessions/pull-requests` **Post Profiles Sessions Pull Requests** — The PR each of these sessions opened, recovered from its own transcript.
 - `GET /api/profiles/sessions/sidebar` **Get Profiles Sessions Sidebar** — Batched sidebar session slices — one profile-DB open per refresh.
 - `PATCH /api/profiles/{name}` **Rename Profile Endpoint**
 - `DELETE /api/profiles/{name}` **Delete Profile Endpoint** — Delete a profile. The dashboard collects the user's confirmation in
 - `POST /api/profiles/{name}/describe-auto` **Describe Profile Auto Endpoint** — Auto-generate a profile's description via the auxiliary LLM
 - `PUT /api/profiles/{name}/description` **Update Profile Description Endpoint** — Set or clear a profile's role description (kanban routing signal).
+- `GET /api/profiles/{name}/desktop-overlay` **Get Profile Desktop Overlay** — The desktop appearance/interface overlay bundled with an imported
+- `POST /api/profiles/{name}/export` **Export Profile Endpoint**
 - `PUT /api/profiles/{name}/model` **Update Profile Model Endpoint** — Set the main model (``model.default`` + ``model.provider``) for a
 - `POST /api/profiles/{name}/open-terminal` **Open Profile Terminal Endpoint**
 - `GET /api/profiles/{name}/setup-command` **Get Profile Setup Command**
@@ -291,8 +302,8 @@ status: stable
 - `GET /api/sessions/stats` **Get Session Stats** — Session-store statistics for the Sessions page (mirrors `hermes sessions stats`).
 - `GET /api/sessions/{session_id}` **Get Session Detail**
 - `DELETE /api/sessions/{session_id}` **Delete Session Endpoint**
-- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename, archive, and/or pin it.
-- `GET /api/sessions/{session_id}/export` **Export Session Endpoint** — Export a single session (metadata + messages) as JSON.
+- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename, archive, pin, and/or mark read/unread.
+- `GET /api/sessions/{session_id}/export` **Export Session Endpoint** — Stream a single session (metadata + messages) as JSON.
 - `GET /api/sessions/{session_id}/latest-descendant` **Get Session Latest Descendant**
 - `GET /api/sessions/{session_id}/messages` **Get Session Messages**
 

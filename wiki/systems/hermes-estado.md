@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-08-10T03:00:02-03:00
+timestamp: 2026-08-17T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-10T03:00:02-03:00
+> Última atualização: 2026-08-17T03:00:01-03:00
 
 ## Status geral
 
@@ -34,13 +34,9 @@ status: stable
 - `analytics` ✓ — When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
 - `claude-code` ✓ — Delegate coding to Claude Code CLI (features, PRs).
 - `codex` ✓ — Delegate coding to OpenAI Codex CLI (features, PRs).
-- `computer-use` ✓ — Drive the user's desktop in the background — clicking, typing,
-scrolling, dragging — without stealing the cursor, keyboard focus,
-or switching virtual desktops / Spaces. Cross-platform: macOS,
-Windows, Linux. Works with any tool-capable model. Load this skill
-whenever the `computer_use` tool is available.
-
+- `computer-use` ✓ — Drive the desktop in the background without stealing focus.
 - `hermes-agent` ✓ — Use, configure, theme, extend, and orchestrate Hermes Agent.
+- `merge-reconciler` ✓ — Neutral third-party resolution of agent merge conflicts.
 - `opencode` ✓ — Delegate coding to OpenCode CLI (features, PR review).
 - `brand-architect` ✓ — Use this skill when users need to develop brand strategy, choose a company name, define brand positioning, create brand voice, or build brand identity from day one. Activates for "what should I name it," "brand strategy," "positioning," or identity questions.
 - `brand-copywriter` ✓ — Writes marketing copy using proven copywriting frameworks. Use when user needs copy for ads (Facebook, Instagram, TikTok, YouTube), landing pages, sales pages, email sequences, LinkedIn posts, product descriptions, or any marketing content.
@@ -74,6 +70,7 @@ whenever the `computer_use` tool is available.
 - `cron-news-scraping` ✓ — Set up and maintain scheduled news-scraping cron jobs with firecrawl CLI. Covers the full pipeline: search, language filter, dedup, webhook POST, silent delivery.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
 - `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
+- `hermes-approvals-and-config-writes` ✓ — Use when editing Hermes config or commands get denied.
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
 - `hermes-update-verification` ✓ — Verify a Hermes update applied; diagnose version confusion.
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
@@ -85,6 +82,7 @@ Covers communication style, data sourcing, session startup, knowledge storage,
 and correction handling. Broader than system-modification-protocol (system tasks only).
 - `vps-service-deployment` ✓ — Deploy and expose services via Docker (Swarm) + EasyPanel + Traefik on the Hostinger KVM 2 VPS.
 - `docker-host-interaction-troubleshooting` ✓ — Troubleshoot and resolve configuration issues related to Docker host interactions, container networking, volume mounts, and permission problems.
+- `email-inbox-triage` ✓ — Triage an inbox: prioritize threads, draft replies safely.
 - `himalaya` ✓ — Himalaya CLI: IMAP/SMTP email from terminal.
 - `embedded-captions` ✓ — Add captions to a talking-head video. ONE catalog (CATALOG.md) of 36 visual identities behind two engines: column-flow (captions composited INTO the scene — matte occlusion + mix-blend; cream/ink/editorial/keynote/documentary/loud/neon/glitch/chrome/velocity) and themed constitutions (anchor/ordnance/terminal/neonsign/stardust/stomp/scoreboard/transit/vhs/arcade/dossier/laser/thunder/hologram/biolume/aurora/spectrum/papercut/popup/chalkboard/graffiti/brush/inkwater/ransom/lastpage/nightcity — e.g. a glyph-decode climax, a neon sign WRITTEN stroke by stroke, or the quiet `anchor` rail default). Route by identity, never by mode. Trigger on "captions/subtitles", "embed/cinematic captions", "VFX captions", "炸/特效/酷炫字幕", a named identity, or top-tier motion-graphics asks. Embedding every word is wrong for most talking-head content — `anchor` is the verbatim default. Runs locally end-to-end (transcribes and mattes the subject itself, no API key). Requires hyperframes and a single-subject clip (multi-shot clips ar...
 - `faceless-explainer` ✓ — Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video: there is no site or footage to capture, so the visuals are invented per scene (typography, abstract graphics, diagrams, data-viz). Use for topic explainers, concept breakdowns, how-tos, listicles. Not a product promo (/product-launch-video) or a site tour (/website-to-video). Unclear → /hyperframes.
@@ -98,6 +96,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `codebase-inspection` ✓ — Inspect codebases w/ pygount: LOC, languages, ratios.
 - `github-auth` ✓ — GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.
 - `github-code-review` ✓ — Review PRs: diffs, inline comments via gh or REST.
+- `github-issue-to-pr` ✓ — Carry a GitHub issue to a verified PR with honest CI state.
 - `github-issues` ✓ — Create, triage, label, assign GitHub issues via gh or REST.
 - `github-pr-workflow` ✓ — GitHub PR lifecycle: branch, commit, open, CI, merge.
 - `github-repo-management` ✓ — Clone/create/fork repos; manage remotes, releases.
@@ -140,28 +139,37 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `obsidian-ai-memory` ✓ — Setup específico do usuário — ai-memory ↔ Obsidian vault sync, Obsidian Git plugin (Windows/Android), rebuild script, gotchas de autenticação e preferências de manutenção do vault.
 - `obsidian-wiki-maintenance` ✓ — Enriquecer e manter vaults Obsidian com [[wikilinks]], INDEX.md, conexões entre projetos e sincronia via git. Scripts reutilizáveis cruzam tags do frontmatter pra conectar páginas relacionadas.
 - `obsidian` ✓ — Read, search, create, and edit notes in the Obsidian vault.
+- `open-midia` ✓ — Use ao refinar copy dos projetos Open Mídia.
 - `pr-to-video` ✓ — Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video — changelog, feature reveal, fix, or refactor walkthrough built from the diff, commits, and files: the input is a code change, not a website. Not a product promo (/product-launch-video) or a no-PR topic explainer (/faceless-explainer). Unclear → /hyperframes.
 - `product-launch-video` ✓ — Turn a product or marketing URL, pasted script, or brief into a product launch / promo video — SaaS promos, feature reveals, product demos, app and company launches. Use when the user wants to market, launch, promote, or reveal a product; the default for any commercial URL. Not a general site tour (/website-to-video). Unclear → /hyperframes.
 - `airtable` ✓ — Airtable REST API via curl. Records CRUD, filters, upserts.
-- `docx` ✓ — Create, read, edit Word .docx documents and templates.
+- `box` ✓ — Box manages cloud files, sharing, search, and metadata.
+- `document-to-action-items` ✓ — Extract cited obligations, deadlines, tasks from documents.
+- `docx` ✓ — Create, read, edit, template, and review Word .docx files.
 - `google-workspace` ✓ — Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.
 - `maps` ✓ — Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.
+- `meeting-action-items` ✓ — Turn meeting notes into cited decisions, owners, tickets.
 - `nano-pdf` ✓ — Edit text in existing PDFs via natural-language prompts.
 - `notion` ✓ — Notion API + ntn CLI: pages, databases, markdown, Workers.
 - `ocr-and-documents` ✓ — Extract text from PDFs/scans (pymupdf, marker-pdf).
-- `pdf` ✓ — Create, merge, split, fill, and secure PDF files.
-- `powerpoint` ✓ — Create, read, edit .pptx decks, slides, notes, templates.
+- `pdf` ✓ — Create, read, merge, fill, and secure PDF files.
+- `powerpoint` ✓ — Create, read, edit .pptx decks with python-pptx.
+- `product-price-monitor` ✓ — Watch product, flight, or listing prices; alert on target.
+- `session-librarian` ✓ — Organize sessions by prompt: find, rename, archive, prune.
 - `teams-meeting-pipeline` ✓ — Teams meeting summaries, job replay, Graph subscriptions.
-- `xlsx` ✓ — Create, read, edit Excel .xlsx spreadsheets and CSVs.
+- `weekly-review-planning` ✓ — Weekly reset: commitments, stalled work, next-week plan.
+- `xlsx` ✓ — Create, read, edit Excel .xlsx workbooks and CSVs.
 - `agent-memory-architecture` ✓ — Design agent memory systems combining manual knowledge bases (Obsidian vaults) with automatic capture tools (ai-memory). Covers vault structure, complementary layers, and integration patterns for cross-agent persistence.
 - `arxiv` ✓ — Search arXiv papers by keyword, author, category, or ID.
+- `blocked-page-recovery` ✓ — Recover blocked/paywalled/WAF'd pages via fallbacks.
 - `blogwatcher` ✓ — Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.
+- `competitor-news-monitor` ✓ — Watch named companies for material news; cited digests.
 - `grounded-citations` ✓ — Ground answers and documents in cited, verifiable sources.
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
 - `llm-wiki` ✓ — Karpathy's LLM Wiki: build/query interlinked markdown KB.
-- `polymarket` ✓ — Query Polymarket: markets, prices, orderbooks, history.
 - `research-paper-writing` ✓ — Write ML papers for NeurIPS/ICML/ICLR: design→submit.
 - `web-research-delivery` ✓ — Answer research questions; web fallbacks when tools fail.
+- `web-research-fallbacks` ✓ — Use when web_search fails. Direct-API web fetch paths.
 - `senior-react-video-developer` ✓ — Skill para desenvolvimento de videos com React e Remotion. Instalacao, componentes, manipulacao de midia, renderizacao e exportacao.
 - `seo-audit` ✓ — When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 - `skill-catalog-format` ✓ — Template de formatação para skills no catálogo do Telegram no tópico Skills
@@ -194,6 +202,7 @@ chat_id/message_id resolution via session context, and the reaction emoji whitel
 Use when the user asks to react to a specific message and requires certainty
 that the reaction was applied to the correct message. Eliminates guesswork
 by requiring validation before action and user confirmation after.
+- `telegram-rich-delivery-maintenance` ✓ — Use when Telegram replies arrive flat; restore rich.
 - `mcp-server-trello` ✓ — Trello MCP Server skill for board discovery, card workflows, checklist management, comments, attachments, labels, members, board/workspace selection, and health monitoring through the bundled @delorenj/mcp-server-trello server.
 - `website-to-video` ✓ — Capture a general website/URL and turn it into a video OF the site — tour, showcase, or social clip built from captured screenshots and the site's own brand assets. Use for portfolio / blog / docs / landing-page showcases. Not a product launch or promo, even from a URL (/product-launch-video). Unclear → /hyperframes.
 
