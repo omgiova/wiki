@@ -71,6 +71,7 @@ precisa ficar viva enquanto navega (a sessão de trabalho normal continua separa
 | Hermes Agent | 9119 | Dashboard |
 | [[wiki/systems/n8n.md\|n8n]] | 5678 (interna, via Traefik) | Automação — ver [[wiki/systems/n8n.md\|n8n]] |
 | Node-RED | 8800 | Automação residencial + Alexa |
+| Prompt Golf | 8090 (interna, via Traefik) | Jogo prompt-golf (tradução pt-BR) — `https://promptgolf.igkokh.easypanel.host` |
 
 ## Stack de desenvolvimento
 

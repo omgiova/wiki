@@ -893,3 +893,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página wiki/tools/llm-providers.md (type tool, status draft): OpenCode Go completo (provider nativo opencode-go, key OPENCODE_GO_API_KEY, modelo default deepseek-v4-flash) + stubs de DeepSeek, OpenRouter, Gemini, Nvidia NIM e Anthropic
 - index.md atualizado (árvore + seção tools/)
 - páginas tocadas: wiki/tools/llm-providers.md, index.md
+
+## [2026-08-17] chore | vps — Prompt Golf exposto via EasyPanel/Traefik
+- Swarm service `promptgolf` na rede `easypanel` (mesma imagem php:8.3-cli e mounts do container antigo; sem porta no host)
+- Rotas Traefik `http-promptgolf-0`/`https-promptgolf-0` + service `promptgolf-0` -> http://promptgolf:8090/ (backup de main.yaml em main.yaml.bak-20260817)
+- Domínio público com HTTPS: https://promptgolf.igkokh.easypanel.host
+- APP_URL do projeto atualizado de http://localhost:8090 para o domínio
+- Container antigo `promptgolf` parado (docker start promptgolf para rollback)
+- páginas tocadas: systems/vps.md
