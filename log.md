@@ -917,3 +917,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página wiki/tools/criar-artigo-seo-libertas-skill.md documentando o processo de produção de artigo SEO da Libertas (fonte da verdade: /root/.claude/skills/criar-artigo-seo-libertas/SKILL.md, v1.1.0)
 - Pointer acrescentado em wiki/projects/Libertas-SEO.md (Conexões) e link em index.md (tools/)
 - páginas tocadas: wiki/tools/criar-artigo-seo-libertas-skill.md, wiki/projects/Libertas-SEO.md, index.md
+
+## [2026-08-20] edit | tools — enxugar página da skill (só registro de existência)
+- wiki/tools/criar-artigo-seo-libertas-skill.md reduzida a registro de existência (removidos resumo, regras e versão; SKILL.md é a fonte da verdade)
+- index.md: linha da skill enxugada (sem versão/resumo)
+- páginas tocadas: wiki/tools/criar-artigo-seo-libertas-skill.md, index.md
