@@ -912,3 +912,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Novo arquivo wiki/projects/promptgolf.md (documentação completa: localização, stack, IA via OpenCode Go + seletor por jogador, deploy Traefik/EasyPanel, dados SQLite, sessões, operação, erros conhecidos)
 - index.md atualizado (árvore + link na seção projects/)
 - página tocadas: wiki/projects/promptgolf.md, index.md
+
+## [2026-08-20] edit | tools — página da skill criar-artigo-seo-libertas
+- Nova página wiki/tools/criar-artigo-seo-libertas-skill.md documentando o processo de produção de artigo SEO da Libertas (fonte da verdade: /root/.claude/skills/criar-artigo-seo-libertas/SKILL.md, v1.1.0)
+- Pointer acrescentado em wiki/projects/Libertas-SEO.md (Conexões) e link em index.md (tools/)
+- páginas tocadas: wiki/tools/criar-artigo-seo-libertas-skill.md, wiki/projects/Libertas-SEO.md, index.md

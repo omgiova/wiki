@@ -162,3 +162,4 @@ Entregue também em PDF (`Guia-Decisao-Libertas-SEO.pdf`, 20 páginas), gerado p
 - Guia consolidado por item (fora da wiki): `/root/Libertas-SEO/GUIA-DECISAO.md`
 - Checklist do cliente: [[wiki/projects/progresso-libertas-seo.md]]
 - Plano original (hipóteses, contexto histórico): [[wiki/projects/slide-plano-de-ação.md]]
+- Processo de produção de artigo (skill do Claude Code): [[wiki/tools/criar-artigo-seo-libertas-skill.md]]
