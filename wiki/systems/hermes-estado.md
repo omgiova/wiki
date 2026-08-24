@@ -3,19 +3,19 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-08-17T03:00:01-03:00
+timestamp: 2026-08-24T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-17T03:00:01-03:00
+> Última atualização: 2026-08-24T03:00:01-03:00
 
 ## Status geral
 
 - **Gateway:** ?
-- **Modelo principal:** `deepseek-v4-flash` (deepseek)
+- **Modelo principal:** `deepseek-v4-flash` (opencode-go)
 
 ## Servidores MCP
 
@@ -74,6 +74,7 @@ status: stable
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
 - `hermes-update-verification` ✓ — Verify a Hermes update applied; diagnose version confusion.
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
+- `opencode-go-api` ✓ — Use when working with the OpenCode Go/Zen API.
 - `proportional-response` ✓ — Use when a request is simple or a tool fails. Reply short.
 - `system-modification-protocol` ✓ — Protocol for setup, configuration, and system-modification tasks.
 Governs how to approach, communicate, and execute changes to the VPS.
@@ -184,6 +185,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `inspecting-hermes-desktop-dom` ✓ — Read the live Hermes desktop DOM/CSS over CDP.
 - `node-inspect-debugger` ✓ — Debug Node.js via --inspect + Chrome DevTools Protocol CLI.
 - `plan` ✓ — Write a markdown plan to .hermes/plans/; no execution.
+- `promptgolf` ✓ — Manutenção do Prompt Golf (pt-BR). Teste só read-only.
 - `python-debugpy` ✓ — Debug Python: pdb REPL + debugpy remote (DAP).
 - `requesting-code-review` ✓ — Pre-commit review: security scan, quality gates, auto-fix.
 - `simplify-code` ✓ — Parallel 4-agent cleanup of recent code changes.
@@ -250,6 +252,7 @@ Pure stdlib transport (http.server + urllib) — no a2a-sdk dependency required.
 - `default` — deepseek-v4-flash
 - `gio` — deepseek-v4-flash
 - `gio2` — deepseek-v4-flash
+- `gio3` — Criador de Perfis — Seu papel é encontrar referências e boas práticas para criar os melhores perfis, alinhados às expectativas do Giovani. Para isso, precisa de método: diagnóstico, pesquisas, hipóteses, autonomia, processos validados e eficiência de tokens.
 
 ## Cron jobs
 
