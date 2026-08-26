@@ -9,6 +9,16 @@ status: draft
 
 # Trello MCP (comunidade)
 
+> [!warning] ⚠️ MCP stdio — abre uma cópia por cliente (acumula RAM)
+> Este servidor é **stdio-only** (v1.8.1, sem HTTP/`url:`): **cada** sessão do Claude Code e **cada** agente do Hermes (gateway, dashboard, serve) sobe a **própria cópia** ao usar (~35–70 MB cada). Sessões que fecham mal viram **órfãs** (`ppid=1`) e vivem pra sempre.
+>
+> **Para ZERAR as cópias, desligar nos DOIS registros e matar as abertas:**
+> 1. **Claude Code:** `claude mcp remove trello -s user` (bloco `"trello"` em `/root/.claude.json`)
+> 2. **Hermes:** `enabled: false` no bloco `trello` de `/root/.hermes/config.yaml` (auto-reload; `/reload-mcp` se preciso)
+> 3. Matar os processos `mcp-server-trello` já rodando (`node` + wrappers `sh`/`npm`)
+>
+> Enquanto **qualquer** registro seguir `enabled`, novas sessões reabrem cópias. Reativar = reverter os 2 passos. Detalhes em [Ciclo de vida e como desligar](#ciclo-de-vida-e-como-desligar-obs-sessão-2026-08-25).
+
 ## O que é
 
 Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-trello` ([repositório](https://github.com/delorenj/mcp-server-trello)), rodando localmente na VPS via `npx` (Node v22, sem instalação permanente). Escolhido em vez do [[wiki/tools/trello-mcp-oficial.md|MCP oficial]] porque, na época (2026-07-05), o Giovani era apenas **convidado** no board principal (não membro do workspace), o que bloqueava o OAuth do oficial. Este servidor usa API key + token da **dona do workspace**, que enxergam tudo que a conta dela enxerga. Desde 2026-07-06 o bloqueio não existe mais (Giovani virou membro e o oficial foi autenticado); os dois MCPs coexistem com identidades distintas — este age como a dona do workspace, o oficial age como o Giovani.
