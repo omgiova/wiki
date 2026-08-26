@@ -927,3 +927,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página wiki/tools/ocg-usage.md: CLI /root/scripts/ocg-usage — nº de requisições e tokens por modelo/sessão em janelas de 15m a 1w + % do plano via API /zen/go/v1/usage
 - Link adicionado em index.md (árvore + seção tools/)
 - páginas tocadas: wiki/tools/ocg-usage.md, index.md
+
+## [2026-08-26] edit | ocg-usage — caminho único e wikilinks bidirecionais
+- Symlink /usr/local/bin/ocg-usage removido (autorizado) — caminho único confirmado e registrado na página: /root/scripts/ocg-usage, sem symlinks no PATH
+- Backlinks adicionados: Conexões de wiki/tools/llm-providers.md e wiki/systems/hermes.md apontando para ocg-usage.md
+- páginas tocadas: wiki/tools/ocg-usage.md, wiki/tools/llm-providers.md, wiki/systems/hermes.md

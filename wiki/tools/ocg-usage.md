@@ -51,7 +51,7 @@ ocg-usage 6h --json # saída para pipeline
 ## Configuração
 
 - **Nenhuma.** Lê `OPENCODE_GO_API_KEY` de `/root/.hermes/.env` e abre o `state.db` em modo somente leitura
-- Instalado como arquivo único em `/root/scripts/` (padrão de organização do Giovani)
+- **Caminho único:** `/root/scripts/ocg-usage` — sem symlinks no PATH (o `/usr/local/bin/ocg-usage` foi removido em 2026-08-26); invocar pelo caminho completo
 
 ## Erros conhecidos
 
