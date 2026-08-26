@@ -38,6 +38,16 @@ Servidor MCP da comunidade para o Trello — pacote npm `@delorenj/mcp-server-tr
 - **Skill:** `/root/.hermes/skills/trello/` — pacote `skill/` do repositório (clonado em 2026-07-05), com `SKILL.md`, `references/trello-mcp/` (api, patterns, gotchas, configuration), `assets/source/` e `scripts/install.sh`. Recurso de todos os agentes da VPS.
 - **Registro nos clientes:** Claude Code (`claude mcp add trello -s user -- /root/mcp/trello-mcp.sh`) e Hermes (bloco `trello` em `mcp_servers:` no `config.yaml` — auto-recarregado, sem restart; `/reload-mcp` se necessário). Ver [[wiki/concepts/mcps.md|Registro central de MCPs]].
 
+### Ciclo de vida e como desligar (obs. sessão 2026-08-25)
+
+Este servidor é **stdio-only** — verificado no código instalado (v1.8.1, pasta `build/`): só existe `StdioServerTransport`, sem SSE/HTTP. **Consequência:** não dá para rodar como servidor único via `url:` (ao contrário do `ai-memory`). Cada **cliente** que registra o Trello (cada sessão do Claude Code, cada agente do Hermes — gateway, dashboard, serve) **sobe a própria cópia** ao usar. Uma cópia = corrente de 3 processos (`sh -c` → `npm exec` → `node`). Sessões que fecham mal deixam a cópia **órfã** (`ppid=1`), que vive indefinidamente acumulando RAM (observados exemplares de 9 dias). Cada instância `node` ocupa ~35–70 MB.
+
+**Os dois pontos de registro (é aqui que se liga/desliga):**
+- **Claude Code:** bloco `"trello"` em `/root/.claude.json` (`"type": "stdio"`, `command: /root/mcp/trello-mcp.sh`). Remover/desregistrar: `claude mcp remove trello -s user`.
+- **Hermes:** bloco `trello` em `/root/.hermes/config.yaml` → alternar `enabled: true|false` (auto-reload; `/reload-mcp` se preciso).
+
+**Para chegar a ZERO cópias rodando:** desabilitar nos dois registros acima **e** matar as instâncias já abertas (os `node` de `mcp-server-trello` + wrappers `sh`/`npm`). Enquanto qualquer registro seguir habilitado, novas sessões voltam a abrir cópias. Reativar depois = reverter os dois passos (re-`add` no Claude / `enabled: true` no Hermes).
+
 ## Quando não usar
 
 - **n8n:** usar o nó nativo do Trello do próprio n8n, com a credencial (mesma API key + token) cadastrada na UI (Credentials → Trello API) — caminho natural do n8n, mais confiável que MCP dentro de workflow. Ver [[wiki/systems/n8n.md|n8n]].
