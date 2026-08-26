@@ -932,3 +932,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Symlink /usr/local/bin/ocg-usage removido (autorizado) — caminho único confirmado e registrado na página: /root/scripts/ocg-usage, sem symlinks no PATH
 - Backlinks adicionados: Conexões de wiki/tools/llm-providers.md e wiki/systems/hermes.md apontando para ocg-usage.md
 - páginas tocadas: wiki/tools/ocg-usage.md, wiki/tools/llm-providers.md, wiki/systems/hermes.md
+
+## [2026-08-26] edit | ocg-usage — reescrita da página (camadas uso + implementação)
+- Página reescrita: seções de uso enxutas + seção "Implementação — construção do script" com os 4 itens (shebang, stdlib, mescla por session_id, fontes de dados)
+- Removidos: changelog (remoção de symlink), bug resolvido dos Erros conhecidos, negativas defensivas, redundâncias
+- páginas tocadas: wiki/tools/ocg-usage.md
