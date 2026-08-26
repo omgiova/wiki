@@ -922,3 +922,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - wiki/tools/criar-artigo-seo-libertas-skill.md reduzida a registro de existência (removidos resumo, regras e versão; SKILL.md é a fonte da verdade)
 - index.md: linha da skill enxugada (sem versão/resumo)
 - páginas tocadas: wiki/tools/criar-artigo-seo-libertas-skill.md, index.md
+
+## [2026-08-26] ingest | ocg-usage — página da ferramenta de consumo do OpenCode Go
+- Nova página wiki/tools/ocg-usage.md: CLI /root/scripts/ocg-usage — nº de requisições e tokens por modelo/sessão em janelas de 15m a 1w + % do plano via API /zen/go/v1/usage
+- Link adicionado em index.md (árvore + seção tools/)
+- páginas tocadas: wiki/tools/ocg-usage.md, index.md
