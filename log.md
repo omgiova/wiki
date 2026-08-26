@@ -943,3 +943,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Identidade B aprovada: lavanda #B4A7D6 + Fraunces + Hanken Grotesk, status editoriais empoeirados; versão A Linear descartada
 - Mecânica: tarefa com equipe 1..n (assigneeIds) e etapas de agência no lançamento de tempo
 - index.md atualizado (árvore + lista projects/)
+
+## [2026-08-26] chore | projects — exclusão de om-hub-regras-design.md
+- Página criada precipitadamente durante experimentação: projeto em fase de testes, nada validado pelo Giovani
+- index.md limpo (árvore + lista projects/)

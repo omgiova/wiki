@@ -60,7 +60,6 @@ log.md
     │   ├── automacao-videos.md
     │   ├── automacao-trello-open-midia.md
     │   ├── isca-diagnostico-open-midia.md
-    │   ├── om-hub-regras-design.md
     │   ├── Libertas-SEO.md
     │   ├── finflow.md
     │   ├── game-loop-mario-hyperframes.md
@@ -119,7 +118,6 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
 - [[wiki/projects/isca-diagnostico-open-midia.md|Isca — Diagnóstico de Presença Digital]] — isca de captação da Open Mídia estruturada sobre o modelo CBBE de Keller: 4 focos, 8 perguntas, 36 cruzamentos pré-escritos; protótipo na rota /diagnostico do repo omgiova/om, com conteúdo em CSV
-- [[wiki/projects/om-hub-regras-design.md|OM Hub — Regras de Design]] — regras universais de UI do hub interno da agência (repo privado omgiova/om-hub): proibido eyebrow, identidade lavanda + Fraunces/Hanken, status editoriais; mecânica de tarefa com equipe e etapas
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
 - [[wiki/projects/Libertas-SEO.md|Libertas SEO — Doc Central]] — documento interno de trabalho do projeto SEO da Libertas: setup técnico, pendências, plano de ação (código) e processo de redação dos artigos
