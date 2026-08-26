@@ -947,3 +947,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-08-26] chore | projects — exclusão de om-hub-regras-design.md
 - Página criada precipitadamente durante experimentação: projeto em fase de testes, nada validado pelo Giovani
 - index.md limpo (árvore + lista projects/)
+
+## [2026-08-26] ingest | tools — Script publicar-artigo.sh (Libertas) v1.0.0
+- Nova página: wiki/tools/publicar-artigo-libertas.md
+- Script genérico de publicação/agendamento de artigos da Libertas (branch nova a partir da main -> commit -> push -> PR)
+- Registrado como v1.0.0, criado 26/08/26, 1a execução agendada 28/08/26; não testado/validado
