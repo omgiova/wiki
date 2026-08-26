@@ -937,3 +937,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Página reescrita: seções de uso enxutas + seção "Implementação — construção do script" com os 4 itens (shebang, stdlib, mescla por session_id, fontes de dados)
 - Removidos: changelog (remoção de symlink), bug resolvido dos Erros conhecidos, negativas defensivas, redundâncias
 - páginas tocadas: wiki/tools/ocg-usage.md
+
+## [2026-08-26] ingest | projects — página om-hub-regras-design
+- Regras universais de UI do OM Hub decididas pelo Giovani: proibido eyebrow (regra universal), sem legendas que poluem KPI, sem subtítulo redundante
+- Identidade B aprovada: lavanda #B4A7D6 + Fraunces + Hanken Grotesk, status editoriais empoeirados; versão A Linear descartada
+- Mecânica: tarefa com equipe 1..n (assigneeIds) e etapas de agência no lançamento de tempo
+- index.md atualizado (árvore + lista projects/)
