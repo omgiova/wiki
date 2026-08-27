@@ -952,3 +952,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova página: wiki/tools/publicar-artigo-libertas.md
 - Script genérico de publicação/agendamento de artigos da Libertas (branch nova a partir da main -> commit -> push -> PR)
 - Registrado como v1.0.0, criado 26/08/26, 1a execução agendada 28/08/26; não testado/validado
+
+## [2026-08-26] edit | tools — Reescrita da página publicar-artigo.sh (cron nativo)
+- wiki/tools/publicar-artigo-libertas.md reescrita do zero; removida toda menção ao "at" (abordagem descartada, nunca funcionou)
+- Documenta v1.0.0 via cron nativo do Linux com linha one-shot auto-removível; mecanismo do cron testado com sucesso hoje

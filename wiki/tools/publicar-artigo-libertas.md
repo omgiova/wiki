@@ -1,9 +1,9 @@
 ---
 type: tool
-tags: [tools, libertas, seo, publicacao, automacao, git, agendamento]
+tags: [tools, libertas, seo, publicacao, automacao, git, cron, agendamento]
 title: Script publicar-artigo.sh (Libertas)
-description: Script genérico que facilita o agendamento e a publicação de qualquer artigo do blog da Libertas — abre branch nova a partir da main, commita os arquivos indicados, dá push e abre o PR. v1.0.0.
-timestamp: 2026-08-26T20:55:00-03:00
+description: Script genérico que facilita o agendamento e a publicação de qualquer artigo do blog da Libertas via cron nativo — abre branch nova a partir da main, commita os arquivos indicados, dá push e abre o PR. v1.0.0.
+timestamp: 2026-08-26T21:30:00-03:00
 status: draft
 ---
 
@@ -13,13 +13,13 @@ status: draft
 
 **v1.0.0** — criado em **26/08/2026**. Primeira execução real agendada para **28/08/2026 00:00 (BRT)** (publicação do artigo de planejamento financeiro).
 
-> ⚠️ **Não testado e não validado.** Nesta data (26/08/2026) o script foi apenas escrito e documentado; ainda não rodou nenhuma vez. A primeira execução será a de 28/08/2026 — só depois dela dá para considerar validado.
+> ⚠️ **Ainda não validado em produção.** Em 26/08/2026 o script foi escrito, e o **mecanismo do cron foi testado com sucesso** (um cron de teste disparou no horário certo e se auto-removeu). Mas o job real — abrir o PR do artigo — só roda pela primeira vez em 28/08/2026; só depois disso a publicação de verdade estará validada.
 
 ## Função
 
-Facilitar o **agendamento e a publicação** de qualquer artigo do blog da Libertas, independente de formato ou de quantos recursos (imagens, etc.) ele tenha. Em vez de um script descartável por artigo, é uma peça reutilizável: para publicar um novo artigo agendado, basta chamar o script passando a branch, o título e a lista de arquivos daquele artigo.
+Facilitar o **agendamento e a publicação** de qualquer artigo do blog da Libertas, independente de formato ou de quantos recursos (imagens, etc.) ele tenha. É uma peça reutilizável: para publicar um artigo em um horário marcado, agenda-se uma linha no **cron nativo do Linux** chamando este script com a branch, o título e a lista de arquivos daquele artigo.
 
-Respeita a regra do projeto: **toda alteração abre uma branch NOVA a partir da `main`** (nunca reusa branch). O **merge continua sendo manual, feito pela conta da Luciana** — o script só chega até abrir o PR.
+Respeita a regra do projeto: **toda alteração abre uma branch NOVA a partir da `main`** (nunca reusa branch). O **merge continua manual, feito pela conta da Luciana** — o script só vai até abrir o PR.
 
 ## Localização
 
@@ -46,36 +46,37 @@ gh pr create --base main --head "$branch" --title "$titulo" \
 
 1. `set -euo pipefail` — aborta em qualquer erro (não publica pela metade).
 2. `cd /root/libertas` — entra no repositório do site.
-3. Lê os argumentos: `branch` (nome da branch), `titulo` (do commit e do PR), e o `shift 2` deixa em `"$@"` **a lista de arquivos** do artigo.
+3. Lê os argumentos: `branch`, `titulo`, e o `shift 2` deixa em `"$@"` **a lista de arquivos** do artigo.
 4. `git fetch -q origin main` — atualiza a referência da `main`.
 5. `git checkout -qB "$branch" origin/main` — cria a branch **nova a partir da `main`**. Arquivos ainda não rastreados (o `.md` e as imagens do artigo) permanecem intactos no diretório.
 6. `git add -- "$@"` — adiciona **apenas** os arquivos passados. Nada mais entra no commit.
-7. `git commit` / `git push` — commita e envia a branch pro GitHub.
+7. `git commit` / `git push` — commita e envia a branch pro GitHub (via chave SSH da VPS).
 8. `gh pr create` — abre o PR contra a `main`. O merge fica com a Luciana.
 
 Como o script lê os arquivos **no momento em que roda**, qualquer ajuste feito no artigo antes do horário agendado já entra automaticamente.
 
-## Agendamento (one-shot com `at`)
+## Agendamento (cron nativo do Linux)
 
-Ferramenta escolhida: **`at`** (dispara uma vez e se auto-remove — mais limpo que cron para tarefa única). Requer o pacote `at` instalado e o daemon `atd` ativo.
+Usa-se o `crontab -l` do root — o mesmo cron nativo que já roda outros jobs da VPS, sem instalar nada externo. Como o cron não tem campo de ano, um agendamento **de uma vez só** é feito com a própria linha **se auto-removendo** após disparar, via um marcador único.
 
-Exemplo — agendar a publicação do planejamento financeiro para 28/08/2026 00:00:
+Exemplo — publicação do planejamento financeiro em 28/08/2026 00:00 (linha real hoje no crontab):
 
-```bash
-echo '/root/libertas/scripts/publicar-artigo.sh pub/planejamento-financeiro \
-"Planejamento financeiro empresarial" \
-content/blog/planejamento-financeiro-empresarial.md \
-static/images/planejamento-financeiro-empresarial.webp \
-static/images/planejamento-financeiro-padaria.webp' | at 00:00 2026-08-28
+```cron
+0 0 28 8 * /root/libertas/scripts/publicar-artigo.sh pub/planejamento-financeiro "Planejamento financeiro empresarial" content/blog/planejamento-financeiro-empresarial.md static/images/planejamento-financeiro-empresarial.webp static/images/planejamento-financeiro-padaria.webp >> /root/libertas/.publish.log 2>&1; crontab -l | grep -v PLANEJAMENTO_ONESHOT | crontab - # PLANEJAMENTO_ONESHOT
 ```
 
-Para publicar outro artigo no futuro: trocar o nome da branch, o título e a lista de arquivos. Nada mais.
+- `0 0 28 8 *` — 00:00 do dia 28/08 (fuso da VPS é `America/Sao_Paulo -03`, então já é BRT).
+- Saída vai para `/root/libertas/.publish.log`.
+- `crontab -l | grep -v PLANEJAMENTO_ONESHOT | crontab -` — depois de rodar, remove a própria linha (identificada pelo marcador `# PLANEJAMENTO_ONESHOT`), sem deixar lixo nem repetir no ano seguinte.
+
+Para agendar outro artigo: nova linha de cron com data, nome de branch, título, lista de arquivos e um marcador `_ONESHOT` próprio. Nada mais.
 
 ## Pré-requisitos / gotchas
 
-- **Fuso:** VPS em `America/Sao_Paulo (-03)` — o horário do `at` já é BRT.
-- **`at` não vinha instalado** na VPS (26/08/2026); precisa `apt-get install -y at` + `systemctl enable --now atd`.
-- **`gh` autenticado** como `omgiova` (já configurado no repo).
+- **Cron nativo** já ativo na VPS (`cron`/`crontab`), sem instalar nada.
+- **Fuso:** VPS em `America/Sao_Paulo (-03)` — o horário do cron já é BRT.
+- **`gh` autenticado** como `omgiova` e **push por chave SSH** da VPS (já configurados no repo).
+- Cada agendamento único precisa de um **marcador `_ONESHOT` distinto** para a auto-remoção não apagar outras linhas.
 
 ## Conexões
 
