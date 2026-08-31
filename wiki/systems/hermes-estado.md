@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-08-24T03:00:01-03:00
+timestamp: 2026-08-31T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-24T03:00:01-03:00
+> Última atualização: 2026-08-31T03:00:02-03:00
 
 ## Status geral
 
@@ -136,6 +136,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `n8n-validation-expert` ✓ — Interpret validation errors and guide fixing them. Use when encountering validation errors, validation warnings, false positives, operator structure issues, or need help understanding validation results. Also use when asking about validation profiles, error types, the validation loop process, or auto-fix capabilities. Consult this skill whenever a validate_node or validate_workflow call returns errors or warnings — it knows which warnings are false positives and which errors need real fixes.
 - `n8n-workflow-builder` ✓ — Guia técnico para construir e editar workflows no n8n usando as MCP tools (create_workflow, update_workflow, get_workflow, list_workflows, execute_workflow, delete_workflow, export_workflow, import_workflow, activate_workflow, deactivate_workflow)
 - `n8n-workflow-patterns` ✓ — Proven workflow architectural patterns from real n8n workflows. Use when building new workflows, designing workflow structure, choosing workflow patterns, planning workflow architecture, or asking about webhook processing, HTTP API integration, database operations, AI agent workflows, batch processing, or scheduled tasks. Always consult this skill when the user asks to create, build, or design an n8n workflow, automate a process, or connect services — even if they don't explicitly mention 'patterns'. Covers webhook, API, database, AI, batch processing, and scheduled automation architectures.
+- `next-internal-apps` ✓ — Use when building/evolving Next.js internal hub apps.
 - `node-red-alexa-evolution` ✓ — Evolution roadmap for Node-RED + Alexa integration. Guides the implementation of a complete smart home and voice assistant pipeline: from basic smart home devices through custom Alexa skills with SSML, audio, and integrated automations.
 - `obsidian-ai-memory` ✓ — Setup específico do usuário — ai-memory ↔ Obsidian vault sync, Obsidian Git plugin (Windows/Android), rebuild script, gotchas de autenticação e preferências de manutenção do vault.
 - `obsidian-wiki-maintenance` ✓ — Enriquecer e manter vaults Obsidian com [[wikilinks]], INDEX.md, conexões entre projetos e sincronia via git. Scripts reutilizáveis cruzam tags do frontmatter pra conectar páginas relacionadas.
@@ -183,6 +184,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `dogfood` ✓ — Exploratory QA of web apps: find bugs, evidence, reports.
 - `hermes-agent-skill-authoring` ✓ — Author in-repo SKILL.md files: frontmatter and structure.
 - `inspecting-hermes-desktop-dom` ✓ — Read the live Hermes desktop DOM/CSS over CDP.
+- `internal-web-tools` ✓ — Criar app web interna (Next.js); prints de UI sem server.
 - `node-inspect-debugger` ✓ — Debug Node.js via --inspect + Chrome DevTools Protocol CLI.
 - `plan` ✓ — Write a markdown plan to .hermes/plans/; no execution.
 - `promptgolf` ✓ — Manutenção do Prompt Golf (pt-BR). Teste só read-only.
@@ -192,6 +194,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `spike` ✓ — Throwaway experiments to validate an idea before build.
 - `systematic-debugging` ✓ — 4-phase root cause debugging: understand bugs before fixing.
 - `test-driven-development` ✓ — TDD: enforce RED-GREEN-REFACTOR, tests before code.
+- `ui-design-review-loop` ✓ — Use ao iterar UI por prints; composição antes de cor.
 - `spotify-helper` ✓ — Skill para ajudar a controlar e gerenciar funcionalidades do Spotify via Hermes Agent, garantindo uma experiencia proativa e intuitiva.
 - `talking-head-recut` ✓ — Package an existing talking-head / interview / podcast video with timed, designed GRAPHIC OVERLAY cards — kinetic titles, lower-thirds, data callouts, quotes, side panels, picture-in-picture — synced to the transcript, on a 16:9 / 9:16 / 4:5 canvas of your choice; the clip plays untouched underneath. Trigger on "graphic overlays", "on-screen graphics", "package / dress up my video". Not plain subtitles (/embedded-captions). Unclear → /hyperframes.
 - `telegram-rich-messages` ✓ — Complete reference for Telegram Rich Messages: Markdown and HTML formatting, sendRichMessage API, RichText types, limits, and best practices for sending formatted messages via Hermes.
