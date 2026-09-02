@@ -956,3 +956,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-08-26] edit | tools — Reescrita da página publicar-artigo.sh (cron nativo)
 - wiki/tools/publicar-artigo-libertas.md reescrita do zero; removida toda menção ao "at" (abordagem descartada, nunca funcionou)
 - Documenta v1.0.0 via cron nativo do Linux com linha one-shot auto-removível; mecanismo do cron testado com sucesso hoje
+
+## [2026-09-02] edit | web-browser — consolidação de ferramentas web/browser numa página central
+- Criada wiki/tools/web-browser.md (type: tool, status: stable) reunindo web_search/web_extract nativos, firecrawl CLI, helper ler(), browser_exec/Browser Use CLI 3.0 (browser-harness), backends web e troubleshooting.
+- Migrado conteúdo de wiki/tools/firecrawl.md para web-browser.md; firecrawl.md removido (git rm).
+- Atualizados wikilinks em index.md, hermes.md, wiki.md, orquestrador.md (firecrawl.md -> web-browser.md).
+- Motivo: ferramentas de web são voláteis; página única é o ponto de verdade do capability "LLM acessa a web".

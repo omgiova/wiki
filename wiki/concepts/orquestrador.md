@@ -311,8 +311,8 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 
 ### 7.4 — Sem documentação de configuração do Firecrawl no Hermes
 
-**Gap:** `wiki/tools/firecrawl.md` descreve uso do Firecrawl (sintaxe site:, quando usar). Mas o diário de 24/06 documenta um gotcha crítico: `web.search_backend` e `web.extract_backend` estavam vazios no config.yaml mesmo com a API key presente — ferramenta não funcionava.  
-**Ação:** Adicionar seção "Configuração no Hermes" em `firecrawl.md` com: variáveis do .env, campos do config.yaml que precisam ser setados, e o pitfall "key no .env não é suficiente — setar o backend também".
+**Gap:** `wiki/tools/web-browser.md` (página central de web/browser) descreve uso do Firecrawl (sintaxe site:, quando usar). Mas o diário de 24/06 documenta um gotcha crítico: `web.search_backend` e `web.extract_backend` estavam vazios no config.yaml mesmo com a API key presente — ferramenta não funcionava.  
+**Ação:** Adicionar seção "Configuração no Hermes" em `web-browser.md` com: variáveis do .env, campos do config.yaml que precisam ser setados, e o pitfall "key no .env não é suficiente — setar o backend também".
 
 ### 7.5 — Tweet "design loops, not prompts" sem registro permanente
 
@@ -322,7 +322,7 @@ Grupos de data em ISO 8601, mais recente primeiro. Múltiplas entradas por dia s
 ### 7.6 — Técnica de pesquisa factual vs temática sem registro
 
 **Gap:** O diário de 24/06 (10:19-10:20) documenta uma distinção importante: "pesquisa temática" (`openclaw agent loop`) vs "pesquisa factual" (`openclaw creator founder`). Cada tipo exige query diferente. Essa técnica não está em nenhuma página permanente.  
-**Ação:** Adicionar em `firecrawl.md` uma seção "Tipos de busca" que documente a distinção.
+**Ação:** Adicionar em `web-browser.md` uma seção "Tipos de busca" que documente a distinção.
 
 ---
 
@@ -413,7 +413,7 @@ Prioridades organizadas por impacto e custo de execução.
 | M2 | Mover entradas temáticas do diário para páginas permanentes | 2 arquivos diário | Médio |
 | M3 | Criar seção "Promote" no AGENTS.md | `AGENTS.md` | Médio |
 | M4 | Adicionar tweet "design loops" em agent-loop-architectures.md | `agent-loop-architectures.md` | Baixo |
-| M5 | Criar seção "Configuração Hermes" em firecrawl.md | `firecrawl.md` | Baixo |
+| M5 | Criar seção "Configuração Hermes" em web-browser.md | `web-browser.md` | Baixo |
 | M6 | Linkar history/ e infraestrutura/ de hermes.md | `hermes.md` | Baixo |
 | M7 | Documentar escrita concorrente como issue em wiki-review.md | `wiki-review.md` | Baixo |
 
@@ -424,7 +424,7 @@ Prioridades organizadas por impacto e custo de execução.
 | B1 | Definir idioma de wikilinks (com/sem prefixo `wiki/`) e documentar no AGENTS.md | AGENTS.md | Baixo |
 | B2 | Decidir formato padrão de diário e renomear arquivos legacy | diário/ | Médio |
 | B3 | ~~Criar `wiki/conhecimento/elevenlabs-sfx.md`~~ ✅ criada como `tools/elevenlabs-mcp.md` | novo arquivo | Médio |
-| B4 | Adicionar seção "Tipos de busca" (factual vs temática) em firecrawl.md | `firecrawl.md` | Baixo |
+| B4 | Adicionar seção "Tipos de busca" (factual vs temática) em web-browser.md | `web-browser.md` | Baixo |
 | B5 | Avaliar se `wiki/todo/` vale como pasta (só 1 arquivo) | estrutura | Baixo |
 | B6 | Atualizar `user_profile.md` do Claude Code | memória externa | Baixo |
 

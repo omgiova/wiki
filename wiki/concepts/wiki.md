@@ -91,6 +91,6 @@ Na sessão de 2026-06-18, após uma série de comandos Docker Swarm errados que 
 - [[index.md|🏠 Index]]
 - [[wiki/systems/vps.md|🖥 VPS]]
 - [[wiki/systems/hermes.md|🤖 Hermes Config]]
-- [[wiki/tools/firecrawl.md|🔥 Firecrawl]]
+- [[wiki/tools/web-browser.md|🌐 Web & Browser]]
 - [[wiki/history/crise-update.md|🔄 Crise update]]
 - [[wiki/todo/proximos-passos.md|📋 Próximos passos]]

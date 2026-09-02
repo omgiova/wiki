@@ -149,7 +149,7 @@ plugins:
 - [[wiki/systems/hermes-estado.md|Hermes — Estado das Configurações]] — snapshot vivo de MCPs, skills, webhooks, toolsets e modelo
 - [[wiki/concepts/wiki.md|Wiki]] — base de conhecimento
 - [[wiki/concepts/mcps.md|Registro central de MCPs]] — lista oficial dos MCPs da VPS e onde cada um está registrado
-- [[wiki/tools/firecrawl.md|Firecrawl]] — busca multi-plataforma
+- [[wiki/tools/web-browser.md|Web & Browser]] — busca, extração, scraping e browser automation
 - [[wiki/tools/ocg-usage.md|ocg-usage]] — consumo do OpenCode Go (lê `session_model_usage` do state.db)
 - [[wiki/tools/elevenlabs-mcp.md|ElevenLabs MCP]] — síntese de voz via MCP
 - [[wiki/history/crise-update.md|Crise update]] — recuperação de sessões

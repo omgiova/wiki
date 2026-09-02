@@ -78,7 +78,7 @@ log.md
     └── tools/
         ├── autoloop.md
         ├── elevenlabs-mcp.md
-        ├── firecrawl.md
+        ├── web-browser.md
         ├── hermes-desktop.md
         ├── hyperframes.md
         ├── llm-providers.md
@@ -136,7 +136,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/tools/ocg-usage.md|ocg-usage]] — CLI em /root/scripts/ocg-usage que reporta consumo do OpenCode Go: nº de requisições e tokens por modelo/sessão em janelas de 15m a 1w (o painel da OpenCode só mostra filtro mensal) + % do plano via API
 - [[wiki/tools/hyperframes.md|HyperFrames]] — CLI open-source da HeyGen (HTML→MP4, feita pra agentes); instalada globalmente na VPS, ainda sem uso real
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
-- [[wiki/tools/firecrawl.md|Firecrawl]] — busca com sintaxe site: para plataformas específicas; quando usar e não usar
+- [[wiki/tools/web-browser.md|Web & Browser]] — busca, extração, scraping (Firecrawl CLI, web_search/extract nativos) e browser automation (Browser Use CLI 3.0)
 - [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] — MCP local via npx com credenciais da dona do workspace; wrapper em /root/mcp/, skill em /root/.hermes/skills/trello/; credenciais validadas 2026-07-06, registrado no Claude Code e no Hermes
 - [[wiki/tools/trello-mcp-oficial.md|Trello MCP (oficial)]] — MCP na nuvem da Atlassian via OAuth; registrado no Claude Code mas bloqueado (Giovani é só convidado no board, OAuth exige membro do workspace)
 - [[wiki/tools/autoloop.md|autoloop]] — harness de loops autônomos de agentes LLM (padrão autoresearch do Karpathy); presets com papéis planner/builder/critic/finalizer, dashboard web local, limites de custo/iterações no autoloops.toml; instalado na VPS 2026-07-18, ainda sem execução real
