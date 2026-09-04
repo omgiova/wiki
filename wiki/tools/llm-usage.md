@@ -25,7 +25,7 @@ CLI local que reporta o consumo de **todos os LLMs** que passaram pelo Hermes: n
 - **Σ POR DIA:** totais por dia (tabela própria, sem coluna de modelo)
 - **Σ POR PROVIDER:** todos os modelos de cada provider somados
 - **Subtotal por provider / modelo** e **sessões** (top N, com título, span, pond. e %plano)
-- **`--md`**: emite as tabelas em markdown pronto para colar no Telegram (uso do agente; rich message recebe até 32.768 chars, então janelas grandes chegam inteiras)
+- **`--md`**: emite as tabelas em markdown pronto para colar **cru** no Telegram (uso do agente; rich message recebe até 32.768 chars, então janelas grandes chegam inteiras). **Nunca em bloco de código — ver regra obrigatória em [Entrega no Telegram](#entrega-no-telegram--regra-obrigatória)**
 - **`--json`** para pipeline/cron; **`--top N`** para controlar a listagem de sessões
 - Coluna **pond.** = `input×1 + output×4 + cache×0.1` (pesos típicos de billing; exibidos no cabeçalho do grid)
 - Coluna **%plano** = estimativa: pond. do período calibrada contra o `monthly%` real da API, usando **só tráfego do provider do plano** (`opencode-go`); linha de outro provider → `-`
@@ -47,6 +47,10 @@ llm-usage 6h --json       # saída estruturada para pipeline
 ```
 
 **Nota de tamanho de saída:** o `--md` de janelas ≥ 30 dias gera ~8K chars — dentro do limite de rich message (32.768), então chega inteiro; o problema de "2 mensagens com bullets" era o caminho legacy do gateway (4.096) e foi corrigido no adapter do Telegram (fresh-final rich com `rich_all`), não no script.
+
+## Entrega no Telegram — regra obrigatória
+
+O output do `--md` vai **cru** no corpo da resposta do agente — verbatim, sem reformatar e **NUNCA dentro de bloco de código**. Fence de código (``` \`\`\` ```) faz o Telegram renderizar tudo como texto literal monoespaçado: as tabelas pipe nunca chegam como rich message. Não vale "proteger" o output com fence, nem cortar, nem resumir.
 
 ## Limites
 

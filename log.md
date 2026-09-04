@@ -976,3 +976,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Backlinks atualizados: index.md (árvore + entrada), wiki/systems/hermes.md, wiki/tools/llm-providers.md
 - Validação final ao vivo (04/09, pós-fix do rich no adapter): 32d (7.977 chars) chegou numa única mensagem rich — primeira vez que a tabela grande chega inteira
 - páginas tocadas: wiki/tools/llm-usage.md (renomeada), index.md, wiki/systems/hermes.md, wiki/tools/llm-providers.md
+
+## [2026-09-04] edit | llm-usage — regra obrigatória de entrega no Telegram (--md nunca em fence)
+- Nova seção "Entrega no Telegram — regra obrigatória": output do --md vai cru no corpo da mensagem, verbatim, NUNCA dentro de code block (fence faz o Telegram renderizar texto literal e a tabela nunca vira rich message)
+- Capabilities do --md atualizado com callout apontando pra seção
+- Motivo: sessão de 04/09 — o próprio agente colou o output dentro de ``` e o rich não chegou; a página não ensinava a regra de entrega (falha de doc, não só do agente)
+- páginas tocadas: wiki/tools/llm-usage.md
