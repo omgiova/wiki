@@ -85,4 +85,4 @@ Plano OpenCode Go (opencode.ai), assinatura mensal do Giovani com acesso a model
 
 - [[wiki/systems/hermes.md|Hermes]] — config de modelo
 - [[wiki/systems/hermes-estado.md|Estado do Hermes]]
-- [[wiki/tools/ocg-usage.md|ocg-usage]] — CLI que reporta o consumo deste plano (reqs/tokens por janela de 15m a 1w)
+- [[wiki/tools/llm-usage.md|llm-usage]] — CLI que reporta o consumo deste plano (e de todos os providers; reqs/tokens por janela de 15m a 1w ou desde uma data)

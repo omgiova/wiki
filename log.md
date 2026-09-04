@@ -969,3 +969,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Limites atualizados com verificação ao vivo (04/09): session_model_usage acumulado por sessão; messages sem token_count por request; API OCG sonda 15 endpoints -> só /usage e /models; plano em $; %plano é estimativa com pesos in=1/out=4/cache=0.1
 - v2 validada ao vivo: janela 15m, 3h, 2026-09-01, guard do gateway destravado (False)
 - v1 intacta em /root/scripts/ocg-usage; página documenta a v2
+
+## [2026-09-04] edit | llm-usage — v2 oficial documentada (rename ocg-usage → llm-usage)
+- Script consolidado: /root/scripts/llm-usage (ex-ocg-usage2, removido; v1 /root/scripts/ocg-usage intacta). Cobre TODOS os providers via billing_provider do state.db; coluna provider no grid/subtotal; %plano calibrado só com tráfego opencode-go; flags --md (markdown p/ Telegram), janelas relativas (sintaxe livre Nm/Nh/Nd/Nw), data YYYY-MM-DD, --json, --top N
+- Página renomeada wiki/tools/ocg-usage.md -> wiki/tools/llm-usage.md (git mv) com verbatim atual (343 linhas) + seções: O que é, Capabilities, Como usar (15m/3h/7d/30d/data), Limites (acumulado por sessão, messages sem tokens, API sem histórico, %plano estimativa, provider ?), Configuração, Erros conhecidos (inclui bloqueio do guard na v1), Status de validação
+- Backlinks atualizados: index.md (árvore + entrada), wiki/systems/hermes.md, wiki/tools/llm-providers.md
+- Validação final ao vivo (04/09, pós-fix do rich no adapter): 32d (7.977 chars) chegou numa única mensagem rich — primeira vez que a tabela grande chega inteira
+- páginas tocadas: wiki/tools/llm-usage.md (renomeada), index.md, wiki/systems/hermes.md, wiki/tools/llm-providers.md

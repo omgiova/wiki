@@ -83,7 +83,7 @@ log.md
         ├── hyperframes.md
         ├── llm-providers.md
         ├── n8n-mcp.md
-        ├── ocg-usage.md
+        ├── llm-usage.md
         ├── remotion.md
         ├── obsidian-git.md
         ├── telegram.md
@@ -133,7 +133,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/tools/remotion.md|Remotion]] — framework React para vídeos programáticos; projeto único em /root/projects/remotion, skills oficiais, referência dos projetos do PC em referencia-pc/, whisper fica no PC
 - [[wiki/tools/hermes-desktop.md|Hermes Desktop]] — app Electron (Windows, 0.15.1) que conecta ao gateway remoto da VPS; modos de auth token/oauth, reconexão por cookie na partição `persist:hermes-remote-oauth`, TTL de sessão no dashboard; validado ponta a ponta 2026-08-11
 - [[wiki/tools/llm-providers.md|LLM Providers]] — registro central dos providers de LLM da VPS: OpenCode Go completo (provider nativo do Hermes, key `OPENCODE_GO_API_KEY`, default `deepseek-v4-flash`) + stubs de DeepSeek, OpenRouter, Gemini, Nvidia NIM e Anthropic
-- [[wiki/tools/ocg-usage.md|ocg-usage]] — CLI em /root/scripts/ocg-usage que reporta consumo do OpenCode Go: nº de requisições e tokens por modelo/sessão em janelas de 15m a 1w (o painel da OpenCode só mostra filtro mensal) + % do plano via API
+- [[wiki/tools/llm-usage.md|llm-usage]] — CLI em /root/scripts/llm-usage que reporta consumo de LLMs (todos os providers, discriminados por `billing_provider`): nº de requisições e tokens por dia × provider × modelo em janelas de 15m a 1w ou desde uma data + % do plano OpenCode Go via API
 - [[wiki/tools/hyperframes.md|HyperFrames]] — CLI open-source da HeyGen (HTML→MP4, feita pra agentes); instalada globalmente na VPS, ainda sem uso real
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — todos os problemas já encontrados com o plugin obsidian-git, causas raiz e soluções definitivas
 - [[wiki/tools/web-browser.md|Web & Browser]] — busca, extração, scraping (Firecrawl CLI, web_search/extract nativos) e browser automation (Browser Use CLI 3.0)
