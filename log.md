@@ -962,3 +962,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Migrado conteúdo de wiki/tools/firecrawl.md para web-browser.md; firecrawl.md removido (git rm).
 - Atualizados wikilinks em index.md, hermes.md, wiki.md, orquestrador.md (firecrawl.md -> web-browser.md).
 - Motivo: ferramentas de web são voláteis; página única é o ponto de verdade do capability "LLM acessa a web".
+
+## [2026-09-04] edit | ocg-usage — v2 documentada (grid completo + since)
+- wiki/tools/ocg-usage.md reescrita documentando a v2 (`/root/scripts/ocg-usage2`): grid dia x modelo (sessões, reqs, tokens, pond., %plano), janelas relativas, --since/data, Σ POR DIA, subtotal por modelo, sessões, --json
+- Código verbatim da v2 incluído na página
+- Limites atualizados com verificação ao vivo (04/09): session_model_usage acumulado por sessão; messages sem token_count por request; API OCG sonda 15 endpoints -> só /usage e /models; plano em $; %plano é estimativa com pesos in=1/out=4/cache=0.1
+- v2 validada ao vivo: janela 15m, 3h, 2026-09-01, guard do gateway destravado (False)
+- v1 intacta em /root/scripts/ocg-usage; página documenta a v2
