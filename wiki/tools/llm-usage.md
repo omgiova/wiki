@@ -25,6 +25,7 @@ CLI local que reporta o consumo de **todos os LLMs** que passaram pelo Hermes: n
 - **Σ POR DIA:** totais por dia (tabela própria, sem coluna de modelo)
 - **Σ POR PROVIDER:** todos os modelos de cada provider somados
 - **Subtotal por provider / modelo** e **sessões** (top N, com título, span, pond. e %plano)
+- **Cabeçalho:** período da busca legível (`últimos 15 minutos`, `últimos 60 dias`, `desde 01/09/2026`) + limites do plano com **label em negrito**, % atual, horário exato de expiração no fuso do host e tempo restante — `**Limite de 5 horas:** 34% · expira 04/09 13:17 (-03) · faltam 1m`
 - **`--md`**: emite as tabelas em markdown pronto para colar **cru** no Telegram (uso do agente; rich message recebe até 32.768 chars, então janelas grandes chegam inteiras). **Nunca em bloco de código — ver regra obrigatória em [Entrega no Telegram](#entrega-no-telegram--regra-obrigatória)**
 - **`--json`** para pipeline/cron; **`--top N`** para controlar a listagem de sessões
 - Coluna **pond.** = `input×1 + output×4 + cache×0.1` (pesos típicos de billing; exibidos no cabeçalho do grid)
@@ -118,6 +119,10 @@ PLAN_PROVIDER = "opencode-go"  # provider cujo monthly% vem da API
 # pesos de billing para a coluna "pond." e calibração do %plano
 W_IN, W_OUT, W_CACHE = 1.0, 4.0, 0.1
 
+# etiquetas dos limites do plano (chaves da API: rolling/weekly/monthly)
+PLAN_LABELS = {"rolling": "Limite de 5 horas", "weekly": "Limite semanal",
+               "monthly": "Limite mensal"}
+
 
 def fetch_api():
     try:
@@ -149,6 +154,60 @@ def fmt(n):
 
 def weighted(in_tok, out_tok, cr, cw):
     return in_tok * W_IN + out_tok * W_OUT + (cr + cw) * W_CACHE
+
+
+def fmt_remaining(secs):
+    """tempo restante legível: '1m' | '2h 30m' | '1d 4h' (arredonda p/ cima)."""
+    secs = max(0, int(secs))
+    d, rem = divmod(secs, 86400)
+    h, rem = divmod(rem, 3600)
+    m = (rem + 59) // 60
+    if m == 60:
+        h += 1
+        m = 0
+    if h == 24:
+        d += 1
+        h = 0
+    if d:
+        return f"{d}d {h}h" if h else f"{d}d"
+    if h:
+        return f"{h}h {m}m" if m else f"{h}h"
+    return f"{m}m"
+
+
+def parse_reset(rst):
+    """resetsAt (ISO UTC) -> datetime no fuso do host; None se inválido."""
+    try:
+        dt = datetime.fromisoformat(rst.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=ZoneInfo("UTC"))
+        return dt.astimezone(TZ)
+    except Exception:
+        return None
+
+
+def tz_off(dt):
+    """offset do fuso como '-03' / '+00'."""
+    off = dt.utcoffset()
+    return f"{int(off.total_seconds() // 3600):+03d}" if off else "UTC"
+
+
+def period_label(arg, cutoff_dt):
+    """rótulo do período: 'últimos 15 minutos', 'últimos 60 dias', 'desde 01/09/2026'."""
+    dm = re.fullmatch(r"(\d+)([mhdw])", arg)
+    if dm:
+        n, u = int(dm.group(1)), dm.group(2)
+        if u == "m":
+            return "último minuto" if n == 1 else f"últimos {n} minutos"
+        if u == "h":
+            return "última hora" if n == 1 else f"últimas {n} horas"
+        if u == "d":
+            return "último dia" if n == 1 else f"últimos {n} dias"
+        if u == "w":
+            return "última semana" if n == 1 else f"últimas {n} semanas"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", arg):
+        return f"desde {cutoff_dt:%d/%m/%Y}"
+    return f"desde {cutoff_dt:%d/%m/%Y %H:%M}"
 
 
 def md_table(headers, rows):
@@ -268,15 +327,25 @@ def main():
         s["first"] = min(s["first"], r["first_seen"])
         s["last"] = max(s["last"], r["last_seen"])
 
-    print(f"LLM usage (state.db) — {cutoff_dt:%d/%m/%Y %H:%M} → {now:%d/%m %H:%M} ({TZ})")
+    b = lambda s: f"**{s}**" if md else s
+    print(f"{b('LLM usage')} — {b(period_label(arg, cutoff_dt))} "
+          f"({cutoff_dt:%d/%m/%Y %H:%M} → {now:%d/%m %H:%M} · America/Sao_Paulo)")
     if api and api.get("usage"):
         u = api["usage"]
+        off = tz_off(now)
         for k in ("rolling", "weekly", "monthly"):
             v = u.get(k, {})
-            reset = v.get("resetsAt", "")[:16].replace("T", " ")
-            print(f"plano {k:<8} {v.get('percent', '?')}%  (reset {reset} UTC) [provider {PLAN_PROVIDER}]")
+            pct = v.get("percent", "?")
+            end = parse_reset(v.get("resetsAt", ""))
+            line = f"{b(PLAN_LABELS.get(k, k))}: {pct}%"
+            if end:
+                left = fmt_remaining((end - now).total_seconds())
+                verb = "falta" if (left[0] == "1" and " " not in left) else "faltam"
+                line += f" · expira {end:%d/%m %H:%M} ({off}) · {verb} {left}"
+            print(line)
     else:
-        print(f"plano: API indisponível ({api.get('error') if isinstance(api, dict) else ''})")
+        err = api.get("error") if isinstance(api, dict) else ""
+        print(f"Plano: API indisponível ({err})")
     print(f"[est] ciclo mensal ({PLAN_PROVIDER}): {fmt(month_raw)} brutos / {fmt(month_w)} pond. "
           f"— calibração do %plano contra monthly {monthly_pct}%")
 

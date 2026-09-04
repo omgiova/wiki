@@ -982,3 +982,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Capabilities do --md atualizado com callout apontando pra seção
 - Motivo: sessão de 04/09 — o próprio agente colou o output dentro de ``` e o rich não chegou; a página não ensinava a regra de entrega (falha de doc, não só do agente)
 - páginas tocadas: wiki/tools/llm-usage.md
+## [2026-09-04] edit | llm-usage — cabeçalho formatado: período legível + limites com expiração no fuso e tempo restante
+- Script v2 (/root/scripts/llm-usage) editado: período da busca legível no topo ("últimos 15 minutos", "últimos 60 dias", "desde 01/09/2026") + labels dos limites (Limite de 5 horas / semanal / mensal) em negrito no --md, horário exato de expiração em America/Sao_Paulo e tempo restante ("expira 06/09 21:00 (-03) · faltam 2d 7h") — antes mostrava reset em UTC sem tempo restante
+- Novos helpers: period_label, fmt_remaining (arredonda p/ cima c/ carry), parse_reset, tz_off
+- Wiki: verbatim da seção Implementação substituído pelo script atual (igual ao disco) + bullet novo em Capabilities
+- páginas tocadas: wiki/tools/llm-usage.md
