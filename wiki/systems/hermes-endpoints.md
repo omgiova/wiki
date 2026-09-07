@@ -3,15 +3,15 @@ type: system
 tags: [hermes, api, rest, openapi]
 title: Hermes Agent — API REST (OpenAPI)
 description: Referência completa dos endpoints REST do Hermes Agent, gerada automaticamente do /openapi.json — seção Interface do sistema Hermes
-timestamp: 2026-08-31T03:00:02-03:00
+timestamp: 2026-09-07T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — API REST
 
-> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.20.2, OAS 3.1).
+> **Gerado automaticamente** a partir de `GET /openapi.json` (Hermes Agent v0.21.0, OAS 3.1).
 > Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-08-31T03:00:02-03:00 | Total de endpoints: 251
+> Última atualização: 2026-09-07T03:00:02-03:00 | Total de endpoints: 255
 
 - **Base URL:** `http://localhost:9119`
 - **Auth:** POST `/auth/password-login` com `{"username":"...","password":"...","provider":"basic"}`
@@ -35,6 +35,7 @@ status: stable
 - `GET /api/audio/elevenlabs/voices` **Get Elevenlabs Voices** — Return ElevenLabs voices when an API key is configured.
 - `POST /api/audio/speak` **Speak Text** — Synthesize speech and return audio as base64 data URL.
 - `POST /api/audio/transcribe` **Transcribe Audio Upload**
+- `GET /api/audio/voice-config` **Get Client Voice Config** — The active profile's STT/TTS config for CLIENT-DIRECT voice.
 
 ### auth
 - `GET /api/auth/me` **Auth Me** — Return the verified session as JSON. Auth-required (gate enforces).
@@ -167,6 +168,7 @@ status: stable
 ### hermes
 - `POST /api/hermes/update` **Update Hermes** — Kick off ``hermes update`` in the background.
 - `GET /api/hermes/update/check` **Check Hermes Update** — Report whether a Hermes update is available, without applying it.
+- `GET /api/hermes/update/receipt` **Get Update Receipt** — The most recent update receipt — the durable update-outcome record.
 
 ### learning
 - `GET /api/learning/graph` **Get Learning Graph** — Learning graph payload for the desktop panel.
@@ -294,15 +296,16 @@ status: stable
 ### sessions
 - `GET /api/sessions` **Get Sessions** — List sessions.
 - `POST /api/sessions/bulk-delete` **Bulk Delete Sessions Endpoint** — Delete every session in ``body.ids`` in a single DB transaction.
-- `DELETE /api/sessions/empty` **Delete Empty Sessions Endpoint** — Delete every empty (``message_count == 0``), ended,
+- `DELETE /api/sessions/empty` **Delete Empty Sessions Endpoint** — Delete every empty, ended, non-archived session in a single
 - `GET /api/sessions/empty/count` **Count Empty Sessions Endpoint** — Return the number of empty, ended, non-archived sessions.
 - `POST /api/sessions/import` **Import Sessions Endpoint** — Import one or more sessions exported from the dashboard or CLI.
+- `POST /api/sessions/owner-backfill` **Backfill Session Owner Profiles** — Stamp legacy ``profile_name = NULL`` session rows with this store's own
 - `POST /api/sessions/prune` **Prune Sessions Endpoint** — Delete ended sessions matching filters without blocking the event loop.
 - `GET /api/sessions/search` **Search Sessions** — Search sessions by ID plus full-text message content using FTS5.
 - `GET /api/sessions/stats` **Get Session Stats** — Session-store statistics for the Sessions page (mirrors `hermes sessions stats`).
 - `GET /api/sessions/{session_id}` **Get Session Detail**
 - `DELETE /api/sessions/{session_id}` **Delete Session Endpoint**
-- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename, archive, pin, and/or mark read/unread.
+- `PATCH /api/sessions/{session_id}` **Rename Session Endpoint** — Update a session: rename, archive, hide, pin, and/or mark read/unread.
 - `GET /api/sessions/{session_id}/export` **Export Session Endpoint** — Stream a single session (metadata + messages) as JSON.
 - `GET /api/sessions/{session_id}/latest-descendant` **Get Session Latest Descendant**
 - `GET /api/sessions/{session_id}/messages` **Get Session Messages**
@@ -313,6 +316,7 @@ status: stable
 - `GET /api/skills/content` **Get Skill Content** — Return the raw SKILL.md text for a skill, for the dashboard editor.
 - `PUT /api/skills/content` **Update Skill Content** — Replace the SKILL.md of an existing skill (full rewrite) from the editor.
 - `POST /api/skills/hub/install` **Install Skill Hub**
+- `GET /api/skills/hub/official` **List Official Skills** — List the ENTIRE built-in optional-skills catalog shipped with the repo.
 - `GET /api/skills/hub/preview` **Preview Skill Hub** — Fetch a hub skill's SKILL.md content + metadata for in-dashboard reading.
 - `GET /api/skills/hub/scan` **Scan Skill Hub** — Run the install-time security scan on a hub skill WITHOUT installing it.
 - `GET /api/skills/hub/search` **Search Skills Hub** — Search the skill hub across all configured sources.
