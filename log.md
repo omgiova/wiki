@@ -987,3 +987,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Novos helpers: period_label, fmt_remaining (arredonda p/ cima c/ carry), parse_reset, tz_off
 - Wiki: verbatim da seção Implementação substituído pelo script atual (igual ao disco) + bullet novo em Capabilities
 - páginas tocadas: wiki/tools/llm-usage.md
+
+## [2026-09-08] ingest | analise-seo-de-artigos — registro das opções yoastseo e @power-seo/content-analysis
+- Página nova documentando duas candidatas para auditoria/revisão/otimização de artigos SEO fora do WordPress, levantadas na pesquisa de 2026-08-28
+- Marcada como status: draft — nenhuma das duas foi instalada ou testada; a decisão segue em aberto
+- Verificado só metadados do npm (autor CyberCraft Bangladesh, MIT, latest 1.0.19); divergência 13 vs 99 checks registrada como pendência
+- páginas tocadas: wiki/tools/analise-seo-de-artigos.md
