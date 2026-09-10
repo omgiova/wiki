@@ -1005,3 +1005,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Janela da rodada forçada (2 slots) mantida por decisão dele: mais segura, deixa de ser pendência
 - Fluxo 6 passou a mandar resumo no Telegram em toda rodada (If "Teve mudança?" removido); Fluxo 4 segue calado em rodada sem novidade
 - páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-09-10] ingest | projects — página da LAT (Liga Amadora de Tênis)
+- Nova marca atendida pelo Giovani via Open Mídia (conteúdo e estratégia); página curta que aponta para a pasta viva /root/lat e para o consolidado /root/lat/lat.md
+- Registrada a decisão sobre os pilares (Comunidade · Competitividade · Flexibilidade); História entra como categoria de conteúdo
+- páginas tocadas: wiki/projects/lat.md, index.md
