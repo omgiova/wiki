@@ -993,3 +993,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Marcada como status: draft — nenhuma das duas foi instalada ou testada; a decisão segue em aberto
 - Verificado só metadados do npm (autor CyberCraft Bangladesh, MIT, latest 1.0.19); divergência 13 vs 99 checks registrada como pendência
 - páginas tocadas: wiki/tools/analise-seo-de-artigos.md
+
+## [2026-09-09] edit | projects — Fluxo 4 diário + Fluxo 6 (conferência de arquivados)
+- Fluxo 4: schedule semanal → seg-sex 10h e 15h; janela passou a ser calculada do slot anterior (forcarDias como override); `situacao`/`arquivado_em` no frontmatter a partir do closed/dateClosed; faxina automática de duplicados por shortLink; link secreto (webhook) respondendo JSON para o botão Renovar do om-hub
+- Fluxo 6 novo (`om-database - Conferência de arquivados`, xl9ywhvafenAKnxh, ativo seg-sex 15h20): marca como arquivado todo arquivo do repo cujo card saiu do board
+- Correção de base: 87 arquivos marcados à mão com situacao/arquivado_em (84 movidos pro board ARQUIVO, 2 pro Pati Personal, 1 apagado)
+- Conferência repo × board documentada (284 arquivos / 242 cards / 197 em comum) e revisão dos 45 ignorados
+- páginas tocadas: wiki/projects/automacao-trello-open-midia.md

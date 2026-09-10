@@ -225,6 +225,73 @@ Comportamentos a saber:
 - **Limitação conhecida:** card renomeado ou movido de lista muda o nome do arquivo — o novo é criado e o antigo fica órfão no repo; limpar manualmente quando acontecer (decisão de 2026-07-12: não vale complicar o fluxo por isso)
 - Corrida de versões UI × API (lição do Fluxo 3) não ocorreu aqui: o Publish do Giovani preservou a edição via API — verificado por GET + diff logo após (13 nós, schedule presente, filtro no lugar)
 
+### Atualização 2026-09-09 — rodadas diárias, situação do card e faxina de duplicados
+
+Tudo aplicado via PUT na API (resto do fluxo devolvido verbatim) e validado na prática no mesmo dia, com uma carga completa do board.
+
+**1. Frequência: de semanal para 2x por dia útil.** O nó `Schedule (Segunda 7h)` virou `Schedule (dias úteis 10h e 15h)`, cron `0 10,15 * * 1-5`.
+
+**2. Janela: do slot anterior, não mais de 8 dias.** O `diasJanela = 8` deu lugar a um cálculo em `America/Sao_Paulo` (derivado por `toLocaleString`, sem depender do fuso do container): a rodada das 15h olha desde as 10h de hoje; a das 10h, desde as 15h do dia útil anterior (na segunda, desde sexta) — com 30 min de folga. No topo do nó ficou `const forcarDias = 0;`: qualquer valor > 0 ignora o cálculo e usa essa janela em dias (o antigo truque do `36500` para recarregar o board inteiro).
+
+> Comportamento conhecido, ainda não ajustado: numa rodada **forçada** (link ou gatilho manual) o cálculo volta dois slots — às 10h10 conta desde as 15h de ontem, refazendo o trabalho que a rodada das 10h acabou de fazer. Não duplica nada (nome de arquivo determinístico), só gasta tempo e commits. O ajuste seria voltar um slot só.
+
+**3. Situação do card no frontmatter.** O `closed` da API do Trello — que o fluxo já pedia e jogava fora — passou a virar `situacao: ativo | arquivado`, e o `dateClosed` (incluído nos `fields` da busca) vira `arquivado_em: "dd/mm/aaaa, hh:mm"` em BRT, só quando o card está arquivado. O campo `status: draft` **não** foi tocado: ele é o padrão OKF da wiki e significa outra coisa.
+
+**4. Faxina automática de duplicados.** A limitação de 2026-07-12 (card renomeado gera arquivo novo e deixa o antigo órfão) foi resolvida: a identidade do card passou a ser o `shortLink` no fim do nome do arquivo. Três nós novos:
+
+- `Listar arquivos do repo` (HTTP, `GET /git/trees/main?recursive=1`, credencial GitHub) entre os gatilhos e a listagem de cards — lê a árvore do repo uma vez por rodada
+- `Duplicatas do mesmo card` (Code) — ramo paralelo pendurado nos dois nós de gravação; devolve todo arquivo terminado no mesmo `shortLink` com nome diferente do atual
+- `Apagar nome antigo` (GitHub, `file:delete`, `onError: continueRegularOutput`) — commit `faxina: remove nome antigo <arquivo>`
+
+O ramo é paralelo de propósito: se não houver duplicata ele morre sem itens, sem travar a fila.
+
+**5. Link secreto para renovar sob demanda.** Nó `Atualizar agora (link)` (Webhook GET, `responseMode: responseNode`, `allowedOrigins: "*"` para poder ser chamado de outra origem) ligado no mesmo ponto do Schedule. A resposta sai pelo nó `Responder o link` (Respond to Webhook), em **JSON** com os números da rodada (`total`, `ignorados`, `novos`, `atualizados`, `mensagem`) — é o que alimenta o botão **Renovar** da página Banco de posts do om-hub. A URL é secreta e vive no código do om-hub (`components/domain/publications-view.tsx`).
+
+**6. Rodada vazia não trava mais.** O Code de ordenação devolve um item sentinela (`{ vazio: true }`) quando nenhum card entra na janela; um If `Tem card?` desvia esse item direto pro `Resumo`, que responde "nenhum card mexido desde a rodada anterior". O Telegram ficou atrás de um If `Teve mudança?`, mantendo o silêncio em rodada sem novidade.
+
+**Carga completa de validação (2026-09-09, 22h–23h BRT):** 242 cards varridos, 45 ignorados, 191 atualizados, 6 gravados pela primeira vez (lista LAT), 17 duplicados apagados pela faxina. Outros 3 duplicados eram de cards que já haviam saído do board e foram apagados à mão. Resultado: **zero duplicados no repo**.
+
+## Fluxo 6 — Conferência de arquivados (criado e validado 2026-09-09)
+
+**Workflow n8n:** `om-database - Conferência de arquivados` (ID `xl9ywhvafenAKnxh`), **ativo**, Schedule `20 15 * * 1-5` (seg–sex 15h20) + gatilho manual + link secreto `Conferir agora (link)` (Webhook GET, resposta imediata). 16 nós, Error Workflow "Alerta de Erro" (`3MI1k15YL5OUrEXF`).
+
+**Por que existe:** o Fluxo 4 só enxerga o que está no board — ele nunca olha para o repo. Um card que **sai** do board (arquivado no Trello, movido para outro board ou apagado) deixa no `om-database` um arquivo congelado, sem sinal nenhum de que aquilo não está mais ativo. Regra definida pelo Giovani em 2026-09-09: **qualquer card que não esteja ativo no board DEMANDAS GERAIS conta como arquivado no frontmatter.**
+
+```
+Schedule (dias úteis 15h20) ─┬→ Listar arquivos do repo (GitHub tree) → Listar cards do board (Trello)
+Manual / Conferir agora (link) ┘
+  → Code "Arquivos fora do board" (arquivo cujo shortLink não está no board)
+  → Split in Batches "Fila (1 por vez)"
+       → Ler arquivo no GitHub → Histórico do card (Trello /actions) → Code "Marcar como arquivado"
+       → If "Precisa gravar?" ──sim──> Gravar no GitHub → Esperar 1s → volta pra fila
+                              └──não──> Esperar 1s
+  → (fila vazia) → Resumo → If "Teve mudança?" → Resumo no Telegram
+```
+
+- **Data do arquivamento:** vem da ação `moveCardToBoard` (mudança de board) ou da ação que virou `closed` para `true`. Card apagado de vez não tem histórico — fica com `situacao: arquivado` e sem `arquivado_em`.
+- **Não reescreve o que já está certo:** o Code compara o texto antes e depois; se nada muda, o If barra e não há commit. Rodada em dia parado gera zero commits.
+- **Silêncio em dia parado:** o Telegram só recebe mensagem quando algo foi marcado; erro real cai no "Alerta de Erro".
+- **Descoberta da API do Trello:** o `closed` não tem descrição na documentação oficial da Atlassian. A prova de que significa "arquivado" é de comportamento: `/boards/<id>/cards/open` (199) + `/cards/closed` (43) = `/cards/all` (242), e o log de ações mostra `old.closed: false → card.closed: true` junto com um `dateClosed`.
+
+**Correção de base feita à mão em 2026-09-09** (antes de ativar o fluxo): 87 arquivos de cards fora do board receberam `situacao: arquivado` e a data exata do histórico — 84 haviam sido movidos para o board **ARQUIVO** (`https://trello.com/b/5uzpUo7l/arquivo`), 2 para **Pati Personal**, e 1 tinha sido apagado de vez (esse ficou sem data). Só as linhas de frontmatter foram tocadas.
+
+**Primeira execução real (nº 5511, 2min10s, sucesso):** 284 arquivos e 242 cards lidos, 87 arquivos identificados como fora do board, **nenhuma gravação** — validando o caminho mais importante, o de não reescrever o que já está correto.
+
+### Conferência do repo × board (números de 2026-09-09)
+
+Os dois conjuntos se cruzam só em parte — a diferença entre 284 e 242 não é subtração direta:
+
+| | |
+|---|---|
+| Arquivos `.md` no repo | 284 |
+| ├ com card vivo no board | 197 |
+| └ de cards fora do board | 87 |
+| Cards no board (com arquivados) | 242 |
+| ├ com arquivo no repo | 197 |
+| └ sem arquivo (ignorados pelo fluxo) | 45 |
+
+Os 45 ignorados foram revisados um a um em 2026-09-09: os **40 organizadores de semana estão todos vazios** (sem descrição, checklist, anexo ou comentário) — a regra não perde conteúdo. Dos 5 da lista "Informações gerais", 3 têm conteúdo real (`COMECE AQUI!` com 2.559 caracteres de descrição, `TAGS` com checklist de 7 itens, `REFERENCIAS VISUAIS` com 1 anexo) — documentação do próprio board, não conteúdo de cliente. **Decisão do Giovani: deixar como está**, os 3 seguem fora do repo.
+
 ## Fluxo 5 — Aviso de menção em comentário (construído 2026-07-18, AGUARDANDO VALIDAÇÃO)
 
 **Workflow n8n:** `Trello Menção em Comentário - Open Mídia` (ID `dx1Dz80y8AEGx1ET`), **desativado** — criado via API (POST) em 2026-07-18, aguardando revisão, teste e ativação pelo Giovani. Ainda não validado.
