@@ -1010,3 +1010,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nova marca atendida pelo Giovani via Open Mídia (conteúdo e estratégia); página curta que aponta para a pasta viva /root/lat e para o consolidado /root/lat/lat.md
 - Registrada a decisão sobre os pilares (Comunidade · Competitividade · Flexibilidade); História entra como categoria de conteúdo
 - páginas tocadas: wiki/projects/lat.md, index.md
+
+## [2026-09-10] edit | projects — LAT: "Leia primeiro" e índice por assunto
+- Página ganha bloco "Leia primeiro" (decisões validadas, status, índice por assunto); decisões novas: origem 2014 e site oficial latbrasil.com.br
+- Consolidado /root/lat/lat.md dividido em 6 arquivos por assunto (texto copiado sem alteração) e apagado; banco de posts fica fora (não é referência)
+- páginas tocadas: wiki/projects/lat.md, index.md
