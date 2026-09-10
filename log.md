@@ -1000,3 +1000,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Correção de base: 87 arquivos marcados à mão com situacao/arquivado_em (84 movidos pro board ARQUIVO, 2 pro Pati Personal, 1 apagado)
 - Conferência repo × board documentada (284 arquivos / 242 cards / 197 em comum) e revisão dos 45 ignorados
 - páginas tocadas: wiki/projects/automacao-trello-open-midia.md
+
+## [2026-09-10] edit | projects — decisões do Giovani sobre Fluxo 4 e Fluxo 6
+- Janela da rodada forçada (2 slots) mantida por decisão dele: mais segura, deixa de ser pendência
+- Fluxo 6 passou a mandar resumo no Telegram em toda rodada (If "Teve mudança?" removido); Fluxo 4 segue calado em rodada sem novidade
+- páginas tocadas: wiki/projects/automacao-trello-open-midia.md

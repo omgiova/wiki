@@ -233,7 +233,7 @@ Tudo aplicado via PUT na API (resto do fluxo devolvido verbatim) e validado na p
 
 **2. Janela: do slot anterior, não mais de 8 dias.** O `diasJanela = 8` deu lugar a um cálculo em `America/Sao_Paulo` (derivado por `toLocaleString`, sem depender do fuso do container): a rodada das 15h olha desde as 10h de hoje; a das 10h, desde as 15h do dia útil anterior (na segunda, desde sexta) — com 30 min de folga. No topo do nó ficou `const forcarDias = 0;`: qualquer valor > 0 ignora o cálculo e usa essa janela em dias (o antigo truque do `36500` para recarregar o board inteiro).
 
-> Comportamento conhecido, ainda não ajustado: numa rodada **forçada** (link ou gatilho manual) o cálculo volta dois slots — às 10h10 conta desde as 15h de ontem, refazendo o trabalho que a rodada das 10h acabou de fazer. Não duplica nada (nome de arquivo determinístico), só gasta tempo e commits. O ajuste seria voltar um slot só.
+> Comportamento deliberado, **decidido pelo Giovani em 2026-09-10**: numa rodada **forçada** (link ou gatilho manual) o cálculo volta dois slots — às 10h10 conta desde as 15h de ontem, refazendo o trabalho que a rodada das 10h acabou de fazer. Chegou a ser proposto voltar um slot só; ele preferiu manter a folga por ser mais seguro (nada duplica, porque o nome do arquivo é determinístico; o custo é só tempo e commits).
 
 **3. Situação do card no frontmatter.** O `closed` da API do Trello — que o fluxo já pedia e jogava fora — passou a virar `situacao: ativo | arquivado`, e o `dateClosed` (incluído nos `fields` da busca) vira `arquivado_em: "dd/mm/aaaa, hh:mm"` em BRT, só quando o card está arquivado. O campo `status: draft` **não** foi tocado: ele é o padrão OKF da wiki e significa outra coisa.
 
@@ -270,7 +270,7 @@ Manual / Conferir agora (link) ┘
 
 - **Data do arquivamento:** vem da ação `moveCardToBoard` (mudança de board) ou da ação que virou `closed` para `true`. Card apagado de vez não tem histórico — fica com `situacao: arquivado` e sem `arquivado_em`.
 - **Não reescreve o que já está certo:** o Code compara o texto antes e depois; se nada muda, o If barra e não há commit. Rodada em dia parado gera zero commits.
-- **Silêncio em dia parado:** o Telegram só recebe mensagem quando algo foi marcado; erro real cai no "Alerta de Erro".
+- **Avisa sempre:** desde 2026-09-10, a pedido do Giovani, o resumo vai pro Telegram em toda rodada — inclusive quando não há nada a marcar (`ℹ️ Conferência do om-database: N arquivos de cards fora do board, todos já marcados como arquivados. Nada a fazer.`). O If `Teve mudança?` foi removido do fluxo. Erro real cai no "Alerta de Erro".
 - **Descoberta da API do Trello:** o `closed` não tem descrição na documentação oficial da Atlassian. A prova de que significa "arquivado" é de comportamento: `/boards/<id>/cards/open` (199) + `/cards/closed` (43) = `/cards/all` (242), e o log de ações mostra `old.closed: false → card.closed: true` junto com um `dateClosed`.
 
 **Correção de base feita à mão em 2026-09-09** (antes de ativar o fluxo): 87 arquivos de cards fora do board receberam `situacao: arquivado` e a data exata do histórico — 84 haviam sido movidos para o board **ARQUIVO** (`https://trello.com/b/5uzpUo7l/arquivo`), 2 para **Pati Personal**, e 1 tinha sido apagado de vez (esse ficou sem data). Só as linhas de frontmatter foram tocadas.
