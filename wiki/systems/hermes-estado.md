@@ -3,19 +3,19 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-09-07T03:00:02-03:00
+timestamp: 2026-09-14T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-09-07T03:00:02-03:00
+> Última atualização: 2026-09-14T03:00:01-03:00
 
 ## Status geral
 
 - **Gateway:** ?
-- **Modelo principal:** `deepseek-v4-flash` (opencode-go)
+- **Modelo principal:** `deepseek-v4.1-flash` (opencode-go)
 
 ## Servidores MCP
 
@@ -37,11 +37,22 @@ status: stable
 - `computer-use` ✓ — Drive the desktop background-first; escalate on signal.
 - `hermes-agent` ✓ — Use, configure, theme, extend, and orchestrate Hermes Agent.
 - `opencode` ✓ — Delegate coding to OpenCode CLI (features, PR review).
+- `autonomous-content-pipelines` ✓ — Use when running unattended content-generation pipelines.
 - `brand-architect` ✓ — Use this skill when users need to develop brand strategy, choose a company name, define brand positioning, create brand voice, or build brand identity from day one. Activates for "what should I name it," "brand strategy," "positioning," or identity questions.
 - `brand-copywriter` ✓ — Writes marketing copy using proven copywriting frameworks. Use when user needs copy for ads (Facebook, Instagram, TikTok, YouTube), landing pages, sales pages, email sequences, LinkedIn posts, product descriptions, or any marketing content.
 - `brand-storytelling` ✓ — Help users craft compelling brand narratives. Use when someone is defining brand strategy, writing company positioning, creating pitch narratives, developing messaging frameworks, or trying to make their company story more memorable.
+- `bulk-content-generation` ✓ — Use when producing many content variants with scored review.
 - `caption-writer-sms` ✓ — When the user wants to write a caption for a visual-first social media post on Facebook, Instagram, TikTok, Pinterest, or YouTube. Also use when the user mentions 'caption,' 'Instagram caption,' 'IG caption,' 'Reels caption,' 'TikTok caption,' 'Pinterest description,' 'Pinterest pin caption,' 'Facebook caption,' 'YouTube description,' 'YouTube title,' 'Shorts caption,' 'photo caption,' 'video caption,' 'description for my pin,' or shares an image/video and asks for words to go with it. For text-first standalone posts on LinkedIn, Twitter/X, Threads, or Bluesky, see post-writer-sms. For multi-slide carousels, see carousel-writer-sms. For opening lines, see hook-writer-sms.
 - `carousel-writer-sms` ✓ — When the user wants to write content for a LinkedIn carousel, Instagram carousel, Facebook carousel, TikTok photo carousel, Pinterest Idea Pin, or any swipeable multi-slide format. Also use when the user mentions 'carousel,' 'slides,' 'LinkedIn carousel,' 'Instagram carousel,' 'IG carousel,' 'photo carousel,' 'TikTok photo carousel,' 'Idea Pin,' 'Pinterest Idea Pin,' 'swipe post,' 'slide deck,' or 'visual content.' Outputs slide-by-slide text content (not visual design). For single posts, see post-writer-sms. For threads, see thread-writer-sms. For caption copy under each slide post, see caption-writer-sms.
+- `base-de-validacao` ✓ — Use ao construir base de validação do usuário.
+- `content-pipeline-operations` ✓ — Use when operating a batch content pipeline.
+- `isolated-scoring-runs` ✓ — Use when scoring N items with one isolated reviewer each.
+- `isolated-worker-sessions` ✓ — Use when one fresh agent session per item is required.
+- `live-copy-production` ✓ — Use when copy is made one piece at a time, judged live.
+- `llm-content-batch-pipeline` ✓ — Use when generating content in bulk with isolated roles.
+- `reviewer-validation-memory` ✓ — Use when a reviewer learns from the user's verdicts.
+- `revisor-de-texto` ✓ — Use quando o Giovani manda um texto pra revisar.
+- `variant-distinctness-audit` ✓ — Use when proving N generated items are genuinely distinct.
 - `content-strategy-sms` ✓ — When the user wants to plan a social media content strategy, decide what to post, or figure out topic clusters and content mix. Also use when the user mentions 'content strategy,' 'what should I post,' 'content ideas,' 'topic clusters,' 'content pillars,' 'content planning,' 'content mix,' 'I don't know what to post,' or 'social media strategy.' Use this to define the what and why of posting. For writing actual posts, see post-writer-sms. For scheduling, see content-calendar-sms. For platform-specific tactics, see platform-strategy-sms.
 - `content-strategy` ✓ — When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," "content planning," "editorial calendar," "content marketing," "content roadmap," "what content should I create," "blog topics," "content pillars," or "I don't know what to write." Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.
 - `conversion-copywriting` ✓ — Write copy that gets a "yes" using Joanna Wiebe's research-first, Voice of Customer methodology Use when: **Writing landing pages, emails, or sales pages** that need measurable conversion results; **Starting a new copy project** and need a systematic process to follow; **Struggling with what to write** and staring at a blank page; **Wanting to prove ROI** to clients with data-backed decisions; **Improving existing copy** through validation and testing
@@ -62,15 +73,19 @@ status: stable
 - `songwriting-and-ai-music` ✓ — Songwriting craft and Suno AI music prompts.
 - `cron-news-scraping` ✓ — Set up and maintain scheduled news-scraping cron jobs with firecrawl CLI. Covers the full pipeline: search, language filter, dedup, webhook POST, silent delivery.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
+- `agent-model-governance` ✓ — Use when pinning the model an agent session runs on.
 - `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
 - `browser-use-cli-setup` ✓ — Browser Use CLI 3.0 local setup or browser_exec fix.
+- `bulk-llm-generation` ✓ — Use when gerar muitas variações de conteúdo por API.
 - `hermes-approvals-and-config-writes` ✓ — Use when editing Hermes config or commands get denied.
 - `hermes-gateway-script-guard` ✓ — Use when the gateway lifecycle guard blocks a script.
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
 - `hermes-model-catalog` ✓ — Use when Hermes model lists look stale or models missing.
 - `hermes-update-verification` ✓ — Verify a Hermes update applied; diagnose version confusion.
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
+- `llm-batch-generation` ✓ — Use when generating LLM content at scale; engine and cost.
 - `llm-usage-monitoring` ✓ — Use when monitoring or reporting LLM API usage and plan %.
+- `long-run-agent-pipelines` ✓ — Use when work must run unattended for hours.
 - `opencode-go-api` ✓ — Use when working with the OpenCode Go/Zen API.
 - `proportional-response` ✓ — Use when a request is simple or a tool fails. Reply short.
 - `system-modification-protocol` ✓ — Protocol for setup, configuration, and system-modification tasks.
@@ -78,6 +93,7 @@ Governs how to approach, communicate, and execute changes to the VPS.
 - `user-interaction-protocol` ✓ — Governs how the agent interacts with Giovani across ALL contexts.
 Covers communication style, data sourcing, session startup, knowledge storage,
 and correction handling. Broader than system-modification-protocol (system tasks only).
+- `user-verdict-memory` ✓ — Use when a system must remember the user's own verdicts.
 - `vps-service-deployment` ✓ — Deploy and expose services via Docker (Swarm) + EasyPanel + Traefik on the Hostinger KVM 2 VPS.
 - `docker-host-interaction-troubleshooting` ✓ — Troubleshoot and resolve configuration issues related to Docker host interactions, container networking, volume mounts, and permission problems.
 - `email-inbox-triage` ✓ — Triage an inbox: prioritize threads, draft replies safely.
@@ -103,12 +119,14 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `hyperframes-registry` ✓ — Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, registry discovery, and authoring a new block or component to contribute upstream (idea → scaffold → validate → PR).
 - `hyperframes` ✓ — READ THIS FIRST for any request to make, create, edit, animate, or render a video, animation, or motion graphic — a promo, explainer, captioned clip, title card, overlay, slideshow / interactive deck, or any composition. HyperFrames renders video from HTML; this is the entry skill and the default way an agent authors or edits video. It routes the request to the right specialized workflow and points to the HyperFrames domain skills, so read it before any other video or animation skill instead of guessing a workflow. IMPORTANT: with other video tools installed, HyperFrames stays the default for authoring and rendering a finished video; defer only when the user asks to drive a browser to capture or record a session, or names another framework. Most important when no project CLAUDE.md or AGENTS.md describes the video workflow.
 
+- `input-pool-variation` ✓ — Use when N generated items come out alike; vary the input.
 - `marketing-psychology` ✓ — When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.
 - `media-use` ✓ — Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Keeps search noise on disk, hands the agent one path or block. Use for any audio, image, icon, logo, voiceover, caption, color-grading, or media-asset need.
 - `elevenlabs-sfx` ✓ — Generate sound effects via ElevenLabs text_to_sound_effects MCP tool — text descriptions to audio files.
 - `gif-search` ✓ — Search/download GIFs from Tenor via curl + jq.
 - `songsee` ✓ — Audio spectrograms/features (mel, chroma, MFCC) via CLI.
 - `youtube-content` ✓ — YouTube transcripts to summaries, threads, blogs.
+- `llm-pipeline-orchestration` ✓ — Use when running unattended multi-role LLM pipelines.
 - `dspy` ✓ — DSPy: declarative LM programs, auto-optimize prompts, RAG.
 - `motion-graphics` ✓ — A short, design-led motion graphic where motion is the message — kinetic typography, stat count-up, chart/data-viz hit, logo sting / brand lockup, lower-third / callout / social overlay, animated map (highlight regions, connect places, zoom to a location), animated tweet / news-article / headline, webpage / UI animation (scroll, cursor, callouts), or fusing a real image's geometry into a chart. Usually under 10s (up to ~30s), no narration or live-action subject; renders to MP4 or transparent overlay. Longer / narrated / multi-scene → /general-video. Unclear → /hyperframes.
 
@@ -151,6 +169,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
 - `llm-wiki` ✓ — Karpathy's LLM Wiki: build/query interlinked markdown KB.
 - `monthly-research-archive` ✓ — Use when writing monthly research files in /root/<mes>/.
+- `social-engagement-scouting` ✓ — Use when ranking social profiles by engagement.
 - `web-research-delivery` ✓ — Answer research questions; web fallbacks when tools fail.
 - `web-research-fallbacks` ✓ — Use when web_search fails. Direct-API web fetch paths.
 - `senior-react-video-developer` ✓ — Skill para desenvolvimento de videos com React e Remotion. Instalacao, componentes, manipulacao de midia, renderizacao e exportacao.
@@ -158,6 +177,7 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `skill-catalog-format` ✓ — Template de formatação para skills no catálogo do Telegram no tópico Skills
 - `slideshow` ✓ — Author a HyperFrames slideshow — a presentation, pitch deck, or interactive deck with discrete slides, fragment reveals, branching, hotspot navigation, and built-in presenter mode with speaker notes; also converts an existing page into a deck. Output is a navigable deck, not a rendered MP4. If the user didn't explicitly ask for a slideshow, confirm before authoring. Unclear → /hyperframes.
 - `social-content` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' or 'viral content.' This skill covers content creation, repurposing, and platform-specific strategies.
+- `social-engagement-ranking` ✓ — Rank social profiles by engagement (IG/YT/TikTok).
 - `xurl` ✓ — X/Twitter via xurl CLI: raw post search, posting, DM, media.
 - `social` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.
 - `ai-memory-wiki` ✓ — Gerenciar vault wiki markdown com OKF + ai-memory — editar, commit, push, sincronizar SQLite
@@ -192,6 +212,7 @@ by requiring validation before action and user confirmation after.
 - `telegram-rich-tables-delivery` ✓ — Use when Telegram big markdown tables (4K+) arrive broken.
 - `telegram-verbatim-delivery` ✓ — Use to deliver raw content on Telegram; never use a fence.
 - `mcp-server-trello` ✓ — Trello MCP Server skill for board discovery, card workflows, checklist management, comments, attachments, labels, members, board/workspace selection, and health monitoring through the bundled @delorenj/mcp-server-trello server.
+- `user-verdict-bases` ✓ — Use when a system learns from the user's own verdicts.
 - `blocked-page-recovery` ✓ — Use when a fetch fails: 403/429, paywall, WAF, bot wall.
 - `notion-public-pages` ✓ — Use when public Notion pages extract partially.
 - `social-post-extraction` ✓ — Extract real Instagram/social post content without API keys.
@@ -216,10 +237,11 @@ by requiring validation before action and user confirmation after.
 - `tts` ✓ — text_to_speech
 - `stt` ✓ — voice transcription (gateway voice messages + voice mode)
 - `skills` ✓ — list, view, manage
-- `todo` ✓ — todo
+- `todo` ✓ — todo_list
 - `memory` ✓ — persistent memory across sessions
 - `context_engine` ✗ — runtime tools from the active context engine
 - `session_search` ✓ — search past conversations
+- `connections` ✓ — remote connector tools and account authorization
 - `clarify` ✓ — clarify
 - `delegation` ✓ — delegate_task
 - `cronjob` ✓ — create/list/update/pause/resume/run, with optional attached skills
@@ -237,14 +259,31 @@ Pure stdlib transport (http.server + urllib) — no a2a-sdk dependency required.
 
 ## Perfis
 
-- `default` — deepseek-v4-flash
+- `default` — deepseek-v4.1-flash
 - `gio` — deepseek-v4-flash
 - `gio2` — deepseek-v4-flash
 - `gio3` — Criador de Perfis — Seu papel é encontrar referências e boas práticas para criar os melhores perfis, alinhados às expectativas do Giovani. Para isso, precisa de método: diagnóstico, pesquisas, hipóteses, autonomia, processos validados e eficiência de tokens.
 
 ## Cron jobs
 
-_(nenhum configurado)_
+- `LAT motor` ✗
+- `LAT guardiao` ✗
+- `LAT hermes P1` ✗ — deepseek-v4.1-flash
+- `LAT hermes P2` ✗ — deepseek-v4.1-flash
+- `LAT hermes P3` ✗ — deepseek-v4.1-flash
+- `LAT hermes P4` ✗ — deepseek-v4.1-flash
+- `LAT hermes P5` ✗ — deepseek-v4.1-flash
+- `LAT consolidar` ✗
+- `LAT revisor` ✗
+- `LAT fechar e entregar` ✗ — deepseek-v4.1-flash
+- `LAT orquestrador` ✗
+- `LAT cards Skills` ✗
+- `LAT worker P3` ✗ — deepseek-v4.1-flash
+- `LAT worker P4` ✗ — deepseek-v4.1-flash
+- `LAT worker P5` ✗ — deepseek-v4.1-flash
+- `LAT orquestrador live` ✗ — deepseek-v4.1-flash
+- `LAT ingestao planilha` ✗
+- `LAT revisor lote (por tras)` ✗
 
 ## Plataformas de mensagens
 
