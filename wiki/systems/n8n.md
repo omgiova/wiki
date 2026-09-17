@@ -102,8 +102,35 @@ O n8n da VPS tem **Data Tables** nativas — armazenamento persistente por proje
 
 **Limitação do Simple Memory em queue mode** (doc oficial, não testado aqui): o sub-nó Simple Memory (memória de chat dos AI Agents) **não funciona em workflow ativo de produção quando o n8n roda em queue mode** — chamadas podem cair em workers diferentes — e a memória dele é só do processo (restart apaga). Como o n8n da VPS é queue mode, não usar Simple Memory em produção; pra estado persistente, usar Data Tables. Fonte: docs.n8n.io (common issues do nó, consultado 2026-07-18).
 
+### Nós da comunidade — persistência via bind mount (corrigido 2026-09-17)
+
+O n8n instala nós da comunidade como arquivos em `/home/node/.n8n/nodes`. Em Docker essa pasta vive **dentro do container**: toda atualização da imagem (`n8nio/n8n:latest`) recria o container do zero e a instalação é perdida. A doc oficial confirma — *"you may lose the packages when you recreate your container or upgrade your n8n version"* — e manda **persistir o conteúdo de `~/.n8n/nodes`** (*"This is the best option"*).
+
+**Correção aplicada (2026-09-17):** bind mount único compartilhado pelos 3 serviços.
+
+| Campo | Valor |
+|---|---|
+| Host path | `/etc/easypanel/projects/projetos/n8n-nodes` (dono `1000:1000` = user `node`) |
+| Mount path | `/home/node/.n8n/nodes` |
+| Serviços | `n8n_editor`, `n8n_worker`, `n8n_webhook` (os mesmos valores nos 3) |
+
+Pasta compartilhada = instala/atualiza **uma vez** e os 4 containers enxergam (o `webhook` tem 2 réplicas, mas é 1 serviço no painel).
+
+**Por que bind mount e não "Volume" do EasyPanel:** o Volume do EasyPanel é criado **por serviço** (`/etc/easypanel/projects/<projeto>/<serviço>/volumes/<nome>`), então o mesmo nome em 3 serviços gera 3 pastas distintas — exigiria 3 instalações e sincronia manual. Só o bind mount permite apontar os 3 para a mesma pasta.
+
+**Alternativas descartadas, com motivo:**
+
+- `N8N_REINSTALL_MISSING_PACKAGES=true` — documentada, mas a própria doc avisa que aumenta o tempo de boot e *"may cause health checks to fail"*; pior, **sem volume** ela reinstala e depois detecta cópia duplicada, quebrando com `nodes package is already loaded` ([issue #14712](https://github.com/n8n-io/n8n/issues/14712), fechado como *not planned*; ver também [#5501](https://github.com/n8n-io/n8n/issues/5501) e [#16685](https://github.com/n8n-io/n8n/issues/16685))
+- **Imagem Docker própria** com o nó assado dentro — recomendação original da equipe do n8n para queue mode, e a mais robusta; descartada aqui porque congela o n8n na versão buildada (update passa a exigir rebuild manual), e o Giovani quer o n8n sempre atualizado sozinho
+- **Fixar a versão da imagem** (sair do `latest`) — descartado pelo Giovani: atualizar não é o defeito, o defeito era a instalação não sobreviver à atualização
+
+**Instalar/atualizar nó daqui em diante:** continua pela UI (Settings → Community nodes), que escreve nessa mesma pasta. A doc diz que queue mode exige instalação manual via `npm` — na prática a UI funciona nesta instância. **Depois de atualizar um nó, implantar os 3 serviços**: o worker e os webhooks só releem a pasta ao iniciar, senão a UI mostra a versão nova e o fluxo executa a antiga. Atualização do **n8n** em si não exige mais nada.
+
+> Terminologia da doc: *"manual installation"* = linha de comando (`npm install` dentro do container). Instalar pela tela Settings → Community nodes é *GUI installation*, mesmo sendo feito à mão.
+
 ## Erros conhecidos
 
+- **Nó da comunidade some após update do n8n** → `Unrecognized node type: <pacote>` e falha de ativação em cascata. Causa: pasta de nós não persistida. **Corrigido em 2026-09-17** pelo bind mount acima. Caso real: `n8n-nodes-evolution-api` sumiu no update automático de 2026-09-16 23h20, derrubando 6 workflows (4 deles dispararam o Alerta de Erro)
 - **502 via Traefik** quando a tabela IPVS esvazia após scale/update do serviço — ver [[wiki/systems/vps.md|vps]] e case em `/root/.hermes/skills/docker-host-interaction-troubleshooting/`
 - Erros específicos da MCP: ver [[wiki/tools/n8n-mcp.md|n8n MCP]]
 - Workflow "Teste de skills" com 2 falhas em 03/07 (madrugada) — investigar

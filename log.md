@@ -1015,3 +1015,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Página ganha bloco "Leia primeiro" (decisões validadas, status, índice por assunto); decisões novas: origem 2014 e site oficial latbrasil.com.br
 - Consolidado /root/lat/lat.md dividido em 6 arquivos por assunto (texto copiado sem alteração) e apagado; banco de posts fica fora (não é referência)
 - páginas tocadas: wiki/projects/lat.md, index.md
+
+## [2026-09-17] edit | n8n — persistência de nós da comunidade via bind mount
+- Incidente 2026-09-16 23h20 (BRT): update automático do `n8nio/n8n:latest` recriou os containers e apagou `n8n-nodes-evolution-api`; 6 workflows falharam a ativação com `Unrecognized node type`
+- Correção: bind mount único `/etc/easypanel/projects/projetos/n8n-nodes` → `/home/node/.n8n/nodes` nos 3 serviços (editor, worker, webhook); 14 workflows ativaram sem erro após implantar
+- Registradas as alternativas descartadas com motivo (N8N_REINSTALL_MISSING_PACKAGES, imagem própria, fixar versão)
+- Pendente: validar entrega da mensagem no WhatsApp nos agendados de 2026-09-18 manhã
+- Páginas tocadas: `wiki/systems/n8n.md`
