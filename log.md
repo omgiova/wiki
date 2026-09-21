@@ -1026,3 +1026,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-09-21] edit | lat — página da LAT removida a pedido do Giovani
 - Excluída wiki/projects/lat.md e removidas as 2 referências no index.md
 - Páginas tocadas: `wiki/projects/lat.md`, `index.md`
+
+## [2026-09-21] edit | vps — VPS travou por sobrecarga; swap criado, promptgolf e finflow dev desligados
+- VPS congelou ~20h08 (load ~44), Docker Swarm reiniciou todos os serviços ~20h20; sem OOM kill; causa não confirmada
+- Ações: finflow `next dev` desligado, promptgolf em réplicas 0, swap de 2GB (`/swapfile`, swappiness 10)
+- Páginas tocadas: `wiki/history/2026-09-21-vps-travou-swap.md` (nova), `wiki/systems/vps.md`, `index.md`

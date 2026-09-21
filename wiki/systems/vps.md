@@ -64,6 +64,8 @@ precisa ficar viva enquanto navega (a sessão de trabalho normal continua separa
 - **Disco:** 96GB (60GB livre)
 - **RAM:** 7.8GB (4.8GB disponível)
 
+> **Atualização 2026-09-21:** criado **swap de 2 GB** (`/swapfile`, ativo no boot via `/etc/fstab`, `vm.swappiness=10` em `/etc/sysctl.d/99-swap.conf`) após a VPS travar por sobrecarga. Disco nesta data: ~65 GB usados, ~30 GB livres. Ver [[wiki/history/2026-09-21-vps-travou-swap.md|incidente 2026-09-21]].
+
 ## Serviços rodando
 
 | Serviço | Porta | Função |
@@ -72,6 +74,8 @@ precisa ficar viva enquanto navega (a sessão de trabalho normal continua separa
 | [[wiki/systems/n8n.md\|n8n]] | 5678 (interna, via Traefik) | Automação — ver [[wiki/systems/n8n.md\|n8n]] |
 | Node-RED | 8800 | Automação residencial + Alexa |
 | Prompt Golf | 8090 (interna, via Traefik) | Jogo prompt-golf (tradução pt-BR) — `https://promptgolf.igkokh.easypanel.host` |
+
+> **Atualização 2026-09-21:** Prompt Golf **desligado** (réplicas 0, config mantida no EasyPanel) — não está mais em uso. Ver [[wiki/history/2026-09-21-vps-travou-swap.md|incidente 2026-09-21]].
 
 ## Stack de desenvolvimento
 
@@ -185,3 +189,4 @@ A stack roda num único VPS Hostinger KVM 2 com Ubuntu. O Hermes Agent é o orqu
 
 - [[wiki/systems/termux-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — configuração e troubleshooting do plugin
+- [[wiki/history/2026-09-21-vps-travou-swap.md|Incidente 2026-09-21]] — VPS travou, Swarm reiniciou tudo; swap criado, promptgolf desligado
