@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-09-14T03:00:01-03:00
+timestamp: 2026-09-21T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-09-14T03:00:01-03:00
+> Última atualização: 2026-09-21T03:00:02-03:00
 
 ## Status geral
 
@@ -44,10 +44,12 @@ status: stable
 - `bulk-content-generation` ✓ — Use when producing many content variants with scored review.
 - `caption-writer-sms` ✓ — When the user wants to write a caption for a visual-first social media post on Facebook, Instagram, TikTok, Pinterest, or YouTube. Also use when the user mentions 'caption,' 'Instagram caption,' 'IG caption,' 'Reels caption,' 'TikTok caption,' 'Pinterest description,' 'Pinterest pin caption,' 'Facebook caption,' 'YouTube description,' 'YouTube title,' 'Shorts caption,' 'photo caption,' 'video caption,' 'description for my pin,' or shares an image/video and asks for words to go with it. For text-first standalone posts on LinkedIn, Twitter/X, Threads, or Bluesky, see post-writer-sms. For multi-slide carousels, see carousel-writer-sms. For opening lines, see hook-writer-sms.
 - `carousel-writer-sms` ✓ — When the user wants to write content for a LinkedIn carousel, Instagram carousel, Facebook carousel, TikTok photo carousel, Pinterest Idea Pin, or any swipeable multi-slide format. Also use when the user mentions 'carousel,' 'slides,' 'LinkedIn carousel,' 'Instagram carousel,' 'IG carousel,' 'photo carousel,' 'TikTok photo carousel,' 'Idea Pin,' 'Pinterest Idea Pin,' 'swipe post,' 'slide deck,' or 'visual content.' Outputs slide-by-slide text content (not visual design). For single posts, see post-writer-sms. For threads, see thread-writer-sms. For caption copy under each slide post, see caption-writer-sms.
+- `auditoria-de-planilha` ✓ — Use ao auditar planilha entregue: colunas vazias e links.
 - `base-de-validacao` ✓ — Use ao construir base de validação do usuário.
 - `content-pipeline-operations` ✓ — Use when operating a batch content pipeline.
 - `isolated-scoring-runs` ✓ — Use when scoring N items with one isolated reviewer each.
 - `isolated-worker-sessions` ✓ — Use when one fresh agent session per item is required.
+- `lat-arquivos-e-dados` ✓ — Use ao procurar dados/arquivos do projeto LAT.
 - `live-copy-production` ✓ — Use when copy is made one piece at a time, judged live.
 - `llm-content-batch-pipeline` ✓ — Use when generating content in bulk with isolated roles.
 - `reviewer-validation-memory` ✓ — Use when a reviewer learns from the user's verdicts.
@@ -57,8 +59,6 @@ status: stable
 - `content-strategy` ✓ — When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," "content planning," "editorial calendar," "content marketing," "content roadmap," "what content should I create," "blog topics," "content pillars," or "I don't know what to write." Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.
 - `conversion-copywriting` ✓ — Write copy that gets a "yes" using Joanna Wiebe's research-first, Voice of Customer methodology Use when: **Writing landing pages, emails, or sales pages** that need measurable conversion results; **Starting a new copy project** and need a systematic process to follow; **Struggling with what to write** and staring at a blank page; **Wanting to prove ROI** to clients with data-backed decisions; **Improving existing copy** through validation and testing
 - `copywriting` ✓ — When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says "write copy for," "improve this copy," "rewrite this page," "marketing copy," "headline help," "CTA copy," "value proposition," "tagline," "subheadline," "hero section copy," "above the fold," "this copy is weak," "make this more compelling," or "help me describe my product." Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing.
-- `architecture-diagram` ✓ — Dark-themed SVG architecture/cloud/infra diagrams as HTML.
-- `ascii-video` ✓ — ASCII video: convert video/audio to colored ASCII MP4/GIF.
 - `baoyu-article-illustrator` ✓ — Article illustrations: type × style × palette consistency.
 - `baoyu-comic` ✓ — Knowledge comics (知识漫画): educational, biography, tutorial.
 - `baoyu-infographic` ✓ — Infographics: 21 layouts x 21 styles (信息图, 可视化).
@@ -66,21 +66,21 @@ status: stable
 - `ideation` ✓ — Generate project ideas via creative constraints.
 - `design-md` ✓ — Author/validate/export Google's DESIGN.md token spec files.
 - `humanizer` ✓ — Humanize text: strip AI-isms and add real voice.
-- `manim-video` ✓ — Manim CE animations: 3Blue1Brown math/algo videos.
-- `p5js` ✓ — p5.js sketches: gen art, shaders, interactive, 3D.
 - `pixel-art` ✓ — Pixel art w/ era palettes (NES, Game Boy, PICO-8).
 - `popular-web-designs` ✓ — 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.
 - `songwriting-and-ai-music` ✓ — Songwriting craft and Suno AI music prompts.
-- `cron-news-scraping` ✓ — Set up and maintain scheduled news-scraping cron jobs with firecrawl CLI. Covers the full pipeline: search, language filter, dedup, webhook POST, silent delivery.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
+- `data-artifact-audit` ✓ — Use ao auditar, filtrar ou entregar planilha de dados.
 - `agent-model-governance` ✓ — Use when pinning the model an agent session runs on.
 - `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
+- `automation-failure-diagnosis` ✓ — Use when a job/workflow failed; read-only diagnosis.
 - `browser-use-cli-setup` ✓ — Browser Use CLI 3.0 local setup or browser_exec fix.
 - `bulk-llm-generation` ✓ — Use when gerar muitas variações de conteúdo por API.
 - `hermes-approvals-and-config-writes` ✓ — Use when editing Hermes config or commands get denied.
 - `hermes-gateway-script-guard` ✓ — Use when the gateway lifecycle guard blocks a script.
 - `hermes-maintenance` ✓ — Safely update Hermes Agent, back up user data pre-update, and recover from update failures that wipe untracked user files (SOUL.md, USER.md, MEMORY.md, custom skills, state.db).
 - `hermes-model-catalog` ✓ — Use when Hermes model lists look stale or models missing.
+- `hermes-session-recall` ✓ — Use when finding or resuming a past Hermes session.
 - `hermes-update-verification` ✓ — Verify a Hermes update applied; diagnose version confusion.
 - `llm-api-cost-tracking` ✓ — Track, log, and visualize LLM API spending across providers. Covers local logging from API responses, platform CSV export, and proxy-based approaches. Provider-specific quirks in references/.
 - `llm-batch-generation` ✓ — Use when generating LLM content at scale; engine and cost.
@@ -97,7 +97,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `vps-service-deployment` ✓ — Deploy and expose services via Docker (Swarm) + EasyPanel + Traefik on the Hostinger KVM 2 VPS.
 - `docker-host-interaction-troubleshooting` ✓ — Troubleshoot and resolve configuration issues related to Docker host interactions, container networking, volume mounts, and permission problems.
 - `email-inbox-triage` ✓ — Triage an inbox: prioritize threads, draft replies safely.
-- `himalaya` ✓ — Himalaya CLI: IMAP/SMTP email from terminal.
 - `embedded-captions` ✓ — Add captions to a talking-head video. ONE catalog (CATALOG.md) of 36 visual identities behind two engines: column-flow (captions composited INTO the scene — matte occlusion + mix-blend; cream/ink/editorial/keynote/documentary/loud/neon/glitch/chrome/velocity) and themed constitutions (anchor/ordnance/terminal/neonsign/stardust/stomp/scoreboard/transit/vhs/arcade/dossier/laser/thunder/hologram/biolume/aurora/spectrum/papercut/popup/chalkboard/graffiti/brush/inkwater/ransom/lastpage/nightcity — e.g. a glyph-decode climax, a neon sign WRITTEN stroke by stroke, or the quiet `anchor` rail default). Route by identity, never by mode. Trigger on "captions/subtitles", "embed/cinematic captions", "VFX captions", "炸/特效/酷炫字幕", a named identity, or top-tier motion-graphics asks. Embedding every word is wrong for most talking-head content — `anchor` is the verbatim default. Runs locally end-to-end (transcribes and mattes the subject itself, no API key). Requires hyperframes and a single-subject clip (multi-shot clips ar...
 - `faceless-explainer` ✓ — Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video: there is no site or footage to capture, so the visuals are invented per scene (typography, abstract graphics, diagrams, data-viz). Use for topic explainers, concept breakdowns, how-tos, listicles. Not a product promo (/product-launch-video) or a site tour (/website-to-video). Unclear → /hyperframes.
 - `figma` ✓ — Import Figma content into a HyperFrames composition — rendered assets, brand tokens, components, storyboard sections → reconstructed motion (frames read as states, not slides) (REST/CLI), Figma Motion animations (MCP), and shaders (MCP source / native export). Use when the user pastes a figma.com link or asks to bring a Figma design, frame, logo, brand, or animation into a video/composition.
@@ -147,23 +146,17 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `open-midia` ✓ — Use ao refinar copy dos projetos Open Mídia.
 - `pr-to-video` ✓ — Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video — changelog, feature reveal, fix, or refactor walkthrough built from the diff, commits, and files: the input is a code change, not a website. Not a product promo (/product-launch-video) or a no-PR topic explainer (/faceless-explainer). Unclear → /hyperframes.
 - `product-launch-video` ✓ — Turn a product or marketing URL, pasted script, or brief into a product launch / promo video — SaaS promos, feature reveals, product demos, app and company launches. Use when the user wants to market, launch, promote, or reveal a product; the default for any commercial URL. Not a general site tour (/website-to-video). Unclear → /hyperframes.
-- `airtable` ✓ — Airtable REST API via curl. Records CRUD, filters, upserts.
 - `box` ✓ — Box manages cloud files, sharing, search, and metadata.
 - `document-to-action-items` ✓ — Extract cited obligations, deadlines, tasks from documents.
 - `docx` ✓ — Create, read, edit, template, and review Word .docx files.
-- `google-workspace` ✓ — Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.
-- `maps` ✓ — Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.
 - `meeting-action-items` ✓ — Turn meeting notes into cited decisions, owners, tickets.
 - `notion-public-extraction` ✓ — Use to extract full content from a public notion.site page.
 - `notion` ✓ — Notion API + ntn CLI: pages, databases, markdown, Workers.
 - `pdf` ✓ — PDF files: create, read, merge, fill, OCR, edit text.
-- `powerpoint` ✓ — Create, read, edit .pptx decks with python-pptx.
 - `product-price-monitor` ✓ — Watch product, flight, or listing prices; alert on target.
-- `teams-meeting-pipeline` ✓ — Teams meeting summaries, job replay, Graph subscriptions.
 - `weekly-review-planning` ✓ — Weekly reset: commitments, stalled work, next-week plan.
 - `xlsx` ✓ — Create, read, edit Excel .xlsx workbooks and CSVs.
 - `agent-memory-architecture` ✓ — Design agent memory systems combining manual knowledge bases (Obsidian vaults) with automatic capture tools (ai-memory). Covers vault structure, complementary layers, and integration patterns for cross-agent persistence.
-- `arxiv` ✓ — Search arXiv papers by keyword, author, category, or ID.
 - `competitor-news-monitor` ✓ — Watch named companies for material news; cited digests.
 - `grounded-citations` ✓ — Ground answers and documents in cited, verifiable sources.
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
@@ -174,29 +167,18 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `web-research-fallbacks` ✓ — Use when web_search fails. Direct-API web fetch paths.
 - `senior-react-video-developer` ✓ — Skill para desenvolvimento de videos com React e Remotion. Instalacao, componentes, manipulacao de midia, renderizacao e exportacao.
 - `seo-audit` ✓ — When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
-- `skill-catalog-format` ✓ — Template de formatação para skills no catálogo do Telegram no tópico Skills
 - `slideshow` ✓ — Author a HyperFrames slideshow — a presentation, pitch deck, or interactive deck with discrete slides, fragment reveals, branching, hotspot navigation, and built-in presenter mode with speaker notes; also converts an existing page into a deck. Output is a navigable deck, not a rendered MP4. If the user didn't explicitly ask for a slideshow, confirm before authoring. Unclear → /hyperframes.
 - `social-content` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' or 'viral content.' This skill covers content creation, repurposing, and platform-specific strategies.
 - `social-engagement-ranking` ✓ — Rank social profiles by engagement (IG/YT/TikTok).
 - `xurl` ✓ — X/Twitter via xurl CLI: raw post search, posting, DM, media.
 - `social` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.
 - `ai-memory-wiki` ✓ — Gerenciar vault wiki markdown com OKF + ai-memory — editar, commit, push, sincronizar SQLite
-- `codebase-inspection` ✓ — Inspect codebases w/ pygount: LOC, languages, ratios.
-- `dogfood` ✓ — Exploratory QA of web apps: find bugs, evidence, reports.
 - `github` ✓ — GitHub via gh CLI: PRs, issues, reviews, repos, auth.
-- `hermes-agent-skill-authoring` ✓ — Author in-repo SKILL.md files: frontmatter and structure.
 - `inspecting-hermes-desktop-dom` ✓ — Read the live Hermes desktop DOM/CSS over CDP.
 - `internal-web-tools` ✓ — Criar app web interna (Next.js); prints de UI sem server.
-- `node-inspect-debugger` ✓ — Debug Node.js via --inspect + Chrome DevTools Protocol CLI.
 - `promptgolf` ✓ — Manutenção do Prompt Golf (pt-BR). Teste só read-only.
-- `python-debugpy` ✓ — Debug Python: pdb REPL + debugpy remote (DAP).
-- `requesting-code-review` ✓ — Pre-commit review: security scan, quality gates, auto-fix.
-- `simplify-code` ✓ — Parallel 4-agent cleanup of recent code changes.
 - `spike` ✓ — Throwaway experiments to validate an idea before build.
-- `systematic-debugging` ✓ — 4-phase root cause debugging: understand bugs before fixing.
-- `test-driven-development` ✓ — TDD: enforce RED-GREEN-REFACTOR, tests before code.
 - `ui-design-review-loop` ✓ — Use ao iterar UI por prints; composição antes de cor.
-- `spotify-helper` ✓ — Skill para ajudar a controlar e gerenciar funcionalidades do Spotify via Hermes Agent, garantindo uma experiencia proativa e intuitiva.
 - `talking-head-recut` ✓ — Package an existing talking-head / interview / podcast video with timed, designed GRAPHIC OVERLAY cards — kinetic titles, lower-thirds, data callouts, quotes, side panels, picture-in-picture — synced to the transcript, on a 16:9 / 9:16 / 4:5 canvas of your choice; the clip plays untouched underneath. Trigger on "graphic overlays", "on-screen graphics", "package / dress up my video". Not plain subtitles (/embedded-captions). Unclear → /hyperframes.
 - `telegram-rich-messages` ✓ — Complete reference for Telegram Rich Messages: Markdown and HTML formatting, sendRichMessage API, RichText types, limits, and best practices for sending formatted messages via Hermes.
 - `telegram-topics` ✓ — Mapa completo dos chats, grupos e tópicos do Telegram do Giovani — IDs e referências para entrega de mensagens.
@@ -217,6 +199,7 @@ by requiring validation before action and user confirmation after.
 - `notion-public-pages` ✓ — Use when public Notion pages extract partially.
 - `social-post-extraction` ✓ — Extract real Instagram/social post content without API keys.
 - `website-to-video` ✓ — Capture a general website/URL and turn it into a video OF the site — tour, showcase, or social clip built from captured screenshots and the site's own brand assets. Use for portfolio / blog / docs / landing-page showcases. Not a product launch or promo, even from a URL (/product-launch-video). Unclear → /hyperframes.
+- `writing-fragments` ✓ — Writing, explore: mine raw fragments, no structure yet.
 
 ## Webhooks
 
