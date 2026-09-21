@@ -1022,3 +1022,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Registradas as alternativas descartadas com motivo (N8N_REINSTALL_MISSING_PACKAGES, imagem própria, fixar versão)
 - Pendente: validar entrega da mensagem no WhatsApp nos agendados de 2026-09-18 manhã
 - Páginas tocadas: `wiki/systems/n8n.md`
+
+## [2026-09-21] edit | lat — página da LAT removida a pedido do Giovani
+- Excluída wiki/projects/lat.md e removidas as 2 referências no index.md
+- Páginas tocadas: `wiki/projects/lat.md`, `index.md`
