@@ -1031,3 +1031,11 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - VPS congelou ~20h08 (load ~44), Docker Swarm reiniciou todos os serviços ~20h20; sem OOM kill; causa não confirmada
 - Ações: finflow `next dev` desligado, promptgolf em réplicas 0, swap de 2GB (`/swapfile`, swappiness 10)
 - Páginas tocadas: `wiki/history/2026-09-21-vps-travou-swap.md` (nova), `wiki/systems/vps.md`, `index.md`
+
+## [2026-09-22] ingest | automacao-trello-libertas — Fluxo único do Trello Libertas construído, validado e documentado
+- Workflow n8n `Trello Libertas - Fluxo único` (`xOaO43iqm1bz0b8M`), 18 nós, ativo; board `Libertas - Assist Virtual Financeiro`
+- 4 eventos (adição a card, menção, resposta, etiqueta APROVADO) para Thairine e Luciana; janela seg-sex 9h-18h com fila às 9h
+- Data Table `fila-trello-libertas` (`QCKb3dKnxHvEmGD0`) criada via API pública
+- Descoberto ao vivo o payload de `addLabelToCard` (não documentado pelo Trello) e o `updateCard` duplicado que o filtro descarta
+- Pendente: números reais das destinatárias (hoje apontam pro Giovani), teste ao vivo de menção/resposta/adição, melhoria do Error Workflow
+- Páginas tocadas: `wiki/projects/automacao-trello-libertas.md` (nova), `wiki/projects/automacao-trello-open-midia.md`, `index.md`

@@ -401,3 +401,4 @@ Oi, Lu!
 - [[wiki/systems/evolution-api.md|Evolution API]] — envio de WhatsApp
 - [[wiki/tools/trello-mcp.md|Trello MCP (comunidade)]] e [[wiki/tools/trello-mcp-oficial.md|Trello MCP (oficial)]] — acesso ao Trello pelos agentes
 - [[raw/fluxo-2-trello-prazos-workflow-2026-07-09.md]] — JSON completo do Fluxo 2, primeira versão oficial em produção
+- [[wiki/projects/automacao-trello-libertas.md|Automação Trello — Libertas]] — fluxo único sobre o board da Libertas, construído a partir dos moldes desta página (2026-09-22)

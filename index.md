@@ -59,6 +59,7 @@ log.md
     │   └── wiki-review.md
     ├── projects/
     │   ├── automacao-videos.md
+    │   ├── automacao-trello-libertas.md
     │   ├── automacao-trello-open-midia.md
     │   ├── isca-diagnostico-open-midia.md
     │   ├── Libertas-SEO.md
@@ -118,6 +119,7 @@ enxuto** — o que é, onde mora, como roda — apontando pra documentação com
 sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 
 - [[wiki/projects/automacao-trello-open-midia.md|Automação Trello — Open Mídia]] — fluxos n8n sobre o board DEMANDAS GERAIS; fluxo 1 (aviso WhatsApp de membro adicionado a card, ativo desde 2026-07-06) e fluxo 2 (lista semanal de prazos, em produção desde 2026-07-08, com Error Workflow apontado)
+- [[wiki/projects/automacao-trello-libertas.md|Automação Trello — Libertas]] — fluxo único n8n sobre o board Libertas - Assist Virtual Financeiro; avisa Thairine e Luciana no WhatsApp (adição a card, menção, resposta, etiqueta APROVADO), janela 9h-18h com fila fora do horário; ativo desde 2026-09-22
 - [[wiki/projects/isca-diagnostico-open-midia.md|Isca — Diagnóstico de Presença Digital]] — isca de captação da Open Mídia estruturada sobre o modelo CBBE de Keller: 4 focos, 8 perguntas, 36 cruzamentos pré-escritos; protótipo na rota /diagnostico do repo omgiova/om, com conteúdo em CSV
 - [[wiki/projects/finflow.md|finflow]] — dashboard de gestão financeira pessoal (Next.js + Planilha Google) em /root/finflow; dev na porta 3777; docs completas no repo (README/CLAUDE/CHANGELOG)
 - [[wiki/projects/automacao-videos.md|Automação Vídeos]] — projeto de automação de vídeos do Giovani, em definição; meta é geração totalmente automática usando Remotion e/ou HyperFrames
