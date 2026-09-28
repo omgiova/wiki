@@ -3,14 +3,14 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-09-21T03:00:02-03:00
+timestamp: 2026-09-28T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-09-21T03:00:02-03:00
+> Última atualização: 2026-09-28T03:00:01-03:00
 
 ## Status geral
 
@@ -30,7 +30,6 @@ status: stable
 - `ads-copywriter` ✓ — Multi-platform ad copy generation for Google Ads, Meta/Facebook, TikTok, LinkedIn with A/B testing variants
 - `ads` ✓ — When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' or 'should I run ads.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro.
 - `ai-social-media-content` ✓ — Create AI-powered social media content for TikTok, Instagram, YouTube, Twitter/X. Generate: images, videos, reels, shorts, thumbnails, captions, hashtags. Tools: FLUX, Veo, Seedance, Wan, Kokoro TTS, Claude for copywriting. Use for: content creators, social media managers, influencers, brands. Triggers: social media content, tiktok, instagram reels, youtube shorts, twitter post, content creator, ai influencer, social content, reels, shorts, viral content, thumbnail generator, caption generator, hashtag generator, ugc content
-- `alexa-notifications` ✓ — Send notifications to Alexa via NotifyMe through Node-RED /lembretes endpoint. Use when the user wants to schedule a reminder or send a spoken notification to Alexa.
 - `analytics` ✓ — When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
 - `claude-code` ✓ — Delegate coding to Claude Code CLI (features, PRs).
 - `codex` ✓ — Delegate coding to OpenAI Codex CLI (features, PRs).
@@ -64,7 +63,6 @@ status: stable
 - `baoyu-infographic` ✓ — Infographics: 21 layouts x 21 styles (信息图, 可视化).
 - `claude-design` ✓ — Design one-off HTML artifacts (landing, deck, prototype).
 - `ideation` ✓ — Generate project ideas via creative constraints.
-- `design-md` ✓ — Author/validate/export Google's DESIGN.md token spec files.
 - `humanizer` ✓ — Humanize text: strip AI-isms and add real voice.
 - `pixel-art` ✓ — Pixel art w/ era palettes (NES, Game Boy, PICO-8).
 - `popular-web-designs` ✓ — 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.
@@ -72,7 +70,6 @@ status: stable
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
 - `data-artifact-audit` ✓ — Use ao auditar, filtrar ou entregar planilha de dados.
 - `agent-model-governance` ✓ — Use when pinning the model an agent session runs on.
-- `ai-memory` ✓ — Deploy, configure, and integrate the ai-memory MCP server — LLM providers, project management, wiki management, and Obsidian vault sync.
 - `automation-failure-diagnosis` ✓ — Use when a job/workflow failed; read-only diagnosis.
 - `browser-use-cli-setup` ✓ — Browser Use CLI 3.0 local setup or browser_exec fix.
 - `bulk-llm-generation` ✓ — Use when gerar muitas variações de conteúdo por API.
@@ -95,7 +92,6 @@ Covers communication style, data sourcing, session startup, knowledge storage,
 and correction handling. Broader than system-modification-protocol (system tasks only).
 - `user-verdict-memory` ✓ — Use when a system must remember the user's own verdicts.
 - `vps-service-deployment` ✓ — Deploy and expose services via Docker (Swarm) + EasyPanel + Traefik on the Hostinger KVM 2 VPS.
-- `docker-host-interaction-troubleshooting` ✓ — Troubleshoot and resolve configuration issues related to Docker host interactions, container networking, volume mounts, and permission problems.
 - `email-inbox-triage` ✓ — Triage an inbox: prioritize threads, draft replies safely.
 - `embedded-captions` ✓ — Add captions to a talking-head video. ONE catalog (CATALOG.md) of 36 visual identities behind two engines: column-flow (captions composited INTO the scene — matte occlusion + mix-blend; cream/ink/editorial/keynote/documentary/loud/neon/glitch/chrome/velocity) and themed constitutions (anchor/ordnance/terminal/neonsign/stardust/stomp/scoreboard/transit/vhs/arcade/dossier/laser/thunder/hologram/biolume/aurora/spectrum/papercut/popup/chalkboard/graffiti/brush/inkwater/ransom/lastpage/nightcity — e.g. a glyph-decode climax, a neon sign WRITTEN stroke by stroke, or the quiet `anchor` rail default). Route by identity, never by mode. Trigger on "captions/subtitles", "embed/cinematic captions", "VFX captions", "炸/特效/酷炫字幕", a named identity, or top-tier motion-graphics asks. Embedding every word is wrong for most talking-head content — `anchor` is the verbatim default. Runs locally end-to-end (transcribes and mattes the subject itself, no API key). Requires hyperframes and a single-subject clip (multi-shot clips ar...
 - `faceless-explainer` ✓ — Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video: there is no site or footage to capture, so the visuals are invented per scene (typography, abstract graphics, diagrams, data-viz). Use for topic explainers, concept breakdowns, how-tos, listicles. Not a product promo (/product-launch-video) or a site tour (/website-to-video). Unclear → /hyperframes.
@@ -121,7 +117,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `input-pool-variation` ✓ — Use when N generated items come out alike; vary the input.
 - `marketing-psychology` ✓ — When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.
 - `media-use` ✓ — Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Keeps search noise on disk, hands the agent one path or block. Use for any audio, image, icon, logo, voiceover, caption, color-grading, or media-asset need.
-- `elevenlabs-sfx` ✓ — Generate sound effects via ElevenLabs text_to_sound_effects MCP tool — text descriptions to audio files.
 - `gif-search` ✓ — Search/download GIFs from Tenor via curl + jq.
 - `songsee` ✓ — Audio spectrograms/features (mel, chroma, MFCC) via CLI.
 - `youtube-content` ✓ — YouTube transcripts to summaries, threads, blogs.
@@ -139,10 +134,8 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `n8n-workflow-builder` ✓ — Guia técnico para construir e editar workflows no n8n usando as MCP tools (create_workflow, update_workflow, get_workflow, list_workflows, execute_workflow, delete_workflow, export_workflow, import_workflow, activate_workflow, deactivate_workflow)
 - `n8n-workflow-patterns` ✓ — Proven workflow architectural patterns from real n8n workflows. Use when building new workflows, designing workflow structure, choosing workflow patterns, planning workflow architecture, or asking about webhook processing, HTTP API integration, database operations, AI agent workflows, batch processing, or scheduled tasks. Always consult this skill when the user asks to create, build, or design an n8n workflow, automate a process, or connect services — even if they don't explicitly mention 'patterns'. Covers webhook, API, database, AI, batch processing, and scheduled automation architectures.
 - `next-internal-apps` ✓ — Use when building/evolving Next.js internal hub apps.
-- `node-red-alexa-evolution` ✓ — Evolution roadmap for Node-RED + Alexa integration. Guides the implementation of a complete smart home and voice assistant pipeline: from basic smart home devices through custom Alexa skills with SSML, audio, and integrated automations.
 - `obsidian-ai-memory` ✓ — Setup específico do usuário — ai-memory ↔ Obsidian vault sync, Obsidian Git plugin (Windows/Android), rebuild script, gotchas de autenticação e preferências de manutenção do vault.
 - `obsidian-wiki-maintenance` ✓ — Enriquecer e manter vaults Obsidian com [[wikilinks]], INDEX.md, conexões entre projetos e sincronia via git. Scripts reutilizáveis cruzam tags do frontmatter pra conectar páginas relacionadas.
-- `obsidian` ✓ — Read, search, create, and edit notes in the Obsidian vault.
 - `open-midia` ✓ — Use ao refinar copy dos projetos Open Mídia.
 - `pr-to-video` ✓ — Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video — changelog, feature reveal, fix, or refactor walkthrough built from the diff, commits, and files: the input is a code change, not a website. Not a product promo (/product-launch-video) or a no-PR topic explainer (/faceless-explainer). Unclear → /hyperframes.
 - `product-launch-video` ✓ — Turn a product or marketing URL, pasted script, or brief into a product launch / promo video — SaaS promos, feature reveals, product demos, app and company launches. Use when the user wants to market, launch, promote, or reveal a product; the default for any commercial URL. Not a general site tour (/website-to-video). Unclear → /hyperframes.
@@ -156,7 +149,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `product-price-monitor` ✓ — Watch product, flight, or listing prices; alert on target.
 - `weekly-review-planning` ✓ — Weekly reset: commitments, stalled work, next-week plan.
 - `xlsx` ✓ — Create, read, edit Excel .xlsx workbooks and CSVs.
-- `agent-memory-architecture` ✓ — Design agent memory systems combining manual knowledge bases (Obsidian vaults) with automatic capture tools (ai-memory). Covers vault structure, complementary layers, and integration patterns for cross-agent persistence.
 - `competitor-news-monitor` ✓ — Watch named companies for material news; cited digests.
 - `grounded-citations` ✓ — Ground answers and documents in cited, verifiable sources.
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
@@ -170,14 +162,12 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `slideshow` ✓ — Author a HyperFrames slideshow — a presentation, pitch deck, or interactive deck with discrete slides, fragment reveals, branching, hotspot navigation, and built-in presenter mode with speaker notes; also converts an existing page into a deck. Output is a navigable deck, not a rendered MP4. If the user didn't explicitly ask for a slideshow, confirm before authoring. Unclear → /hyperframes.
 - `social-content` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' or 'viral content.' This skill covers content creation, repurposing, and platform-specific strategies.
 - `social-engagement-ranking` ✓ — Rank social profiles by engagement (IG/YT/TikTok).
-- `xurl` ✓ — X/Twitter via xurl CLI: raw post search, posting, DM, media.
 - `social` ✓ — When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.
 - `ai-memory-wiki` ✓ — Gerenciar vault wiki markdown com OKF + ai-memory — editar, commit, push, sincronizar SQLite
 - `github` ✓ — GitHub via gh CLI: PRs, issues, reviews, repos, auth.
 - `inspecting-hermes-desktop-dom` ✓ — Read the live Hermes desktop DOM/CSS over CDP.
 - `internal-web-tools` ✓ — Criar app web interna (Next.js); prints de UI sem server.
 - `promptgolf` ✓ — Manutenção do Prompt Golf (pt-BR). Teste só read-only.
-- `spike` ✓ — Throwaway experiments to validate an idea before build.
 - `ui-design-review-loop` ✓ — Use ao iterar UI por prints; composição antes de cor.
 - `talking-head-recut` ✓ — Package an existing talking-head / interview / podcast video with timed, designed GRAPHIC OVERLAY cards — kinetic titles, lower-thirds, data callouts, quotes, side panels, picture-in-picture — synced to the transcript, on a 16:9 / 9:16 / 4:5 canvas of your choice; the clip plays untouched underneath. Trigger on "graphic overlays", "on-screen graphics", "package / dress up my video". Not plain subtitles (/embedded-captions). Unclear → /hyperframes.
 - `telegram-rich-messages` ✓ — Complete reference for Telegram Rich Messages: Markdown and HTML formatting, sendRichMessage API, RichText types, limits, and best practices for sending formatted messages via Hermes.
@@ -186,10 +176,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 Use when the user asks to react to messages, manage forum topics, use setMessageReaction,
 or any Telegram Bot API method not exposed as a native Hermes tool. Covers authentication,
 chat_id/message_id resolution via session context, and the reaction emoji whitelist.
-- `telegram-reaction-safe` ✓ — Safe procedure for sending Telegram reactions with mandatory verification.
-Use when the user asks to react to a specific message and requires certainty
-that the reaction was applied to the correct message. Eliminates guesswork
-by requiring validation before action and user confirmation after.
 - `telegram-rich-delivery-maintenance` ✓ — Use when Telegram replies arrive flat; restore rich.
 - `telegram-rich-tables-delivery` ✓ — Use when Telegram big markdown tables (4K+) arrive broken.
 - `telegram-verbatim-delivery` ✓ — Use to deliver raw content on Telegram; never use a fence.
