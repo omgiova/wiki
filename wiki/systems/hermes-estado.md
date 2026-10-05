@@ -3,19 +3,19 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-09-28T03:00:01-03:00
+timestamp: 2026-10-05T03:00:01-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-09-28T03:00:01-03:00
+> Última atualização: 2026-10-05T03:00:01-03:00
 
 ## Status geral
 
 - **Gateway:** ?
-- **Modelo principal:** `deepseek-v4.1-flash` (opencode-go)
+- **Modelo principal:** `gemini/gemini-3.8-flash` (custom:omniroute)
 
 ## Servidores MCP
 
@@ -31,11 +31,7 @@ status: stable
 - `ads` ✓ — When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' or 'should I run ads.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro.
 - `ai-social-media-content` ✓ — Create AI-powered social media content for TikTok, Instagram, YouTube, Twitter/X. Generate: images, videos, reels, shorts, thumbnails, captions, hashtags. Tools: FLUX, Veo, Seedance, Wan, Kokoro TTS, Claude for copywriting. Use for: content creators, social media managers, influencers, brands. Triggers: social media content, tiktok, instagram reels, youtube shorts, twitter post, content creator, ai influencer, social content, reels, shorts, viral content, thumbnail generator, caption generator, hashtag generator, ugc content
 - `analytics` ✓ — When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
-- `claude-code` ✓ — Delegate coding to Claude Code CLI (features, PRs).
-- `codex` ✓ — Delegate coding to OpenAI Codex CLI (features, PRs).
-- `computer-use` ✓ — Drive the desktop background-first; escalate on signal.
 - `hermes-agent` ✓ — Use, configure, theme, extend, and orchestrate Hermes Agent.
-- `opencode` ✓ — Delegate coding to OpenCode CLI (features, PR review).
 - `autonomous-content-pipelines` ✓ — Use when running unattended content-generation pipelines.
 - `brand-architect` ✓ — Use this skill when users need to develop brand strategy, choose a company name, define brand positioning, create brand voice, or build brand identity from day one. Activates for "what should I name it," "brand strategy," "positioning," or identity questions.
 - `brand-copywriter` ✓ — Writes marketing copy using proven copywriting frameworks. Use when user needs copy for ads (Facebook, Instagram, TikTok, YouTube), landing pages, sales pages, email sequences, LinkedIn posts, product descriptions, or any marketing content.
@@ -60,13 +56,11 @@ status: stable
 - `copywriting` ✓ — When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says "write copy for," "improve this copy," "rewrite this page," "marketing copy," "headline help," "CTA copy," "value proposition," "tagline," "subheadline," "hero section copy," "above the fold," "this copy is weak," "make this more compelling," or "help me describe my product." Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing.
 - `baoyu-article-illustrator` ✓ — Article illustrations: type × style × palette consistency.
 - `baoyu-comic` ✓ — Knowledge comics (知识漫画): educational, biography, tutorial.
-- `baoyu-infographic` ✓ — Infographics: 21 layouts x 21 styles (信息图, 可视化).
 - `claude-design` ✓ — Design one-off HTML artifacts (landing, deck, prototype).
 - `ideation` ✓ — Generate project ideas via creative constraints.
 - `humanizer` ✓ — Humanize text: strip AI-isms and add real voice.
 - `pixel-art` ✓ — Pixel art w/ era palettes (NES, Game Boy, PICO-8).
 - `popular-web-designs` ✓ — 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.
-- `songwriting-and-ai-music` ✓ — Songwriting craft and Suno AI music prompts.
 - `cron-prompt-patterns` ✓ — Define and maintain standard prompt patterns for cron jobs in Hermes. Covers multi-action patterns, pronunciation rules, one-shot scheduling, and cron job formatting.
 - `data-artifact-audit` ✓ — Use ao auditar, filtrar ou entregar planilha de dados.
 - `agent-model-governance` ✓ — Use when pinning the model an agent session runs on.
@@ -102,7 +96,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `pokemon-player` ✓ — Play Pokemon via headless emulator + RAM reads.
 - `general-video` ✓ — The fallback workflow for authoring or editing any custom HyperFrames composition at any length or format — longer / multi-scene pieces, brand and sizzle reels, montages, title cards, static loops, freeform builds. Use only when no specialized workflow fits the input; routing table at /hyperframes.
 
-- `github-token-masking` ✓ — Como extrair tokens do .env sem o mascaramento do Hermes bloquear o valor — técnica de hex-encoding para uso em URLs de remote git.
 - `hermes-gateway-tool-configuration` ✓ — Configure Hermes Gateway toolsets, plugins, Docker mounts, and credentials — covers the full path from 'tool not working in gateway' to 'tool working in Telegram/Discord'. Use when the user reports a tool that works in CLI but not in Hermes Gateway (Telegram/Discord), or needs to set up a new integration in the gateway.
 
 - `hook-writer-sms` ✓ — When the user wants help writing opening lines, hooks, first sentences, video hooks, thumbnails titles, or pin titles that grab attention. Also use when the user mentions 'hook,' 'opening line,' 'first line,' 'scroll stopper,' 'attention grabber,' 'headline,' 'video hook,' 'on-screen hook,' 'YouTube title,' 'thumbnail text,' 'pin title,' 'how to start my post,' or 'nobody reads past my first line.' Covers text-first platforms (LinkedIn, Twitter/X, Threads, Bluesky) and visual-first platforms (Facebook, Instagram, TikTok, Pinterest, YouTube). Can be used standalone or invoked by other creation skills. For writing full posts, see post-writer-sms. For threads, see thread-writer-sms.
@@ -117,9 +110,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `input-pool-variation` ✓ — Use when N generated items come out alike; vary the input.
 - `marketing-psychology` ✓ — When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.
 - `media-use` ✓ — Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Keeps search noise on disk, hands the agent one path or block. Use for any audio, image, icon, logo, voiceover, caption, color-grading, or media-asset need.
-- `gif-search` ✓ — Search/download GIFs from Tenor via curl + jq.
-- `songsee` ✓ — Audio spectrograms/features (mel, chroma, MFCC) via CLI.
-- `youtube-content` ✓ — YouTube transcripts to summaries, threads, blogs.
 - `llm-pipeline-orchestration` ✓ — Use when running unattended multi-role LLM pipelines.
 - `dspy` ✓ — DSPy: declarative LM programs, auto-optimize prompts, RAG.
 - `motion-graphics` ✓ — A short, design-led motion graphic where motion is the message — kinetic typography, stat count-up, chart/data-viz hit, logo sting / brand lockup, lower-third / callout / social overlay, animated map (highlight regions, connect places, zoom to a location), animated tweet / news-article / headline, webpage / UI animation (scroll, cursor, callouts), or fusing a real image's geometry into a chart. Usually under 10s (up to ~30s), no narration or live-action subject; renders to MP4 or transparent overlay. Longer / narrated / multi-scene → /general-video. Unclear → /hyperframes.
@@ -134,7 +124,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `n8n-workflow-builder` ✓ — Guia técnico para construir e editar workflows no n8n usando as MCP tools (create_workflow, update_workflow, get_workflow, list_workflows, execute_workflow, delete_workflow, export_workflow, import_workflow, activate_workflow, deactivate_workflow)
 - `n8n-workflow-patterns` ✓ — Proven workflow architectural patterns from real n8n workflows. Use when building new workflows, designing workflow structure, choosing workflow patterns, planning workflow architecture, or asking about webhook processing, HTTP API integration, database operations, AI agent workflows, batch processing, or scheduled tasks. Always consult this skill when the user asks to create, build, or design an n8n workflow, automate a process, or connect services — even if they don't explicitly mention 'patterns'. Covers webhook, API, database, AI, batch processing, and scheduled automation architectures.
 - `next-internal-apps` ✓ — Use when building/evolving Next.js internal hub apps.
-- `obsidian-ai-memory` ✓ — Setup específico do usuário — ai-memory ↔ Obsidian vault sync, Obsidian Git plugin (Windows/Android), rebuild script, gotchas de autenticação e preferências de manutenção do vault.
 - `obsidian-wiki-maintenance` ✓ — Enriquecer e manter vaults Obsidian com [[wikilinks]], INDEX.md, conexões entre projetos e sincronia via git. Scripts reutilizáveis cruzam tags do frontmatter pra conectar páginas relacionadas.
 - `open-midia` ✓ — Use ao refinar copy dos projetos Open Mídia.
 - `pr-to-video` ✓ — Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video — changelog, feature reveal, fix, or refactor walkthrough built from the diff, commits, and files: the input is a code change, not a website. Not a product promo (/product-launch-video) or a no-PR topic explainer (/faceless-explainer). Unclear → /hyperframes.
@@ -152,7 +141,6 @@ and correction handling. Broader than system-modification-protocol (system tasks
 - `competitor-news-monitor` ✓ — Watch named companies for material news; cited digests.
 - `grounded-citations` ✓ — Ground answers and documents in cited, verifiable sources.
 - `llm-wiki-ai-memory` ✓ — Complemento ao llm-wiki para uso com ai-memory como backend — UUID folders, OKF principles, renomear arquivos em wikis git-backed, e deduplicação de conceitos.
-- `llm-wiki` ✓ — Karpathy's LLM Wiki: build/query interlinked markdown KB.
 - `monthly-research-archive` ✓ — Use when writing monthly research files in /root/<mes>/.
 - `social-engagement-scouting` ✓ — Use when ranking social profiles by engagement.
 - `web-research-delivery` ✓ — Answer research questions; web fallbacks when tools fail.
@@ -228,7 +216,7 @@ Pure stdlib transport (http.server + urllib) — no a2a-sdk dependency required.
 
 ## Perfis
 
-- `default` — deepseek-v4.1-flash
+- `default` — gemini/gemini-3.8-flash
 - `gio` — deepseek-v4-flash
 - `gio2` — deepseek-v4-flash
 - `gio3` — Criador de Perfis — Seu papel é encontrar referências e boas práticas para criar os melhores perfis, alinhados às expectativas do Giovani. Para isso, precisa de método: diagnóstico, pesquisas, hipóteses, autonomia, processos validados e eficiência de tokens.
