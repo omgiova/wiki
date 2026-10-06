@@ -1039,3 +1039,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Descoberto ao vivo o payload de `addLabelToCard` (não documentado pelo Trello) e o `updateCard` duplicado que o filtro descarta
 - Pendente: números reais das destinatárias (hoje apontam pro Giovani), teste ao vivo de menção/resposta/adição, melhoria do Error Workflow
 - Páginas tocadas: `wiki/projects/automacao-trello-libertas.md` (nova), `wiki/projects/automacao-trello-open-midia.md`, `index.md`
+
+## [2026-10-06] edit | procedures — teste de resolução no gerador de GIF
+- Alterada resolução de 100x100 para 500x500 no script `gerar_gif.py`
+- GIF gerado e validado
