@@ -3,19 +3,19 @@ type: system
 tags: [hermes, configuracao, estado]
 title: Hermes Agent — Estado das Configurações
 description: Estado atual das integrações do Hermes (MCPs, skills, webhooks, toolsets, modelos) — gerado automaticamente, seção Interface do sistema Hermes
-timestamp: 2026-10-05T03:00:01-03:00
+timestamp: 2026-10-12T03:00:02-03:00
 status: stable
 ---
 
 # Hermes Agent — Estado das Configurações
 
 > **Gerado automaticamente.** Para atualizar manualmente: execute `/root/scripts/update-hermes-wiki.sh`
-> Última atualização: 2026-10-05T03:00:01-03:00
+> Última atualização: 2026-10-12T03:00:02-03:00
 
 ## Status geral
 
 - **Gateway:** ?
-- **Modelo principal:** `gemini/gemini-3.8-flash` (custom:omniroute)
+- **Modelo principal:** `combo-opus-4-6-gio` (custom:combo-omniroute)
 
 ## Servidores MCP
 
@@ -167,7 +167,6 @@ chat_id/message_id resolution via session context, and the reaction emoji whitel
 - `telegram-rich-delivery-maintenance` ✓ — Use when Telegram replies arrive flat; restore rich.
 - `telegram-rich-tables-delivery` ✓ — Use when Telegram big markdown tables (4K+) arrive broken.
 - `telegram-verbatim-delivery` ✓ — Use to deliver raw content on Telegram; never use a fence.
-- `mcp-server-trello` ✓ — Trello MCP Server skill for board discovery, card workflows, checklist management, comments, attachments, labels, members, board/workspace selection, and health monitoring through the bundled @delorenj/mcp-server-trello server.
 - `user-verdict-bases` ✓ — Use when a system learns from the user's own verdicts.
 - `blocked-page-recovery` ✓ — Use when a fetch fails: 403/429, paywall, WAF, bot wall.
 - `notion-public-pages` ✓ — Use when public Notion pages extract partially.
@@ -216,9 +215,9 @@ Pure stdlib transport (http.server + urllib) — no a2a-sdk dependency required.
 
 ## Perfis
 
-- `default` — gemini/gemini-3.8-flash
-- `gio` — deepseek-v4-flash
-- `gio2` — deepseek-v4-flash
+- `default` — combo-opus-4-6-gio
+- `gio` — agy-barato-v1
+- `gio2` — api-gemini
 - `gio3` — Criador de Perfis — Seu papel é encontrar referências e boas práticas para criar os melhores perfis, alinhados às expectativas do Giovani. Para isso, precisa de método: diagnóstico, pesquisas, hipóteses, autonomia, processos validados e eficiência de tokens.
 
 ## Cron jobs
