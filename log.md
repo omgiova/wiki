@@ -1043,3 +1043,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-10-06] edit | procedures — teste de resolução no gerador de GIF
 - Alterada resolução de 100x100 para 500x500 no script `gerar_gif.py`
 - GIF gerado e validado
+
+## [2026-10-13] ingest | projects — documentação técnica do bootcamp de copy
+- Nova página com a documentação do painel e das automações de copy (sala dos redatores, comandos de terminal, fila, painel), copiada de `/opt/redatores-notas/DOCUMENTACAO.md` a pedido do Giovani
+- Páginas tocadas: `wiki/projects/bootcamp-copy-automacao.md` (nova), `index.md`
