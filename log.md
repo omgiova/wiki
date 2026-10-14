@@ -1047,3 +1047,7 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-10-13] ingest | projects — documentação técnica do bootcamp de copy
 - Nova página com a documentação do painel e das automações de copy (sala dos redatores, comandos de terminal, fila, painel), copiada de `/opt/redatores-notas/DOCUMENTACAO.md` a pedido do Giovani
 - Páginas tocadas: `wiki/projects/bootcamp-copy-automacao.md` (nova), `index.md`
+
+## [2026-10-14] ingest | projects — Fluxo de trabalho (GTD), fase 1 do @tralhasbot
+- Nova página do sistema baseado no livro A Arte de Fazer Acontecer: bot @tralhasbot (serviço tralhasbot, só guarda), banco SQLite e uso na fase 1 (etapas acionadas pelo Giovani em sessão); nome e conteúdo aprovados pelo Giovani
+- Páginas tocadas: `wiki/projects/fluxo-de-trabalho-gtd.md` (nova), `index.md`

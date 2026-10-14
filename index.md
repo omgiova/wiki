@@ -64,6 +64,7 @@ log.md
     │   ├── isca-diagnostico-open-midia.md
     │   ├── Libertas-SEO.md
     │   ├── finflow.md
+    │   ├── fluxo-de-trabalho-gtd.md
     │   ├── game-loop-mario-hyperframes.md
     │   ├── progresso-libertas-seo.md
     │   └── promptgolf.md
@@ -128,6 +129,7 @@ sustenta a infra* → `systems/`; *de terceiro, eu só uso* → `tools/`.
 - [[wiki/projects/promptgolf.md|Prompt Golf (pt-BR)]] — tradução pt-BR do jogo promptgolf (holyphoton): PHP + SQLite em /root/projects/promptgolf, IA via OpenCode Go (deepseek-v4-flash), vivo em https://promptgolf.igkokh.easypanel.host via Traefik/EasyPanel
 - [[wiki/projects/game-loop-mario-hyperframes.md|Projeto game-loop (Mario)]] — vídeo 10s de cenário de jogo com parallax no HyperFrames; v1 vetorial (SMB3) → v2 final com sprites reais de SNES (Super Mario World / Yoshi's Island 2) e Mario correndo; técnicas de recorte de sprite (color-key, flood fill + maior componente, tile espelhado, ciclo seek-safe com steps)
 - [[wiki/projects/bootcamp-copy-automacao.md|Bootcamp — painel e automações de copy]] — documentação técnica do sistema de copy por agentes: sala dos redatores em /opt/redatores, comandos de terminal, fila no Supabase com vigia na VPS e painel https://copyyyy.netlify.app/bootcamp
+- [[wiki/projects/fluxo-de-trabalho-gtd.md|Fluxo de trabalho (GTD)]] — sistema para administrar o fluxo de trabalho pelo método do livro A Arte de Fazer Acontecer: bot do Telegram @tralhasbot como caixa de entrada (só guarda, sem LLM), SQLite em /root/projects/metodo-pendencias e processamento por agente Claude em sessão; fase 1 desde 2026-10-14
 
 ### tools/
 
