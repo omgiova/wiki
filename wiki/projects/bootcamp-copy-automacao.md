@@ -2,7 +2,7 @@
 type: concept
 tags: [projects, copy, bootcamp, redatores, claude-code, supabase, fila, libertas]
 title: Bootcamp — painel e automações de copy
-description: Documentação técnica do sistema de copy por agentes — sala dos redatores (/opt/redatores), comandos de terminal, fila no Supabase com vigia na VPS e painel https://copyyyy.netlify.app/bootcamp.
+description: Documentação técnica do sistema de copy por agentes — sala dos redatores (/opt/redatores), comandos de terminal, fila no Supabase com vigia na VPS e painel https://cop-ia.netlify.app/bootcamp.
 timestamp: 2026-10-13T20:45:00-03:00
 status: draft
 ---
@@ -16,7 +16,7 @@ O sistema é uma coisa só, com quatro partes:
 1. **Sala dos redatores** (`/opt/redatores`): onde as sessões do Claude escrevem, revisam e refazem peças.
 2. **Comandos de terminal** (`/usr/local/bin`): encadeiam as sessões.
 3. **Fila** (tabela `fila` no Supabase + vigia na VPS): deixa o painel disparar os comandos sem terminal.
-4. **Painel** (`https://copyyyy.netlify.app/bootcamp`): mostra as peças, as notas e as execuções, e dispara pedidos.
+4. **Painel** (`https://cop-ia.netlify.app/bootcamp`): mostra as peças, as notas e as execuções, e dispara pedidos.
 
 ```
 painel (bootcamp.html) ──insere linha──▶ tabela fila (Supabase)
@@ -102,7 +102,7 @@ claude -p "/r 003" --tools "Bash,Read,Skill" [--model X] \
 
 ## 3. Fila
 
-**Tabela `public.fila`** (definição em `/root/copy-pesquisa-e-escrita/supabase/fila.sql`): `id, comando, parametros, estado, resposta, detalhes, criado_em, iniciado_em, terminado_em`. Estados: `na fila`, `rodando`, `terminou`, `falhou`.
+**Tabela `public.fila`** (definição em `/root/cop-ia/supabase/fila.sql`): `id, comando, parametros, estado, resposta, detalhes, criado_em, iniciado_em, terminado_em`. Estados: `na fila`, `rodando`, `terminou`, `falhou`.
 
 Quem pode o quê:
 
@@ -128,7 +128,7 @@ FILA_SECO=1 python3 /opt/redatores/ferramentas/fila.py   # roda o encanamento se
 
 ## 4. Painel
 
-Arquivo único: `/root/copy-pesquisa-e-escrita/bootcamp.html` (HTML, CSS e JavaScript juntos, sem etapa de build). Repositório no GitHub, ramo `main`; o Netlify publica a cada push.
+Arquivo único: `/root/cop-ia/bootcamp.html` (HTML, CSS e JavaScript juntos, sem etapa de build). Repositório no GitHub, ramo `main`; o Netlify publica a cada push.
 
 - Lê as peças da tabela `projetos` do Supabase e os dados extras de `/bootcamp-dados.json`, gerado na VPS por `python3 ferramentas/copy.py painel` (briefings, sorteios, revisões, rodadas).
 - Cabeçalho: seletor de execução (`cmdMonta`, estado em `CMD`). O botão Executar chama `filaPedeLogado`; o Testar chama `filaPede`.

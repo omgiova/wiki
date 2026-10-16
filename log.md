@@ -1051,3 +1051,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 ## [2026-10-14] ingest | projects — Fluxo de trabalho (GTD), fase 1 do @tralhasbot
 - Nova página do sistema baseado no livro A Arte de Fazer Acontecer: bot @tralhasbot (serviço tralhasbot, só guarda), banco SQLite e uso na fase 1 (etapas acionadas pelo Giovani em sessão); nome e conteúdo aprovados pelo Giovani
 - Páginas tocadas: `wiki/projects/fluxo-de-trabalho-gtd.md` (nova), `index.md`
+
+## [2026-10-16] edit | projects — sistema renomeado para Cop.ia
+- Pasta `/root/copy-pesquisa-e-escrita` → `/root/cop-ia` (link simbólico com o nome antigo mantido); repositório `omgiova/cop-ia`; site `https://cop-ia.netlify.app` (o antigo `copyyyy.netlify.app` dá 404)
+- Atualizados também, fora da wiki: `copy.py` (SITE, EDITOR_HTML), `produzir`, `escrever-lote`, `refazer-lote` (backup em `/opt/redatores/_versoes/2026-10-16-16h57-rename-cop-ia/`) e `bootcamp.html` (aceita links dos dois endereços)
+- Páginas tocadas: `wiki/projects/bootcamp-copy-automacao.md`, `index.md`
