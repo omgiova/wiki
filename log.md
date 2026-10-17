@@ -1062,3 +1062,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Novo: `/usr/local/bin/claude-sessao`, `claude-tmux.service` (tmux `-L claude`), vigia `claude-sessao-vigia.timer` (sempre uma sessão vazia, fecha as arquivadas, limite de 8)
 - `claude-remote.service` desativado logo após este registro; sessões dele retomáveis por id (`claude-sessao retomar`): 970cc2cc-9cf1-5c94-a078-48860a2de1ff (API/MCP Cop.ia), 118fe3a1-4c66-5b6a-a55d-0209fb941812, 20af2962-4785-5733-9ed9-4f76021e90cc
 - Páginas tocadas: `wiki/systems/claude-sessoes.md` (nova), `wiki/systems/vps.md`, `index.md`
+
+## [2026-10-17] edit | systems — vigia do claude-sessao não fecha mais sessão
+- O vigia fechava sessões ativas como "arquivada no app": a frase `/remote-control is active` só aparece no começo da conversa e sai da tela quando ela cresce (970cc2cc fechada 2x, às 14:24 e 14:32)
+- `/usr/local/bin/claude-sessao`: removido o fechamento automático do `vigiar`; fechar só com `claude-sessao fechar`
+- Páginas tocadas: `wiki/systems/claude-sessoes.md`
