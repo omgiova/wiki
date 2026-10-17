@@ -1067,3 +1067,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - O vigia fechava sessões ativas como "arquivada no app": a frase `/remote-control is active` só aparece no começo da conversa e sai da tela quando ela cresce (970cc2cc fechada 2x, às 14:24 e 14:32)
 - `/usr/local/bin/claude-sessao`: removido o fechamento automático do `vigiar`; fechar só com `claude-sessao fechar`
 - Páginas tocadas: `wiki/systems/claude-sessoes.md`
+
+## [2026-10-17] edit | systems — vigia do claude-sessao fecha arquivadas pelo "code 4090"; listar mostra nome
+- Arquivada = mensagem de sistema "Remote Control disconnected … (code 4090)" no histórico com horário depois da abertura atual no tmux; o vigia volta a fechar só nesse caso (sinal achado pela sessão 970cc2cc, aprovado pelo Giovani)
+- Teste antes de ligar: 3 sessões abertas deram ativa; bc4fdcb4, 77693ecd e ad3f1555 (arquivadas pelo Giovani) deram arquivada
+- `listar`: coluna nome (último `ai-title` do histórico, ou começo da primeira mensagem); estados vazia | em uso | arquivada; não usa mais a tela
+- Páginas tocadas: `wiki/systems/claude-sessoes.md`

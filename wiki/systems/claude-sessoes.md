@@ -3,7 +3,7 @@ type: system
 tags: [claude, sessoes, remote-control, tmux, vps]
 title: Sessões do Claude na VPS (claude-sessao)
 description: Sessões do Claude interativo rodando no tmux da VPS com Remote Control — comando claude-sessao, vigia, retomada, regras para agentes e erros conhecidos
-timestamp: 2026-10-17T14:40:00-03:00
+timestamp: 2026-10-17T14:55:00-03:00
 status: draft
 ---
 
@@ -21,7 +21,7 @@ Substituiu em 2026-10-17 o serviço `claude-remote` (modo servidor, `claude remo
 |---|---|---|
 | Comando | `/usr/local/bin/claude-sessao` | abre, retoma, lista, procura, fecha; tem a lista de subcomandos no topo |
 | Servidor tmux | `claude-tmux.service` (socket `tmux -L claude`, sessão `_base`) | dono dos processos; as sessões não morrem com quem as abriu |
-| Vigia | `claude-sessao-vigia.timer` → `.service`, a cada 60 s | mantém uma sessão vazia e responde avisos de abertura; não fecha sessão |
+| Vigia | `claude-sessao-vigia.timer` → `.service`, a cada 60 s | mantém uma sessão vazia, fecha as arquivadas, responde avisos de abertura |
 | Registro | `/var/lib/claude-sessao/registro.log` | uma linha por abertura, retomada e fechamento (só acrescenta) |
 | Histórico | `~/.claude/projects/-root/<id>.jsonl` | conversa de cada sessão (as do modo servidor antigo ficam em `-root-vps/`, e também se retomam) |
 
@@ -32,7 +32,7 @@ Limite: **8 sessões abertas** (cada uma usa ~350–430 MB de memória).
 ## Interface
 
 ```bash
-claude-sessao listar                         # id, estado (vazia | em uso | sem Remote Control), memória, aberta em
+claude-sessao listar                         # nome, id, estado (vazia | em uso | arquivada), memória, aberta em
 claude-sessao abrir                          # sessão nova agora (normalmente o vigia faz)
 claude-sessao procurar "cop-ia api"          # conversas antigas com esse texto nas mensagens do usuário (só lista)
 claude-sessao procurar "raquetes" --dias 7
@@ -56,10 +56,13 @@ Pedidos do Giovani e o que fazer:
 ## Operação
 
 **Vigia, a cada rodada:**
-1. Se a tela de uma sessão tem a pergunta de confiança na pasta ou o aviso do modo auto, responde (Down+Enter / "Don't show again").
-2. Se não há nenhuma sessão vazia (histórico sem mensagem do usuário) e há menos de 8 abertas, abre uma.
+1. Se o histórico da sessão tem a mensagem de sistema "Remote Control disconnected — this session was ended or archived from another device or app (code 4090)" com horário depois da abertura atual da sessão no tmux, considera arquivada no app e fecha o processo. Só conta depois da abertura porque uma sessão retomada traz no histórico os arquivamentos antigos. Só vale a entrada `type: system`; o texto "code 4090" escrito numa conversa não conta.
+2. Se a tela de uma sessão tem a pergunta de confiança na pasta ou o aviso do modo auto, responde (Down+Enter / "Don't show again").
+3. Se não há nenhuma sessão vazia (histórico sem mensagem do usuário) e há menos de 8 abertas, abre uma.
 
-**Arquivar:** só pelo app, pelo Giovani. Ao arquivar, o processo na VPS continua rodando. O vigia não fecha sozinho (desde 2026-10-17, ver Erros conhecidos); fechar com `claude-sessao fechar <id>`.
+**Arquivar:** só pelo app, pelo Giovani. Ao arquivar, o processo na VPS continua rodando. O Claude grava a mensagem "code 4090" no histórico na hora do arquivamento, e o vigia fecha o processo na rodada seguinte.
+
+**Nome no `listar`:** o último título automático que o Claude deu à conversa (`ai-title` no histórico); sem título, o começo da primeira mensagem. Renomear no app não muda esse nome: o nome dado no app não fica gravado na VPS.
 
 **Retomar:** `claude --resume <id>` num processo novo. Testado em 2026-10-17: sessão interativa antiga, sessão do modo servidor e sessão arquivada voltaram com o histórico e reconectadas ao app (a arquivada voltou no mesmo endereço).
 
@@ -84,8 +87,7 @@ Pedidos do Giovani e o que fazer:
 | "offline" no app | `claude-sessao listar` | arquivada (o vigia fecha) ou processo caiu → `retomar` |
 | arquivo não chega ao usuário | conferir se a sessão é do `claude-sessao` | sessão de modo servidor não envia arquivo |
 | pergunta "trust this folder" toda vez em `/root` | nenhum (o comando responde) | o Claude não grava a confiança da pasta pessoal (`hasTrustDialogAccepted` fica `false` para `/root`) |
-| sessão ativa fechada sozinha, registro diz "fechada (arquivada no app)" | `tail /var/lib/claude-sessao/registro.log` | versão antiga do vigia: fechava quando a frase `/remote-control is active` sumia da tela, mas ela só aparece no começo da conversa e sai da tela quando a conversa cresce. Corrigido em 2026-10-17: o vigia não fecha mais sessão; retomar com `claude-sessao retomar <id>` |
-| `listar` mostra "sem Remote Control" numa sessão em uso | `claude-sessao ver <id>` | mesma causa: o estado olha a mesma frase na tela, então não é confiável em conversa longa |
+| sessão ativa fechada sozinha, registro diz "fechada (arquivada no app)" | `tail /var/lib/claude-sessao/registro.log` | versão antiga do vigia: fechava quando a frase `/remote-control is active` sumia da tela, mas ela só aparece no começo da conversa e sai da tela quando a conversa cresce. Corrigido em 2026-10-17: o vigia passou a usar a mensagem "code 4090" do histórico (ver Operação); retomar com `claude-sessao retomar <id>` |
 | sessão retomada abre em modo manual | usar sempre o comando | `--resume` sem `--permission-mode auto` volta no modo manual |
 
 ## Conexões
