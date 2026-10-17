@@ -1073,3 +1073,8 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Teste antes de ligar: 3 sessões abertas deram ativa; bc4fdcb4, 77693ecd e ad3f1555 (arquivadas pelo Giovani) deram arquivada
 - `listar`: coluna nome (último `ai-title` do histórico, ou começo da primeira mensagem); estados vazia | em uso | arquivada; não usa mais a tela
 - Páginas tocadas: `wiki/systems/claude-sessoes.md`
+
+## [2026-10-17] edit | systems — claude-sessao: subcomando renomear; listar mostra o nome dado no app
+- Nome dado no app fica no histórico (`custom-title`), ao contrário do que a página dizia; `listar` mostra ele primeiro (teste com 970cc2cc → "MCP e API Cop.ia")
+- `renomear <id> "<nome>"`: só digita `/rename <nome>`, recusa se há pergunta aberta ou texto na caixa; regra `Bash(claude-sessao renomear *)` em settings.local.json; testado em 08c652a2 → "Teste456"
+- Páginas tocadas: `wiki/systems/claude-sessoes.md`

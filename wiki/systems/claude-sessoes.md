@@ -3,7 +3,7 @@ type: system
 tags: [claude, sessoes, remote-control, tmux, vps]
 title: Sessões do Claude na VPS (claude-sessao)
 description: Sessões do Claude interativo rodando no tmux da VPS com Remote Control — comando claude-sessao, vigia, retomada, regras para agentes e erros conhecidos
-timestamp: 2026-10-17T14:55:00-03:00
+timestamp: 2026-10-17T15:12:00-03:00
 status: draft
 ---
 
@@ -39,6 +39,7 @@ claude-sessao procurar "raquetes" --dias 7
 claude-sessao retomar 970cc2cc-9cf1-5c94-a078-48860a2de1ff   # volta no app com o histórico
 claude-sessao ver 970cc2cc                   # tela atual da sessão
 claude-sessao fechar 970cc2cc                # fecha o processo; o histórico fica
+claude-sessao renomear 970cc2cc "Novo nome"  # dá nome à sessão (digita só "/rename <nome>")
 claude-sessao vigiar                         # uma rodada do vigia, à mão
 
 systemctl status claude-sessao-vigia.timer
@@ -51,6 +52,7 @@ Pedidos do Giovani e o que fazer:
 - "lista as sessões" → `listar`
 - "retoma a sessão sobre X" → `procurar` → mostrar candidatas (id, data, primeira mensagem) → ele escolhe → `retomar`
 - "fecha a sessão X" → `fechar`
+- "renomeia a sessão X para Y" → `renomear` (vale para qualquer sessão aberta, inclusive a própria)
 - "a sessão X sumiu do app" → `ver X` e dizer o que está na tela
 
 ## Operação
@@ -64,13 +66,17 @@ Pedidos do Giovani e o que fazer:
 
 **Nome no `listar`:** o último título automático que o Claude deu à conversa (`ai-title` no histórico); sem título, o começo da primeira mensagem. Renomear no app não muda esse nome: o nome dado no app não fica gravado na VPS.
 
+> Observação (2026-10-17 15:01, teste com a sessão 970cc2cc): o nome dado no app **fica gravado** na VPS, como entrada `custom-title` no histórico (e em `<id>/custom-title.json`). O `listar` passou a mostrar primeiro esse nome; sem ele, o `ai-title`; sem título, o começo da primeira mensagem.
+
+**Renomear:** `claude-sessao renomear <id> "<nome>"` digita `/rename <nome>` na tela da sessão e Enter; não digita nenhum outro texto. Antes confere a tela: se há pergunta aberta (ex.: pedido de aprovação) ou texto na caixa, recusa. Nome limpo de quebras de linha e caracteres de controle, até 80 caracteres. Registra "renomeada" no registro. Se a sessão está respondendo, o comando entra na fila e roda quando ela termina. No modo auto, `tmux send-keys` é bloqueado ("Tmux Self Drive"); por isso há só a regra `Bash(claude-sessao renomear *)` em `/root/.claude/settings.local.json`, e o `send-keys` continua bloqueado (evita `/clear` ou outro texto). Testado em 2026-10-17 15:11: esta sessão (08c652a2) virou "Teste456" no app.
+
 **Retomar:** `claude --resume <id>` num processo novo. Testado em 2026-10-17: sessão interativa antiga, sessão do modo servidor e sessão arquivada voltaram com o histórico e reconectadas ao app (a arquivada voltou no mesmo endereço).
 
 **Boot:** `claude-tmux` sobe com a VPS; o timer roda 30 s depois e abre a sessão vazia.
 
 ### Regras para agentes (nunca)
 
-1. Nunca digitar numa sessão alheia com `tmux send-keys` para dar instrução (o classificador do modo auto bloqueia, e é proibido). Falar com outra sessão: `SendMessage`.
+1. Nunca digitar numa sessão alheia com `tmux send-keys` para dar instrução (o classificador do modo auto bloqueia, e é proibido). Falar com outra sessão: `SendMessage`. A única exceção é o `/rename`, e só pelo `claude-sessao renomear`.
 2. Nunca `kill` em processo `claude`. Fechar só com `claude-sessao fechar`.
 3. Nunca retomar conversa que já está aberta; o comando recusa e não se força. Dois processos na mesma conversa estragam o histórico.
 4. Nunca religar `claude-remote.service` nem rodar `claude remote-control` (modo servidor).
