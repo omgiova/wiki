@@ -3,7 +3,7 @@ type: concept
 tags: [projects, copy, bootcamp, redatores, claude-code, supabase, fila, libertas]
 title: Bootcamp — painel e automações de copy
 description: Documentação técnica do sistema de copy por agentes — sala dos redatores (/opt/redatores), comandos de terminal, fila no Supabase com vigia na VPS e painel https://cop-ia.netlify.app/bootcamp.
-timestamp: 2026-10-13T20:45:00-03:00
+timestamp: 2026-10-17T16:40:00-03:00
 status: draft
 ---
 
@@ -70,6 +70,8 @@ painel (bootcamp.html) ──insere linha──▶ tabela fila (Supabase)
 Cada script tem a lista de subcomandos no topo do arquivo.
 
 **Nomes das peças:** `R17v1` é a primeira versão do redator 17. Refeita vira `R17v1.1`, e a refeita dela `R17v1.1.1`.
+
+**Coluna `projetos.nome` (17/10/2026):** guarda só o título, verbatim como vem do ticket/Trello. O prefixo `NNN · Rxx · Sxxxx | ` e o sufixo `(vN)` deixaram de ser gravados; ticket, redator e sorteio ficam nas tags (`ticket-`, `redator-`, `sorteio-`) e a versão em `dados.bootcamp.versao`. Vale para as duas salas (`/opt/redatores` e `/opt/redatores-lat`). Scripts e painel identificam a peça pelas tags e pelo `codigo`, nunca pelo nome; o título do painel vem de `dados.bootcamp.briefing.titulo`. As 141 peças antigas foram limpas (nome, `dados.nome` e 1ª linha do `md`); o estado anterior está na tabela `projetos_nome_backup_20261017`. As 9 peças de teste do ticket 000 foram para a lixeira.
 
 **Nota (soma 100):** briefing 15, tom de voz 15, legenda 15, sweep zero 12, clareza 12, especificidade 12, fixação 7, emoção 5, prova 2, voz 2, combinação 3. Os pesos estão em `PESOS_SCORE` (`copy.py`), na lista de `rv.md` e no array `SCORE` de `bootcamp.html`. Os três têm de mudar juntos. Revisões anteriores a 13/10/2026 usam pesos antigos.
 

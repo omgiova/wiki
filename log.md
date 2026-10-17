@@ -1078,3 +1078,10 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Nome dado no app fica no histórico (`custom-title`), ao contrário do que a página dizia; `listar` mostra ele primeiro (teste com 970cc2cc → "MCP e API Cop.ia")
 - `renomear <id> "<nome>"`: só digita `/rename <nome>`, recusa se há pergunta aberta ou texto na caixa; regra `Bash(claude-sessao renomear *)` em settings.local.json; testado em 08c652a2 → "Teste456"
 - Páginas tocadas: `wiki/systems/claude-sessoes.md`
+
+## [2026-10-17] edit | bootcamp-copy-automacao — projetos.nome guarda só o título
+- Prefixo "NNN · Rxx · Sxxxx | " e sufixo "(vN)" retirados de 141 peças (nome, dados.nome, md); backup em projetos_nome_backup_20261017
+- copy.py e feedback.py das salas Libertas e LAT passam a gravar/ler só o título (versões antigas em _versoes/2026-10-17-16h18m-*); banco() não foi mexida
+- Painel: título vem de dados.bootcamp.briefing.titulo (cop-ia 1a9da8e)
+- 9 peças de teste do ticket 000 para a lixeira, a pedido do Giovani
+- Páginas: wiki/projects/bootcamp-copy-automacao.md
