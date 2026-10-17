@@ -69,6 +69,7 @@ log.md
     │   ├── progresso-libertas-seo.md
     │   └── promptgolf.md
     ├── systems/
+    │   ├── claude-sessoes.md
     │   ├── evolution-api.md
     │   ├── hermes-endpoints.md
     │   ├── hermes-estado.md
@@ -107,6 +108,7 @@ log.md
 - [[wiki/systems/hermes.md|Hermes]] — sistema principal: identidade, stack, modelos, interface REST e operação do Hermes Agent
 - [[wiki/systems/hermes-endpoints.md|Hermes API]] — referência completa dos ~180 endpoints REST do Hermes Agent (gerada do /openapi.json)
 - [[wiki/systems/hermes-estado.md|Hermes — Estado das Configurações]] — snapshot vivo de MCPs, skills, webhooks, toolsets e modelo (gerado automaticamente)
+- [[wiki/systems/claude-sessoes.md|Sessões do Claude na VPS]] — Claude interativo no tmux com Remote Control: comando claude-sessao, vigia, retomada, regras para agentes
 - [[wiki/systems/vps.md|VPS]] — Hostinger KVM 2 — hardware, serviços rodando, Docker Swarm, IPVS, problemas conhecidos
 - [[wiki/systems/n8n.md|n8n]] — plataforma de automação: Swarm queue mode via EasyPanel, workflows, API/MCP, credenciais e erros conhecidos
 - [[wiki/systems/evolution-api.md|Evolution API]] — gateway de WhatsApp na VPS (instância Giobot); canal de saída das automações do n8n

@@ -1056,3 +1056,9 @@ Registro cronológico de operações na wiki. Append-only — nunca editar entra
 - Pasta `/root/copy-pesquisa-e-escrita` → `/root/cop-ia` (link simbólico com o nome antigo mantido); repositório `omgiova/cop-ia`; site `https://cop-ia.netlify.app` (o antigo `copyyyy.netlify.app` dá 404)
 - Atualizados também, fora da wiki: `copy.py` (SITE, EDITOR_HTML), `produzir`, `escrever-lote`, `refazer-lote` (backup em `/opt/redatores/_versoes/2026-10-16-16h57-rename-cop-ia/`) e `bootcamp.html` (aceita links dos dois endereços)
 - Páginas tocadas: `wiki/projects/bootcamp-copy-automacao.md`, `index.md`
+
+## [2026-10-17] ingest | systems — Sessões do Claude na VPS (claude-sessao)
+- O Remote Control em modo servidor (`claude-remote.service`, `claude remote-control`) não envia arquivo ao usuário ("not on a project thread"); o Claude interativo envia (testado)
+- Novo: `/usr/local/bin/claude-sessao`, `claude-tmux.service` (tmux `-L claude`), vigia `claude-sessao-vigia.timer` (sempre uma sessão vazia, fecha as arquivadas, limite de 8)
+- `claude-remote.service` desativado logo após este registro; sessões dele retomáveis por id (`claude-sessao retomar`): 970cc2cc-9cf1-5c94-a078-48860a2de1ff (API/MCP Cop.ia), 118fe3a1-4c66-5b6a-a55d-0209fb941812, 20af2962-4785-5733-9ed9-4f76021e90cc
+- Páginas tocadas: `wiki/systems/claude-sessoes.md` (nova), `wiki/systems/vps.md`, `index.md`

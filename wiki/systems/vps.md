@@ -73,6 +73,7 @@ precisa ficar viva enquanto navega (a sessão de trabalho normal continua separa
 | Hermes Agent | 9119 | Dashboard |
 | [[wiki/systems/n8n.md\|n8n]] | 5678 (interna, via Traefik) | Automação — ver [[wiki/systems/n8n.md\|n8n]] |
 | Node-RED | 8800 | Automação residencial + Alexa |
+| [[wiki/systems/claude-sessoes.md\|Sessões do Claude]] | — (tmux `-L claude`) | Claude interativo com Remote Control: `claude-tmux.service` + vigia `claude-sessao-vigia.timer` |
 | Prompt Golf | 8090 (interna, via Traefik) | Jogo prompt-golf (tradução pt-BR) — `https://promptgolf.igkokh.easypanel.host` |
 
 > **Atualização 2026-09-21:** Prompt Golf **desligado** (réplicas 0, config mantida no EasyPanel) — não está mais em uso. Ver [[wiki/history/2026-09-21-vps-travou-swap.md|incidente 2026-09-21]].
@@ -187,6 +188,7 @@ A stack roda num único VPS Hostinger KVM 2 com Ubuntu. O Hermes Agent é o orqu
 
 ## 🔗 Conexões
 
+- [[wiki/systems/claude-sessoes.md|Sessões do Claude]] — como as sessões do app rodam na VPS (claude-sessao, vigia, retomada)
 - [[wiki/systems/termux-ssh-claude.md|Problema SSH/Claude]] — sessões travando via Remote Control (diagnóstico 2026-06-26)
 - [[wiki/tools/obsidian-git.md|Obsidian Git]] — configuração e troubleshooting do plugin
 - [[wiki/history/2026-09-21-vps-travou-swap.md|Incidente 2026-09-21]] — VPS travou, Swarm reiniciou tudo; swap criado, promptgolf desligado
